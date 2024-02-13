@@ -1,0 +1,8 @@
+{
+  "name": "foss-react-native",
+  "version": "0.0.1",
+  "description": "Foss React Native Template",
+  "repository": "https://gitlab.mindfire.co.in/mobilefoss/Foss_RN",
+  "author": "Madhav Nasit <madhavn@mindfiresolutions.com>",
+  "license": "MIT"
+}
