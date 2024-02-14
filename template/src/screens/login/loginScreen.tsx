@@ -1,9 +1,7 @@
 import * as React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
-import {useTheme} from 'react-native-paper';
+import {StyleSheet, View, Text} from 'react-native';
 
 export const LoginScreen = () => {
-  const {colors, typography} = useTheme();
   return (
     <View style={styles.container}>
       <Text>Login</Text>
