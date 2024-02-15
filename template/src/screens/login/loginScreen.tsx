@@ -1,23 +1,30 @@
 import * as React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
+import {useTheme} from '@react-navigation/native';
+import {Colors, typography} from '../../theme';
 
 export const LoginScreen = () => {
+  const {colors} = useTheme();
+  const styles = makeStyles(colors);
+
   return (
     <View style={styles.container}>
-      <Text>Login</Text>
+      <Text style={styles.titleText}>{'title'}</Text>
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  box: {
-    width: 60,
-    height: 60,
-    marginVertical: 20,
-  },
-});
+const makeStyles = (colors: Colors) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: colors.background,
+    },
+    titleText: {
+      fontSize: 20,
+      color: colors.text,
+      fontFamily: typography.regular,
+    },
+  });

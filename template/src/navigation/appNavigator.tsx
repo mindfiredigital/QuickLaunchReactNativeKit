@@ -5,19 +5,30 @@
  * and a "main" flow which the user will use once logged in.
  */
 import React from 'react';
+import {useColorScheme} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {navigationRef} from './navigationUtilities';
 import PrimaryNavigator from './primaryNavigator';
 import AuthNavigator from './authNavigator';
+import {darkTheme, lightTheme} from '../theme';
 
 export interface NavigationProps
   extends Partial<React.ComponentProps<typeof NavigationContainer>> {}
 
 const AppNavigator = (props: NavigationProps) => {
   const isLogin = false;
+  const scheme = useColorScheme();
+  /**
+   * To support only light mode change isDarkMode to false
+   * const isDarkMode = false
+   */
+  const isDarkMode = scheme === 'dark';
 
   return (
-    <NavigationContainer ref={navigationRef} {...props}>
+    <NavigationContainer
+      ref={navigationRef}
+      theme={isDarkMode ? darkTheme : lightTheme}
+      {...props}>
       {isLogin ? <PrimaryNavigator /> : <AuthNavigator />}
     </NavigationContainer>
   );

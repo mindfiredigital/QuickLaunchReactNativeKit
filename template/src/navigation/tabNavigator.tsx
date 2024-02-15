@@ -9,33 +9,33 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {HomeScreen} from '../screens/home/homeScreen';
 import {SettingsScreen} from '../screens/settings/settingsScreen';
 import {PrimaryParamList} from './primaryNavigator';
+import {useTheme} from '@react-navigation/native';
+import {Colors} from '../theme';
 
 const Tab = createBottomTabNavigator<PrimaryParamList>();
 
 const RootTabNavigator = () => {
-  const styles = makeStyles();
+  const {colors} = useTheme();
+  const styles = makeStyles(colors);
 
   return (
     <Tab.Navigator
       initialRouteName={'home'}
-      screenOptions={() => ({
+      screenOptions={{
         tabBarStyle: styles.container,
         tabBarShowLabel: false,
         headerShown: false,
-        headerStyle: {backgroundColor: 'red'},
-      })}>
+      }}>
       <Tab.Screen name={'home'} component={HomeScreen} />
       <Tab.Screen name={'settings'} component={SettingsScreen} />
     </Tab.Navigator>
   );
 };
 
-const makeStyles = () =>
+const makeStyles = (colors: Colors) =>
   StyleSheet.create({
     container: {
       height: 75,
-      backgroundColor: 'pink',
-      // backgroundColor: 'red',
       paddingHorizontal: 16,
       paddingVertical: 15,
       margin: 0,
