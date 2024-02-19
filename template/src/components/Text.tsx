@@ -1,8 +1,7 @@
-
 import React from "react"
 import { StyleProp, Text as RNText, TextProps as RNTextProps, TextStyle, StyleSheet } from "react-native"
-import { Colors, typography } from "../theme"
 import { useTheme } from "@react-navigation/native"
+import { Colors, typography } from "../theme"
 
 
 export interface TextProps extends RNTextProps {

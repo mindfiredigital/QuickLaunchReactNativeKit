@@ -1,7 +1,8 @@
-import {View, TextInput, TouchableOpacity, Image, Text, StyleSheet, PressableProps as RNPressableProps, TouchableOpacityProps, ViewStyle, StyleProp, TextStyle, Pressable} from 'react-native';
 import React from 'react';
-import {Colors, typography} from '../theme';
+import {StyleSheet, PressableProps as RNPressableProps, TouchableOpacityProps, ViewStyle, StyleProp, TextStyle, Pressable} from 'react-native';
 import {useTheme} from '@react-navigation/native';
+import { Text } from './Text';
+import {Colors, typography} from '../theme';
 
 export interface ButtonProps extends RNPressableProps {
     btnText:string,
@@ -49,9 +50,8 @@ StyleSheet.create({
     },
     btnText: {
       color: colors.white,
-      fontFamily: typography.regular,
+      fontFamily: typography.bold,
       fontStyle: 'normal',
-      fontWeight: '700',
       fontSize: 15,
       lineHeight: 18,
     },

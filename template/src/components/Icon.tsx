@@ -1,48 +1,51 @@
-import * as React from "react"
-import { ComponentType } from "react"
+import React, {ComponentType} from 'react';
 import {
   Image,
   ImageStyle,
   StyleProp,
+  StyleSheet,
   TouchableOpacity,
   TouchableOpacityProps,
   View,
   ViewProps,
   ViewStyle,
-} from "react-native"
+} from 'react-native';
+import { iconRegistry } from '../assets/icons';
+import { Colors } from '../theme';
+import { useTheme } from '@react-navigation/native';
 
-export type IconTypes = keyof typeof iconRegistry
+export type IconTypes = keyof typeof iconRegistry;
 
 interface IconProps extends TouchableOpacityProps {
   /**
    * The name of the icon
    */
-  icon: IconTypes
+  icon: IconTypes;
 
   /**
    * An optional tint color for the icon
    */
-  color?: string
+  color?: string;
 
   /**
    * An optional size for the icon. If not provided, the icon will be sized to the icon's resolution.
    */
-  size?: number
+  size?: number;
 
   /**
    * Style overrides for the icon image
    */
-  style?: StyleProp<ImageStyle>
+  style?: StyleProp<ImageStyle>;
 
   /**
    * Style overrides for the icon container
    */
-  containerStyle?: StyleProp<ViewStyle>
+  containerStyle?: StyleProp<ViewStyle>;
 
   /**
    * An optional function to be called when the icon is pressed
    */
-  onPress?: TouchableOpacityProps["onPress"]
+  onPress?: TouchableOpacityProps['onPress'];
 }
 
 /**
@@ -56,39 +59,37 @@ export function Icon(props: IconProps) {
     icon,
     color,
     size,
-    style: $imageStyleOverride,
-    containerStyle: $containerStyleOverride,
+    style: imageStyleOverride,
+    containerStyle: containerStyleOverride,
     ...WrapperProps
-  } = props
+  } = props;
 
-  const isPressable = !!WrapperProps.onPress
-  const Wrapper = (WrapperProps?.onPress ? TouchableOpacity : View) as ComponentType<
-    TouchableOpacityProps | ViewProps
-  >
+  const {colors} = useTheme();
+  const styles = makeStyles(colors);
+  const isPressable = !!WrapperProps.onPress;
+  const Wrapper = (
+    WrapperProps?.onPress ? TouchableOpacity : View
+  ) as ComponentType<TouchableOpacityProps | ViewProps>;
 
-  const $imageStyle: StyleProp<ImageStyle> = [
-    $imageStyleBase,
-    color !== undefined && { tintColor: color },
-    size !== undefined && { width: size, height: size },
-    $imageStyleOverride,
-  ]
+  const imageStyle: StyleProp<ImageStyle> = [
+    styles.imageStyleBase,
+    color !== undefined && {tintColor: color},
+    size !== undefined && {width: size, height: size},
+    imageStyleOverride,
+  ];
 
   return (
     <Wrapper
-      accessibilityRole={isPressable ? "imagebutton" : undefined}
+      accessibilityRole={isPressable ? 'imagebutton' : undefined}
       {...WrapperProps}
-      style={$containerStyleOverride}
-    >
-      <Image style={$imageStyle} source={iconRegistry[icon]} />
+      style={containerStyleOverride}>
+      <Image style={imageStyle} source={iconRegistry[icon]} />
     </Wrapper>
-  )
+  );
 }
-
-export const iconRegistry = {
-  hidden: require("../assets/icons/hidden.png"),
-  view: require("../assets/icons/view.png"),
-}
-
-const $imageStyleBase: ImageStyle = {
-  resizeMode: "contain",
-}
+const makeStyles = (colors:Colors) =>
+StyleSheet.create({
+  imageStyleBase: {
+    resizeMode: 'contain',
+    },
+  });

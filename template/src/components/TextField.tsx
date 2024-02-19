@@ -3,7 +3,6 @@ import React, {
   Ref,
 } from 'react';
 import {
-  Pressable,
   StyleProp,
   StyleSheet,
   TextInput,
@@ -12,9 +11,9 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
+import {useTheme} from '@react-navigation/native';
 import { TextProps} from './Text';
 import {Colors, typography} from '../theme';
-import {useTheme} from '@react-navigation/native';
 import {Icon, IconTypes} from './Icon';
 
 export interface TextFieldProps extends Omit<TextInputProps, 'ref'> {
@@ -79,10 +78,10 @@ export const TextField = forwardRef(function TextField(
       <TextInput
         placeholder={placeholder}
         placeholderTextColor={colors.lightGrey}
-        {...TextInputProps}
         editable={editable}
         style={[styles.inputStyles,inputStyleOverride]}
         secureTextEntry={secureTextEntry}
+        {...TextInputProps}
       />
       {rightIcon &&<Icon icon={rightIcon} color={colors.primary} onPress={onPressRightIcon}/>}
     </View>
