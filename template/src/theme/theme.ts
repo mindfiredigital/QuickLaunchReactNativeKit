@@ -17,19 +17,82 @@ interface ExtendedTheme extends Theme {
   colors: Theme['colors'] & Colors;
 }
 
+const theme2 = {
+  common: {
+    /**
+     * primary: The primary color of the app used to tint various elements. Usually you'll want to use your brand color for this.
+     */
+    primary: colors.electicRed,
+    /**
+     * btnTextPrimary: Them text color of secondary button elements.
+     */
+    btnTextSecondary: colors.chineseSilver,
+    /**
+     * placeholderText: secondary button text color
+     */
+    placeholderText: colors.gray,
+    /**
+     * backgroundSecondary: The color of various secondary backgrounds, such as background color for the screens.
+     */
+    backgroundSecondary: colors.blackOlive,
+    /**
+     * card: The background color of card-like elements, such as headers, tab bars etc.
+     */
+    card: colors.blackOlive,
+  },
+  light: {
+    /**
+     * tertiary: The icon color of various elements.
+     */
+    tertiary: colors.black,
+    /**
+     * btnTextPrimary: Them text color of primary button elements.
+     */
+    btnTextPrimary: colors.white,
+    /**
+     * background: The color of various backgrounds, such as background color for the screens.
+     */
+    background: colors.white,
+    /**
+     * text: The text color of various elements.
+     */
+    text: colors.darkCharcole,
+    /**
+     * border: The color of borders, e.g. header border, tab bar border etc.
+     */
+    border: colors.darkSilver,
+  },
+  dark: {
+    /**
+     * tertiary: The icon color of various elements.
+     */
+    tertiary: colors.lightGray,
+    /**
+     * btnTextPrimary: Them text color of primary button elements.
+     */
+    btnTextPrimary: colors.smokeWhite,
+    /**
+     * background: The color of various backgrounds, such as background color for the screens.
+     */
+    background: colors.eerieBlack,
+    /**
+     * text: The text color of various elements.
+     */
+    text: colors.platinum,
+    /**
+     * border: The color of borders, e.g. header border, tab bar border etc.
+     */
+    border: colors.smokeWhite,
+  },
+};
+
 /**
  * Light theme colors
  */
 const lightThemeColors = {
   ...colors,
-  primary: colors.red,
-  background: colors.white,
-  text: colors.darkGrey,
-  secondary: colors.darkGrey,
-  tertiary: colors.pink40,
-  surface: colors.white,
-  card: colors.white,
-  border: colors.borderGrey,
+  ...theme2.common,
+  ...theme2.light,
 };
 
 /**
@@ -37,14 +100,8 @@ const lightThemeColors = {
  */
 const darkThemeColors = {
   ...colors,
-  primary: colors.lightPink,
-  background: colors.darkBlue,
-  text: colors.medGrey,
-  secondary: colors.medGrey,
-  tertiary: colors.pink40,
-  surface: colors.ebony,
-  card: colors.darkBlue,
-  border: colors.lighterGrey,
+  ...theme2.common,
+  ...theme2.dark,
 };
 
 /** Light mode theme and colors */
