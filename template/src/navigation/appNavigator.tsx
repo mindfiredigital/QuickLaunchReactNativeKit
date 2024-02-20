@@ -7,6 +7,7 @@
 import React from 'react';
 import {useColorScheme} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
+import BootSplash from 'react-native-bootsplash';
 import {navigationRef} from './navigationUtilities';
 import PrimaryNavigator from './primaryNavigator';
 import AuthNavigator from './authNavigator';
@@ -24,10 +25,16 @@ const AppNavigator = (props: NavigationProps) => {
    */
   const isDarkMode = scheme === 'dark';
 
+  /** Hide boot splash screen once navigation is ready */
+  const hideBootSplash = () => {
+    BootSplash.hide({fade: true});
+  };
+
   return (
     <NavigationContainer
       ref={navigationRef}
       theme={isDarkMode ? darkTheme : lightTheme}
+      onReady={hideBootSplash}
       {...props}>
       {isLogin ? <PrimaryNavigator /> : <AuthNavigator />}
     </NavigationContainer>

@@ -8,12 +8,12 @@
 
     <!-- BootTheme should inherit from Theme.BootSplash or Theme.BootSplash.EdgeToEdge -->
     <style name="BootTheme" parent="Theme.BootSplash.EdgeToEdge">
-        <item name="bootSplashBackground">@color/bootsplash_background</item>
+        <item name="bootSplashBackground">@color/bootsplash_background_dark</item>
         <item name="bootSplashLogo">@mipmap/bootsplash_logo</item>
         <item name="postBootSplashTheme">@style/AppTheme</item>
         <!-- Apply color + style to the status bar (true = dark-content, false = light-content) -->
-        <item name="android:statusBarColor" tools:targetApi="m">@color/bootsplash_background</item>
-        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="android:statusBarColor" tools:targetApi="m">@color/bootsplash_background_dark</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
     </style>
 
 </resources>
