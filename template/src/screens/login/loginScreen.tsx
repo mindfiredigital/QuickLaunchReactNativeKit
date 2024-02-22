@@ -11,6 +11,10 @@ import {Icon} from '../../components/Icon';
 import {AuthScreenProps} from '../../navigation/authNavigator';
 import {makeCommanStyles} from '../styles';
 
+/**
+ * A Screen to render a Login screen.
+ */
+
 export const LoginScreen: FC<AuthScreenProps<'login'>> = ({
   navigation,
   route,
