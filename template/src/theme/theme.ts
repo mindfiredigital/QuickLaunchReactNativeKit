@@ -24,6 +24,10 @@ const theme2 = {
      */
     primary: colors.electicRed,
     /**
+     * secondary: The secondary color of the app used to Text, Text Field borders, icons.
+     */
+    secondary: colors.greyLight,
+    /**
      * btnTextPrimary: Them text color of secondary button elements.
      */
     btnTextSecondary: colors.chineseSilver,
@@ -44,7 +48,7 @@ const theme2 = {
     /**
      * tertiary: The icon color of various elements.
      */
-    tertiary: colors.black,
+    tertiary: colors.tertiary,
     /**
      * btnTextPrimary: Them text color of primary button elements.
      */
@@ -66,7 +70,7 @@ const theme2 = {
     /**
      * tertiary: The icon color of various elements.
      */
-    tertiary: colors.lightGray,
+    tertiary: colors.tertiary,
     /**
      * btnTextPrimary: Them text color of primary button elements.
      */

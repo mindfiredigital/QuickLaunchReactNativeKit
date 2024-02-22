@@ -22,4 +22,6 @@ export const colors = {
   roseVale: '#AF545B',
   yankeesBlue: '#181D3D',
   gunMetal: '#282C35',
+  greyLight: '#B9B9B9',
+  tertiary: '#D2D2D2',
 };
