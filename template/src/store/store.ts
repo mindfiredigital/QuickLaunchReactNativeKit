@@ -1,9 +1,18 @@
-import { configureStore } from '@reduxjs/toolkit';
-import AuthSlice from './slices/AuthSlice';
+import {configureStore} from '@reduxjs/toolkit';
+import {persistStore} from 'redux-persist';
+import {rootReducer} from './reducets';
 
-export const store = configureStore({
-  reducer: AuthSlice,
+const store = configureStore({
+  reducer: rootReducer,
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
+
+const persistor = persistStore(store);
+
+export {store, persistor};
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>;

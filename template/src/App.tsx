@@ -2,12 +2,15 @@ import * as React from 'react';
 import './i18n/i18n';
 import {Provider} from 'react-redux';
 import AppNavigator from './navigation/appNavigator';
-import {store} from './store/store';
+import {PersistGate} from 'redux-persist/integration/react';
+import {persistor, store} from './store';
 
 export default function App() {
   return (
     <Provider store={store}>
-      <AppNavigator />
+      <PersistGate loading={null} persistor={persistor}>
+        <AppNavigator />
+      </PersistGate>
     </Provider>
   );
 }
