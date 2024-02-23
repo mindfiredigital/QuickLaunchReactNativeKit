@@ -1,11 +1,20 @@
 #!/usr/bin/env node
-
-console.log("This is post init script");
+BLUE = '\x1B[34m'
+NC = '\x1B[0m'
 
 // Add npm install for required packages
-console.log('Installing necessary npm packages...');
+console.log(`${BLUE}1. Installing necessary npm packages...${NC}`);
+var twirlTimer = (function () {
+    var P = ["\\", "|", "/", "-"];
+    var x = 0;
+    return setInterval(function () {
+        process.stdout.write("\r" + P[x++]);
+        x = x % P.length;
+    }, 250);
+})();
 const { execSync } = require('child_process');
 execSync('npm install');
+clearInterval(twirlTimer)
 
 const readlineSync = require('readline-sync');
 const fs = require('fs');
@@ -27,7 +36,7 @@ function promptForColor(colorName, defaultValue = '') {
     }
 
     while (!isValidHexColor(userInput)) {
-        console.log('Invalid color! Please enter a valid hex color code.');
+        console.error('Invalid color! Please enter a valid hex color code.');
         userInput = readlineSync.question(`Enter value for ${colorName} (default: ${defaultValue}): `);
     }
 
@@ -35,7 +44,7 @@ function promptForColor(colorName, defaultValue = '') {
 }
 
 // Ask the user if they want to set custom theme values
-const wantsCustomTheme = readlineSync.keyInYNStrict('Do you want to set custom theme values?');
+const wantsCustomTheme = readlineSync.keyInYNStrict(`${BLUE}2. Do you want to set custom theme values?${NC}`);
 
 const colors = {
     primary: '#F00001',
@@ -93,10 +102,10 @@ export const customTheme: ThemeWithMode = {
 
 const generateCustomTheme = () => {
     // Create a TypeScript file with the generated content
-    fs.writeFileSync('template/src/theme/themes/customTheme.ts', themeTemplate);
+    fs.writeFileSync('src/theme/themes/customTheme.ts', themeTemplate);
 
     // Path to the settings.ts file
-    const filePathToSettings = 'template/settings.ts';
+    const filePathToSettings = 'settings.ts';
 
     // Read the content of the file
     fs.readFile(filePathToSettings, 'utf8', (err, data) => {
@@ -120,7 +129,7 @@ const generateCustomTheme = () => {
 
 const updateThemeIndex = () => {
     // Path to the settings.ts file
-    const filePathToIndex = 'template/src/theme/themes/index.ts';
+    const filePathToIndex = 'src/theme/themes/index.ts';
 
     // Read the content of the file
     fs.readFile(filePathToIndex, 'utf8', (err, data) => {
@@ -146,7 +155,7 @@ const updateThemeIndex = () => {
 }
 
 const updateTheme = () => {
-    const filePathToTheme = 'template/src/theme/theme.ts';
+    const filePathToTheme = 'src/theme/theme.ts';
 
     fs.readFile(filePathToTheme, 'utf8', (err, data) => {
         if (err) {
@@ -178,14 +187,14 @@ const updateTheme = () => {
 
 // If the user wants a custom theme, get user input for each color
 if (wantsCustomTheme) {
-    console.log('Press enter or return to fill default color.');
+    console.log(`${BLUE}3. Press enter or return to fill default color.${NC}`);
     for (const color in colors) {
         colors[color] = promptForColor(color, colors[color]);
     }
     generateCustomTheme()
     updateThemeIndex()
     updateTheme()
-    console.log('Theme file generated successfully!');
+    console.log(`${BLUE}\u2713 Theme file generated successfully!${NC}`);
 } else {
-    console.log('Default theme2 will be used.\nTo update theme navigate to settings.ts and choose theme from preset list!');
+    console.log(`${BLUE}\u2713 Default theme2 will be used.\nTo update theme navigate to settings.ts and choose theme from preset list!${NC}`);
 }
