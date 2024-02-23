@@ -23,8 +23,6 @@ export const colors = {
   grayX11: '#B9B9B9',
   yankeesBlue: '#181D3D',
   gunMetal: '#282C35',
-  greyLight: '#B9B9B9',
-  tertiary: '#D2D2D2',
   silverFoil: '#AFAFAF',
   violet: '#8034DE',
   charlestonGreen: '#282828',
