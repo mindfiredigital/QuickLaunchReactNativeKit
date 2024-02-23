@@ -19,30 +19,6 @@ clearInterval(twirlTimer)
 const readlineSync = require('readline-sync');
 const fs = require('fs');
 
-/**
- * Check if hex color is valid
- * @param {*} color 
- */
-function isValidHexColor(color) {
-    const hexColorRegex = /^#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})$/;
-    return hexColorRegex.test(color);
-}
-
-function promptForColor(colorName, defaultValue = '') {
-    let userInput = readlineSync.question(`Enter value for ${colorName} (default: ${defaultValue}): `);
-
-    if (!userInput.trim()) {
-        userInput = defaultValue;
-    }
-
-    while (!isValidHexColor(userInput)) {
-        console.error('Invalid color! Please enter a valid hex color code.');
-        userInput = readlineSync.question(`Enter value for ${colorName} (default: ${defaultValue}): `);
-    }
-
-    return userInput;
-}
-
 // Ask the user if they want to set custom theme values
 const wantsCustomTheme = readlineSync.keyInYNStrict(`${BLUE}2. Do you want to set custom theme values?${NC}`);
 
@@ -67,6 +43,20 @@ const colors = {
     placeholderTextDark: '#808080',
     card: '#3C3C3C',
     cardDark: '#3C3C3C',
+};
+
+const colorsANSI = {
+    '#F00001': '\x1B[38;2;240;0;1m', // primary
+    '#333333': '\x1B[38;2;51;51;51m', // text
+    '#E6E6E6': '\x1B[38;2;230;230;230m', // textDark
+    '#FFFFFF': '\x1B[38;2;255;255;255m', // background
+    '#1E1E1E': '\x1B[38;2;30;30;30m', // backgroundDark
+    '#3C3C3C': '\x1B[38;2;60;60;60m', // backgroundSecondary, backgroundSecondaryDark, card, cardDark
+    '#000000': '\x1B[38;2;0;0;0m', // tertiary
+    '#D2D2D2': '\x1B[38;2;210;210;210m', // tertiaryDark
+    '#FEFFFF': '\x1B[38;2;254;255;255m', // btnTextPrimaryDark, borderDark
+    '#C8C8C8': '\x1B[38;2;200;200;200m', // btnTextSecondary, btnTextSecondaryDark
+    '#808080': '\x1B[38;2;128;128;128m', // placeholderText, placeholderTextDark
 };
 
 const themeTemplate = `
@@ -99,6 +89,30 @@ export const customTheme: ThemeWithMode = {
   },
 };
 `;
+
+/**
+ * Check if hex color is valid
+ * @param {*} color 
+ */
+function isValidHexColor(color) {
+    const hexColorRegex = /^#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})$/;
+    return hexColorRegex.test(color);
+}
+
+function promptForColor(colorName, defaultValue = '') {
+    let userInput = readlineSync.question(`Enter value for ${colorName} (default: ${colorsANSI[defaultValue]}${defaultValue}${NC}): `);
+
+    if (!userInput.trim()) {
+        userInput = defaultValue;
+    }
+
+    while (!isValidHexColor(userInput)) {
+        console.error('Invalid color! Please enter a valid hex color code.');
+        userInput = readlineSync.question(`Enter value for ${colorName} (default: ${defaultValue}): `);
+    }
+
+    return userInput;
+}
 
 const generateCustomTheme = () => {
     // Create a TypeScript file with the generated content
