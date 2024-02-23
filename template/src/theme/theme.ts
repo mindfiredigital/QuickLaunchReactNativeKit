@@ -4,9 +4,10 @@
  * Provide light and dark themes based on the time of the day or user preference
  */
 import {DefaultTheme, DarkTheme} from '@react-navigation/native';
-import {colors, theme1, theme2, theme3} from './colors';
+import {colors} from './colors';
 import {ExtendedTheme} from './theme.types';
 import {settings} from '../../settings';
+import {theme1, theme2, theme3} from './themes';
 
 export type Colors = typeof lightThemeColors;
 export type ThemeList = keyof typeof theme;
