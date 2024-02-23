@@ -1,20 +1,12 @@
 #!/usr/bin/env node
 BLUE = '\x1B[34m'
+GREEN = '\x1B[32m';
 NC = '\x1B[0m'
 
 // Add npm install for required packages
 console.log(`${BLUE}1. Installing necessary npm packages...${NC}`);
-var twirlTimer = (function () {
-    var P = ["\\", "|", "/", "-"];
-    var x = 0;
-    return setInterval(function () {
-        process.stdout.write("\r" + P[x++]);
-        x = x % P.length;
-    }, 250);
-})();
 const { execSync } = require('child_process');
 execSync('npm install');
-clearInterval(twirlTimer)
 
 const readlineSync = require('readline-sync');
 const fs = require('fs');
@@ -57,6 +49,7 @@ const colorsANSI = {
     '#FEFFFF': '\x1B[38;2;254;255;255m', // btnTextPrimaryDark, borderDark
     '#C8C8C8': '\x1B[38;2;200;200;200m', // btnTextSecondary, btnTextSecondaryDark
     '#808080': '\x1B[38;2;128;128;128m', // placeholderText, placeholderTextDark
+    '#707070': '\x1B[38;2;112;112;112m' // border
 };
 
 const themeTemplate = `
@@ -100,7 +93,7 @@ function isValidHexColor(color) {
 }
 
 function promptForColor(colorName, defaultValue = '') {
-    let userInput = readlineSync.question(`Enter value for ${colorName} (default: ${colorsANSI[defaultValue]}${defaultValue}${NC}): `);
+    let userInput = readlineSync.question(`- Enter value for ${colorName} (default: ${colorsANSI[defaultValue] ?? NC}${defaultValue}${NC}): `);
 
     if (!userInput.trim()) {
         userInput = defaultValue;
@@ -108,7 +101,7 @@ function promptForColor(colorName, defaultValue = '') {
 
     while (!isValidHexColor(userInput)) {
         console.error('Invalid color! Please enter a valid hex color code.');
-        userInput = readlineSync.question(`Enter value for ${colorName} (default: ${defaultValue}): `);
+        userInput = userInput = readlineSync.question(`- Enter value for ${colorName} (default: ${colorsANSI[defaultValue] ?? NC}${defaultValue}${NC}): `);
     }
 
     return userInput;
@@ -208,7 +201,7 @@ if (wantsCustomTheme) {
     generateCustomTheme()
     updateThemeIndex()
     updateTheme()
-    console.log(`${BLUE}\u2713 Theme file generated successfully!${NC}`);
+    console.log(`${GREEN}\u2713 Theme file generated successfully!${NC}`);
 } else {
-    console.log(`${BLUE}\u2713 Default theme2 will be used.\nTo update theme navigate to settings.ts and choose theme from preset list!${NC}`);
+    console.log(`${GREEN}\u2713 Default theme2 will be used.${NC}\nTo update theme navigate to settings.ts and choose theme from preset list!${NC}`);
 }
