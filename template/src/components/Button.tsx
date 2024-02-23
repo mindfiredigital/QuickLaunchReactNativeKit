@@ -1,18 +1,26 @@
 import React from 'react';
-import {StyleSheet, PressableProps as RNPressableProps, TouchableOpacityProps, ViewStyle, StyleProp, TextStyle, Pressable} from 'react-native';
+import {
+  StyleSheet,
+  PressableProps as RNPressableProps,
+  TouchableOpacityProps,
+  ViewStyle,
+  StyleProp,
+  TextStyle,
+  Pressable,
+} from 'react-native';
 import {useTheme} from '@react-navigation/native';
-import { Text } from './Text';
+import {Text} from './Text';
 import {Colors, typography} from '../theme';
 
 export interface ButtonProps extends RNPressableProps {
-    btnText:string,
-    onPress:TouchableOpacityProps["onPress"]
-    styleProps?:StyleProp<ViewStyle>
-    textStyleProps?:StyleProp<TextStyle>,
-    isDisabled?:boolean
+  btnText: string;
+  onPress: TouchableOpacityProps['onPress'];
+  styleProps?: StyleProp<ViewStyle>;
+  textStyleProps?: StyleProp<TextStyle>;
+  isDisabled?: boolean;
 }
 
-const Button = (props:ButtonProps) => {
+const Button = (props: ButtonProps) => {
   const {
     btnText,
     onPress,
@@ -20,10 +28,9 @@ const Button = (props:ButtonProps) => {
     textStyleProps,
     isDisabled = false,
     ...restProps
-  }=props
+  } = props;
   const {colors} = useTheme();
   const styles = makeStyles(colors);
-
   return (
     <Pressable
       onPress={onPress}
@@ -38,8 +45,8 @@ const Button = (props:ButtonProps) => {
   );
 };
 
-const makeStyles = (colors:Colors) =>
-StyleSheet.create({
+const makeStyles = (colors: Colors) =>
+  StyleSheet.create({
     container: {
       width: '100%',
       height: 50,
@@ -55,7 +62,7 @@ StyleSheet.create({
       fontSize: 15,
       lineHeight: 18,
     },
-    isDisabledStyle: {backgroundColor: colors.lightGrey},
+    isDisabledStyle: {backgroundColor: colors.placeholderText},
   });
 
 export default Button;
