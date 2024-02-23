@@ -34,7 +34,7 @@ export interface TextProps extends RNTextProps {
  * @returns {JSX.Element} The rendered `Text` component.
  */
 export function Text(props: TextProps): JSX.Element {
-  const {text, children, style: styleOverride, size = 'h1', ...rest} = props;
+  const {text, children, style: styleOverride, size = 'body2', ...rest} = props;
   const {colors} = useTheme();
   const styles = makeStyles(colors);
 
