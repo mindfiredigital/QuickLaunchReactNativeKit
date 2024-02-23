@@ -19,7 +19,7 @@ const selectedTheme = settings.theme;
 
 /**
  * Define list of available theme
- * To add custom theme navigate to ./colors.ts and export custom theme
+ * To add custom theme navigate to ./themes and export custom theme
  * Define custom theme below and update value as custom theme name in settings.ts
  */
 const theme = {
