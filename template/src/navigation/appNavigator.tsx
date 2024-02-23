@@ -12,13 +12,14 @@ import {navigationRef} from './navigationUtilities';
 import PrimaryNavigator from './primaryNavigator';
 import AuthNavigator from './authNavigator';
 import {darkTheme, lightTheme} from '../theme';
+import {useAppSelector} from '../store';
 
 export interface NavigationProps
   extends Partial<React.ComponentProps<typeof NavigationContainer>> {}
 
 const AppNavigator = (props: NavigationProps) => {
-  const isLogin = false;
   const scheme = useColorScheme();
+  const {isAuthenticated} = useAppSelector(state => state.auth);
   /**
    * To support only light mode change isDarkMode to false
    * const isDarkMode = false
@@ -36,7 +37,7 @@ const AppNavigator = (props: NavigationProps) => {
       theme={isDarkMode ? darkTheme : lightTheme}
       onReady={hideBootSplash}
       {...props}>
-      {isLogin ? <PrimaryNavigator /> : <AuthNavigator />}
+      {isAuthenticated ? <PrimaryNavigator /> : <AuthNavigator />}
     </NavigationContainer>
   );
 };

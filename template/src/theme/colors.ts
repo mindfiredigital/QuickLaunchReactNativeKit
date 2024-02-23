@@ -1,3 +1,5 @@
+import {ThemeWithMode} from './theme.types';
+
 /**
  * A color helpers for defining app theme
  */
@@ -20,8 +22,94 @@ export const colors = {
   lavendarGray: '#BBC2D8',
   shadowBlue: '#7D80AA',
   roseVale: '#AF545B',
+  grayX11: '#B9B9B9',
   yankeesBlue: '#181D3D',
   gunMetal: '#282C35',
   greyLight: '#B9B9B9',
   tertiary: '#D2D2D2',
+  silverFoil: '#AFAFAF',
+  violet: '#8034DE',
+  charlestonGreen: '#282828',
+  cultured: '#F5F5F5',
+};
+
+export const theme1: ThemeWithMode = {
+  light: {
+    primary: colors.roseVale,
+    text: colors.grayX11,
+    background: colors.yankeesBlue,
+    backgroundSecondary: colors.blackOlive,
+    tertiary: colors.lightGray,
+    btnTextPrimary: colors.lavendarGray,
+    btnTextSecondary: colors.silverFoil,
+    border: colors.darkSilver,
+    placeholderText: colors.gray,
+    card: colors.blackOlive,
+  },
+  dark: {
+    primary: colors.roseVale,
+    text: colors.grayX11,
+    background: colors.yankeesBlue,
+    backgroundSecondary: colors.blackOlive,
+    tertiary: colors.lightGray,
+    btnTextPrimary: colors.lavendarGray,
+    btnTextSecondary: colors.silverFoil,
+    border: colors.smokeWhite,
+    placeholderText: colors.gray,
+    card: colors.blackOlive,
+  },
+};
+
+export const theme2: ThemeWithMode = {
+  light: {
+    primary: colors.electicRed,
+    text: colors.darkCharcole,
+    background: colors.white,
+    backgroundSecondary: colors.blackOlive,
+    tertiary: colors.black,
+    btnTextPrimary: colors.white,
+    btnTextSecondary: colors.chineseSilver,
+    border: colors.darkSilver,
+    placeholderText: colors.gray,
+    card: colors.blackOlive,
+  },
+  dark: {
+    primary: colors.electicRed,
+    text: colors.platinum,
+    background: colors.eerieBlack,
+    backgroundSecondary: colors.blackOlive,
+    tertiary: colors.lightGray,
+    btnTextPrimary: colors.smokeWhite,
+    btnTextSecondary: colors.chineseSilver,
+    border: colors.smokeWhite,
+    placeholderText: colors.gray,
+    card: colors.blackOlive,
+  },
+};
+
+export const theme3: ThemeWithMode = {
+  light: {
+    primary: colors.violet,
+    text: colors.charlestonGreen,
+    background: colors.white,
+    backgroundSecondary: colors.cultured,
+    tertiary: colors.charlestonGreen,
+    btnTextPrimary: colors.white,
+    btnTextSecondary: colors.chineseSilver,
+    border: colors.darkSilver,
+    placeholderText: colors.gray,
+    card: colors.blackOlive,
+  },
+  dark: {
+    primary: colors.violet,
+    text: colors.platinum,
+    background: colors.eerieBlack,
+    backgroundSecondary: colors.blackOlive,
+    tertiary: colors.lightGray,
+    btnTextPrimary: colors.smokeWhite,
+    btnTextSecondary: colors.chineseSilver,
+    border: colors.smokeWhite,
+    placeholderText: colors.gray,
+    card: colors.blackOlive,
+  },
 };

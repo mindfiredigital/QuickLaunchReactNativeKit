@@ -3,131 +3,58 @@
  * Customize the colors match your brand
  * Provide light and dark themes based on the time of the day or user preference
  */
-import {DefaultTheme, DarkTheme, Theme} from '@react-navigation/native';
-import {colors} from './colors';
+import {DefaultTheme, DarkTheme} from '@react-navigation/native';
+import {colors, theme1, theme2, theme3} from './colors';
+import {ExtendedTheme} from './theme.types';
+import {settings} from '../../settings';
 
 export type Colors = typeof lightThemeColors;
+export type ThemeList = keyof typeof theme;
 
-// Define extended theme type that literally *extends* Theme
-interface ExtendedTheme extends Theme {
-  // Reference the Theme type's colors field and make our field an intersection
-  // Learn more:
-  //   https://www.typescriptlang.org/docs/handbook/2/objects.html#intersection-types
-  //   https://www.typescriptlang.org/docs/handbook/2/indexed-access-types.html
-  colors: Theme['colors'] & Colors;
-}
+/**
+ * Selected theme from settings file
+ */
+const selectedTheme = settings.theme;
 
-const theme2 = {
-  common: {
-    /**
-     * primary: The primary color of the app used to tint various elements. Usually you'll want to use your brand color for this.
-     */
-    primary: colors.electicRed,
-    /**
-     * secondary: The secondary color of the app used to Text, Text Field borders, icons.
-     */
-    secondary: colors.greyLight,
-    /**
-     * btnTextPrimary: Them text color of secondary button elements.
-     */
-    btnTextSecondary: colors.chineseSilver,
-    /**
-     * placeholderText: secondary button text color
-     */
-    placeholderText: colors.gray,
-    /**
-     * backgroundSecondary: The color of various secondary backgrounds, such as background color for the screens.
-     */
-    backgroundSecondary: colors.blackOlive,
-    /**
-     * card: The background color of card-like elements, such as headers, tab bars etc.
-     */
-    card: colors.blackOlive,
-  },
-  light: {
-    /**
-     * tertiary: The icon color of various elements.
-     */
-    tertiary: colors.tertiary,
-    /**
-     * btnTextPrimary: Them text color of primary button elements.
-     */
-    btnTextPrimary: colors.white,
-    /**
-     * background: The color of various backgrounds, such as background color for the screens.
-     */
-    background: colors.white,
-    /**
-     * text: The text color of various elements.
-     */
-    text: colors.darkCharcole,
-    /**
-     * border: The color of borders, e.g. header border, tab bar border etc.
-     */
-    border: colors.darkSilver,
-  },
-  dark: {
-    /**
-     * tertiary: The icon color of various elements.
-     */
-    tertiary: colors.tertiary,
-    /**
-     * btnTextPrimary: Them text color of primary button elements.
-     */
-    btnTextPrimary: colors.smokeWhite,
-    /**
-     * background: The color of various backgrounds, such as background color for the screens.
-     */
-    background: colors.eerieBlack,
-    /**
-     * text: The text color of various elements.
-     */
-    text: colors.platinum,
-    /**
-     * border: The color of borders, e.g. header border, tab bar border etc.
-     */
-    border: colors.smokeWhite,
-  },
+/**
+ * Define list of available theme
+ * To add custom theme navigate to ./colors.ts and export custom theme
+ * Define custom theme below and update value as custom theme name in settings.ts
+ */
+const theme = {
+  theme1,
+  theme2,
+  theme3,
 };
 
 /**
  * Light theme colors
  */
 const lightThemeColors = {
+  ...DefaultTheme.colors,
   ...colors,
-  ...theme2.common,
-  ...theme2.light,
+  ...theme[selectedTheme].light,
 };
 
 /**
  * Dark theme colors
  */
 const darkThemeColors = {
+  ...DarkTheme.colors,
   ...colors,
-  ...theme2.common,
-  ...theme2.dark,
+  ...theme[selectedTheme].dark,
 };
 
 /** Light mode theme and colors */
 export const lightTheme: ExtendedTheme = {
   ...DefaultTheme,
   dark: false,
-  colors: {
-    ...DefaultTheme.colors,
-    ...lightThemeColors,
-  },
+  colors: lightThemeColors,
 };
 
 /** Dark mode theme and colors */
 export const darkTheme: ExtendedTheme = {
   ...DarkTheme,
   dark: true,
-  colors: {
-    ...DarkTheme.colors,
-    ...darkThemeColors,
-  },
+  colors: darkThemeColors,
 };
-
-declare module '@react-navigation/native' {
-  export function useTheme(): ExtendedTheme;
-}
