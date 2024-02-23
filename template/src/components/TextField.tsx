@@ -74,7 +74,7 @@ export const TextField = forwardRef(function TextField(
   return (
     <View style={[styles.inputWrapperStyles, containerStyleOverride]}>
       {leftIcon && (
-        <Icon size={leftIconSize} icon={leftIcon} color={colors.secondary} />
+        <Icon size={leftIconSize} icon={leftIcon} color={colors.text} />
       )}
       <TextInput
         placeholder={placeholder}
@@ -100,7 +100,7 @@ const makeStyles = (colors: Colors) =>
       borderWidth: 2,
       height: 50,
       width: '100%',
-      borderColor: colors.secondary,
+      borderColor: colors.text,
       borderRadius: 10,
       flexDirection: 'row',
       alignItems: 'center',

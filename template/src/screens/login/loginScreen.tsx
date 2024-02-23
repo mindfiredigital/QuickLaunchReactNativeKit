@@ -9,7 +9,6 @@ import Button from '../../components/Button';
 import {Screen} from '../../components/Screen';
 import {Icon} from '../../components/Icon';
 import {AuthScreenProps} from '../../navigation/authNavigator';
-import {makeCommanStyles} from '../styles';
 
 /**
  * A Screen to render a Login screen.
@@ -21,9 +20,7 @@ export const LoginScreen: FC<AuthScreenProps<'login'>> = ({
 }) => {
   const {colors} = useTheme();
   const styles = makeStyles(colors);
-  const commonStyles = makeCommanStyles(colors);
   const {t} = useTranslation();
-  const [tempText, setText] = useState('');
   const [isVisible, setVisible] = useState(false);
 
   const renderHeaders = () => (
@@ -34,7 +31,49 @@ export const LoginScreen: FC<AuthScreenProps<'login'>> = ({
         containerStyle={styles.logoContainer}
         color={colors.primary}
       />
-      <Text style={styles.titleText}>{t('login.title')}</Text>
+      <Text size="h1" style={styles.titleText}>
+        {t('login.title')}
+      </Text>
+    </>
+  );
+
+  const renderButtons = () => (
+    <>
+      <View style={styles.forgotView}>
+        <Button
+          btnText={t('login.forgotPassword')}
+          onPress={() => {
+            //forgot password
+          }}
+          styleProps={styles.forgotBtn}
+          textStyleProps={styles.forgotBtnText}
+        />
+      </View>
+      <Button
+        btnText={t('login.title')}
+        onPress={() => {
+          //login user
+        }}
+      />
+    </>
+  );
+
+  const renderTextinputs = () => (
+    <>
+      <TextField
+        leftIcon={'people'}
+        placeholder={t('login.userNamePlaceholder')}
+        leftIconSize={20}
+      />
+      <TextField
+        leftIcon={'lock'}
+        secureTextEntry={isVisible}
+        rightIcon={!isVisible ? 'view' : 'hidden'}
+        onPressRightIcon={() => setVisible(!isVisible)}
+        placeholder={t('login.passwordPlaceholder')}
+        leftIconSize={20}
+        containerStyle={styles.passwordInput}
+      />
     </>
   );
 
@@ -46,39 +85,13 @@ export const LoginScreen: FC<AuthScreenProps<'login'>> = ({
       contentContainerStyle={styles.contentContainerStyle}>
       <View>
         {renderHeaders()}
-        <TextField
-          leftIcon={'people'}
-          placeholder={t('login.userNamePlaceholder')}
-          leftIconSize={20}
-        />
-        <TextField
-          leftIcon={'lock'}
-          secureTextEntry={isVisible}
-          rightIcon={!isVisible ? 'view' : 'hidden'}
-          onPressRightIcon={() => setVisible(!isVisible)}
-          placeholder={t('login.passwordPlaceholder')}
-          leftIconSize={20}
-          containerStyle={styles.passwordInput}
-        />
-        <View style={styles.forgotView}>
-          <Button
-            btnText={t('login.forgotPassword')}
-            onPress={() => {
-              //forgot password
-            }}
-            styleProps={styles.forgotBtn}
-            textStyleProps={styles.forgotBtnText}
-          />
-        </View>
-        <Button
-          btnText={t('login.title')}
-          onPress={() => {
-            //login user
-          }}
-        />
+        {renderTextinputs()}
+        {renderButtons()}
       </View>
       <View style={styles.bottomView}>
-        <Text style={styles.signupText}>{t('login.dontHave')}</Text>
+        <Text size="body3" style={styles.signupText}>
+          {t('login.dontHave')}
+        </Text>
         <Button
           styleProps={styles.signupBtn}
           btnText={t('login.signup')}
@@ -102,11 +115,9 @@ const makeStyles = (colors: Colors) =>
     },
     titleText: {
       fontFamily: typography.bold,
-      fontSize: 30,
-      lineHeight: 36,
       marginBottom: 20,
       marginTop: 16,
-      color: colors.secondary,
+      color: colors.text,
     },
     passwordInput: {
       marginTop: 40,
@@ -134,9 +145,7 @@ const makeStyles = (colors: Colors) =>
       justifyContent: 'center',
     },
     signupText: {
-      color: colors.secondary,
+      color: colors.text,
       fontFamily: typography.regular,
-      fontSize: 16,
-      lineHeight: 18,
     },
   });
