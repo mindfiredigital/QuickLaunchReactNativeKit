@@ -7,7 +7,8 @@ import {
   StyleSheet,
 } from 'react-native';
 import {useTheme} from '@react-navigation/native';
-import {Colors, typography} from '../theme';
+import {Colors, fontSize, lineHeight, typography} from '../theme';
+import {vs} from '../utils';
 export interface TextProps extends RNTextProps {
   /**
    * The text to display if not using `tx` or nested components.
@@ -20,7 +21,7 @@ export interface TextProps extends RNTextProps {
   /**
    * Text size modifier.
    */
-  size?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'body1' | 'body2' | 'body3';
+  size?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'body' | 'body1' | 'body2';
   /**
    * Children components.
    */
@@ -34,7 +35,7 @@ export interface TextProps extends RNTextProps {
  * @returns {JSX.Element} The rendered `Text` component.
  */
 export function Text(props: TextProps): JSX.Element {
-  const {text, children, style: styleOverride, size = 'body2', ...rest} = props;
+  const {text, children, style: styleOverride, size = 'body', ...rest} = props;
   const {colors} = useTheme();
   const styles = makeStyles(colors);
 
@@ -59,39 +60,45 @@ const makeStyles = (colors: Colors) =>
       fontFamily: typography.regular,
     },
     h1: {
-      fontSize: 30,
-      lineHeight: 34,
+      fontSize: fontSize.h1,
+      lineHeight: lineHeight[fontSize.h1],
+      fontFamily: typography.semiBold,
     },
     h2: {
-      fontSize: 24,
-      lineHeight: 30,
+      fontSize: fontSize.h2,
+      lineHeight: lineHeight[fontSize.h2],
+      fontFamily: typography.semiBold,
     },
     h3: {
-      fontSize: 18,
-      lineHeight: 22,
+      fontSize: fontSize.h3,
+      lineHeight: lineHeight[fontSize.h3],
+      fontFamily: typography.medium,
     },
     h4: {
-      fontSize: 15,
-      lineHeight: 18,
+      fontSize: fontSize.h4,
+      lineHeight: lineHeight[fontSize.h4],
+      fontFamily: typography.medium,
     },
     h5: {
-      fontSize: 12,
-      lineHeight: 14,
+      fontSize: fontSize.h5,
+      lineHeight: lineHeight[fontSize.h5],
+      fontFamily: typography.medium,
     },
     h6: {
-      fontSize: 10,
-      lineHeight: 12,
+      fontSize: fontSize.h6,
+      lineHeight: lineHeight[fontSize.h6],
+      fontFamily: typography.medium,
+    },
+    body: {
+      fontSize: fontSize.body,
+      lineHeight: lineHeight[fontSize.body],
     },
     body1: {
-      fontSize: 15,
-      lineHeight: 28,
+      fontSize: fontSize.body1,
+      lineHeight: lineHeight[fontSize.body1],
     },
     body2: {
-      fontSize: 14,
-      lineHeight: 18,
-    },
-    body3: {
-      fontSize: 16,
-      lineHeight: 18,
+      fontSize: fontSize.body2,
+      lineHeight: lineHeight[fontSize.body2],
     },
   });
