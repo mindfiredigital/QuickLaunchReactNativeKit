@@ -7,8 +7,8 @@ import {
   NativeStackScreenProps,
   createNativeStackNavigator,
 } from '@react-navigation/native-stack';
-import {LoginScreen} from '../screens/login/loginScreen';
 import {useTheme} from '@react-navigation/native';
+import {LoginScreen} from '../screens/login/loginScreen';
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
