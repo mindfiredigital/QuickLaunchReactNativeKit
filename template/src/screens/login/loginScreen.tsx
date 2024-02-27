@@ -87,7 +87,8 @@ export const LoginScreen: FC<AuthScreenProps<'login'>> = ({navigation}) => {
         preset="link"
         btnText={t('login.signup')}
         onPress={() => {
-          // TODO: Redirect to sign up
+          // Redirect to sign up screen
+          navigation.navigate('signUp');
         }}
       />
     </View>

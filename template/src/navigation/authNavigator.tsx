@@ -9,6 +9,7 @@ import {
 } from '@react-navigation/native-stack';
 import {useTheme} from '@react-navigation/native';
 import {LoginScreen} from '../screens/login/loginScreen';
+import {SignUpScreen} from '../screens/signUp/signUpScreen';
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -16,6 +17,7 @@ import {LoginScreen} from '../screens/login/loginScreen';
  */
 export type AuthParamList = {
   login: undefined;
+  signUp: undefined;
 };
 
 /**
@@ -36,6 +38,7 @@ const AuthNavigator = () => {
         navigationBarColor: colors.background,
       }}>
       <AuthStack.Screen name={'login'} component={LoginScreen} />
+      <AuthStack.Screen name={'signUp'} component={SignUpScreen} />
     </AuthStack.Navigator>
   );
 };

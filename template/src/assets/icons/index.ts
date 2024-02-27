@@ -1,7 +1,9 @@
 export const iconRegistry = {
-    hidden: require('./hidden.png'),
-    view: require('./view.png'),
-    mindfireFireLogo:require('./mindfireFireLogo.png'),
-    lock: require('./lock.png'),
-    people: require('./people.png'),
-  };
+  hidden: require('./hidden.png'),
+  view: require('./view.png'),
+  mindfireFireLogo: require('./mindfireFireLogo.png'),
+  lock: require('./lock.png'),
+  people: require('./people.png'),
+  back: require('./back.png'),
+  email: require('./email.png'),
+};

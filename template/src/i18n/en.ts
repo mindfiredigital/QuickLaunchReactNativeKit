@@ -7,6 +7,15 @@ const en = {
     dontHave: `Don't have account ?`,
     signup: 'Sign Up',
   },
+  signUp: {
+    iHaveAlready: 'Account Have an account ?',
+    namePlaceholder: 'Full name',
+    emailPlaceholder: 'Email',
+    confirmPassword: 'Confirm Password',
+  },
+  comman: {
+    back: 'Back',
+  },
 };
 
 export default en;
