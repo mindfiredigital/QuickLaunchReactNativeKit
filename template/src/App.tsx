@@ -1,5 +1,6 @@
 import * as React from 'react';
 import './i18n/i18n';
+import './utils/ignoreWarnings';
 import {Provider} from 'react-redux';
 import AppNavigator from './navigation/appNavigator';
 import {PersistGate} from 'redux-persist/integration/react';
