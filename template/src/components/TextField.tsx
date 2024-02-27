@@ -1,5 +1,6 @@
 import React, {forwardRef, Ref} from 'react';
 import {
+  Platform,
   StyleProp,
   StyleSheet,
   TextInput,
@@ -10,40 +11,75 @@ import {
 } from 'react-native';
 import {useTheme} from '@react-navigation/native';
 import {TextProps} from './Text';
-import {Colors, typography} from '../theme';
+import {Colors, fontSize, lineHeight, spacing, typography} from '../theme';
 import {Icon, IconTypes} from './Icon';
+import {s, vs} from '../utils';
 
 export interface TextFieldProps extends Omit<TextInputProps, 'ref'> {
   /**
    * A style modifier for different input states.
    */
   status?: 'error' | 'disabled';
+
   /**
    * The label text to display if not using `labelTx`.
    */
   label?: TextProps['text'];
+
   /**
    * The placeholder text to display if not using `placeholderTx`.
    */
   placeholder?: TextProps['text'];
+
   /**
    * Optional input style override.
    */
   style?: StyleProp<TextStyle>;
+
   /**
-   * Style overrides for the container
+   * Style overrides for the container.
    */
   containerStyle?: StyleProp<ViewStyle>;
+
   /**
-   * Style overrides for the input wrapper
+   * Style overrides for the input wrapper.
    */
   inputWrapperStyle?: StyleProp<ViewStyle>;
+
+  /**
+   * Determines whether the text input is a secure text entry (password field).
+   */
   secureTextEntry?: boolean;
+
+  /**
+   * The type of icon to be displayed on the right side of the text input.
+   */
   rightIcon?: IconTypes;
+
+  /**
+   * The type of icon to be displayed on the left side of the text input.
+   */
   leftIcon?: IconTypes;
+
+  /**
+   * Determines whether the text input is editable or not.
+   */
   editable?: boolean;
+
+  /**
+   * Callback function to be executed when the right icon is pressed.
+   */
   onPressRightIcon?: () => void;
+
+  /**
+   * The size of the left icon.
+   */
   leftIconSize?: number;
+
+  /**
+   * The size of the right icon.
+   */
+  rightIconSize?: number;
 }
 
 /**
@@ -65,8 +101,9 @@ export const TextField = forwardRef(function TextField(
     editable,
     onPressRightIcon,
     containerStyle: containerStyleOverride,
-    leftIconSize,
-    ...TextInputProps
+    leftIconSize = vs(20),
+    rightIconSize = vs(20),
+    ...textInputProps
   } = props;
   const {colors} = useTheme();
   const styles = makeStyles(colors);
@@ -74,7 +111,7 @@ export const TextField = forwardRef(function TextField(
   return (
     <View style={[styles.inputWrapperStyles, containerStyleOverride]}>
       {leftIcon && (
-        <Icon size={leftIconSize} icon={leftIcon} color={colors.text} />
+        <Icon size={leftIconSize} icon={leftIcon} color={colors.tertiary} />
       )}
       <TextInput
         placeholder={placeholder}
@@ -82,11 +119,13 @@ export const TextField = forwardRef(function TextField(
         editable={editable}
         style={[styles.inputStyles, inputStyleOverride]}
         secureTextEntry={secureTextEntry}
-        {...TextInputProps}
+        cursorColor={colors.primary}
+        {...textInputProps}
       />
       {rightIcon && (
         <Icon
           icon={rightIcon}
+          size={rightIconSize}
           color={colors.tertiary}
           onPress={onPressRightIcon}
         />
@@ -97,20 +136,22 @@ export const TextField = forwardRef(function TextField(
 const makeStyles = (colors: Colors) =>
   StyleSheet.create({
     inputWrapperStyles: {
-      borderWidth: 2,
-      height: 50,
-      width: '100%',
-      borderColor: colors.text,
-      borderRadius: 10,
       flexDirection: 'row',
       alignItems: 'center',
-      padding: 5,
-    },
+      borderWidth: 1,
+      borderColor: colors.border,
+      borderRadius: s(spacing.sm),
+      paddingHorizontal: s(spacing.xs),
+      marginHorizontal: s(spacing.md),
+      marginBottom: vs(spacing.lg),
+    } as ViewStyle,
     inputStyles: {
       flex: 1,
-      height: 30,
-      paddingHorizontal: 5,
-      fontSize: 16,
+      paddingHorizontal: s(spacing.xs),
+      fontSize: fontSize.body,
       fontFamily: typography.regular,
-    },
+      color: colors.text,
+      paddingTop: vs(spacing.sm) + (Platform.OS == 'android' ? vs(2) : 0),
+      paddingBottom: vs(spacing.sm),
+    } as TextStyle,
   });

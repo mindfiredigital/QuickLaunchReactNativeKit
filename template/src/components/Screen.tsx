@@ -14,7 +14,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import {useScrollToTop, useTheme} from '@react-navigation/native';
-import {Colors, colors} from '../theme';
+import {Colors} from '../theme';
 import {
   ExtendedEdge,
   useSafeAreaInsetsStyle,
@@ -72,7 +72,7 @@ interface ScrollScreenProps extends BaseScreenProps {
   /**
    * Pass any additional props directly to the ScrollView component.
    */
-  ScrollViewProps?: ScrollViewProps;
+  scrollViewProps?: ScrollViewProps;
 }
 
 interface AutoScreenProps extends Omit<ScrollScreenProps, 'preset'> {
@@ -201,7 +201,7 @@ function ScreenWithScrolling(props: ScreenProps) {
     children,
     keyboardShouldPersistTaps = 'handled',
     contentContainerStyle,
-    ScrollViewProps,
+    scrollViewProps,
     style,
   } = props as ScrollScreenProps;
 
@@ -218,19 +218,19 @@ function ScreenWithScrolling(props: ScreenProps) {
   return (
     <ScrollView
       {...{keyboardShouldPersistTaps, scrollEnabled, ref}}
-      {...ScrollViewProps}
+      {...scrollViewProps}
       onLayout={e => {
         onLayout(e);
-        ScrollViewProps?.onLayout?.(e);
+        scrollViewProps?.onLayout?.(e);
       }}
       onContentSizeChange={(w: number, h: number) => {
         onContentSizeChange(w, h);
-        ScrollViewProps?.onContentSizeChange?.(w, h);
+        scrollViewProps?.onContentSizeChange?.(w, h);
       }}
-      style={[styles.outerStyle, ScrollViewProps?.style, style]}
+      style={[styles.outerStyle, scrollViewProps?.style, style]}
       contentContainerStyle={[
         styles.innerStyle,
-        ScrollViewProps?.contentContainerStyle,
+        scrollViewProps?.contentContainerStyle,
         contentContainerStyle,
       ]}>
       {children}
@@ -245,16 +245,16 @@ function ScreenWithScrolling(props: ScreenProps) {
  * @param {ScreenProps} props - The props for the `Screen` component.
  * @returns {JSX.Element} The rendered `Screen` component.
  */
-export function Screen(props: ScreenProps) {
-  const {colors} = useTheme();
+export function Screen(props: ScreenProps): JSX.Element {
+  const {colors, dark} = useTheme();
   const styles = makeStyles(colors);
   const {
     backgroundColor = colors.background,
     KeyboardAvoidingViewProps,
     keyboardOffset = 0,
     safeAreaEdges,
-    StatusBarProps,
-    statusBarStyle = 'default',
+    StatusBarProps = {backgroundColor: colors.background},
+    statusBarStyle = dark ? 'light-content' : 'dark-content',
   } = props;
 
   const containerInsets = useSafeAreaInsetsStyle(safeAreaEdges);
