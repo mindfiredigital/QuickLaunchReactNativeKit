@@ -1,54 +1,49 @@
 import React, {FC, useState} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {View} from 'react-native';
 import {useTheme} from '@react-navigation/native';
 import {useTranslation} from 'react-i18next';
-import {Colors, typography} from '../../theme';
-import {Text} from '../../components/Text';
-import {TextField} from '../../components/TextField';
-import Button from '../../components/Button';
-import {Screen} from '../../components/Screen';
-import {Icon} from '../../components/Icon';
+import {Button, Icon, Screen, Text, TextField} from '../../components';
 import {AuthScreenProps} from '../../navigation/authNavigator';
+import {vs} from '../../utils';
+import makeStyles from './styles';
 
 /**
  * A Screen to render a Login screen.
  */
-
-export const LoginScreen: FC<AuthScreenProps<'login'>> = ({
-  navigation,
-  route,
-}) => {
+export const LoginScreen: FC<AuthScreenProps<'login'>> = ({navigation}) => {
   const {colors} = useTheme();
   const styles = makeStyles(colors);
   const {t} = useTranslation();
   const [isVisible, setVisible] = useState(false);
 
+  /**
+   * Render compony logo and title
+   */
   const renderHeaders = () => (
-    <>
+    <View style={styles.headerWrapper}>
       <Icon
         icon="mindfireFireLogo"
-        size={129}
+        size={vs(129)}
         containerStyle={styles.logoContainer}
         color={colors.primary}
       />
-      <Text size="h1" style={styles.titleText}>
-        {t('login.title')}
-      </Text>
-    </>
+      <Text size="h1">{t('login.title')}</Text>
+    </View>
   );
 
+  /**
+   * Render forgot password and sign-in button
+   */
   const renderButtons = () => (
     <>
-      <View style={styles.forgotView}>
-        <Button
-          btnText={t('login.forgotPassword')}
-          onPress={() => {
-            //forgot password
-          }}
-          styleProps={styles.forgotBtn}
-          textStyleProps={styles.forgotBtnText}
-        />
-      </View>
+      <Button
+        preset="link"
+        btnText={t('login.forgotPassword')}
+        styleProps={styles.forgotView}
+        onPress={() => {
+          //forgot password
+        }}
+      />
       <Button
         btnText={t('login.title')}
         onPress={() => {
@@ -58,94 +53,57 @@ export const LoginScreen: FC<AuthScreenProps<'login'>> = ({
     </>
   );
 
-  const renderTextinputs = () => (
+  /**
+   * Render Sign-in text inputs email and password
+   */
+  const renderTextInputs = () => (
     <>
       <TextField
         leftIcon={'people'}
         placeholder={t('login.userNamePlaceholder')}
-        leftIconSize={20}
+        keyboardType="email-address"
+        inputMode="email"
+        returnKeyType="next"
+        textContentType="emailAddress"
       />
       <TextField
         leftIcon={'lock'}
-        secureTextEntry={isVisible}
+        secureTextEntry={!isVisible}
         rightIcon={!isVisible ? 'view' : 'hidden'}
         onPressRightIcon={() => setVisible(!isVisible)}
         placeholder={t('login.passwordPlaceholder')}
-        leftIconSize={20}
-        containerStyle={styles.passwordInput}
+        textContentType="password"
       />
     </>
+  );
+
+  /**
+   * Render redirect to Sign up view
+   */
+  const renderSignUp = () => (
+    <View style={styles.bottomView}>
+      <Text>{t('login.dontHave')}</Text>
+      <Button
+        preset="link"
+        btnText={t('login.signup')}
+        onPress={() => {
+          // TODO: Redirect to sign up
+        }}
+      />
+    </View>
   );
 
   return (
     <Screen
       safeAreaEdges={['top', 'bottom']}
-      preset="auto"
-      keyboardOffset={10}
+      preset="fixed"
       contentContainerStyle={styles.contentContainerStyle}>
       <View>
         {renderHeaders()}
-        {renderTextinputs()}
+        {renderTextInputs()}
         {renderButtons()}
       </View>
-      <View style={styles.bottomView}>
-        <Text size="body3" style={styles.signupText}>
-          {t('login.dontHave')}
-        </Text>
-        <Button
-          styleProps={styles.signupBtn}
-          btnText={t('login.signup')}
-          textStyleProps={styles.forgotBtnText}
-          onPress={() => {
-            //login user
-          }}
-        />
-      </View>
+      {renderSignUp()}
     </Screen>
   );
 };
-
-const makeStyles = (colors: Colors) =>
-  StyleSheet.create({
-    logoContainer: {marginTop: 30, alignSelf: 'center'},
-    contentContainerStyle: {
-      padding: 21,
-      flex: 1,
-      justifyContent: 'space-between',
-    },
-    titleText: {
-      fontFamily: typography.bold,
-      marginBottom: 20,
-      marginTop: 16,
-      color: colors.text,
-    },
-    passwordInput: {
-      marginTop: 40,
-      marginBottom: 30,
-    },
-    forgotView: {
-      justifyContent: 'flex-end',
-      alignSelf: 'flex-end',
-      width: '40%',
-    },
-    forgotBtn: {
-      backgroundColor: colors.background,
-    },
-    forgotBtnText: {
-      color: colors.primary,
-    },
-    signupBtn: {
-      backgroundColor: colors.background,
-      width: 70,
-      height: 18,
-      padding: 0,
-    },
-    bottomView: {
-      flexDirection: 'row',
-      justifyContent: 'center',
-    },
-    signupText: {
-      color: colors.text,
-      fontFamily: typography.regular,
-    },
-  });
