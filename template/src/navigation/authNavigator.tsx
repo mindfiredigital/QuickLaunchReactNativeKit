@@ -8,6 +8,7 @@ import {
   createNativeStackNavigator,
 } from '@react-navigation/native-stack';
 import {LoginScreen} from '../screens/login/loginScreen';
+import {useTheme} from '@react-navigation/native';
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -27,10 +28,12 @@ export type AuthScreenProps<T extends keyof AuthParamList> =
 const AuthStack = createNativeStackNavigator<AuthParamList>();
 
 const AuthNavigator = () => {
+  const {colors} = useTheme();
   return (
     <AuthStack.Navigator
       screenOptions={{
         headerShown: false,
+        navigationBarColor: colors.background,
       }}>
       <AuthStack.Screen name={'login'} component={LoginScreen} />
     </AuthStack.Navigator>
