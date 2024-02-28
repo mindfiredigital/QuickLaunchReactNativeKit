@@ -12,6 +12,7 @@ import {useTheme} from '@react-navigation/native';
 import {Text, TextProps} from './Text';
 import {Colors, spacing, typography} from '../theme';
 import {s, vs} from '../utils';
+import {Icon, IconTypes} from '.';
 
 export interface ButtonProps extends TouchableOpacityProps {
   /**
@@ -48,6 +49,16 @@ export interface ButtonProps extends TouchableOpacityProps {
    * Additional text props for the button text component.
    */
   restTextProps?: TextProps;
+
+  /**
+   * Additional button props for the button icon component
+   */
+  btnIcon?: IconTypes;
+
+  /**
+   * The size of the icon.
+   */
+  btnIconSize?: number;
 }
 
 export const Button = (props: ButtonProps) => {
@@ -59,6 +70,8 @@ export const Button = (props: ButtonProps) => {
     textStyleProps,
     isDisabled = false,
     restTextProps,
+    btnIcon,
+    btnIconSize = vs(30),
     ...restProps
   } = props;
   const {colors} = useTheme();
@@ -87,6 +100,9 @@ export const Button = (props: ButtonProps) => {
         isDisabled ? presets[preset].disabledStyle : null,
       ]}
       {...restProps}>
+      {btnIcon && (
+        <Icon icon={btnIcon} size={btnIconSize} color={colors.primary} />
+      )}
       <Text
         style={[presets[preset].btnTextStyle, textStyleProps]}
         {...restTextProps}>
@@ -106,9 +122,12 @@ const makeStyles = (colors: Colors) =>
       justifyContent: 'center',
       backgroundColor: colors.primary,
       marginBottom: vs(spacing.lg),
+      flexDirection: 'row',
     } as ViewStyle,
     link: {
       paddingHorizontal: s(spacing.xs),
+      flexDirection: 'row',
+      alignItems: 'center',
     } as ViewStyle,
     btnText: {
       color: colors.btnTextPrimary,

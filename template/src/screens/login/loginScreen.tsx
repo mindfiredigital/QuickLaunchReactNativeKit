@@ -17,6 +17,21 @@ export const LoginScreen: FC<AuthScreenProps<'login'>> = ({navigation}) => {
   const [isVisible, setVisible] = useState(false);
 
   /**
+   * Redirect to sign up screen
+   */
+
+  const redirectToSignUp = () => {
+    navigation.navigate('signUp');
+  };
+
+  /**
+   * show and hide password
+   */
+  const onPressRightIcon = () => {
+    setVisible(!isVisible);
+  };
+
+  /**
    * Render compony logo and title
    */
   const renderHeaders = () => (
@@ -70,7 +85,7 @@ export const LoginScreen: FC<AuthScreenProps<'login'>> = ({navigation}) => {
         leftIcon={'lock'}
         secureTextEntry={!isVisible}
         rightIcon={!isVisible ? 'view' : 'hidden'}
-        onPressRightIcon={() => setVisible(!isVisible)}
+        onPressRightIcon={onPressRightIcon}
         placeholder={t('login.passwordPlaceholder')}
         textContentType="password"
       />
@@ -86,9 +101,7 @@ export const LoginScreen: FC<AuthScreenProps<'login'>> = ({navigation}) => {
       <Button
         preset="link"
         btnText={t('login.signup')}
-        onPress={() => {
-          // TODO: Redirect to sign up
-        }}
+        onPress={redirectToSignUp}
       />
     </View>
   );
