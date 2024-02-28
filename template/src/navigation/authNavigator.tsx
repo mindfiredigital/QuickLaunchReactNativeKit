@@ -8,8 +8,7 @@ import {
   createNativeStackNavigator,
 } from '@react-navigation/native-stack';
 import {useTheme} from '@react-navigation/native';
-import {LoginScreen} from '../screens/login/loginScreen';
-import {SignUpScreen} from '../screens/signUp/signUpScreen';
+import {LoginScreen, SignUpScreen} from '../screens';
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator

@@ -8,8 +8,8 @@ const en = {
     signup: 'Sign Up',
   },
   signUp: {
-    iHaveAlready: 'Account Have an account ?',
-    namePlaceholder: 'Full name',
+    iHaveAlready: 'Account Have an account?',
+    namePlaceholder: 'Full Name',
     emailPlaceholder: 'Email',
     confirmPassword: 'Confirm Password',
   },

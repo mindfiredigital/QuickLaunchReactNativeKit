@@ -71,7 +71,7 @@ export const Button = (props: ButtonProps) => {
     isDisabled = false,
     restTextProps,
     btnIcon,
-    btnIconSize,
+    btnIconSize = vs(30),
     ...restProps
   } = props;
   const {colors} = useTheme();

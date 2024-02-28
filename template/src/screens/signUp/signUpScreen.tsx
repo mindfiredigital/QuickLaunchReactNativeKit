@@ -18,6 +18,20 @@ export const SignUpScreen: FC<AuthScreenProps<'signUp'>> = ({navigation}) => {
   const [isVisibleConfirmPassword, setVisibleConfirmPassword] = useState(false);
 
   /**
+   * show hide password
+   */
+  const onPressPasswordEye = () => {
+    setVisiblePassword(!isVisiblePassword);
+  };
+
+  /**
+   * show hide confirm password
+   */
+  const onPressConfirmPasswordEye = () => {
+    setVisibleConfirmPassword(!isVisibleConfirmPassword);
+  };
+
+  /**
    * Render compony logo and title
    */
   const renderHeaders = () => (
@@ -77,20 +91,18 @@ export const SignUpScreen: FC<AuthScreenProps<'signUp'>> = ({navigation}) => {
         leftIcon={'lock'}
         secureTextEntry={!isVisiblePassword}
         rightIcon={!isVisiblePassword ? 'view' : 'hidden'}
-        onPressRightIcon={() => setVisiblePassword(!isVisiblePassword)}
+        onPressRightIcon={onPressPasswordEye}
         placeholder={t('login.passwordPlaceholder')}
-        textContentType="password"
+        textContentType="newPassword"
         containerStyle={styles.textInput}
       />
       <TextField
         leftIcon={'lock'}
         secureTextEntry={!isVisibleConfirmPassword}
         rightIcon={!isVisibleConfirmPassword ? 'view' : 'hidden'}
-        onPressRightIcon={() =>
-          setVisibleConfirmPassword(!isVisibleConfirmPassword)
-        }
+        onPressRightIcon={onPressConfirmPasswordEye}
         placeholder={t('signUp.confirmPassword')}
-        textContentType="password"
+        textContentType="newPassword"
         containerStyle={styles.textInput}
       />
     </>
