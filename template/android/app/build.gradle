@@ -1,4 +1,5 @@
 apply plugin: "com.android.application"
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "com.facebook.react"
 
@@ -73,7 +74,7 @@ android {
     ndkVersion rootProject.ext.ndkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
-
+    
     namespace "com.projectname"
     defaultConfig {
         applicationId "com.projectname"
@@ -82,7 +83,7 @@ android {
         versionCode 1
         versionName "1.0"
     }
-    signingConfigs {
+        signingConfigs {
         debug {
             storeFile file('debug.keystore')
             storePassword 'android'
@@ -93,13 +94,13 @@ android {
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
-        }
+                    }
         release {
             // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
             signingConfig signingConfigs.debug
             minifyEnabled enableProguardInReleaseBuilds
-            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+                        proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }
 }
