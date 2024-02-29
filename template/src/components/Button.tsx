@@ -18,7 +18,7 @@ export interface ButtonProps extends TouchableOpacityProps {
   /**
    * The text to be displayed on the button.
    */
-  btnText: string;
+  btnText?: string;
 
   /**
    * The predefined style preset for the button.

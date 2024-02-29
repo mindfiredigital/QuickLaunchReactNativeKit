@@ -8,9 +8,11 @@ import {vs} from '../../utils';
 import makeStyles from './styles';
 
 /**
- * A Screen to render a Sign-up screen.
+ * A Screen to render a Set new password screen.
  */
-export const SignUpScreen: FC<AuthScreenProps<'signUp'>> = ({navigation}) => {
+export const SetNewPasswordScreen: FC<AuthScreenProps<'setNewPassword'>> = ({
+  navigation,
+}) => {
   const {colors} = useTheme();
   const styles = makeStyles(colors);
   const {t} = useTranslation();
@@ -18,21 +20,21 @@ export const SignUpScreen: FC<AuthScreenProps<'signUp'>> = ({navigation}) => {
   const [isVisibleConfirmPassword, setVisibleConfirmPassword] = useState(false);
 
   /**
-   * show hide password
+   * show hide new password
    */
   const onPressPasswordEye = () => {
     setVisiblePassword(!isVisiblePassword);
   };
 
   /**
-   * show hide confirm password
+   * show hide confirm new password
    */
   const onPressConfirmPasswordEye = () => {
     setVisibleConfirmPassword(!isVisibleConfirmPassword);
   };
 
   /**
-   * Render back btn and title
+   * Render compony logo and title
    */
   const renderHeaders = () => (
     <View style={styles.headerWrapper}>
@@ -40,59 +42,28 @@ export const SignUpScreen: FC<AuthScreenProps<'signUp'>> = ({navigation}) => {
         preset="link"
         btnIcon="back"
         btnIconSize={vs(30)}
-        btnText={t('comman.back')}
         onPress={() => navigation.goBack()}
-        textStyleProps={styles.backBtnText}
         styleProps={styles.backBtnView}
       />
-      <Text size="h1" text={t('login.signup')} />
+      <Text size="h1" text={t('setNewPassoword.title')} />
+      <Text
+        text={t('setNewPassoword.discription')}
+        style={styles.discriptionText}
+      />
     </View>
   );
 
   /**
-   * Render sign-up button
-   */
-  const renderButtons = () => (
-    <>
-      <Button
-        btnText={t('login.signup')}
-        onPress={() => {
-          //sign-up user
-        }}
-      />
-    </>
-  );
-
-  /**
-   * Render inputs name, email, password and confirm password
+   * Render new password and confirm new password text input
    */
   const renderTextInputs = () => (
     <>
-      <TextField
-        leftIcon={'people'}
-        placeholder={t('signUp.namePlaceholder')}
-        keyboardType="name-phone-pad"
-        inputMode="text"
-        returnKeyType="next"
-        textContentType="name"
-        containerStyle={styles.textInput}
-      />
-      <TextField
-        leftIcon={'email'}
-        placeholder={t('signUp.emailPlaceholder')}
-        keyboardType="email-address"
-        inputMode="email"
-        returnKeyType="next"
-        textContentType="emailAddress"
-        leftIconSize={vs(25)}
-        containerStyle={styles.textInput}
-      />
       <TextField
         leftIcon={'lock'}
         secureTextEntry={!isVisiblePassword}
         rightIcon={!isVisiblePassword ? 'view' : 'hidden'}
         onPressRightIcon={onPressPasswordEye}
-        placeholder={t('login.passwordPlaceholder')}
+        placeholder={t('setNewPassoword.newPassword')}
         textContentType="newPassword"
         containerStyle={styles.textInput}
       />
@@ -101,7 +72,7 @@ export const SignUpScreen: FC<AuthScreenProps<'signUp'>> = ({navigation}) => {
         secureTextEntry={!isVisibleConfirmPassword}
         rightIcon={!isVisibleConfirmPassword ? 'view' : 'hidden'}
         onPressRightIcon={onPressConfirmPasswordEye}
-        placeholder={t('signUp.confirmPassword')}
+        placeholder={t('setNewPassoword.confirmNewPassword')}
         textContentType="newPassword"
         containerStyle={styles.textInput}
       />
@@ -109,17 +80,14 @@ export const SignUpScreen: FC<AuthScreenProps<'signUp'>> = ({navigation}) => {
   );
 
   /**
-   * Render redirect to Sign in view
+   * Render submit password btn
    */
-  const renderSignIn = () => (
+  const renderSubmitPassword = () => (
     <View style={styles.bottomView}>
-      <Text>{t('signUp.iHaveAlready')}</Text>
       <Button
-        preset="link"
-        btnText={t('login.title')}
+        btnText={t('setNewPassoword.submitPassword')}
         onPress={() => {
-          //Redirect to sign in screen
-          navigation.goBack();
+          //submit password
         }}
       />
     </View>
@@ -133,9 +101,8 @@ export const SignUpScreen: FC<AuthScreenProps<'signUp'>> = ({navigation}) => {
       <View>
         {renderHeaders()}
         {renderTextInputs()}
-        {renderButtons()}
       </View>
-      {renderSignIn()}
+      {renderSubmitPassword()}
     </Screen>
   );
 };

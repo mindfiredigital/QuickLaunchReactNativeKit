@@ -17,9 +17,15 @@ export const LoginScreen: FC<AuthScreenProps<'login'>> = ({navigation}) => {
   const [isVisible, setVisible] = useState(false);
 
   /**
+   * Redirect to forgot password screen
+   */
+  const redirectToForgotPassword = () => {
+    navigation.navigate('forgotPassword');
+  };
+
+  /**
    * Redirect to sign up screen
    */
-
   const redirectToSignUp = () => {
     navigation.navigate('signUp');
   };
@@ -55,9 +61,7 @@ export const LoginScreen: FC<AuthScreenProps<'login'>> = ({navigation}) => {
         preset="link"
         btnText={t('login.forgotPassword')}
         styleProps={styles.forgotView}
-        onPress={() => {
-          //forgot password
-        }}
+        onPress={redirectToForgotPassword}
       />
       <Button
         btnText={t('login.title')}
