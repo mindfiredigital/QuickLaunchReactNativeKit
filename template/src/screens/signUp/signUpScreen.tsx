@@ -2,10 +2,11 @@ import React, {FC, useState} from 'react';
 import {View} from 'react-native';
 import {useTheme} from '@react-navigation/native';
 import {useTranslation} from 'react-i18next';
-import {Button, Screen, Text, TextField} from '../../components';
+import {Button, Header, Screen, Text, TextField} from '../../components';
 import {AuthScreenProps} from '../../navigation/authNavigator';
 import {vs} from '../../utils';
 import makeStyles from './styles';
+import {makeCommanStyles} from '../styles';
 
 /**
  * A Screen to render a Sign-up screen.
@@ -13,6 +14,7 @@ import makeStyles from './styles';
 export const SignUpScreen: FC<AuthScreenProps<'signUp'>> = ({navigation}) => {
   const {colors} = useTheme();
   const styles = makeStyles(colors);
+  const commonStyles = makeCommanStyles(colors);
   const {t} = useTranslation();
   const [isVisiblePassword, setVisiblePassword] = useState(false);
   const [isVisibleConfirmPassword, setVisibleConfirmPassword] = useState(false);
@@ -32,18 +34,21 @@ export const SignUpScreen: FC<AuthScreenProps<'signUp'>> = ({navigation}) => {
   };
 
   /**
+   * navigate to back screen
+   */
+  const goBack = () => {
+    navigation.goBack();
+  };
+
+  /**
    * Render back btn and title
    */
   const renderHeaders = () => (
     <View style={styles.headerWrapper}>
-      <Button
-        preset="link"
-        btnIcon="back"
-        btnIconSize={vs(30)}
-        btnText={t('comman.back')}
-        onPress={() => navigation.goBack()}
-        textStyleProps={styles.backBtnText}
-        styleProps={styles.backBtnView}
+      <Header
+        leftBtnIcon="back"
+        styleProps={styles.headerStyle}
+        onPressLeft={goBack}
       />
       <Text size="h1" text={t('login.signup')} />
     </View>
@@ -114,14 +119,7 @@ export const SignUpScreen: FC<AuthScreenProps<'signUp'>> = ({navigation}) => {
   const renderSignIn = () => (
     <View style={styles.bottomView}>
       <Text>{t('signUp.iHaveAlready')}</Text>
-      <Button
-        preset="link"
-        btnText={t('login.title')}
-        onPress={() => {
-          //Redirect to sign in screen
-          navigation.goBack();
-        }}
-      />
+      <Button preset="link" btnText={t('login.title')} onPress={goBack} />
     </View>
   );
 
@@ -129,7 +127,7 @@ export const SignUpScreen: FC<AuthScreenProps<'signUp'>> = ({navigation}) => {
     <Screen
       safeAreaEdges={['top', 'bottom']}
       preset="fixed"
-      contentContainerStyle={styles.contentContainerStyle}>
+      contentContainerStyle={commonStyles.contentContainerStyle}>
       <View>
         {renderHeaders()}
         {renderTextInputs()}

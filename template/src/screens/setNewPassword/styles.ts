@@ -4,10 +4,6 @@ import {s, vs} from '../../utils';
 
 const makeStyles = (colors: Colors) =>
   StyleSheet.create({
-    contentContainerStyle: {
-      flexGrow: 1,
-      justifyContent: 'space-between',
-    } as ViewStyle,
     headerWrapper: {
       marginTop: vs(spacing.lg),
       paddingHorizontal: s(spacing.md),
@@ -16,9 +12,7 @@ const makeStyles = (colors: Colors) =>
     discriptionText: {
       marginTop: vs(10),
     } as TextStyle,
-    backBtnView: {
-      width: s(80),
-      paddingHorizontal: 0,
+    headerStyle: {
       marginBottom: vs(100),
     } as ViewStyle,
     bottomView: {

@@ -2,10 +2,11 @@ import React, {FC, useState} from 'react';
 import {View} from 'react-native';
 import {useTheme} from '@react-navigation/native';
 import {useTranslation} from 'react-i18next';
-import {Button, Screen, Text, TextField} from '../../components';
+import {Button, Header, Screen, Text, TextField} from '../../components';
 import {AuthScreenProps} from '../../navigation/authNavigator';
 import {vs} from '../../utils';
 import makeStyles from './styles';
+import {makeCommanStyles} from '../styles';
 
 /**
  * A Screen to render a Set new password screen.
@@ -15,6 +16,7 @@ export const SetNewPasswordScreen: FC<AuthScreenProps<'setNewPassword'>> = ({
 }) => {
   const {colors} = useTheme();
   const styles = makeStyles(colors);
+  const commonStyles = makeCommanStyles(colors);
   const {t} = useTranslation();
   const [isVisiblePassword, setVisiblePassword] = useState(false);
   const [isVisibleConfirmPassword, setVisibleConfirmPassword] = useState(false);
@@ -34,16 +36,21 @@ export const SetNewPasswordScreen: FC<AuthScreenProps<'setNewPassword'>> = ({
   };
 
   /**
+   * navigate to back screen
+   */
+  const goBack = () => {
+    navigation.goBack();
+  };
+
+  /**
    * Render compony logo and title
    */
   const renderHeaders = () => (
     <View style={styles.headerWrapper}>
-      <Button
-        preset="link"
-        btnIcon="back"
-        btnIconSize={vs(30)}
-        onPress={() => navigation.goBack()}
-        styleProps={styles.backBtnView}
+      <Header
+        leftBtnIcon="back"
+        onPressLeft={goBack}
+        styleProps={styles.headerStyle}
       />
       <Text size="h1" text={t('setNewPassoword.title')} />
       <Text
@@ -97,7 +104,7 @@ export const SetNewPasswordScreen: FC<AuthScreenProps<'setNewPassword'>> = ({
     <Screen
       safeAreaEdges={['top', 'bottom']}
       preset="fixed"
-      contentContainerStyle={styles.contentContainerStyle}>
+      contentContainerStyle={commonStyles.contentContainerStyle}>
       <View>
         {renderHeaders()}
         {renderTextInputs()}
