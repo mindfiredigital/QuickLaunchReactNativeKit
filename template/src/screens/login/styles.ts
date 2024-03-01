@@ -4,10 +4,6 @@ import {s, vs} from '../../utils';
 
 const makeStyles = (colors: Colors) =>
   StyleSheet.create({
-    contentContainerStyle: {
-      flexGrow: 1,
-      justifyContent: 'space-between',
-    } as ViewStyle,
     headerWrapper: {
       paddingHorizontal: s(spacing.md),
       marginBottom: vs(spacing.lg),

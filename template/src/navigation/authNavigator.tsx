@@ -8,7 +8,12 @@ import {
   createNativeStackNavigator,
 } from '@react-navigation/native-stack';
 import {useTheme} from '@react-navigation/native';
-import {LoginScreen, SignUpScreen} from '../screens';
+import {
+  ForgotPasswordScreen,
+  LoginScreen,
+  SetNewPasswordScreen,
+  SignUpScreen,
+} from '../screens';
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -17,6 +22,8 @@ import {LoginScreen, SignUpScreen} from '../screens';
 export type AuthParamList = {
   login: undefined;
   signUp: undefined;
+  forgotPassword: undefined;
+  setNewPassword: undefined;
 };
 
 /**
@@ -38,6 +45,14 @@ const AuthNavigator = () => {
       }}>
       <AuthStack.Screen name={'login'} component={LoginScreen} />
       <AuthStack.Screen name={'signUp'} component={SignUpScreen} />
+      <AuthStack.Screen
+        name={'forgotPassword'}
+        component={ForgotPasswordScreen}
+      />
+      <AuthStack.Screen
+        name={'setNewPassword'}
+        component={SetNewPasswordScreen}
+      />
     </AuthStack.Navigator>
   );
 };

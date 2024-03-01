@@ -1,7 +1,6 @@
-import {StyleSheet, ViewStyle} from 'react-native';
+import {StyleSheet, TextStyle, ViewStyle} from 'react-native';
 import {Colors, spacing} from '../../theme';
 import {s, vs} from '../../utils';
-import {TextInput} from 'react-native-gesture-handler';
 
 const makeStyles = (colors: Colors) =>
   StyleSheet.create({
@@ -10,15 +9,18 @@ const makeStyles = (colors: Colors) =>
       paddingHorizontal: s(spacing.md),
       marginBottom: vs(40),
     } as ViewStyle,
+    discriptionText: {
+      marginTop: vs(10),
+    } as TextStyle,
+    headerStyle: {
+      marginBottom: vs(100),
+    } as ViewStyle,
     bottomView: {
-      flexDirection: 'row',
-      justifyContent: 'center',
-      marginBottom: vs(spacing.xs),
+      marginBottom: vs(200),
     } as ViewStyle,
     textInput: {
       marginBottom: vs(spacing.xl),
     } as ViewStyle,
-    headerStyle: {marginBottom: vs(40)} as ViewStyle,
   });
 
 export default makeStyles;
