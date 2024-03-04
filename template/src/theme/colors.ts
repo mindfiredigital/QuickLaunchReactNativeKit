@@ -27,4 +27,8 @@ export const colors = {
   violet: '#8034DE',
   charlestonGreen: '#282828',
   cultured: '#F5F5F5',
+  success: '#66bb6a',
+  danger: '#f44336',
+  warning: '#ffa726',
+  info: '#29b6f6',
 };
