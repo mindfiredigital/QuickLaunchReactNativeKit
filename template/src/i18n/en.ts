@@ -1,4 +1,10 @@
 const en = {
+  common: {
+    success: 'Success',
+    error: 'Error',
+    info: 'Information',
+    warning: 'Warning',
+  },
   apiErrors: {
     requestTimeout:
       'Request timed out. Please check your internet connection or try again later.',
