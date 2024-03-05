@@ -25,25 +25,54 @@ let selectedTheme = 'theme2';
 
 // Default colors for custom theme
 const colors = {
+    // The primary color of the app used to tint various elements.
     primary: '#F00001',
+    // Dark mode version of the primary color.
     primaryDark: '#F00001',
+
+    // The text color of various elements.
     text: '#333333',
+    // Dark mode version of the text color.
     textDark: '#E6E6E6',
+
+    // The color of various backgrounds, such as background color for the screens.
     background: '#FFFFFF',
+    // Dark mode version of the background color.
     backgroundDark: '#1E1E1E',
+
+    // The color of various secondary backgrounds, such as background color for the screens.
     backgroundSecondary: '#3C3C3C',
+    // Dark mode version of the secondary background color.
     backgroundSecondaryDark: '#3C3C3C',
+
+    // The icon color of various elements.
     tertiary: '#000000',
+    // Dark mode version of the tertiary color.
     tertiaryDark: '#D2D2D2',
+
+    // Them text color of primary button elements.
     btnTextPrimary: '#FFFFFF',
+    // Dark mode version of the primary button text color.
     btnTextPrimaryDark: '#FEFFFF',
+
+    // Them text color of secondary button elements.
     btnTextSecondary: '#C8C8C8',
+    // Dark mode version of the secondary button text color.
     btnTextSecondaryDark: '#C8C8C8',
+
+    // The color of borders, e.g. header border, tab bar border etc.
     border: '#707070',
+    // Dark mode version of the border color.
     borderDark: '#FEFFFF',
+
+    // Secondary button text color.
     placeholderText: '#808080',
+    // Dark mode version of the secondary button text color.
     placeholderTextDark: '#808080',
+
+    // The background color of card-like elements, such as headers, tab bars etc.
     card: '#3C3C3C',
+    // Dark mode version of the card background color.
     cardDark: '#3C3C3C',
 };
 
@@ -84,7 +113,24 @@ const getColorHint = (colorName) => {
     switch (colorName) {
         case 'primary':
             return 'The primary color of the app used to tint various elements.';
-        // ... (similar cases for other color names)
+        case 'text':
+            return 'The text color of various elements.';
+        case 'background':
+            return 'The color of various backgrounds, such as background color for the screens.';
+        case 'backgroundSecondary':
+            return 'The color of various secondary backgrounds, such as background color for the screens.';
+        case 'tertiary':
+            return 'The icon color of various elements.';
+        case 'btnTextPrimary':
+            return 'The text color of primary button elements.';
+        case 'btnTextSecondary':
+            return 'The text color of secondary button elements.';
+        case 'border':
+            return 'The color of borders, e.g. header border, tab bar border etc.';
+        case 'placeholderText':
+            return 'The text color of secondary button elements.';
+        case 'card':
+            return 'The background color of card-like elements, such as headers, tab bars etc.';
         default:
             return '';
     }
@@ -122,13 +168,13 @@ const promptForColor = (colorName, defaultValue = '') => {
 
 // Function to generate custom theme based on user input
 const generateCustomTheme = () => {
+    // Create a TypeScript file with the generated content
     fs.writeFileSync('src/theme/themes/customTheme.ts', themeTemplate);
     updateSettingsTheme()
     updateThemeIndex()
     updateTheme()
 }
 
-// Function to update theme settings in the settings file
 const updateSettingsTheme = () => {
     const filePathToSettings = 'settings.ts';
     fs.readFile(filePathToSettings, 'utf8', (err, data) => {
@@ -137,7 +183,10 @@ const updateSettingsTheme = () => {
             return;
         }
 
+        // Update the theme value to either custom or the selected theme
         const updatedData = data.replace(/theme: '[^']*'/, `theme: '${wantsCustomTheme ? 'customTheme' : selectedTheme}'`);
+
+        // Write the updated content back to the file
         fs.writeFile(filePathToSettings, updatedData, 'utf8', (err) => {
             if (err) {
                 console.error('Error writing to file:', err);
@@ -147,20 +196,24 @@ const updateSettingsTheme = () => {
     });
 }
 
-// Function to update theme index file
 const updateThemeIndex = () => {
+    // Path to the settings.ts file
     const filePathToIndex = 'src/theme/themes/index.ts';
+
+    // Read the content of the file
     fs.readFile(filePathToIndex, 'utf8', (err, data) => {
         if (err) {
             console.error('Error reading file:', err);
             return;
         }
 
+        // Add export statement for customTheme
         const updatedDataWithExport = data.replace(
             /export \* from '\.\/theme3';/,
             "export * from './theme3';\nexport * from './customTheme';"
         );
 
+        // Write the updated content back to the file
         fs.writeFile(filePathToIndex, updatedDataWithExport, 'utf8', (err) => {
             if (err) {
                 console.error('Error writing to file:', err);
@@ -170,7 +223,6 @@ const updateThemeIndex = () => {
     });
 }
 
-// Function to update theme in the main theme file
 const updateTheme = () => {
     const filePathToTheme = 'src/theme/theme.ts';
 
@@ -180,16 +232,19 @@ const updateTheme = () => {
             return;
         }
 
+        // Add import statement for customTheme
         const updatedData = data.replace(
             /import {theme1, theme2, theme3} from '\.\/themes';/,
             "import {theme1, theme2, theme3, customTheme} from './themes';"
         );
 
+        // Add customTheme to the theme object
         const updatedDataWithCustomTheme = updatedData.replace(
             /const theme = {[^}]*}/,
             `const theme = {\n  theme1,\n  theme2,\n  theme3,\n  customTheme,\n}`
         );
 
+        // Write the updated content back to the file
         fs.writeFile(filePathToTheme, updatedDataWithCustomTheme, 'utf8', (err) => {
             if (err) {
                 console.error('Error writing to file:', err);
