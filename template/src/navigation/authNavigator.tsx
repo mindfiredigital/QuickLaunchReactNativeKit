@@ -13,6 +13,7 @@ import {
   LoginScreen,
   SetNewPasswordScreen,
   SignUpScreen,
+  VerifyOTPScreen,
 } from '../screens';
 
 /**
@@ -24,6 +25,7 @@ export type AuthParamList = {
   signUp: undefined;
   forgotPassword: undefined;
   setNewPassword: undefined;
+  verifyOTP: undefined;
 };
 
 /**
@@ -53,6 +55,7 @@ const AuthNavigator = () => {
         name={'setNewPassword'}
         component={SetNewPasswordScreen}
       />
+      <AuthStack.Screen name={'verifyOTP'} component={VerifyOTPScreen} />
     </AuthStack.Navigator>
   );
 };

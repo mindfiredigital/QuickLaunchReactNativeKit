@@ -4,3 +4,4 @@ export * from './settings/settingsScreen';
 export * from './signUp/signUpScreen';
 export * from './forgotPassword/forgotPasswordScreen';
 export * from './setNewPassword/setNewPasswordScreen';
+export * from './verifyOTP/verifyOTPScreen';

@@ -115,6 +115,7 @@ export const TextField = forwardRef(function TextField(
       )}
       <TextInput
         placeholder={placeholder}
+        ref={ref}
         placeholderTextColor={colors.placeholderText}
         editable={editable}
         style={[styles.inputStyles, inputStyleOverride]}
