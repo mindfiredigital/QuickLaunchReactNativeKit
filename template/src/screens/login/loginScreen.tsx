@@ -6,7 +6,7 @@ import {Button, Icon, Screen, Text, TextField} from '../../components';
 import {AuthScreenProps} from '../../navigation/authNavigator';
 import {useValidation, vs} from '../../utils';
 import makeStyles from './styles';
-import {makeCommanStyles} from '../styles';
+import makeCommanStyles from '../styles';
 
 /**
  * A Screen to render a Login screen.
