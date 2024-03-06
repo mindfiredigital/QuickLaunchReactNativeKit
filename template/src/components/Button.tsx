@@ -61,6 +61,13 @@ export interface ButtonProps extends TouchableOpacityProps {
   btnIconSize?: number;
 }
 
+type Preset = Exclude<ButtonProps['preset'], undefined>;
+type Size = TextProps['size'];
+
+type TextSizeType = {
+  [P in Preset]: Size | undefined;
+};
+
 export const Button = (props: ButtonProps) => {
   const {
     btnText,
@@ -68,7 +75,7 @@ export const Button = (props: ButtonProps) => {
     onPress,
     styleProps,
     textStyleProps,
-    isDisabled = false,
+    disabled = false,
     restTextProps,
     btnIcon,
     btnIconSize = vs(30),
@@ -90,20 +97,26 @@ export const Button = (props: ButtonProps) => {
     },
   };
 
+  const textSize: TextSizeType = {
+    default: 'h3',
+    link: 'body',
+  };
+
   return (
     <TouchableOpacity
       onPress={onPress}
-      disabled={Boolean(isDisabled)}
+      disabled={Boolean(disabled)}
       style={[
         presets[preset].buttonStyles,
         styleProps,
-        isDisabled ? presets[preset].disabledStyle : null,
+        disabled ? presets[preset].disabledStyle : null,
       ]}
       {...restProps}>
       {btnIcon && (
         <Icon icon={btnIcon} size={btnIconSize} color={colors.primary} />
       )}
       <Text
+        size={textSize[preset]}
         style={[presets[preset].btnTextStyle, textStyleProps]}
         {...restTextProps}>
         {btnText}
@@ -131,7 +144,7 @@ const makeStyles = (colors: Colors) =>
     } as ViewStyle,
     btnText: {
       color: colors.btnTextPrimary,
-      fontFamily: typography.bold,
+      letterSpacing: vs(1),
     } as TextStyle,
     linkText: {
       color: colors.primary,

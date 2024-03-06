@@ -8,23 +8,32 @@ import React from 'react';
 import {useColorScheme} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import BootSplash from 'react-native-bootsplash';
+import Toast from 'react-native-toast-message';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {navigationRef} from './navigationUtilities';
 import PrimaryNavigator from './primaryNavigator';
 import AuthNavigator from './authNavigator';
-import {darkTheme, lightTheme} from '../theme';
+import {darkTheme, lightTheme, spacing} from '../theme';
 import {useAppSelector} from '../store';
+import {useToastConfig, vs} from '../utils';
 
 export interface NavigationProps
   extends Partial<React.ComponentProps<typeof NavigationContainer>> {}
 
 const AppNavigator = (props: NavigationProps) => {
   const scheme = useColorScheme();
-  const {isAuthenticated} = useAppSelector(state => state.auth);
+  const insets = useSafeAreaInsets();
+
   /**
    * To support only light mode change isDarkMode to false
    * const isDarkMode = false
    */
   const isDarkMode = scheme === 'dark';
+  const theme = isDarkMode ? darkTheme : lightTheme;
+  const toastConfig = useToastConfig(theme.colors);
+
+  // Return boolen to idicate if user is loggedin or not
+  const {isAuthenticated} = useAppSelector(state => state.auth);
 
   /** Hide boot splash screen once navigation is ready */
   const hideBootSplash = () => {
@@ -32,13 +41,16 @@ const AppNavigator = (props: NavigationProps) => {
   };
 
   return (
-    <NavigationContainer
-      ref={navigationRef}
-      theme={isDarkMode ? darkTheme : lightTheme}
-      onReady={hideBootSplash}
-      {...props}>
-      {isAuthenticated ? <PrimaryNavigator /> : <AuthNavigator />}
-    </NavigationContainer>
+    <>
+      <NavigationContainer
+        ref={navigationRef}
+        theme={theme}
+        onReady={hideBootSplash}
+        {...props}>
+        {isAuthenticated ? <PrimaryNavigator /> : <AuthNavigator />}
+      </NavigationContainer>
+      <Toast config={toastConfig} topOffset={vs(spacing.xl) + insets.top} />
+    </>
   );
 };
 

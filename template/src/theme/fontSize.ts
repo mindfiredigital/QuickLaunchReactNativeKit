@@ -18,11 +18,11 @@ export const fontSize = {
   /** Font size for Heading 6 */
   h6: vs(10),
   /** Font size for Body text */
-  body: vs(16),
+  body: vs(14),
   /** Font size for Body text variant 1 */
-  body1: vs(15),
+  body1: vs(12),
   /** Font size for Body text variant 2 */
-  body2: vs(14),
+  body2: vs(10),
 };
 
 /**

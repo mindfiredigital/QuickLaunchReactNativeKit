@@ -1,57 +1,82 @@
 #!/usr/bin/env node
-BLUE = '\x1B[34m'
-GREEN = '\x1B[32m';
-NC = '\x1B[0m'
+const BLUE = '\x1B[34m'
+const GREEN = '\x1B[32m';
+const NC = '\x1B[0m'
 
-// Add npm install for required packages
+// Importing necessary packages
+import { spawnSync } from 'child_process'
+import readlineSync from 'readline-sync'
+import fs from 'fs'
+import chalk from 'chalk';
+import inquirer from 'inquirer';
+
+// Step 1: Install necessary npm packages
 console.log(`${BLUE}1. Installing necessary npm packages...${NC}`);
-const { execSync } = require('child_process');
-execSync('npm install');
+const npmInstallProcess = spawnSync('npm', ['install'], { stdio: 'inherit' });
 
-const readlineSync = require('readline-sync');
-const fs = require('fs');
+if (npmInstallProcess.status !== 0) {
+    console.error(`${NC}Error: npm install failed. Exiting.`);
+    process.exit(1);
+}
 
-// Ask the user if they want to set custom theme values
-const wantsCustomTheme = readlineSync.keyInYNStrict(`${BLUE}2. Do you want to set custom theme values?${NC}`);
+// Step 2: Ask the user if they want to set custom theme values
+const wantsCustomTheme = readlineSync.keyInYNStrict(`\n${BLUE}2. Do you want to set custom theme values?${NC}`);
+let selectedTheme = 'theme2';
 
+// Default colors for custom theme
 const colors = {
+    // The primary color of the app used to tint various elements.
     primary: '#F00001',
+    // Dark mode version of the primary color.
     primaryDark: '#F00001',
+
+    // The text color of various elements.
     text: '#333333',
+    // Dark mode version of the text color.
     textDark: '#E6E6E6',
+
+    // The color of various backgrounds, such as background color for the screens.
     background: '#FFFFFF',
+    // Dark mode version of the background color.
     backgroundDark: '#1E1E1E',
+
+    // The color of various secondary backgrounds, such as background color for the screens.
     backgroundSecondary: '#3C3C3C',
+    // Dark mode version of the secondary background color.
     backgroundSecondaryDark: '#3C3C3C',
+
+    // The icon color of various elements.
     tertiary: '#000000',
+    // Dark mode version of the tertiary color.
     tertiaryDark: '#D2D2D2',
+
+    // Them text color of primary button elements.
     btnTextPrimary: '#FFFFFF',
+    // Dark mode version of the primary button text color.
     btnTextPrimaryDark: '#FEFFFF',
+
+    // Them text color of secondary button elements.
     btnTextSecondary: '#C8C8C8',
+    // Dark mode version of the secondary button text color.
     btnTextSecondaryDark: '#C8C8C8',
+
+    // The color of borders, e.g. header border, tab bar border etc.
     border: '#707070',
+    // Dark mode version of the border color.
     borderDark: '#FEFFFF',
+
+    // Secondary button text color.
     placeholderText: '#808080',
+    // Dark mode version of the secondary button text color.
     placeholderTextDark: '#808080',
+
+    // The background color of card-like elements, such as headers, tab bars etc.
     card: '#3C3C3C',
+    // Dark mode version of the card background color.
     cardDark: '#3C3C3C',
 };
 
-const colorsANSI = {
-    '#F00001': '\x1B[38;2;240;0;1m', // primary
-    '#333333': '\x1B[38;2;51;51;51m', // text
-    '#E6E6E6': '\x1B[38;2;230;230;230m', // textDark
-    '#FFFFFF': '\x1B[38;2;255;255;255m', // background
-    '#1E1E1E': '\x1B[38;2;30;30;30m', // backgroundDark
-    '#3C3C3C': '\x1B[38;2;60;60;60m', // backgroundSecondary, backgroundSecondaryDark, card, cardDark
-    '#000000': '\x1B[38;2;0;0;0m', // tertiary
-    '#D2D2D2': '\x1B[38;2;210;210;210m', // tertiaryDark
-    '#FEFFFF': '\x1B[38;2;254;255;255m', // btnTextPrimaryDark, borderDark
-    '#C8C8C8': '\x1B[38;2;200;200;200m', // btnTextSecondary, btnTextSecondaryDark
-    '#808080': '\x1B[38;2;128;128;128m', // placeholderText, placeholderTextDark
-    '#707070': '\x1B[38;2;112;112;112m' // border
-};
-
+// Template for generating custom theme
 const themeTemplate = `
 import { ThemeWithMode } from "../theme.types";
 
@@ -83,17 +108,46 @@ export const customTheme: ThemeWithMode = {
 };
 `;
 
-/**
- * Check if hex color is valid
- * @param {*} color 
- */
-function isValidHexColor(color) {
+// Function to get color hint based on color name
+const getColorHint = (colorName) => {
+    switch (colorName) {
+        case 'primary':
+            return 'The primary color of the app used to tint various elements.';
+        case 'text':
+            return 'The text color of various elements.';
+        case 'background':
+            return 'The color of various backgrounds, such as background color for the screens.';
+        case 'backgroundSecondary':
+            return 'The color of various secondary backgrounds, such as background color for the screens.';
+        case 'tertiary':
+            return 'The icon color of various elements.';
+        case 'btnTextPrimary':
+            return 'The text color of primary button elements.';
+        case 'btnTextSecondary':
+            return 'The text color of secondary button elements.';
+        case 'border':
+            return 'The color of borders, e.g. header border, tab bar border etc.';
+        case 'placeholderText':
+            return 'The text color of secondary button elements.';
+        case 'card':
+            return 'The background color of card-like elements, such as headers, tab bars etc.';
+        default:
+            return '';
+    }
+};
+
+// Function to check if hex color is valid
+const isValidHexColor = (color) => {
     const hexColorRegex = /^#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})$/;
     return hexColorRegex.test(color);
 }
 
-function promptForColor(colorName, defaultValue = '') {
-    let userInput = readlineSync.question(`- Enter value for ${colorName} (default: ${colorsANSI[defaultValue] ?? NC}${defaultValue}${NC}): `);
+// Function to prompt user for color input
+const promptForColor = (colorName, defaultValue = '') => {
+    if (!colorName.includes('Dark')) console.log(`\n${GREEN}Hint: ${NC}${getColorHint(colorName)}`);
+    let userInput = readlineSync.question(
+        `- Enter value for ${colorName} (default: ${defaultValue ? `${defaultValue} ${chalk.bgHex(defaultValue)('  ')}` : 'N/A'}): `
+    );
 
     if (!userInput.trim()) {
         userInput = defaultValue;
@@ -101,28 +155,36 @@ function promptForColor(colorName, defaultValue = '') {
 
     while (!isValidHexColor(userInput)) {
         console.error('Invalid color! Please enter a valid hex color code.');
-        userInput = userInput = readlineSync.question(`- Enter value for ${colorName} (default: ${colorsANSI[defaultValue] ?? NC}${defaultValue}${NC}): `);
+        userInput = readlineSync.question(
+            `- Enter value for ${colorName} (default: ${defaultValue ? `${defaultValue} ${chalk.bgHex(defaultValue)('  ')}` : 'N/A'}): `
+        );
+        if (!userInput.trim()) {
+            userInput = defaultValue;
+        }
     }
 
     return userInput;
-}
+};
 
+// Function to generate custom theme based on user input
 const generateCustomTheme = () => {
     // Create a TypeScript file with the generated content
     fs.writeFileSync('src/theme/themes/customTheme.ts', themeTemplate);
+    updateSettingsTheme()
+    updateThemeIndex()
+    updateTheme()
+}
 
-    // Path to the settings.ts file
+const updateSettingsTheme = () => {
     const filePathToSettings = 'settings.ts';
-
-    // Read the content of the file
     fs.readFile(filePathToSettings, 'utf8', (err, data) => {
         if (err) {
             console.error('Error reading file:', err);
             return;
         }
 
-        // Update the theme value to 'custom'
-        const updatedData = data.replace(/theme: '[^']*'/, "theme: 'customTheme'");
+        // Update the theme value to either custom or the selected theme
+        const updatedData = data.replace(/theme: '[^']*'/, `theme: '${wantsCustomTheme ? 'customTheme' : selectedTheme}'`);
 
         // Write the updated content back to the file
         fs.writeFile(filePathToSettings, updatedData, 'utf8', (err) => {
@@ -194,14 +256,27 @@ const updateTheme = () => {
 
 // If the user wants a custom theme, get user input for each color
 if (wantsCustomTheme) {
-    console.log(`${BLUE}3. Press enter or return to fill default color.${NC}`);
+    console.log(`\n${BLUE}3. Press enter or return to fill default color.${NC}`);
+    console.log(`${chalk.green('Hint:')} Consider both light and dark mode versions for optimal theme design`)
     for (const color in colors) {
         colors[color] = promptForColor(color, colors[color]);
     }
     generateCustomTheme()
-    updateThemeIndex()
-    updateTheme()
     console.log(`${GREEN}\u2713 Theme file generated successfully!${NC}`);
 } else {
-    console.log(`${GREEN}\u2713 Default theme2 will be used.${NC}\nTo update theme navigate to settings.ts and choose theme from preset list!${NC}`);
+    // If the user doesn't want a custom theme, provide options
+    console.log(`\n${BLUE}3. Choose a theme from the options:${NC}`);
+    console.log(`${chalk.green('Hint:')} Refer to README.md file for preset themes.`)
+    const themeOptions = ['theme1', 'theme2', 'theme3'];
+    const themeSelectionPrompt = {
+        type: 'list',
+        name: 'selectedTheme',
+        message: 'Select:',
+        choices: themeOptions,
+    };
+
+    const themeAnswer = await inquirer.prompt(themeSelectionPrompt);
+    selectedTheme = themeAnswer.selectedTheme;
+    updateSettingsTheme()
+    console.log(`${GREEN}\u2713 ${selectedTheme} will be used.${NC}\nTo update theme navigate to settings.ts and choose theme from preset list!${NC}`);
 }
