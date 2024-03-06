@@ -39,6 +39,12 @@ const en = {
       'Opps. It happens to the best of us. Input your email address to fix the issue.',
     sendOtp: 'Send OTP',
   },
+  verifyOTP: {
+    title: 'OTP Verification',
+    discription:
+      'Copy the verification code in your authy application to verify this account recovery',
+    verifyOTP: 'Verify OTP',
+  },
   setNewPassoword: {
     title: 'Set new password',
     discription:
