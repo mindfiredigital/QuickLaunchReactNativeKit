@@ -42,7 +42,7 @@ const en = {
   verifyOTP: {
     title: 'OTP Verification',
     discription:
-      'Copy the verification code in your authy application to verify this account recoery',
+      'Copy the verification code in your authy application to verify this account recovery',
     verifyOTP: 'Verify OTP',
   },
   setNewPassoword: {

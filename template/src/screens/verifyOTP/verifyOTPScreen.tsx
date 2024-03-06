@@ -6,14 +6,11 @@ import {
   getHash,
   removeListener,
   startOtpListener,
-  useOtpVerify,
 } from 'react-native-otp-verify';
-import {Button, Header, Screen, Text, TextField} from '../../components';
+import {Button, Header, OTPTextField, Screen, Text} from '../../components';
 import {AuthScreenProps} from '../../navigation/authNavigator';
-import {vs} from '../../utils';
 import makeStyles from './styles';
 import makeCommanStyles from '../styles';
-import {OTPTextField} from '../../components/OTPTextField';
 
 /**
  * A Screen to render a Forgot password screen.
