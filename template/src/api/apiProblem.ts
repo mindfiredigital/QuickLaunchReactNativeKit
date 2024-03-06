@@ -1,6 +1,6 @@
 import i18n from '../i18n/i18n';
 import {store} from '../store';
-import {resetState} from '../store/reducets';
+import {resetState} from '../store/reducers';
 import {showErrorToast} from '../utils';
 
 /**

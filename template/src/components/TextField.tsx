@@ -1,4 +1,4 @@
-import React, {forwardRef, Ref} from 'react';
+import React, {forwardRef, Ref, useImperativeHandle, useRef} from 'react';
 import {
   Platform,
   StyleProp,
@@ -10,7 +10,7 @@ import {
   ViewStyle,
 } from 'react-native';
 import {useTheme} from '@react-navigation/native';
-import {TextProps} from './Text';
+import {Text, TextProps} from './Text';
 import {Colors, fontSize, lineHeight, spacing, typography} from '../theme';
 import {Icon, IconTypes} from './Icon';
 import {s, vs} from '../utils';
@@ -47,6 +47,16 @@ export interface TextFieldProps extends Omit<TextInputProps, 'ref'> {
   inputWrapperStyle?: StyleProp<ViewStyle>;
 
   /**
+   * Style overrides for the outer wrapper.
+   */
+  outerWrapper?: StyleProp<ViewStyle>;
+
+  /**
+   * Style overrides for the error text.
+   */
+  errorStyle?: StyleProp<TextStyle>;
+
+  /**
    * Determines whether the text input is a secure text entry (password field).
    */
   secureTextEntry?: boolean;
@@ -80,6 +90,11 @@ export interface TextFieldProps extends Omit<TextInputProps, 'ref'> {
    * The size of the right icon.
    */
   rightIconSize?: number;
+
+  /**
+   * Display error string for textinput
+   */
+  error?: string;
 }
 
 /**
@@ -91,6 +106,7 @@ export const TextField = forwardRef(function TextField(
   props: TextFieldProps,
   ref: Ref<TextInput>,
 ) {
+  const input = useRef<TextInput>(null);
   const {
     secureTextEntry = false,
     rightIcon,
@@ -101,49 +117,71 @@ export const TextField = forwardRef(function TextField(
     editable,
     onPressRightIcon,
     containerStyle: containerStyleOverride,
+    outerWrapper: outerWrapperOverride,
+    errorStyle: errorStyleOverride,
     leftIconSize = vs(20),
     rightIconSize = vs(20),
+    error = '',
     ...textInputProps
   } = props;
   const {colors} = useTheme();
   const styles = makeStyles(colors);
 
+  useImperativeHandle(ref, () => input.current as TextInput);
+
+  const wrapperStyle = [
+    styles.inputWrapperStyles,
+    {borderColor: !!!error ? colors.border : colors.danger},
+    containerStyleOverride,
+  ];
+
   return (
-    <View style={[styles.inputWrapperStyles, containerStyleOverride]}>
-      {leftIcon && (
-        <Icon size={leftIconSize} icon={leftIcon} color={colors.tertiary} />
-      )}
-      <TextInput
-        placeholder={placeholder}
-        placeholderTextColor={colors.placeholderText}
-        editable={editable}
-        style={[styles.inputStyles, inputStyleOverride]}
-        secureTextEntry={secureTextEntry}
-        cursorColor={colors.primary}
-        {...textInputProps}
-      />
-      {rightIcon && (
-        <Icon
-          icon={rightIcon}
-          size={rightIconSize}
-          color={colors.tertiary}
-          onPress={onPressRightIcon}
+    <View style={[styles.outerWrapper, outerWrapperOverride]}>
+      <View style={wrapperStyle}>
+        {leftIcon && (
+          <Icon
+            size={leftIconSize}
+            icon={leftIcon}
+            color={!!!error ? colors.tertiary : colors.danger}
+          />
+        )}
+        <TextInput
+          ref={input}
+          placeholder={placeholder}
+          placeholderTextColor={colors.placeholderText}
+          editable={editable}
+          style={[styles.inputStyles, inputStyleOverride]}
+          secureTextEntry={secureTextEntry}
+          cursorColor={colors.primary}
+          {...textInputProps}
         />
+        {rightIcon && (
+          <Icon
+            icon={rightIcon}
+            size={rightIconSize}
+            color={colors.tertiary}
+            onPress={onPressRightIcon}
+          />
+        )}
+      </View>
+      {!!error && (
+        <Text style={[styles.errorText, errorStyleOverride]}>{error}</Text>
       )}
     </View>
   );
 });
 const makeStyles = (colors: Colors) =>
   StyleSheet.create({
+    outerWrapper: {
+      marginHorizontal: s(spacing.md),
+      marginBottom: vs(spacing.lg),
+    } as ViewStyle,
     inputWrapperStyles: {
       flexDirection: 'row',
       alignItems: 'center',
       borderWidth: 1,
-      borderColor: colors.border,
       borderRadius: s(spacing.sm),
       paddingHorizontal: s(spacing.xs),
-      marginHorizontal: s(spacing.md),
-      marginBottom: vs(spacing.lg),
     } as ViewStyle,
     inputStyles: {
       flex: 1,
@@ -153,5 +191,9 @@ const makeStyles = (colors: Colors) =>
       color: colors.text,
       paddingTop: vs(spacing.sm) + (Platform.OS == 'android' ? vs(2) : 0),
       paddingBottom: vs(spacing.sm),
+    } as TextStyle,
+    errorText: {
+      color: colors.danger,
+      marginLeft: s(spacing.xxxs),
     } as TextStyle,
   });

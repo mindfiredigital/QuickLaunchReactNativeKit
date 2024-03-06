@@ -75,7 +75,7 @@ export const Button = (props: ButtonProps) => {
     onPress,
     styleProps,
     textStyleProps,
-    isDisabled = false,
+    disabled = false,
     restTextProps,
     btnIcon,
     btnIconSize = vs(30),
@@ -105,11 +105,11 @@ export const Button = (props: ButtonProps) => {
   return (
     <TouchableOpacity
       onPress={onPress}
-      disabled={Boolean(isDisabled)}
+      disabled={Boolean(disabled)}
       style={[
         presets[preset].buttonStyles,
         styleProps,
-        isDisabled ? presets[preset].disabledStyle : null,
+        disabled ? presets[preset].disabledStyle : null,
       ]}
       {...restProps}>
       {btnIcon && (

@@ -6,7 +6,7 @@ import {Button, Header, Screen, Text, TextField} from '../../components';
 import {AuthScreenProps} from '../../navigation/authNavigator';
 import {vs} from '../../utils';
 import makeStyles from './styles';
-import {makeCommanStyles} from '../styles';
+import makeCommanStyles from '../styles';
 
 /**
  * A Screen to render a Sign-up screen.
