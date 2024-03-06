@@ -106,6 +106,7 @@ export const TextField = forwardRef(function TextField(
   props: TextFieldProps,
   ref: Ref<TextInput>,
 ) {
+  const input = useRef<TextInput>(null);
   const {
     secureTextEntry = false,
     rightIcon,
@@ -145,7 +146,7 @@ export const TextField = forwardRef(function TextField(
           />
         )}
         <TextInput
-          ref={ref}
+          ref={input}
           placeholder={placeholder}
           placeholderTextColor={colors.placeholderText}
           editable={editable}
