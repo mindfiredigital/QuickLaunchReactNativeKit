@@ -32,7 +32,6 @@ export const VerifyOTPScreen: FC<AuthScreenProps<'verifyOTP'>> = ({
     getHash()
       .then(hash => {
         // use this hash in the message.
-        console.log(hash, 'hash');
       })
       .catch(console.log);
 
