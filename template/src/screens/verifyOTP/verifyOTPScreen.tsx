@@ -53,11 +53,9 @@ export const VerifyOTPScreen: FC<AuthScreenProps<'verifyOTP'>> = ({
   // OTP listener setup
   useEffect(() => {
     if (Platform.OS === 'android') {
-      getHash()
-        .then(hash => {
-          // Use this hash in the message.
-        })
-        .catch(console.log);
+      getHash().then(hash => {
+        // Use this hash in the message.
+      });
 
       startOtpListener(message => {
         // Extract the OTP using regex. Below regex extracts a 4-digit OTP from the message.
