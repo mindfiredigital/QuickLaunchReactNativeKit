@@ -6,7 +6,6 @@ import {Button, Icon, Screen, Text, TextField} from '../../components';
 import {AuthScreenProps} from '../../navigation/authNavigator';
 import {useValidation, vs} from '../../utils';
 import makeStyles from './styles';
-import makeCommanStyles from '../styles';
 
 /**
  * A Screen to render a Login screen.
@@ -18,7 +17,6 @@ export const LoginScreen: FC<AuthScreenProps<'login'>> = ({navigation}) => {
 
   // Styles
   const styles = makeStyles(colors);
-  const commonStyles = makeCommanStyles(colors);
 
   // Textinput references
   const passwordRef = useRef<TextInput>(null);
@@ -169,13 +167,10 @@ export const LoginScreen: FC<AuthScreenProps<'login'>> = ({navigation}) => {
     <Screen
       safeAreaEdges={['top', 'bottom']}
       preset="auto"
-      contentContainerStyle={commonStyles.contentContainerStyle}>
-      <View>
-        {renderHeaders()}
-        {renderTextInputs()}
-        {renderButtons()}
-      </View>
-      {renderSignUp()}
+      bottomContent={renderSignUp()}>
+      {renderHeaders()}
+      {renderTextInputs()}
+      {renderButtons()}
     </Screen>
   );
 };
