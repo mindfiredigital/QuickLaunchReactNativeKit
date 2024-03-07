@@ -54,7 +54,12 @@ export const VerifyOTPScreen: FC<AuthScreenProps<'verifyOTP'>> = ({
   useEffect(() => {
     if (Platform.OS === 'android') {
       getHash().then(hash => {
-        // Use this hash in the message.
+        /**
+         * Use this hash in the message.
+         * For ex,
+         * Your ExampleApp code is: 123456
+         * DtTKiAyg7RE <-- This is hash returned above
+         */
       });
 
       startOtpListener(message => {
