@@ -26,6 +26,10 @@ interface BaseScreenProps {
    */
   children?: React.ReactNode;
   /**
+   * Content to be rendered at the bottom of the screen.
+   */
+  bottomContent?: React.ReactNode;
+  /**
    * Style for the outer content container useful for padding & margin.
    */
   style?: StyleProp<ViewStyle>;
@@ -255,6 +259,7 @@ export function Screen(props: ScreenProps): JSX.Element {
     safeAreaEdges,
     StatusBarProps = {backgroundColor: colors.background},
     statusBarStyle = dark ? 'light-content' : 'dark-content',
+    bottomContent,
   } = props;
 
   const containerInsets = useSafeAreaInsetsStyle(safeAreaEdges);
@@ -277,6 +282,7 @@ export function Screen(props: ScreenProps): JSX.Element {
           <ScreenWithScrolling {...props} />
         )}
       </KeyboardAvoidingView>
+      {bottomContent}
     </View>
   );
 }
