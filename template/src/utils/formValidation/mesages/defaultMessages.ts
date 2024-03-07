@@ -10,6 +10,7 @@ export const defaultMessages: DefaultMessages = {
     strings: 'The field {0} must be a valid string.',
     email: 'The field {0} must be a valid email address.',
     required: 'The field {0} is mandatory.',
+    length: 'The field {0} length must be {1}.',
     minlength: 'The field {0} length must be greater than {1}.',
     maxlength: 'The field {0} length must be lower than {1}.',
     equalWith: 'The field {0} do not match.',
