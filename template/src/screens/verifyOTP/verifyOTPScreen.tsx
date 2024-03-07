@@ -1,5 +1,5 @@
-import React, {FC, useEffect, useRef, useState} from 'react';
-import {TextInput, View} from 'react-native';
+import React, {FC, useEffect, useState} from 'react';
+import {Platform, View} from 'react-native';
 import {useTheme} from '@react-navigation/native';
 import {useTranslation} from 'react-i18next';
 import {
@@ -9,55 +9,90 @@ import {
 } from 'react-native-otp-verify';
 import {Button, Header, OTPTextField, Screen, Text} from '../../components';
 import {AuthScreenProps} from '../../navigation/authNavigator';
+import {useValidation} from '../../utils';
 import makeStyles from './styles';
-import makeCommanStyles from '../styles';
 
 /**
- * A Screen to render a Forgot password screen.
+ * VerifyOTPScreen Component
+ * A screen to render a Verify OTP screen.
+ * @component
+ * @param {AuthScreenProps<'verifyOTP'>} props - Navigation props for VerifyOTPScreen.
  */
 export const VerifyOTPScreen: FC<AuthScreenProps<'verifyOTP'>> = ({
   navigation,
 }) => {
+  // Theme and style setup
   const {colors} = useTheme();
   const styles = makeStyles(colors);
-  const commonStyles = makeCommanStyles(colors);
+
+  // Translation setup
   const {t} = useTranslation();
+
+  // State for OTP input
   const [otp, setOtp] = useState<string>('');
 
-  // using methods
-  useEffect(() => {
-    getHash()
-      .then(hash => {
-        // use this hash in the message.
-      })
-      .catch(console.log);
+  /**
+   * Number of digits required for OTP.
+   */
+  const otpLength = 6;
 
-    startOtpListener(message => {
-      //TODO:resolve type script error
-      // extract the otp using regex e.g. the below regex extracts 4 digit otp from message
-      const otp = /(\d{4})/g.exec(message)[1];
-      setOtp(otp);
+  // Form validation setup
+  const {setIsTouched, validateForm, isFormValid, getErrorsInField} =
+    useValidation({
+      state: {otp},
+      fieldsRules: {
+        otp: {
+          required: true,
+          numbers: true,
+          length: otpLength,
+        },
+      },
+      isTouchedEnabled: true,
     });
-    return () => removeListener();
+
+  // OTP listener setup
+  useEffect(() => {
+    if (Platform.OS === 'android') {
+      getHash().then(hash => {
+        /**
+         * Use this hash in the message.
+         * For ex,
+         * Your ExampleApp code is: 123456
+         * DtTKiAyg7RE <-- This is hash returned above
+         */
+      });
+
+      startOtpListener(message => {
+        // Extract the OTP using regex. Below regex extracts a 4-digit OTP from the message.
+        const match = /(\d{4})/g.exec(message);
+        if (match && match[1]) {
+          setOtp(match[1]);
+        }
+      });
+    }
+    return removeListener;
   }, []);
 
   /**
-   * send otp
+   * Verify OTP and navigate to the next screen.
    */
   const verifyOTP = () => {
-    //TODO: navigate to set new password screen
-    navigation.navigate('setNewPassword');
+    setIsTouched(true);
+    const isValid = validateForm();
+    if (isValid) {
+      navigation.navigate('setNewPassword');
+    }
   };
 
   /**
-   * navigate to back screen
+   * Navigate back to the previous screen.
    */
   const goBack = () => {
     navigation.goBack();
   };
 
   /**
-   * Render back btn, title and discription
+   * Render header, title, and description.
    */
   const renderHeaders = () => (
     <View style={styles.headerWrapper}>
@@ -72,33 +107,38 @@ export const VerifyOTPScreen: FC<AuthScreenProps<'verifyOTP'>> = ({
   );
 
   /**
-   * Render forgot password email text input
+   * Render OTP input field.
    */
-  const renderTextInputs = () => (
-    <>
-      <OTPTextField otp={otp} setOtp={text => setOtp(text)} />
-    </>
+  const renderOTPInput = () => (
+    <OTPTextField
+      length={otpLength}
+      otp={otp}
+      setOtp={setOtp}
+      error={getErrorsInField('otp')}
+    />
   );
 
   /**
-   * Render redirect to send otp screen btn
+   * Render the button to verify OTP.
    */
   const renderVerifyOTP = () => (
     <View style={styles.bottomView}>
-      <Button btnText={t('verifyOTP.verifyOTP')} onPress={verifyOTP} />
+      <Button
+        btnText={t('verifyOTP.verifyOTP')}
+        disabled={!isFormValid()}
+        onPress={verifyOTP}
+      />
     </View>
   );
 
+  // Render the entire screen
   return (
     <Screen
       safeAreaEdges={['top', 'bottom']}
       preset="fixed"
-      contentContainerStyle={commonStyles.contentContainerStyle}>
-      <View>
-        {renderHeaders()}
-        {renderTextInputs()}
-      </View>
-      {renderVerifyOTP()}
+      bottomContent={renderVerifyOTP()}>
+      {renderHeaders()}
+      {renderOTPInput()}
     </Screen>
   );
 };

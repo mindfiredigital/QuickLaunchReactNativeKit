@@ -11,6 +11,14 @@ const defaultRules = {
   hasUpperCase: /(?=.*[A-Z])/,
   hasLowerCase: /(?=.*[a-z])/,
   hasSpecialCharacter: /(\W)/,
+  length(length: number, value: string) {
+    if (length === void 0) {
+      throw 'ERROR: It is not a valid length, checkout your minlength settings.';
+    } else if (value.length == length) {
+      return true;
+    }
+    return false;
+  },
   minlength(length: number, value: string) {
     if (length === void 0) {
       throw 'ERROR: It is not a valid length, checkout your minlength settings.';

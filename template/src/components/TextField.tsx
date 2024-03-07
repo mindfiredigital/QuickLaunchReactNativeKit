@@ -165,7 +165,9 @@ export const TextField = forwardRef(function TextField(
         )}
       </View>
       {!!error && (
-        <Text style={[styles.errorText, errorStyleOverride]}>{error}</Text>
+        <Text size="error" style={[styles.errorText, errorStyleOverride]}>
+          {error}
+        </Text>
       )}
     </View>
   );
@@ -185,15 +187,15 @@ const makeStyles = (colors: Colors) =>
     } as ViewStyle,
     inputStyles: {
       flex: 1,
+      height: vs(50),
       paddingHorizontal: s(spacing.xs),
       fontSize: fontSize.body,
       fontFamily: typography.regular,
       color: colors.text,
-      paddingTop: vs(spacing.sm) + (Platform.OS == 'android' ? vs(2) : 0),
-      paddingBottom: vs(spacing.sm),
+      paddingTop: Platform.OS == 'android' ? 2 : 0,
+      paddingBottom: 0,
     } as TextStyle,
     errorText: {
-      color: colors.danger,
       marginLeft: s(spacing.xxxs),
     } as TextStyle,
   });

@@ -27,9 +27,9 @@ export const fontSize = {
 
 /**
  * Ideally line height value should be between 1.2 to 1.6
- * @default - 1.5
+ * @default - 1.4
  */
-const lineHeightFactor = 1.5;
+const lineHeightFactor = 1.4;
 
 /**
  * Line heights for different text styles based on the font sizes.
