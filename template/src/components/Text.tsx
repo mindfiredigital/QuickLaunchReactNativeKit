@@ -21,7 +21,17 @@ export interface TextProps extends RNTextProps {
   /**
    * Text size modifier.
    */
-  size?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'body' | 'body1' | 'body2';
+  size?:
+    | 'h1'
+    | 'h2'
+    | 'h3'
+    | 'h4'
+    | 'h5'
+    | 'h6'
+    | 'body'
+    | 'body1'
+    | 'body2'
+    | 'error';
   /**
    * Children components.
    */
@@ -100,5 +110,10 @@ const makeStyles = (colors: Colors) =>
     body2: {
       fontSize: fontSize.body2,
       lineHeight: lineHeight[fontSize.body2],
+    },
+    error: {
+      fontSize: fontSize.body,
+      lineHeight: lineHeight[fontSize.body],
+      color: colors.danger,
     },
   });

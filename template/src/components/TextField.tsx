@@ -165,7 +165,9 @@ export const TextField = forwardRef(function TextField(
         )}
       </View>
       {!!error && (
-        <Text style={[styles.errorText, errorStyleOverride]}>{error}</Text>
+        <Text size="error" style={[styles.errorText, errorStyleOverride]}>
+          {error}
+        </Text>
       )}
     </View>
   );
