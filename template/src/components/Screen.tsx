@@ -15,6 +15,7 @@ import {
 } from 'react-native';
 import {useScrollToTop, useTheme} from '@react-navigation/native';
 import {Colors} from '../theme';
+import {Spinner} from '.';
 import {
   ExtendedEdge,
   useSafeAreaInsetsStyle,
@@ -61,6 +62,10 @@ interface BaseScreenProps {
    * Pass any additional props directly to the KeyboardAvoidingView component.
    */
   KeyboardAvoidingViewProps?: KeyboardAvoidingViewProps;
+  /**
+   * Boolean indicating whether to show spinner
+   */
+  loading?: boolean;
 }
 
 interface FixedScreenProps extends BaseScreenProps {
@@ -260,6 +265,7 @@ export function Screen(props: ScreenProps): JSX.Element {
     StatusBarProps = {backgroundColor: colors.background},
     statusBarStyle = dark ? 'light-content' : 'dark-content',
     bottomContent,
+    loading = false,
   } = props;
 
   const containerInsets = useSafeAreaInsetsStyle(safeAreaEdges);
@@ -283,6 +289,7 @@ export function Screen(props: ScreenProps): JSX.Element {
         )}
       </KeyboardAvoidingView>
       {bottomContent}
+      <Spinner loading={loading} />
     </View>
   );
 }
