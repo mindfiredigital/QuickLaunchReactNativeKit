@@ -22,3 +22,23 @@ export interface ApiConfig {
    */
   timeout: number;
 }
+
+export interface LoginReq {
+  email: string;
+  password: string;
+}
+export interface LoginRes {
+  status: string;
+  message: string;
+  data: UserObj | null;
+  error: string;
+}
+export interface UserObj {
+  email: string;
+  full_name: string;
+  phone_number: string;
+  profileSignedUrl: string;
+  token: string;
+  access_token: string;
+  refresh_token: string;
+}

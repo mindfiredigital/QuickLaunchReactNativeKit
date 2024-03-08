@@ -5,6 +5,8 @@ import {useTranslation} from 'react-i18next';
 import {Button, Icon, Screen, Text, TextField} from '../../components';
 import {AuthScreenProps} from '../../navigation/authNavigator';
 import {useValidation, vs} from '../../utils';
+import {login, useAppDispatch, useAppSelector} from '../../store';
+import {LoginReq} from '../../api';
 import makeStyles from './styles';
 
 /**
@@ -14,6 +16,10 @@ export const LoginScreen: FC<AuthScreenProps<'login'>> = ({navigation}) => {
   // constants & hooks
   const {colors} = useTheme();
   const {t} = useTranslation();
+
+  // Redux hooks
+  const dispatch = useAppDispatch();
+  const {loading} = useAppSelector(state => state.auth);
 
   // Styles
   const styles = makeStyles(colors);
@@ -83,6 +89,11 @@ export const LoginScreen: FC<AuthScreenProps<'login'>> = ({navigation}) => {
     const isValid = validateForm();
     if (isValid) {
       //login user
+      const reqBody: LoginReq = {
+        email,
+        password,
+      };
+      dispatch(login(reqBody));
     }
   };
 
@@ -136,6 +147,7 @@ export const LoginScreen: FC<AuthScreenProps<'login'>> = ({navigation}) => {
         textContentType="emailAddress"
         error={getErrorsInField('email')}
         blurOnSubmit={false}
+        autoCapitalize="none"
         onSubmitEditing={focusPassword}
       />
       <TextField
@@ -172,6 +184,7 @@ export const LoginScreen: FC<AuthScreenProps<'login'>> = ({navigation}) => {
     <Screen
       safeAreaEdges={['top', 'bottom', 'left', 'right']}
       preset="auto"
+      loading={loading}
       bottomContent={renderSignUp()}>
       {renderHeaders()}
       {renderTextInputs()}
