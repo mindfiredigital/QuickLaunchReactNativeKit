@@ -24,7 +24,7 @@ export const resetState = () => {
 const persistAuthConfig = {
   key: 'auth',
   storage: AsyncStorage,
-  whitelist: ['isAuthenticated'],
+  whitelist: ['isAuthenticated', 'user'],
 };
 
 /**
