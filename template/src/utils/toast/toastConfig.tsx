@@ -112,12 +112,11 @@ const makeStyles = (colors: Colors) =>
       lineHeight: lineHeight[fontSize.h4],
       fontFamily: typography.medium,
       color: colors.text,
-      marginBottom: 0,
     },
     text2Style: {
-      fontSize: fontSize.body,
-      lineHeight: lineHeight[fontSize.body],
-      fontFamily: typography.regular,
+      fontSize: fontSize.body1,
+      lineHeight: lineHeight[fontSize.body1],
+      fontFamily: typography.light,
       color: colors.tertiary,
     },
   });
