@@ -133,12 +133,10 @@ export const VerifyOTPScreen: FC<AuthScreenProps<'verifyOTP'>> = ({
 
   // Render the entire screen
   return (
-    <Screen
-      safeAreaEdges={['top', 'bottom']}
-      preset="fixed"
-      bottomContent={renderVerifyOTP()}>
+    <Screen safeAreaEdges={['top', 'bottom', 'left', 'right']} preset="auto">
       {renderHeaders()}
       {renderOTPInput()}
+      {renderVerifyOTP()}
     </Screen>
   );
 };

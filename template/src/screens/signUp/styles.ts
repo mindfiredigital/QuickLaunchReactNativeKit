@@ -1,7 +1,6 @@
 import {StyleSheet, ViewStyle} from 'react-native';
 import {Colors, spacing} from '../../theme';
 import {s, vs} from '../../utils';
-import {TextInput} from 'react-native-gesture-handler';
 
 const makeStyles = (colors: Colors) =>
   StyleSheet.create({
@@ -15,10 +14,10 @@ const makeStyles = (colors: Colors) =>
       justifyContent: 'center',
       marginBottom: vs(spacing.xs),
     } as ViewStyle,
-    textInput: {
-      marginBottom: vs(spacing.xl),
-    } as ViewStyle,
     headerStyle: {marginBottom: vs(40)} as ViewStyle,
+    signUpBtn: {
+      marginTop: spacing.xl,
+    } as ViewStyle,
   });
 
 export default makeStyles;

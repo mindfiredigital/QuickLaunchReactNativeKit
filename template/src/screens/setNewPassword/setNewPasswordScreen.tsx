@@ -1,12 +1,11 @@
-import React, {FC, useState} from 'react';
-import {View} from 'react-native';
+import React, {FC, useRef, useState} from 'react';
+import {TextInput, View} from 'react-native';
 import {useTheme} from '@react-navigation/native';
 import {useTranslation} from 'react-i18next';
 import {Button, Header, Screen, Text, TextField} from '../../components';
 import {AuthScreenProps} from '../../navigation/authNavigator';
-import {vs} from '../../utils';
+import {useValidation, vs} from '../../utils';
 import makeStyles from './styles';
-import makeCommanStyles from '../styles';
 
 /**
  * A Screen to render a Set new password screen.
@@ -16,10 +15,39 @@ export const SetNewPasswordScreen: FC<AuthScreenProps<'setNewPassword'>> = ({
 }) => {
   const {colors} = useTheme();
   const styles = makeStyles(colors);
-  const commonStyles = makeCommanStyles(colors);
   const {t} = useTranslation();
+
+  // Textinput references
+  const confirmPasswordRef = useRef<TextInput>(null);
+
+  //Hooks
   const [isVisiblePassword, setVisiblePassword] = useState(false);
   const [isVisibleConfirmPassword, setVisibleConfirmPassword] = useState(false);
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
+  // Validate form textfields input
+  const {setIsTouched, validateForm, isFormValid, getErrorsInField} =
+    useValidation({
+      state: {password, confirmPassword},
+      fieldsRules: {
+        password: {
+          required: true,
+          password: true,
+          minlength: 8,
+          maxlength: 16,
+          hasUpperCase: true,
+          hasLowerCase: true,
+          hasNumber: true,
+          hasSpecialCharacter: true,
+        },
+        confirmPassword: {
+          required: true,
+          equalWith: password,
+        },
+      },
+      isTouchedEnabled: true,
+    });
 
   /**
    * show hide new password
@@ -36,11 +64,27 @@ export const SetNewPasswordScreen: FC<AuthScreenProps<'setNewPassword'>> = ({
   };
 
   /**
+   * Validate text input than submit password
+   */
+  const onSubmitPassword = () => {
+    setIsTouched(true);
+    const isValid = validateForm();
+    if (isValid) {
+      //submit password
+    }
+  };
+
+  /**
    * navigate to back screen
    */
   const goBack = () => {
     navigation.goBack();
   };
+
+  /**
+   * Focus confirm new password textfield
+   */
+  const focusConfirmPassword = () => confirmPasswordRef.current?.focus();
 
   /**
    * Render compony logo and title
@@ -66,22 +110,29 @@ export const SetNewPasswordScreen: FC<AuthScreenProps<'setNewPassword'>> = ({
   const renderTextInputs = () => (
     <>
       <TextField
+        onChangeText={setPassword}
         leftIcon={'lock'}
         secureTextEntry={!isVisiblePassword}
         rightIcon={!isVisiblePassword ? 'view' : 'hidden'}
         onPressRightIcon={onPressPasswordEye}
         placeholder={t('setNewPassoword.newPassword')}
         textContentType="newPassword"
-        containerStyle={styles.textInput}
+        returnKeyType="next"
+        onSubmitEditing={focusConfirmPassword}
+        error={getErrorsInField('password')}
+        blurOnSubmit={false}
       />
       <TextField
+        ref={confirmPasswordRef}
+        onChangeText={setConfirmPassword}
         leftIcon={'lock'}
         secureTextEntry={!isVisibleConfirmPassword}
         rightIcon={!isVisibleConfirmPassword ? 'view' : 'hidden'}
         onPressRightIcon={onPressConfirmPasswordEye}
         placeholder={t('setNewPassoword.confirmNewPassword')}
         textContentType="newPassword"
-        containerStyle={styles.textInput}
+        returnKeyType="done"
+        error={getErrorsInField('confirmPassword')}
       />
     </>
   );
@@ -93,23 +144,19 @@ export const SetNewPasswordScreen: FC<AuthScreenProps<'setNewPassword'>> = ({
     <View style={styles.bottomView}>
       <Button
         btnText={t('setNewPassoword.submitPassword')}
-        onPress={() => {
-          //submit password
-        }}
+        onPress={onSubmitPassword}
+        disabled={!isFormValid()}
       />
     </View>
   );
 
   return (
-    <Screen
-      safeAreaEdges={['top', 'bottom']}
-      preset="fixed"
-      contentContainerStyle={commonStyles.contentContainerStyle}>
+    <Screen safeAreaEdges={['top', 'bottom', 'bottom', 'right']} preset="auto">
       <View>
         {renderHeaders()}
         {renderTextInputs()}
+        {renderSubmitPassword()}
       </View>
-      {renderSubmitPassword()}
     </Screen>
   );
 };

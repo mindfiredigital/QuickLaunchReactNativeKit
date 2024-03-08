@@ -76,6 +76,17 @@ export const LoginScreen: FC<AuthScreenProps<'login'>> = ({navigation}) => {
   const focusPassword = () => passwordRef.current?.focus();
 
   /**
+   * Validate text input than login the user
+   */
+  const loginUser = () => {
+    setIsTouched(true);
+    const isValid = validateForm();
+    if (isValid) {
+      //login user
+    }
+  };
+
+  /**
    * Render compony logo and title
    */
   const renderHeaders = () => (
@@ -103,14 +114,8 @@ export const LoginScreen: FC<AuthScreenProps<'login'>> = ({navigation}) => {
       />
       <Button
         btnText={t('login.title')}
-        disabled={!isFormValid}
-        onPress={() => {
-          setIsTouched(true);
-          const isValid = validateForm();
-          if (isValid) {
-            //login user
-          }
-        }}
+        disabled={!isFormValid()}
+        onPress={loginUser}
       />
     </>
   );
@@ -165,7 +170,7 @@ export const LoginScreen: FC<AuthScreenProps<'login'>> = ({navigation}) => {
 
   return (
     <Screen
-      safeAreaEdges={['top', 'bottom']}
+      safeAreaEdges={['top', 'bottom', 'left', 'right']}
       preset="auto"
       bottomContent={renderSignUp()}>
       {renderHeaders()}

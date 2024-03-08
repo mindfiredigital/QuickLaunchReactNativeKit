@@ -16,7 +16,7 @@ const makeStyles = (colors: Colors) =>
       marginBottom: vs(100),
     } as ViewStyle,
     bottomView: {
-      marginBottom: vs(200),
+      marginTop: vs(spacing.xxxl),
     } as ViewStyle,
     textInput: {
       marginBottom: vs(spacing.xl),
