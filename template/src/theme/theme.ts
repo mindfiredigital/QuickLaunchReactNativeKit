@@ -28,12 +28,26 @@ const theme = {
   theme3,
 };
 
+const commonColors = {
+  common: {
+    success: colors.success,
+    danger: colors.danger,
+    warning: colors.warning,
+    info: colors.info,
+    spinner: 'rgba(0, 0, 0, 0.5)',
+  },
+  light: {},
+  dark: {},
+};
+
 /**
  * Light theme colors
  */
 const lightThemeColors = {
   ...DefaultTheme.colors,
   ...colors,
+  ...commonColors.common,
+  ...commonColors.light,
   ...theme[selectedTheme].light,
 };
 
@@ -43,6 +57,8 @@ const lightThemeColors = {
 const darkThemeColors = {
   ...DarkTheme.colors,
   ...colors,
+  ...commonColors.common,
+  ...commonColors.dark,
   ...theme[selectedTheme].dark,
 };
 
