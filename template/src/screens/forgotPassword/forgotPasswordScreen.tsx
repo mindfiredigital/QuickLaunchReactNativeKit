@@ -4,9 +4,8 @@ import {useTheme} from '@react-navigation/native';
 import {useTranslation} from 'react-i18next';
 import {Button, Header, Screen, Text, TextField} from '../../components';
 import {AuthScreenProps} from '../../navigation/authNavigator';
-import {vs} from '../../utils';
+import {useValidation, vs} from '../../utils';
 import makeStyles from './styles';
-import makeCommanStyles from '../styles';
 
 /**
  * A Screen to render a Forgot password screen.
@@ -16,15 +15,33 @@ export const ForgotPasswordScreen: FC<AuthScreenProps<'forgotPassword'>> = ({
 }) => {
   const {colors} = useTheme();
   const styles = makeStyles(colors);
-  const commonStyles = makeCommanStyles(colors);
   const {t} = useTranslation();
+  // Hooks
+  const [email, setEmail] = useState('');
+
+  // Validate form textfields input
+  const {setIsTouched, validateForm, isFormValid, getErrorsInField} =
+    useValidation({
+      state: {email},
+      fieldsRules: {
+        email: {
+          required: true,
+          email: true,
+        },
+      },
+      isTouchedEnabled: true,
+    });
 
   /**
    * send otp
    */
   const sendOTP = () => {
-    //TODO: navigate to send otp screen
-    navigation.navigate('verifyOTP');
+    setIsTouched(true);
+    const isValid = validateForm();
+    if (isValid) {
+      //TODO: navigate to send otp screen
+      navigation.navigate('verifyOTP');
+    }
   };
 
   /**
@@ -59,13 +76,14 @@ export const ForgotPasswordScreen: FC<AuthScreenProps<'forgotPassword'>> = ({
     <>
       <TextField
         leftIcon={'email'}
+        onChangeText={setEmail}
         placeholder={t('signUp.emailPlaceholder')}
         keyboardType="email-address"
         inputMode="email"
-        returnKeyType="next"
+        returnKeyType="done"
         textContentType="emailAddress"
         leftIconSize={vs(25)}
-        containerStyle={styles.textInput}
+        error={getErrorsInField('email')}
       />
     </>
   );
@@ -75,20 +93,21 @@ export const ForgotPasswordScreen: FC<AuthScreenProps<'forgotPassword'>> = ({
    */
   const renderSendOTP = () => (
     <View style={styles.bottomView}>
-      <Button btnText={t('forgotPassword.sendOtp')} onPress={sendOTP} />
+      <Button
+        btnText={t('forgotPassword.sendOtp')}
+        onPress={sendOTP}
+        disabled={!isFormValid()}
+      />
     </View>
   );
 
   return (
-    <Screen
-      safeAreaEdges={['top', 'bottom']}
-      preset="fixed"
-      contentContainerStyle={commonStyles.contentContainerStyle}>
+    <Screen safeAreaEdges={['top', 'bottom', 'left', 'right']} preset="auto">
       <View>
         {renderHeaders()}
         {renderTextInputs()}
+        {renderSendOTP()}
       </View>
-      {renderSendOTP()}
     </Screen>
   );
 };

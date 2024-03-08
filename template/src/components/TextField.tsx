@@ -197,5 +197,6 @@ const makeStyles = (colors: Colors) =>
     } as TextStyle,
     errorText: {
       marginLeft: s(spacing.xxxs),
+      marginTop: vs(spacing.xxs),
     } as TextStyle,
   });

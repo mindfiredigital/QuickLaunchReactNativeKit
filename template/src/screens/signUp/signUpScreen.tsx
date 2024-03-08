@@ -1,12 +1,11 @@
-import React, {FC, useState} from 'react';
-import {View} from 'react-native';
+import React, {FC, useRef, useState} from 'react';
+import {TextInput, View} from 'react-native';
 import {useTheme} from '@react-navigation/native';
 import {useTranslation} from 'react-i18next';
 import {Button, Header, Screen, Text, TextField} from '../../components';
 import {AuthScreenProps} from '../../navigation/authNavigator';
-import {vs} from '../../utils';
+import {useValidation, vs} from '../../utils';
 import makeStyles from './styles';
-import makeCommanStyles from '../styles';
 
 /**
  * A Screen to render a Sign-up screen.
@@ -14,10 +13,50 @@ import makeCommanStyles from '../styles';
 export const SignUpScreen: FC<AuthScreenProps<'signUp'>> = ({navigation}) => {
   const {colors} = useTheme();
   const styles = makeStyles(colors);
-  const commonStyles = makeCommanStyles(colors);
   const {t} = useTranslation();
+
+  // Textinput references
+  const emailRef = useRef<TextInput>(null);
+  const passwordRef = useRef<TextInput>(null);
+  const confirmPasswordRef = useRef<TextInput>(null);
+  //hooks
   const [isVisiblePassword, setVisiblePassword] = useState(false);
   const [isVisibleConfirmPassword, setVisibleConfirmPassword] = useState(false);
+  const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
+  // Validate form textfields input
+  const {setIsTouched, validateForm, isFormValid, getErrorsInField} =
+    useValidation({
+      state: {fullName, email, password, confirmPassword},
+      fieldsRules: {
+        fullName: {
+          required: true,
+          strings: true,
+        },
+        email: {
+          required: true,
+          email: true,
+        },
+        password: {
+          required: true,
+          password: true,
+          minlength: 8,
+          maxlength: 16,
+          hasUpperCase: true,
+          hasLowerCase: true,
+          hasNumber: true,
+          hasSpecialCharacter: true,
+        },
+        confirmPassword: {
+          required: true,
+          equalWith: password,
+        },
+      },
+      isTouchedEnabled: true,
+    });
 
   /**
    * show hide password
@@ -41,6 +80,32 @@ export const SignUpScreen: FC<AuthScreenProps<'signUp'>> = ({navigation}) => {
   };
 
   /**
+   * Focus email textfield
+   */
+  const focusEmail = () => emailRef.current?.focus();
+
+  /**
+   * Focus password textfield
+   */
+  const focusPassword = () => passwordRef.current?.focus();
+
+  /**
+   * Focus confirm password textfield
+   */
+  const focusConfirmPassword = () => confirmPasswordRef.current?.focus();
+
+  /**
+   * Validate text input than sign up the user
+   */
+  const signUpUser = () => {
+    setIsTouched(true);
+    const isValid = validateForm();
+    if (isValid) {
+      //login user
+    }
+  };
+
+  /**
    * Render back btn and title
    */
   const renderHeaders = () => (
@@ -61,9 +126,9 @@ export const SignUpScreen: FC<AuthScreenProps<'signUp'>> = ({navigation}) => {
     <>
       <Button
         btnText={t('login.signup')}
-        onPress={() => {
-          //sign-up user
-        }}
+        onPress={signUpUser}
+        styleProps={styles.signUpBtn}
+        disabled={!isFormValid()}
       />
     </>
   );
@@ -74,15 +139,20 @@ export const SignUpScreen: FC<AuthScreenProps<'signUp'>> = ({navigation}) => {
   const renderTextInputs = () => (
     <>
       <TextField
+        onChangeText={setFullName}
         leftIcon={'people'}
         placeholder={t('signUp.namePlaceholder')}
         keyboardType="name-phone-pad"
         inputMode="text"
         returnKeyType="next"
         textContentType="name"
-        containerStyle={styles.textInput}
+        onSubmitEditing={focusEmail}
+        error={getErrorsInField('fullName')}
+        blurOnSubmit={false}
       />
       <TextField
+        ref={emailRef}
+        onChangeText={setEmail}
         leftIcon={'email'}
         placeholder={t('signUp.emailPlaceholder')}
         keyboardType="email-address"
@@ -90,25 +160,35 @@ export const SignUpScreen: FC<AuthScreenProps<'signUp'>> = ({navigation}) => {
         returnKeyType="next"
         textContentType="emailAddress"
         leftIconSize={vs(25)}
-        containerStyle={styles.textInput}
+        onSubmitEditing={focusPassword}
+        error={getErrorsInField('email')}
+        blurOnSubmit={false}
       />
       <TextField
+        ref={passwordRef}
+        onChangeText={setPassword}
         leftIcon={'lock'}
         secureTextEntry={!isVisiblePassword}
         rightIcon={!isVisiblePassword ? 'view' : 'hidden'}
         onPressRightIcon={onPressPasswordEye}
         placeholder={t('login.passwordPlaceholder')}
         textContentType="newPassword"
-        containerStyle={styles.textInput}
+        returnKeyType="next"
+        onSubmitEditing={focusConfirmPassword}
+        error={getErrorsInField('password')}
+        blurOnSubmit={false}
       />
       <TextField
+        ref={confirmPasswordRef}
+        onChangeText={setConfirmPassword}
         leftIcon={'lock'}
         secureTextEntry={!isVisibleConfirmPassword}
         rightIcon={!isVisibleConfirmPassword ? 'view' : 'hidden'}
         onPressRightIcon={onPressConfirmPasswordEye}
         placeholder={t('signUp.confirmPassword')}
         textContentType="newPassword"
-        containerStyle={styles.textInput}
+        returnKeyType="done"
+        error={getErrorsInField('confirmPassword')}
       />
     </>
   );
@@ -125,15 +205,14 @@ export const SignUpScreen: FC<AuthScreenProps<'signUp'>> = ({navigation}) => {
 
   return (
     <Screen
-      safeAreaEdges={['top', 'bottom']}
-      preset="fixed"
-      contentContainerStyle={commonStyles.contentContainerStyle}>
+      safeAreaEdges={['top', 'bottom', 'left', 'right']}
+      preset="auto"
+      bottomContent={renderSignIn()}>
       <View>
         {renderHeaders()}
         {renderTextInputs()}
         {renderButtons()}
       </View>
-      {renderSignIn()}
     </Screen>
   );
 };
