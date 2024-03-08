@@ -37,21 +37,21 @@ const lineHeightFactor = 1.4;
  */
 export const lineHeight = {
   /** Line height for Heading 1 */
-  [fontSize.h1]: Math.round(vs(fontSize.h1 * lineHeightFactor)),
+  [fontSize.h1]: Math.round(fontSize.h1 * lineHeightFactor),
   /** Line height for Heading 2 */
-  [fontSize.h2]: Math.round(vs(fontSize.h2 * lineHeightFactor)),
+  [fontSize.h2]: Math.round(fontSize.h2 * lineHeightFactor),
   /** Line height for Heading 3 */
-  [fontSize.h3]: Math.round(vs(fontSize.h3 * lineHeightFactor)),
+  [fontSize.h3]: Math.round(fontSize.h3 * lineHeightFactor),
   /** Line height for Heading 4 */
-  [fontSize.h4]: Math.round(vs(fontSize.h4 * lineHeightFactor)),
+  [fontSize.h4]: Math.round(fontSize.h4 * lineHeightFactor),
   /** Line height for Heading 5 */
-  [fontSize.h5]: Math.round(vs(fontSize.h5 * lineHeightFactor)),
+  [fontSize.h5]: Math.round(fontSize.h5 * lineHeightFactor),
   /** Line height for Heading 6 */
-  [fontSize.h6]: Math.round(vs(fontSize.h6 * lineHeightFactor)),
+  [fontSize.h6]: Math.round(fontSize.h6 * lineHeightFactor),
   /** Line height for Body text */
-  [fontSize.body]: Math.round(vs(fontSize.body * lineHeightFactor)),
+  [fontSize.body]: Math.round(fontSize.body * lineHeightFactor),
   /** Line height for Body text variant 1 */
-  [fontSize.body1]: Math.round(vs(fontSize.body1 * lineHeightFactor)),
+  [fontSize.body1]: Math.round(fontSize.body1 * lineHeightFactor),
   /** Line height for Body text variant 2 */
-  [fontSize.body2]: Math.round(vs(fontSize.body2 * lineHeightFactor)),
+  [fontSize.body2]: Math.round(fontSize.body2 * lineHeightFactor),
 };
