@@ -1,8 +1,8 @@
 {
-  "name": "foss-react-native",
+  "name": "QuickLaunchReactNativeKit",
   "version": "0.0.1",
-  "type": "module",
-  "description": "Foss React Native Template",
+  "type": "commonjs",
+  "description": "It is designed to reduce the time of common projects. This kit provides frameworks for login, signup, settings and other common features. Users/Developers can use this kit and quickly include these functionality in their projects. This kit also includes multiple themes.",
   "repository": "https://gitlab.mindfire.co.in/mobilefoss/Foss_RN",
   "author": "Madhav Nasit <madhavn@mindfiresolutions.com>",
   "license": "MIT",
