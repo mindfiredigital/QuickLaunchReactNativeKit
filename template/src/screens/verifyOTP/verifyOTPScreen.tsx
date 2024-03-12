@@ -9,8 +9,10 @@ import {
 } from 'react-native-otp-verify';
 import {Button, Header, OTPTextField, Screen, Text} from '../../components';
 import {AuthScreenProps} from '../../navigation/authNavigator';
-import {useValidation} from '../../utils';
+import {showSuccessToast, useValidation} from '../../utils';
 import makeStyles from './styles';
+import {otpVerification, useAppDispatch, useAppSelector} from '../../store';
+import {OTPVerificationReq} from '../../api';
 
 /**
  * VerifyOTPScreen Component
@@ -30,6 +32,10 @@ export const VerifyOTPScreen: FC<AuthScreenProps<'verifyOTP'>> = ({
 
   // State for OTP input
   const [otp, setOtp] = useState<string>('');
+
+  // Redux hooks
+  const dispatch = useAppDispatch();
+  const {loading} = useAppSelector(state => state.auth);
 
   /**
    * Number of digits required for OTP.
@@ -76,11 +82,21 @@ export const VerifyOTPScreen: FC<AuthScreenProps<'verifyOTP'>> = ({
   /**
    * Verify OTP and navigate to the next screen.
    */
-  const verifyOTP = () => {
+  const verifyOTP = async () => {
     setIsTouched(true);
     const isValid = validateForm();
     if (isValid) {
-      navigation.navigate('setNewPassword');
+      //sign up user
+      const reqBody: OTPVerificationReq = {
+        code: Number(otp),
+      };
+      const response = await dispatch(otpVerification(reqBody));
+      // on api success
+      if (response.meta.requestStatus === 'fulfilled') {
+        showSuccessToast({message: t('verifyOTP.onSuccess')});
+        //Navigate to set new password screen
+        navigation.navigate('setNewPassword');
+      }
     }
   };
 
@@ -133,7 +149,10 @@ export const VerifyOTPScreen: FC<AuthScreenProps<'verifyOTP'>> = ({
 
   // Render the entire screen
   return (
-    <Screen safeAreaEdges={['top', 'bottom', 'left', 'right']} preset="auto">
+    <Screen
+      safeAreaEdges={['top', 'bottom', 'left', 'right']}
+      preset="auto"
+      loading={loading}>
       {renderHeaders()}
       {renderOTPInput()}
       {renderVerifyOTP()}

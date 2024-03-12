@@ -32,18 +32,21 @@ const en = {
     namePlaceholder: 'Full Name',
     emailPlaceholder: 'Email',
     confirmPassword: 'Confirm Password',
+    onSucess: `You've successfully signed up!`,
   },
   forgotPassword: {
     title: 'Forgot Password',
     discription:
       'Opps. It happens to the best of us. Input your email address to fix the issue.',
     sendOtp: 'Send OTP',
+    otpSent: 'OTP Sent Successfully!',
   },
   verifyOTP: {
     title: 'OTP Verification',
     discription:
       'Copy the verification code in your authy application to verify this account recovery',
     verifyOTP: 'Verify OTP',
+    onSuccess: 'OTP verification success.',
   },
   setNewPassoword: {
     title: 'Set new password',
@@ -52,6 +55,8 @@ const en = {
     submitPassword: 'Submit password',
     newPassword: 'New Password',
     confirmNewPassword: 'Confirm New Password',
+    onSucess:
+      'Your password has been successfully reset. You can now log in using your new password.',
   },
   comman: {
     back: 'Back',

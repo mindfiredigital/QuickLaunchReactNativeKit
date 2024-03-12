@@ -23,7 +23,7 @@ import {
 export type AuthParamList = {
   login: undefined;
   signUp: undefined;
-  forgotPassword: undefined;
+  forgotPassword: {email: string};
   setNewPassword: undefined;
   verifyOTP: undefined;
 };

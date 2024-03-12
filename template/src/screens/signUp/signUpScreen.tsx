@@ -4,8 +4,10 @@ import {useTheme} from '@react-navigation/native';
 import {useTranslation} from 'react-i18next';
 import {Button, Header, Screen, Text, TextField} from '../../components';
 import {AuthScreenProps} from '../../navigation/authNavigator';
-import {useValidation, vs} from '../../utils';
+import {showSuccessToast, useValidation, vs} from '../../utils';
 import makeStyles from './styles';
+import {SignUpReq} from '../../api';
+import {signUp, useAppDispatch, useAppSelector} from '../../store';
 
 /**
  * A Screen to render a Sign-up screen.
@@ -26,6 +28,10 @@ export const SignUpScreen: FC<AuthScreenProps<'signUp'>> = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+
+  // Redux hooks
+  const dispatch = useAppDispatch();
+  const {loading} = useAppSelector(state => state.auth);
 
   // Validate form textfields input
   const {setIsTouched, validateForm, isFormValid, getErrorsInField} =
@@ -97,11 +103,23 @@ export const SignUpScreen: FC<AuthScreenProps<'signUp'>> = ({navigation}) => {
   /**
    * Validate text input than sign up the user
    */
-  const signUpUser = () => {
+  const signUpUser = async () => {
     setIsTouched(true);
     const isValid = validateForm();
     if (isValid) {
-      //login user
+      //sign up user
+      const reqBody: SignUpReq = {
+        email,
+        password,
+        confirm_password: confirmPassword,
+        full_name: fullName,
+      };
+      const response = await dispatch(signUp(reqBody));
+      // on api success
+      if (response.meta.requestStatus === 'fulfilled') {
+        showSuccessToast({message: t('signUp.onSucess')});
+        goBack();
+      }
     }
   };
 
@@ -207,6 +225,7 @@ export const SignUpScreen: FC<AuthScreenProps<'signUp'>> = ({navigation}) => {
     <Screen
       safeAreaEdges={['top', 'bottom', 'left', 'right']}
       preset="auto"
+      loading={loading}
       bottomContent={renderSignIn()}>
       <View>
         {renderHeaders()}

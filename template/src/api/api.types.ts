@@ -42,3 +42,43 @@ export interface UserObj {
   access_token: string;
   refresh_token: string;
 }
+export interface SignUpReq {
+  email: string;
+  password: string;
+  confirm_password: string;
+  full_name: string;
+}
+export interface SignUpRes {
+  status: string;
+  message: string;
+  data: UserObj | null;
+  error: string;
+}
+export interface ForgotPasswordReq {
+  email: string;
+}
+export interface ForgotPasswordRes {
+  status: string;
+  message: string;
+  data: null;
+  error: string;
+}
+export interface OTPVerificationReq {
+  code: number;
+}
+export interface OTPVerificationRes {
+  status: string;
+  message: string;
+  data: null;
+  error: string;
+}
+export interface PasswordResetReq {
+  password: string;
+  confirm_password: string;
+}
+export interface PasswordResetRes {
+  status: string;
+  message: string;
+  data: null;
+  error: string;
+}
