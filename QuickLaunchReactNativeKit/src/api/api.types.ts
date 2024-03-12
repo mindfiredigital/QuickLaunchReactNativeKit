@@ -58,3 +58,11 @@ export interface PasswordResetReq {
   password: string;
   confirm_password: string;
 }
+export interface SocialSignUpReq {
+  full_name: string;
+  email: string;
+  token: string;
+}
+export interface SocialLogInReq {
+  token: string;
+}

@@ -6,6 +6,8 @@ import {
   otpVerification,
   passwordReset,
   signUp,
+  socialSignUp,
+  socialLogIn,
 } from '../actions';
 
 export interface AuthState {
@@ -63,7 +65,7 @@ export const authSlice = createSlice({
     builder.addCase(forgotPassword.pending, state => {
       state.loading = true;
     });
-    builder.addCase(forgotPassword.fulfilled, (state, {payload}) => {
+    builder.addCase(forgotPassword.fulfilled, state => {
       state.loading = false;
     });
     builder.addCase(forgotPassword.rejected, state => {
@@ -72,7 +74,7 @@ export const authSlice = createSlice({
     builder.addCase(otpVerification.pending, state => {
       state.loading = true;
     });
-    builder.addCase(otpVerification.fulfilled, (state, {payload}) => {
+    builder.addCase(otpVerification.fulfilled, state => {
       state.loading = false;
     });
     builder.addCase(otpVerification.rejected, state => {
@@ -85,6 +87,32 @@ export const authSlice = createSlice({
       state.loading = false;
     });
     builder.addCase(passwordReset.rejected, state => {
+      state.loading = false;
+    }),
+      builder.addCase(socialSignUp.pending, state => {
+        state.loading = true;
+      });
+    builder.addCase(socialSignUp.fulfilled, (state, {payload}) => {
+      state.loading = false;
+      if (payload?.data) {
+        state.isAuthenticated = true;
+        state.user = payload.data;
+      }
+    });
+    builder.addCase(socialSignUp.rejected, state => {
+      state.loading = false;
+    });
+    builder.addCase(socialLogIn.pending, state => {
+      state.loading = true;
+    });
+    builder.addCase(socialLogIn.fulfilled, (state, {payload}) => {
+      state.loading = false;
+      if (payload?.data) {
+        state.isAuthenticated = true;
+        state.user = payload.data;
+      }
+    });
+    builder.addCase(socialLogIn.rejected, state => {
       state.loading = false;
     });
   },

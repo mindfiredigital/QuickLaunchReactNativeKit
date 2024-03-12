@@ -7,6 +7,7 @@ import {AuthScreenProps} from '../../navigation/authNavigator';
 import {useValidation, vs} from '../../utils';
 import {login, useAppDispatch, useAppSelector} from '../../store';
 import {LoginReq} from '../../api';
+import {GoogleSignIn} from './services';
 import makeStyles from './styles';
 
 /**
@@ -167,6 +168,18 @@ export const LoginScreen: FC<AuthScreenProps<'login'>> = ({navigation}) => {
   );
 
   /**
+   * Render social signin options like with Google and Apple
+   */
+  const renderSocialSignIn = () => (
+    <View style={styles.socialSignIn}>
+      <Text>{t('login.signInWith')}</Text>
+      <View style={styles.socialSignInButtons}>
+        <GoogleSignIn />
+      </View>
+    </View>
+  );
+
+  /**
    * Render redirect to Sign up view
    */
   const renderSignUp = () => (
@@ -189,6 +202,7 @@ export const LoginScreen: FC<AuthScreenProps<'login'>> = ({navigation}) => {
       {renderHeaders()}
       {renderTextInputs()}
       {renderButtons()}
+      {renderSocialSignIn()}
     </Screen>
   );
 };

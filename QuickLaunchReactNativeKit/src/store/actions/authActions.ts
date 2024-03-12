@@ -1,11 +1,13 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {
   ForgotPasswordReq,
-  LoginReq,
-  LoginRes,
   OTPVerificationReq,
   PasswordResetReq,
   SignUpReq,
+  LoginReq,
+  LoginRes,
+  SocialLogInReq,
+  SocialSignUpReq,
   api,
   endPoints,
 } from '../../api';
@@ -33,6 +35,21 @@ export const signUp = createAsyncThunk(
   async (data: SignUpReq, {rejectWithValue}) => {
     try {
       const res: LoginRes = await api.post(endPoints.auth.signUp, data);
+      return res;
+    } catch (e) {
+      return rejectWithValue(e);
+    }
+  },
+);
+
+/*
+ * The socialSignUp function is responsible for handling the asynchronous social sign-up operation.
+ */
+export const socialSignUp = createAsyncThunk(
+  endPoints.auth.socialSignUp,
+  async (data: SocialSignUpReq, {rejectWithValue}) => {
+    try {
+      const res: LoginRes = await api.post(endPoints.auth.socialSignUp, data);
       return res;
     } catch (e) {
       return rejectWithValue(e);
@@ -80,6 +97,21 @@ export const passwordReset = createAsyncThunk(
   async (data: PasswordResetReq, {rejectWithValue}) => {
     try {
       const res: LoginRes = await api.post(endPoints.auth.passwordReset, data);
+      return res;
+    } catch (e) {
+      return rejectWithValue(e);
+    }
+  },
+);
+
+/*
+ * The socialLogIn function is responsible for handling the asynchronous social login operation.
+ */
+export const socialLogIn = createAsyncThunk(
+  endPoints.auth.socialLogIn,
+  async (data: SocialLogInReq, {rejectWithValue}) => {
+    try {
+      const res: LoginRes = await api.post(endPoints.auth.socialLogIn, data);
       return res;
     } catch (e) {
       return rejectWithValue(e);

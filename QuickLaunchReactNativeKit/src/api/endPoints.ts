@@ -14,5 +14,9 @@ export const endPoints = {
     otpVerification: 'auth/password/verification/otp',
     /** Endpoint for reset password. */
     passwordReset: 'auth/password/reset',
+    /** Endpoint for sign-up with social accounts */
+    socialSignUp: 'auth/social/signup',
+    /** Endpoint for login with social accounts */
+    socialLogIn: 'auth/social/login',
   },
 };

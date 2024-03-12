@@ -24,6 +24,12 @@ const makeStyles = (colors: Colors) =>
       justifyContent: 'center',
       marginBottom: vs(spacing.xs),
     },
+    socialSignIn: {
+      alignItems: 'center',
+    } as ViewStyle,
+    socialSignInButtons: {
+      marginTop: vs(spacing.xs),
+    },
   });
 
 export default makeStyles;
