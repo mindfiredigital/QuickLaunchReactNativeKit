@@ -5,7 +5,7 @@ import {useTranslation} from 'react-i18next';
 import {Button, Header, Screen, Text, TextField} from '../../components';
 import {AuthScreenProps} from '../../navigation/authNavigator';
 import {showSuccessToast, useValidation, vs} from '../../utils';
-import {SignUpReq} from '../../api';
+import {LoginRes, SignUpReq} from '../../api';
 import {signUp, useAppDispatch, useAppSelector} from '../../store';
 import makeStyles from './styles';
 
@@ -114,10 +114,11 @@ export const SignUpScreen: FC<AuthScreenProps<'signUp'>> = ({navigation}) => {
         confirm_password: confirmPassword,
         full_name: fullName,
       };
-      const response = await dispatch(signUp(reqBody));
+      const {meta, payload} = await dispatch(signUp(reqBody));
+      const data = payload as LoginRes;
       // on api success
-      if (response.meta.requestStatus === 'fulfilled') {
-        showSuccessToast({message: t('signUp.onSucess')});
+      if (meta.requestStatus === 'fulfilled') {
+        showSuccessToast({message: data.message});
         goBack();
       }
     }

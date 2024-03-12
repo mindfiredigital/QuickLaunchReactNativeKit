@@ -1,15 +1,11 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {
   ForgotPasswordReq,
-  ForgotPasswordRes,
   LoginReq,
   LoginRes,
   OTPVerificationReq,
-  OTPVerificationRes,
   PasswordResetReq,
-  PasswordResetRes,
   SignUpReq,
-  SignUpRes,
   api,
   endPoints,
 } from '../../api';
@@ -36,7 +32,7 @@ export const signUp = createAsyncThunk(
   endPoints.auth.signUp,
   async (data: SignUpReq, {rejectWithValue}) => {
     try {
-      const res: SignUpRes = await api.post(endPoints.auth.signUp, data);
+      const res: LoginRes = await api.post(endPoints.auth.signUp, data);
       return res;
     } catch (e) {
       return rejectWithValue(e);
@@ -51,10 +47,7 @@ export const forgotPassword = createAsyncThunk(
   endPoints.auth.forgotPassword,
   async (data: ForgotPasswordReq, {rejectWithValue}) => {
     try {
-      const res: ForgotPasswordRes = await api.post(
-        endPoints.auth.forgotPassword,
-        data,
-      );
+      const res: LoginRes = await api.post(endPoints.auth.forgotPassword, data);
       return res;
     } catch (e) {
       return rejectWithValue(e);
@@ -69,10 +62,9 @@ export const otpVerification = createAsyncThunk(
   endPoints.auth.otpVerification,
   async (data: OTPVerificationReq, {rejectWithValue}) => {
     try {
-      const res: OTPVerificationRes = await api.get(
-        endPoints.auth.otpVerification,
-        {params: data},
-      );
+      const res: LoginRes = await api.get(endPoints.auth.otpVerification, {
+        params: data,
+      });
       return res;
     } catch (e) {
       return rejectWithValue(e);
@@ -87,10 +79,7 @@ export const passwordReset = createAsyncThunk(
   endPoints.auth.passwordReset,
   async (data: PasswordResetReq, {rejectWithValue}) => {
     try {
-      const res: PasswordResetRes = await api.post(
-        endPoints.auth.passwordReset,
-        data,
-      );
+      const res: LoginRes = await api.post(endPoints.auth.passwordReset, data);
       return res;
     } catch (e) {
       return rejectWithValue(e);

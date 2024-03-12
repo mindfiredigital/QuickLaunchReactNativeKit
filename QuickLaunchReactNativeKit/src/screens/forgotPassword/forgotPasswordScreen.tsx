@@ -5,7 +5,7 @@ import {useTranslation} from 'react-i18next';
 import {Button, Header, Screen, Text, TextField} from '../../components';
 import {AuthScreenProps} from '../../navigation/authNavigator';
 import {showSuccessToast, useValidation, vs} from '../../utils';
-import {ForgotPasswordReq} from '../../api';
+import {ForgotPasswordReq, LoginRes} from '../../api';
 import {forgotPassword, useAppDispatch, useAppSelector} from '../../store';
 import makeStyles from './styles';
 
@@ -50,10 +50,11 @@ export const ForgotPasswordScreen: FC<AuthScreenProps<'forgotPassword'>> = ({
       const reqBody: ForgotPasswordReq = {
         email,
       };
-      const response = await dispatch(forgotPassword(reqBody));
+      const {meta, payload} = await dispatch(forgotPassword(reqBody));
+      const data = payload as LoginRes;
       // on api success
-      if (response.meta.requestStatus === 'fulfilled') {
-        showSuccessToast({message: t('forgotPassword.otpSent')});
+      if (meta.requestStatus === 'fulfilled' && data?.message) {
+        showSuccessToast({message: data?.message});
         //Navigate to otp verification screen
         navigation.navigate('verifyOTP');
       }

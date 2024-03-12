@@ -11,7 +11,7 @@ import {Button, Header, OTPTextField, Screen, Text} from '../../components';
 import {AuthScreenProps} from '../../navigation/authNavigator';
 import {showSuccessToast, useValidation} from '../../utils';
 import {otpVerification, useAppDispatch, useAppSelector} from '../../store';
-import {OTPVerificationReq} from '../../api';
+import {LoginRes, OTPVerificationReq} from '../../api';
 import makeStyles from './styles';
 
 /**
@@ -90,10 +90,11 @@ export const VerifyOTPScreen: FC<AuthScreenProps<'verifyOTP'>> = ({
       const reqBody: OTPVerificationReq = {
         code: Number(otp),
       };
-      const response = await dispatch(otpVerification(reqBody));
+      const {meta, payload} = await dispatch(otpVerification(reqBody));
+      const data = payload as LoginRes;
       // on api success
-      if (response.meta.requestStatus === 'fulfilled') {
-        showSuccessToast({message: t('verifyOTP.onSuccess')});
+      if (meta.requestStatus === 'fulfilled' && data?.message) {
+        showSuccessToast({message: data.message});
         //Navigate to set new password screen
         navigation.navigate('setNewPassword');
       }

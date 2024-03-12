@@ -6,7 +6,7 @@ import {Button, Header, Screen, Text, TextField} from '../../components';
 import {AuthScreenProps} from '../../navigation/authNavigator';
 import {showSuccessToast, useValidation, vs} from '../../utils';
 import {passwordReset, useAppDispatch, useAppSelector} from '../../store';
-import {PasswordResetReq} from '../../api';
+import {LoginRes, PasswordResetReq} from '../../api';
 import makeStyles from './styles';
 
 /**
@@ -81,10 +81,11 @@ export const SetNewPasswordScreen: FC<AuthScreenProps<'setNewPassword'>> = ({
         password,
         confirm_password: confirmPassword,
       };
-      const response = await dispatch(passwordReset(reqBody));
+      const {meta, payload} = await dispatch(passwordReset(reqBody));
+      const data = payload as LoginRes;
       // on api success
-      if (response.meta.requestStatus === 'fulfilled') {
-        showSuccessToast({message: t('setNewPassoword.onSucess')});
+      if (meta.requestStatus === 'fulfilled') {
+        showSuccessToast({message: data.message});
         //Navigate to login screen
         navigation.pop(3);
       }
