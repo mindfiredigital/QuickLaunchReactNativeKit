@@ -1,5 +1,4 @@
 import * as React from 'react';
-
 import {StyleSheet, View, Text} from 'react-native';
 import {Button, Screen} from '../../components';
 import {useAppDispatch} from '../../store';

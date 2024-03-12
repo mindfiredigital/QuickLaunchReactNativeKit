@@ -5,9 +5,9 @@ import {useTranslation} from 'react-i18next';
 import {Button, Header, Screen, Text, TextField} from '../../components';
 import {AuthScreenProps} from '../../navigation/authNavigator';
 import {showSuccessToast, useValidation, vs} from '../../utils';
-import makeStyles from './styles';
 import {SignUpReq} from '../../api';
 import {signUp, useAppDispatch, useAppSelector} from '../../store';
+import makeStyles from './styles';
 
 /**
  * A Screen to render a Sign-up screen.

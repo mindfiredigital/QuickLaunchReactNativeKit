@@ -69,9 +69,9 @@ export const otpVerification = createAsyncThunk(
   endPoints.auth.otpVerification,
   async (data: OTPVerificationReq, {rejectWithValue}) => {
     try {
-      console.log(data, 'data');
       const res: OTPVerificationRes = await api.get(
-        `${endPoints.auth.otpVerification}?code=${data.code}`,
+        endPoints.auth.otpVerification,
+        {params: data},
       );
       return res;
     } catch (e) {

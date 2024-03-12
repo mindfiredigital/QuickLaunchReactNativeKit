@@ -5,9 +5,9 @@ import {useTranslation} from 'react-i18next';
 import {Button, Header, Screen, Text, TextField} from '../../components';
 import {AuthScreenProps} from '../../navigation/authNavigator';
 import {showSuccessToast, useValidation, vs} from '../../utils';
-import makeStyles from './styles';
 import {passwordReset, useAppDispatch, useAppSelector} from '../../store';
 import {PasswordResetReq} from '../../api';
+import makeStyles from './styles';
 
 /**
  * A Screen to render a Set new password screen.

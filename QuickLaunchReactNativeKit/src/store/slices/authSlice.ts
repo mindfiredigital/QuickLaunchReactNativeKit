@@ -12,7 +12,6 @@ export interface AuthState {
   isAuthenticated: boolean;
   user: UserObj;
   loading: boolean;
-  message: string;
 }
 
 const initialState: AuthState = {
@@ -27,7 +26,6 @@ const initialState: AuthState = {
     access_token: '',
     refresh_token: '',
   },
-  message: '',
 };
 
 export const authSlice = createSlice({
@@ -67,9 +65,6 @@ export const authSlice = createSlice({
     });
     builder.addCase(forgotPassword.fulfilled, (state, {payload}) => {
       state.loading = false;
-      if (payload?.message) {
-        state.message = payload.message;
-      }
     });
     builder.addCase(forgotPassword.rejected, state => {
       state.loading = false;
@@ -79,9 +74,6 @@ export const authSlice = createSlice({
     });
     builder.addCase(otpVerification.fulfilled, (state, {payload}) => {
       state.loading = false;
-      if (payload?.message) {
-        state.message = payload.message;
-      }
     });
     builder.addCase(otpVerification.rejected, state => {
       state.loading = false;
@@ -91,9 +83,6 @@ export const authSlice = createSlice({
     });
     builder.addCase(passwordReset.fulfilled, (state, {payload}) => {
       state.loading = false;
-      if (payload?.message) {
-        state.message = payload.message;
-      }
     });
     builder.addCase(passwordReset.rejected, state => {
       state.loading = false;

@@ -10,9 +10,9 @@ import {
 import {Button, Header, OTPTextField, Screen, Text} from '../../components';
 import {AuthScreenProps} from '../../navigation/authNavigator';
 import {showSuccessToast, useValidation} from '../../utils';
-import makeStyles from './styles';
 import {otpVerification, useAppDispatch, useAppSelector} from '../../store';
 import {OTPVerificationReq} from '../../api';
+import makeStyles from './styles';
 
 /**
  * VerifyOTPScreen Component
