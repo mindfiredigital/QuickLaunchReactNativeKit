@@ -60,7 +60,7 @@ export const LoginScreen: FC<AuthScreenProps<'login'>> = ({navigation}) => {
    * Redirect to forgot password screen
    */
   const redirectToForgotPassword = () => {
-    navigation.navigate('forgotPassword');
+    navigation.navigate('forgotPassword', {email: email});
   };
 
   /**

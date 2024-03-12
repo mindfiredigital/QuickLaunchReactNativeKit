@@ -1,6 +1,14 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {UserObj} from '../../api';
-import {login, socialLogIn, socialSignUp} from '../actions';
+import {
+  forgotPassword,
+  login,
+  otpVerification,
+  passwordReset,
+  signUp,
+  socialSignUp,
+  socialLogIn,
+} from '../actions';
 
 export interface AuthState {
   isAuthenticated: boolean;
@@ -45,9 +53,45 @@ export const authSlice = createSlice({
       state.isAuthenticated = false;
       state.loading = false;
     });
-    builder.addCase(socialSignUp.pending, state => {
+    builder.addCase(signUp.pending, state => {
       state.loading = true;
     });
+    builder.addCase(signUp.fulfilled, state => {
+      state.loading = false;
+    });
+    builder.addCase(signUp.rejected, state => {
+      state.loading = false;
+    });
+    builder.addCase(forgotPassword.pending, state => {
+      state.loading = true;
+    });
+    builder.addCase(forgotPassword.fulfilled, state => {
+      state.loading = false;
+    });
+    builder.addCase(forgotPassword.rejected, state => {
+      state.loading = false;
+    });
+    builder.addCase(otpVerification.pending, state => {
+      state.loading = true;
+    });
+    builder.addCase(otpVerification.fulfilled, state => {
+      state.loading = false;
+    });
+    builder.addCase(otpVerification.rejected, state => {
+      state.loading = false;
+    });
+    builder.addCase(passwordReset.pending, state => {
+      state.loading = true;
+    });
+    builder.addCase(passwordReset.fulfilled, (state, {payload}) => {
+      state.loading = false;
+    });
+    builder.addCase(passwordReset.rejected, state => {
+      state.loading = false;
+    }),
+      builder.addCase(socialSignUp.pending, state => {
+        state.loading = true;
+      });
     builder.addCase(socialSignUp.fulfilled, (state, {payload}) => {
       state.loading = false;
       if (payload?.data) {

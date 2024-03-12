@@ -4,7 +4,9 @@ import {useTheme} from '@react-navigation/native';
 import {useTranslation} from 'react-i18next';
 import {Button, Header, Screen, Text, TextField} from '../../components';
 import {AuthScreenProps} from '../../navigation/authNavigator';
-import {useValidation, vs} from '../../utils';
+import {showSuccessToast, useValidation, vs} from '../../utils';
+import {ForgotPasswordReq, LoginRes} from '../../api';
+import {forgotPassword, useAppDispatch, useAppSelector} from '../../store';
 import makeStyles from './styles';
 
 /**
@@ -12,12 +14,17 @@ import makeStyles from './styles';
  */
 export const ForgotPasswordScreen: FC<AuthScreenProps<'forgotPassword'>> = ({
   navigation,
+  route,
 }) => {
   const {colors} = useTheme();
   const styles = makeStyles(colors);
   const {t} = useTranslation();
+  const {email: emailParams} = route.params;
   // Hooks
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState(emailParams ? emailParams : '');
+  // Redux hooks
+  const dispatch = useAppDispatch();
+  const {loading} = useAppSelector(state => state.auth);
 
   // Validate form textfields input
   const {setIsTouched, validateForm, isFormValid, getErrorsInField} =
@@ -33,14 +40,24 @@ export const ForgotPasswordScreen: FC<AuthScreenProps<'forgotPassword'>> = ({
     });
 
   /**
-   * send otp
+   * send otp to registered email id
    */
-  const sendOTP = () => {
+  const sendOTP = async () => {
     setIsTouched(true);
     const isValid = validateForm();
     if (isValid) {
-      //TODO: navigate to send otp screen
-      navigation.navigate('verifyOTP');
+      //forgot password method to send otp on email
+      const reqBody: ForgotPasswordReq = {
+        email,
+      };
+      const {meta, payload} = await dispatch(forgotPassword(reqBody));
+      const data = payload as LoginRes;
+      // on api success
+      if (meta.requestStatus === 'fulfilled' && data?.message) {
+        showSuccessToast({message: data?.message});
+        //Navigate to otp verification screen
+        navigation.navigate('verifyOTP');
+      }
     }
   };
 
@@ -77,6 +94,7 @@ export const ForgotPasswordScreen: FC<AuthScreenProps<'forgotPassword'>> = ({
       <TextField
         leftIcon={'email'}
         onChangeText={setEmail}
+        value={email}
         placeholder={t('signUp.emailPlaceholder')}
         keyboardType="email-address"
         inputMode="email"
@@ -102,7 +120,10 @@ export const ForgotPasswordScreen: FC<AuthScreenProps<'forgotPassword'>> = ({
   );
 
   return (
-    <Screen safeAreaEdges={['top', 'bottom', 'left', 'right']} preset="auto">
+    <Screen
+      safeAreaEdges={['top', 'bottom', 'left', 'right']}
+      preset="auto"
+      loading={loading}>
       <View>
         {renderHeaders()}
         {renderTextInputs()}

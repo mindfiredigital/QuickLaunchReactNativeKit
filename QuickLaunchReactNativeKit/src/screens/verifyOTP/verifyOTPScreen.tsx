@@ -9,7 +9,9 @@ import {
 } from 'react-native-otp-verify';
 import {Button, Header, OTPTextField, Screen, Text} from '../../components';
 import {AuthScreenProps} from '../../navigation/authNavigator';
-import {useValidation} from '../../utils';
+import {showSuccessToast, useValidation} from '../../utils';
+import {otpVerification, useAppDispatch, useAppSelector} from '../../store';
+import {LoginRes, OTPVerificationReq} from '../../api';
 import makeStyles from './styles';
 
 /**
@@ -30,6 +32,10 @@ export const VerifyOTPScreen: FC<AuthScreenProps<'verifyOTP'>> = ({
 
   // State for OTP input
   const [otp, setOtp] = useState<string>('');
+
+  // Redux hooks
+  const dispatch = useAppDispatch();
+  const {loading} = useAppSelector(state => state.auth);
 
   /**
    * Number of digits required for OTP.
@@ -76,11 +82,22 @@ export const VerifyOTPScreen: FC<AuthScreenProps<'verifyOTP'>> = ({
   /**
    * Verify OTP and navigate to the next screen.
    */
-  const verifyOTP = () => {
+  const verifyOTP = async () => {
     setIsTouched(true);
     const isValid = validateForm();
     if (isValid) {
-      navigation.navigate('setNewPassword');
+      //sign up user
+      const reqBody: OTPVerificationReq = {
+        code: Number(otp),
+      };
+      const {meta, payload} = await dispatch(otpVerification(reqBody));
+      const data = payload as LoginRes;
+      // on api success
+      if (meta.requestStatus === 'fulfilled' && data?.message) {
+        showSuccessToast({message: data.message});
+        //Navigate to set new password screen
+        navigation.navigate('setNewPassword');
+      }
     }
   };
 
@@ -133,7 +150,10 @@ export const VerifyOTPScreen: FC<AuthScreenProps<'verifyOTP'>> = ({
 
   // Render the entire screen
   return (
-    <Screen safeAreaEdges={['top', 'bottom', 'left', 'right']} preset="auto">
+    <Screen
+      safeAreaEdges={['top', 'bottom', 'left', 'right']}
+      preset="auto"
+      loading={loading}>
       {renderHeaders()}
       {renderOTPInput()}
       {renderVerifyOTP()}

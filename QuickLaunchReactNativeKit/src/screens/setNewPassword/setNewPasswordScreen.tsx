@@ -4,7 +4,9 @@ import {useTheme} from '@react-navigation/native';
 import {useTranslation} from 'react-i18next';
 import {Button, Header, Screen, Text, TextField} from '../../components';
 import {AuthScreenProps} from '../../navigation/authNavigator';
-import {useValidation, vs} from '../../utils';
+import {showSuccessToast, useValidation, vs} from '../../utils';
+import {passwordReset, useAppDispatch, useAppSelector} from '../../store';
+import {LoginRes, PasswordResetReq} from '../../api';
 import makeStyles from './styles';
 
 /**
@@ -25,6 +27,10 @@ export const SetNewPasswordScreen: FC<AuthScreenProps<'setNewPassword'>> = ({
   const [isVisibleConfirmPassword, setVisibleConfirmPassword] = useState(false);
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+
+  // Redux hooks
+  const dispatch = useAppDispatch();
+  const {loading} = useAppSelector(state => state.auth);
 
   // Validate form textfields input
   const {setIsTouched, validateForm, isFormValid, getErrorsInField} =
@@ -66,11 +72,23 @@ export const SetNewPasswordScreen: FC<AuthScreenProps<'setNewPassword'>> = ({
   /**
    * Validate text input than submit password
    */
-  const onSubmitPassword = () => {
+  const onSubmitPassword = async () => {
     setIsTouched(true);
     const isValid = validateForm();
     if (isValid) {
-      //submit password
+      //submit new password
+      const reqBody: PasswordResetReq = {
+        password,
+        confirm_password: confirmPassword,
+      };
+      const {meta, payload} = await dispatch(passwordReset(reqBody));
+      const data = payload as LoginRes;
+      // on api success
+      if (meta.requestStatus === 'fulfilled') {
+        showSuccessToast({message: data.message});
+        //Navigate to login screen
+        navigation.pop(3);
+      }
     }
   };
 
@@ -151,7 +169,10 @@ export const SetNewPasswordScreen: FC<AuthScreenProps<'setNewPassword'>> = ({
   );
 
   return (
-    <Screen safeAreaEdges={['top', 'bottom', 'bottom', 'right']} preset="auto">
+    <Screen
+      safeAreaEdges={['top', 'bottom', 'bottom', 'right']}
+      preset="auto"
+      loading={loading}>
       <View>
         {renderHeaders()}
         {renderTextInputs()}
