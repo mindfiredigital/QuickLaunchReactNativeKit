@@ -1,6 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {UserObj} from '../../api';
-import {login} from '../actions';
+import {login, socialLogIn, socialSignUp} from '../actions';
 
 export interface AuthState {
   isAuthenticated: boolean;
@@ -43,6 +43,32 @@ export const authSlice = createSlice({
     });
     builder.addCase(login.rejected, state => {
       state.isAuthenticated = false;
+      state.loading = false;
+    });
+    builder.addCase(socialSignUp.pending, state => {
+      state.loading = true;
+    });
+    builder.addCase(socialSignUp.fulfilled, (state, {payload}) => {
+      state.loading = false;
+      if (payload?.data) {
+        state.isAuthenticated = true;
+        state.user = payload.data;
+      }
+    });
+    builder.addCase(socialSignUp.rejected, state => {
+      state.loading = false;
+    });
+    builder.addCase(socialLogIn.pending, state => {
+      state.loading = true;
+    });
+    builder.addCase(socialLogIn.fulfilled, (state, {payload}) => {
+      state.loading = false;
+      if (payload?.data) {
+        state.isAuthenticated = true;
+        state.user = payload.data;
+      }
+    });
+    builder.addCase(socialLogIn.rejected, state => {
       state.loading = false;
     });
   },

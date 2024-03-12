@@ -6,4 +6,6 @@ export const iconRegistry = {
   people: require('./people.png'),
   back: require('./back.png'),
   email: require('./email.png'),
+  googleLight: require('./googleLight.png'),
+  googleDark: require('./googleDark.png'),
 };

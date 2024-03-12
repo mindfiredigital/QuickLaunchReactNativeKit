@@ -26,6 +26,11 @@ const en = {
     forgotPassword: 'Forgot Password ?',
     dontHave: `Don't have account ?`,
     signup: 'Sign Up',
+    signInWith: 'Or sign in with',
+    signInCancelled: 'User cancelled the login flow.',
+    inProgress: 'Operation (e.g., sign-in) already in progress.',
+    playServicesNotAvailable: 'Play services not available or outdated.',
+    defaultError: 'An error occurred during sign-in.',
   },
   signUp: {
     iHaveAlready: 'Already have an account ?',

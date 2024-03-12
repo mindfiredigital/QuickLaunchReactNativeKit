@@ -17,6 +17,7 @@
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		90992F30DA2144AA912867C2 /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F849C8A222874993BEBDB828 /* Poppins-Bold.ttf */; };
 		A6BAB11FD35D4768B78EBC66 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 99F8DD5BFFD4424498467D69 /* Poppins-Regular.ttf */; };
+		B535E1162B9F1C7100D972F7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B535E1152B9F1C7100D972F7 /* GoogleService-Info.plist */; };
 		B59A2B882B9EEB6900AFF751 /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B59A2B872B9EEB6800AFF751 /* BootSplash.storyboard */; };
 		B9E2BF297F5D471EA2786479 /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9FBFF56F80604B488EA3A6A7 /* Poppins-Medium.ttf */; };
 		E0D7FAD83B2B4426B78CCE9E /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0AFC9A6B570C457B9FE7636E /* Poppins-Light.ttf */; };
@@ -53,6 +54,7 @@
 		89C6BE57DB24E9ADA2F236DE /* Pods-QuickLaunchReactNativeKit-QuickLaunchReactNativeKitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuickLaunchReactNativeKit-QuickLaunchReactNativeKitTests.release.xcconfig"; path = "Target Support Files/Pods-QuickLaunchReactNativeKit-QuickLaunchReactNativeKitTests/Pods-QuickLaunchReactNativeKit-QuickLaunchReactNativeKitTests.release.xcconfig"; sourceTree = "<group>"; };
 		99F8DD5BFFD4424498467D69 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Regular.ttf"; path = "../src/assets/fonts/Poppins-Regular.ttf"; sourceTree = "<group>"; };
 		9FBFF56F80604B488EA3A6A7 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Medium.ttf"; path = "../src/assets/fonts/Poppins-Medium.ttf"; sourceTree = "<group>"; };
+		B535E1152B9F1C7100D972F7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B59A2B872B9EEB6800AFF751 /* BootSplash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = BootSplash.storyboard; path = QuickLaunchReactNativeKit/BootSplash.storyboard; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		F849C8A222874993BEBDB828 /* Poppins-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Bold.ttf"; path = "../src/assets/fonts/Poppins-Bold.ttf"; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				B59A2B872B9EEB6800AFF751 /* BootSplash.storyboard */,
+				B535E1152B9F1C7100D972F7 /* GoogleService-Info.plist */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
 			name = QuickLaunchReactNativeKit;
@@ -269,6 +272,7 @@
 			files = (
 				B59A2B882B9EEB6900AFF751 /* BootSplash.storyboard in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
+				B535E1162B9F1C7100D972F7 /* GoogleService-Info.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				90992F30DA2144AA912867C2 /* Poppins-Bold.ttf in Resources */,
 				E0D7FAD83B2B4426B78CCE9E /* Poppins-Light.ttf in Resources */,
@@ -612,7 +616,10 @@
 					"-DFOLLY_USE_LIBCPP=1",
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 				);
-				OTHER_LDFLAGS = "$(inherited)  ";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					" ",
+				);
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;
@@ -680,7 +687,10 @@
 					"-DFOLLY_USE_LIBCPP=1",
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 				);
-				OTHER_LDFLAGS = "$(inherited)  ";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					" ",
+				);
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;
