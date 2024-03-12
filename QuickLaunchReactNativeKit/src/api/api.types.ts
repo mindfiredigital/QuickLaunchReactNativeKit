@@ -42,3 +42,11 @@ export interface UserObj {
   access_token: string;
   refresh_token: string;
 }
+export interface SocialSignUpReq {
+  full_name: string;
+  email: string;
+  token: string;
+}
+export interface SocialLogInReq {
+  token: string;
+}
