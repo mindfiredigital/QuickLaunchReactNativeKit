@@ -1,4 +1,4 @@
-import {StyleSheet, ViewStyle} from 'react-native';
+import {StyleSheet, TextStyle, ViewStyle} from 'react-native';
 import {Colors, spacing} from '../../theme';
 import {s, vs} from '../../utils';
 
@@ -29,7 +29,23 @@ const makeStyles = (colors: Colors) =>
     } as ViewStyle,
     socialSignInButtons: {
       marginTop: vs(spacing.xs),
-    },
+    } as ViewStyle,
+    biometricView: {
+      width: vs(200),
+      backgroundColor: colors.lightGray,
+      alignSelf: 'center',
+      alignItems: 'center',
+      borderRadius: vs(spacing.xs),
+      padding: vs(spacing.md),
+      marginTop: vs(spacing.md),
+    } as ViewStyle,
+    biometricIcon: {
+      marginBottom: vs(spacing.md),
+    } as ViewStyle,
+    signDisText: {
+      marginTop: vs(spacing.sm),
+      textAlign: 'center',
+    } as TextStyle,
   });
 
 export default makeStyles;

@@ -20,6 +20,10 @@
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Face ID Required for authentication</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Touch ID Required for authentication</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
