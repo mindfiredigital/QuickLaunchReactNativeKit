@@ -1,20 +1,22 @@
-import React, {useEffect, useState} from 'react';
-import {StyleSheet, ViewStyle, TextStyle, View} from 'react-native';
+import React, {useEffect, useMemo, useState} from 'react';
+import {StyleSheet, ViewStyle, TextStyle, TouchableOpacity} from 'react-native';
 import {useTranslation} from 'react-i18next';
 import {useTheme} from '@react-navigation/native';
 import ReactNativeBiometrics, {BiometryTypes} from 'react-native-biometrics';
 import {getGenericPasswordFromKeychain, vs} from '../../../utils';
 import {Colors, spacing} from '../../../theme';
-import {Icon, Text} from '../../../components';
-import {login, useAppDispatch} from '../../../store';
-import {LoginReq} from '../../../api';
+import {Icon, IconTypes, Text} from '../../../components';
 
 const rnBiometrics = new ReactNativeBiometrics({allowDeviceCredentials: true});
 
-export const BiometricAuth = () => {
+interface BiometricAuthProps {
+  onBiometricsSuccess: (username: string, password: string) => void;
+}
+
+export const BiometricAuth = (props: BiometricAuthProps) => {
+  const {onBiometricsSuccess} = props;
   // hooks
   const {t} = useTranslation();
-  const dispatch = useAppDispatch();
   const [biometryTypes, setBiometryTypes] = useState<string>('');
   const [userCredentials, setUserCredentials] = useState<any>('');
   const {colors} = useTheme();
@@ -30,6 +32,34 @@ export const BiometricAuth = () => {
     // Call the onMount function when the component mounts
     onMount();
   }, []);
+
+  /**
+   * Returns the appropriate icon, text and description for biometric authentication based on the available biometric types.
+   */
+  const biometricData = useMemo(() => {
+    switch (biometryTypes) {
+      case BiometryTypes.TouchID:
+        return {
+          icon: 'fingerprint' as IconTypes,
+          text: t('login.signinWithTouchId'),
+          desc: t('login.signinWithTouchIdDis'),
+        };
+      case BiometryTypes.FaceID:
+        return {
+          icon: 'faceRecognition' as IconTypes,
+          text: t('login.signinWithFaceId'),
+          desc: t('login.signinWithFaceIdDis'),
+        };
+      case BiometryTypes.Biometrics:
+        return {
+          icon: 'fingerprint' as IconTypes,
+          text: t('login.signinWithTouchId'),
+          desc: t('login.signinWithTouchIdDis'),
+        };
+      default:
+        return undefined;
+    }
+  }, [BiometryTypes]);
 
   /**
    * Function that is called when the component mounts.
@@ -59,24 +89,15 @@ export const BiometricAuth = () => {
    * Prompts the user to authenticate using biometrics (e.g., Face ID or Touch ID).
    * If authentication is successful, it logs the user in.
    */
-  const onBiometrics = async () => {
+  const onBiometrics = async (promptMessage: string) => {
     // Prompt the user to authenticate using biometrics
-    const isSuccess = await showBiometricPrompt(returnSigninWithString());
+    const isSuccess = await showBiometricPrompt(promptMessage);
 
     // If biometric authentication is successful
     if (isSuccess) {
       // Log in the user using stored credentials
-      loginUser(userCredentials.username, userCredentials.password);
+      onBiometricsSuccess(userCredentials.username, userCredentials.password);
     }
-  };
-
-  //login user using credencials
-  const loginUser = (username: string, password: string) => {
-    const reqBody: LoginReq = {
-      email: username,
-      password: password,
-    };
-    dispatch(login(reqBody));
   };
 
   /**
@@ -121,63 +142,28 @@ export const BiometricAuth = () => {
     }
   };
 
-  /**
-   * Returns the appropriate message for biometric authentication based on the available biometric types.
-   * @returns A string representing the message for biometric authentication.
-   */
-  const returnSigninWithString = (): string => {
-    // Determine the biometric type and return the corresponding message
-    if (biometryTypes === BiometryTypes.TouchID) {
-      return t('login.signinWithTouchId'); // Message for Touch ID authentication
-    } else if (biometryTypes === BiometryTypes.FaceID) {
-      return t('login.signinWithFaceId'); // Message for Face ID authentication
-    } else if (biometryTypes === BiometryTypes.Biometrics) {
-      return t('login.signWithBiometrics'); // Generic message for biometrics authentication
-    } else {
-      return ''; // Return an empty string if biometric type is not recognized
-    }
-  };
-
-  /**
-   * Returns the appropriate description for biometric authentication based on the available biometric types.
-   * @returns A string representing the description for biometric authentication.
-   */
-  const returnSigninDiscreptionString = (): string => {
-    // Determine the biometric type and return the corresponding description
-    if (biometryTypes === BiometryTypes.TouchID) {
-      return t('login.signinWithTouchIdDis'); // Description for Touch ID authentication
-    } else if (biometryTypes === BiometryTypes.FaceID) {
-      return t('login.signinWithFaceIdDis'); // Description for Face ID authentication
-    } else if (biometryTypes === BiometryTypes.Biometrics) {
-      return t('login.signWithBiometricsDis'); // Generic description for biometrics authentication
-    } else {
-      return ''; // Return an empty string if biometric type is not recognized
-    }
-  };
-
-  return (
-    <>
-      {userCredentials.username && (
-        <View style={styles.biometricView}>
-          <Icon
-            icon={
-              biometryTypes === BiometryTypes.TouchID
-                ? 'fingerprint'
-                : 'faceRecognition'
-            }
-            size={vs(40)}
-            containerStyle={styles.biometricIcon}
-            color={colors.tertiary}
-            onPress={onBiometrics}
-          />
-          <Text>{returnSigninWithString()}</Text>
-          <Text style={styles.signDisText}>
-            {returnSigninDiscreptionString()}
-          </Text>
-        </View>
-      )}
-    </>
-  );
+  if (biometricData && !!userCredentials)
+    return (
+      <TouchableOpacity
+        activeOpacity={0.6}
+        onPress={() => onBiometrics(biometricData.text)}
+        style={styles.biometricView}>
+        <Icon
+          icon={biometricData.icon}
+          size={vs(40)}
+          style={styles.biometricIcon}
+          color={colors.tertiary}
+        />
+        <Text>{biometricData.text}</Text>
+        <Text
+          size="body1"
+          numberOfLines={2}
+          adjustsFontSizeToFit
+          style={styles.signDisText}>
+          {biometricData.desc}
+        </Text>
+      </TouchableOpacity>
+    );
 };
 /**
  * Function to create styles for the GoogleSignIn component.
@@ -186,19 +172,19 @@ export const BiometricAuth = () => {
 const makeStyles = (colors: Colors) =>
   StyleSheet.create({
     biometricView: {
-      width: vs(200),
-      backgroundColor: colors.lightGray,
+      maxWidth: vs(240),
+      backgroundColor: colors.card,
       alignSelf: 'center',
       alignItems: 'center',
       borderRadius: vs(spacing.xs),
-      padding: vs(spacing.md),
+      padding: vs(spacing.sm),
       marginTop: vs(spacing.md),
     } as ViewStyle,
     biometricIcon: {
-      marginBottom: vs(spacing.md),
+      marginBottom: vs(spacing.xs),
     } as ViewStyle,
     signDisText: {
-      marginTop: vs(spacing.sm),
+      marginTop: vs(spacing.xxs),
       textAlign: 'center',
     } as TextStyle,
   });
