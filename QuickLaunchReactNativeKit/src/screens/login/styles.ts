@@ -31,22 +31,6 @@ const makeStyles = (colors: Colors) =>
       flexDirection: 'row',
       marginTop: vs(spacing.xs),
     } as ViewStyle,
-    biometricView: {
-      width: vs(200),
-      backgroundColor: colors.lightGray,
-      alignSelf: 'center',
-      alignItems: 'center',
-      borderRadius: vs(spacing.xs),
-      padding: vs(spacing.md),
-      marginTop: vs(spacing.md),
-    } as ViewStyle,
-    biometricIcon: {
-      marginBottom: vs(spacing.md),
-    } as ViewStyle,
-    signDisText: {
-      marginTop: vs(spacing.sm),
-      textAlign: 'center',
-    } as TextStyle,
     spacer: {
       width: s(spacing.md),
     } as ViewStyle,
