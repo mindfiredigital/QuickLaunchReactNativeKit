@@ -33,6 +33,14 @@ const en = {
     inProgress: 'Operation (e.g., sign-in) already in progress.',
     playServicesNotAvailable: 'Play services not available or outdated.',
     defaultError: 'An error occurred during sign-in.',
+    signinWithTouchId: 'Sign-in with Touch ID',
+    signinWithFaceId: 'Sign-in with Face ID',
+    signWithBiometrics: 'Sign-in with Biometrics',
+    signinWithTouchIdDis: 'Look directly at the front camera to use face ID',
+    signinWithFaceIdDis:
+      'Place your finger on the Touch ID sensor to authenticate.',
+    signWithBiometricsDis:
+      'Place your finger on the Touch ID sensor to authenticate.',
   },
   signUp: {
     iHaveAlready: 'Already have an account ?',

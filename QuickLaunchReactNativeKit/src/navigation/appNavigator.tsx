@@ -17,7 +17,7 @@ import AuthNavigator from './authNavigator';
 import {darkTheme, lightTheme, spacing} from '../theme';
 import {resetState} from '../store/reducers';
 import {useAppDispatch, useAppSelector} from '../store';
-import {useToastConfig, vs} from '../utils';
+import {clearKeystorePassword, useToastConfig, vs} from '../utils';
 
 export interface NavigationProps
   extends Partial<React.ComponentProps<typeof NavigationContainer>> {}
@@ -56,6 +56,7 @@ const AppNavigator = (props: NavigationProps) => {
         }
       };
     }
+    clearKeystorePassword();
   }, []);
 
   /** Hide boot splash screen once navigation is ready */

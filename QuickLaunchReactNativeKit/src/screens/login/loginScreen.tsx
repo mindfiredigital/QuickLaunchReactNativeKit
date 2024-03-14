@@ -1,13 +1,14 @@
-import React, {FC, useRef, useState} from 'react';
+import React, {FC, useEffect, useRef, useState} from 'react';
 import {TextInput, View} from 'react-native';
 import {useTheme} from '@react-navigation/native';
 import {useTranslation} from 'react-i18next';
+import {BiometryTypes} from 'react-native-biometrics';
 import {Button, Icon, Screen, Text, TextField} from '../../components';
 import {AuthScreenProps} from '../../navigation/authNavigator';
-import {useValidation, vs} from '../../utils';
+import {setGenericPasswordToKeychain, useValidation, vs} from '../../utils';
 import {login, useAppDispatch, useAppSelector} from '../../store';
 import {LoginReq} from '../../api';
-import {AppleSignin, GoogleSignIn} from './services';
+import {AppleSignin, BiometricAuth, GoogleSignIn} from './services';
 import makeStyles from './styles';
 
 /**
@@ -29,9 +30,9 @@ export const LoginScreen: FC<AuthScreenProps<'login'>> = ({navigation}) => {
   const passwordRef = useRef<TextInput>(null);
 
   // Hooks
-  const [isVisible, setVisible] = useState(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [isVisible, setVisible] = useState<boolean>(false);
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
 
   // Validate form textfields input
   const {setIsTouched, validateForm, isFormValid, getErrorsInField} =
@@ -82,19 +83,25 @@ export const LoginScreen: FC<AuthScreenProps<'login'>> = ({navigation}) => {
    */
   const focusPassword = () => passwordRef.current?.focus();
 
+  //login user using credencials
+  const loginUser = (username: string, password: string) => {
+    const reqBody: LoginReq = {
+      email: username,
+      password: password,
+    };
+    dispatch(login(reqBody));
+  };
+
   /**
    * Validate text input than login the user
    */
-  const loginUser = () => {
+  const onLogin = async () => {
     setIsTouched(true);
     const isValid = validateForm();
     if (isValid) {
       //login user
-      const reqBody: LoginReq = {
-        email,
-        password,
-      };
-      dispatch(login(reqBody));
+      await setGenericPasswordToKeychain(email, password);
+      loginUser(email, password);
     }
   };
 
@@ -127,8 +134,9 @@ export const LoginScreen: FC<AuthScreenProps<'login'>> = ({navigation}) => {
       <Button
         btnText={t('login.title')}
         disabled={!isFormValid()}
-        onPress={loginUser}
+        onPress={onLogin}
       />
+      {/* <Button btnText={'Face id'} onPress={onBiometrics} /> */}
     </>
   );
 
@@ -207,6 +215,7 @@ export const LoginScreen: FC<AuthScreenProps<'login'>> = ({navigation}) => {
       {renderTextInputs()}
       {renderButtons()}
       {renderSocialSignIn()}
+      <BiometricAuth />
     </Screen>
   );
 };
