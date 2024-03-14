@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {StyleSheet, TouchableOpacityProps, ViewStyle} from 'react-native';
+import {ImageStyle, StyleSheet, TouchableOpacityProps} from 'react-native';
 import Config from 'react-native-config';
 import {useTranslation} from 'react-i18next';
 import {useTheme} from '@react-navigation/native';
@@ -16,7 +16,7 @@ import {LoginRes} from '../../../api';
 interface GoogleSignInProps extends TouchableOpacityProps {
   /**
    * size - The size of the Google sign-in button.
-   * @default 40
+   * @default 48
    */
   size?: number;
   /**
@@ -34,7 +34,7 @@ export const GoogleSignIn = (props: GoogleSignInProps) => {
   const {dark, colors} = useTheme();
   // props
   const {
-    size = vs(40),
+    size = vs(48),
     icon = dark ? 'googleDark' : 'googleLight',
     ...rest
   } = props;
@@ -65,8 +65,7 @@ export const GoogleSignIn = (props: GoogleSignInProps) => {
       if (!!userInfo && userInfo?.idToken) {
         const socialSignUpReq = {
           token: userInfo?.idToken,
-          full_name:
-            userInfo?.user?.givenName + ' ' + userInfo?.user?.givenName,
+          full_name: `${userInfo?.user?.givenName} ${userInfo?.user?.familyName}`,
           email: userInfo?.user?.email,
         };
         const {meta, payload} = await dispatch(socialSignUp(socialSignUpReq));
@@ -105,9 +104,9 @@ export const GoogleSignIn = (props: GoogleSignInProps) => {
     <Icon
       size={size}
       onPress={signIn}
-      containerStyle={styles.buttonWrapper}
-      {...rest}
+      imageStyle={styles.buttonIcon}
       icon={icon}
+      {...rest}
     />
   );
 };
@@ -118,8 +117,9 @@ export const GoogleSignIn = (props: GoogleSignInProps) => {
  */
 const makeStyles = (colors: Colors) =>
   StyleSheet.create({
-    buttonWrapper: {
-      borderRadius: vs(spacing.xxs),
-      backgroundColor: colors.white,
-    } as ViewStyle,
+    buttonIcon: {
+      borderWidth: 1,
+      borderColor: colors.border,
+      borderRadius: vs(spacing.xs),
+    } as ImageStyle,
   });

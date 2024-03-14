@@ -28,6 +28,7 @@ const makeStyles = (colors: Colors) =>
       alignItems: 'center',
     } as ViewStyle,
     socialSignInButtons: {
+      flexDirection: 'row',
       marginTop: vs(spacing.xs),
     } as ViewStyle,
     biometricView: {
@@ -46,6 +47,9 @@ const makeStyles = (colors: Colors) =>
       marginTop: vs(spacing.sm),
       textAlign: 'center',
     } as TextStyle,
+    spacer: {
+      width: s(spacing.md),
+    } as ViewStyle,
   });
 
 export default makeStyles;

@@ -55,6 +55,7 @@
 		99F8DD5BFFD4424498467D69 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Regular.ttf"; path = "../src/assets/fonts/Poppins-Regular.ttf"; sourceTree = "<group>"; };
 		9FBFF56F80604B488EA3A6A7 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Medium.ttf"; path = "../src/assets/fonts/Poppins-Medium.ttf"; sourceTree = "<group>"; };
 		B535E1152B9F1C7100D972F7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B594CD2F2BA0803D008FB35E /* QuickLaunchReactNativeKit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = QuickLaunchReactNativeKit.entitlements; path = QuickLaunchReactNativeKit/QuickLaunchReactNativeKit.entitlements; sourceTree = "<group>"; };
 		B59A2B872B9EEB6800AFF751 /* BootSplash.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = BootSplash.storyboard; path = QuickLaunchReactNativeKit/BootSplash.storyboard; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		F849C8A222874993BEBDB828 /* Poppins-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Bold.ttf"; path = "../src/assets/fonts/Poppins-Bold.ttf"; sourceTree = "<group>"; };
@@ -100,6 +101,7 @@
 		13B07FAE1A68108700A75B9A /* QuickLaunchReactNativeKit */ = {
 			isa = PBXGroup;
 			children = (
+				B594CD2F2BA0803D008FB35E /* QuickLaunchReactNativeKit.entitlements */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -501,6 +503,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = QuickLaunchReactNativeKit/QuickLaunchReactNativeKit.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = QuickLaunchReactNativeKit/Info.plist;
@@ -528,6 +531,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = QuickLaunchReactNativeKit/QuickLaunchReactNativeKit.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				INFOPLIST_FILE = QuickLaunchReactNativeKit/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

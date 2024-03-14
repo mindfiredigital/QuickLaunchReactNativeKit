@@ -18,6 +18,8 @@ const en = {
       'Internal server error. Please try again later or contact support.',
     unexpectedError: 'Unexpected error occurred. Please try again.',
     badRequest: 'Bad request. Please check your request parameters.',
+    appleSignInError: 'Apple Sign in failed!',
+    appleSignInCancel: 'User canceled Apple Sign in.',
   },
   login: {
     title: 'Sign in',

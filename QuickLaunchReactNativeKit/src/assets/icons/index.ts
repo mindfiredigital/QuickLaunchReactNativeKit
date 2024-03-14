@@ -10,4 +10,6 @@ export const iconRegistry = {
   googleDark: require('./googleDark.png'),
   faceRecognition: require('./face-recognition.png'),
   fingerprint: require('./fingerprint.png'),
+  appleLight: require('./appleLight.png'),
+  appleDark: require('./appleDark.png'),
 };
