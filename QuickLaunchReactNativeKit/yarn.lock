@@ -1323,6 +1323,11 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-2.0.2.tgz#d9fae00a2d5cb40f92cfe64b47ad749fbc38f917"
   integrity sha512-6EwiSjwWYP7pTckG6I5eyFANjPhmPjUX9JRLUSfNPC7FX7zK9gyZAfUEaECL6ALTpGX5AjnBq3C9XmVWPitNpw==
 
+"@invertase/react-native-apple-authentication@^2.3.0":
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@invertase/react-native-apple-authentication/-/react-native-apple-authentication-2.3.0.tgz#b131b2033bfce06ca788f0b0886b51eb6effea0e"
+  integrity sha512-D3NNPv98EmkkCJyQEZhRn1zPC5EH+8LKBS+ddFsDyc3rVGWE7Ct0ffpxZ5T60w6wamIPjojIMSfEPUxbQ28+og==
+
 "@isaacs/ttlcache@^1.4.1":
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/@isaacs/ttlcache/-/ttlcache-1.4.1.tgz#21fb23db34e9b6220c6ba023a0118a2dd3461ea2"

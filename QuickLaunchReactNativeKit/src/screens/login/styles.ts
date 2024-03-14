@@ -28,8 +28,12 @@ const makeStyles = (colors: Colors) =>
       alignItems: 'center',
     } as ViewStyle,
     socialSignInButtons: {
+      flexDirection: 'row',
       marginTop: vs(spacing.xs),
-    },
+    } as ViewStyle,
+    spacer: {
+      width: s(spacing.md),
+    } as ViewStyle,
   });
 
 export default makeStyles;

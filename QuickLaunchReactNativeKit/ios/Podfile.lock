@@ -1133,6 +1133,8 @@ PODS:
     - React-jsi (= 0.73.6)
     - React-logger (= 0.73.6)
     - React-perflogger (= 0.73.6)
+  - RNAppleAuthentication (2.3.0):
+    - React-Core
   - RNBootSplash (5.4.1):
     - React-Core
   - RNCAsyncStorage (1.22.3):
@@ -1232,6 +1234,7 @@ DEPENDENCIES:
   - React-runtimescheduler (from `../node_modules/react-native/ReactCommon/react/renderer/runtimescheduler`)
   - React-utils (from `../node_modules/react-native/ReactCommon/react/utils`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
+  - "RNAppleAuthentication (from `../node_modules/@invertase/react-native-apple-authentication`)"
   - RNBootSplash (from `../node_modules/react-native-bootsplash`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
@@ -1362,6 +1365,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/react/utils"
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
+  RNAppleAuthentication:
+    :path: "../node_modules/@invertase/react-native-apple-authentication"
   RNBootSplash:
     :path: "../node_modules/react-native-bootsplash"
   RNCAsyncStorage:
@@ -1444,6 +1449,7 @@ SPEC CHECKSUMS:
   React-runtimescheduler: 9636eee762c699ca7c85751a359101797e4c8b3b
   React-utils: d16c1d2251c088ad817996621947d0ac8167b46c
   ReactCommon: 2aa35648354bd4c4665b9a5084a7d37097b89c10
+  RNAppleAuthentication: e99eaf3c4c01ad8ecb6125dd6f0cfd98871685b5
   RNBootSplash: eff8239c4f795ce42a0604873aef3733aac0dedd
   RNCAsyncStorage: 10591b9e0a91eaffee14e69b3721009759235125
   RNGestureHandler: 67fb54b3e6ca338a8044e85cd6f340265aa41091

@@ -8,4 +8,6 @@ export const iconRegistry = {
   email: require('./email.png'),
   googleLight: require('./googleLight.png'),
   googleDark: require('./googleDark.png'),
+  appleLight: require('./appleLight.png'),
+  appleDark: require('./appleDark.png'),
 };

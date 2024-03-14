@@ -7,7 +7,7 @@ import {AuthScreenProps} from '../../navigation/authNavigator';
 import {useValidation, vs} from '../../utils';
 import {login, useAppDispatch, useAppSelector} from '../../store';
 import {LoginReq} from '../../api';
-import {GoogleSignIn} from './services';
+import {AppleSignin, GoogleSignIn} from './services';
 import makeStyles from './styles';
 
 /**
@@ -106,7 +106,7 @@ export const LoginScreen: FC<AuthScreenProps<'login'>> = ({navigation}) => {
       <Icon
         icon="mindfireFireLogo"
         size={vs(129)}
-        containerStyle={styles.logoContainer}
+        style={styles.logoContainer}
         color={colors.primary}
       />
       <Text size="h1">{t('login.title')}</Text>
@@ -167,6 +167,8 @@ export const LoginScreen: FC<AuthScreenProps<'login'>> = ({navigation}) => {
     </>
   );
 
+  const Spacer = () => <View style={styles.spacer} />;
+
   /**
    * Render social signin options like with Google and Apple
    */
@@ -175,6 +177,8 @@ export const LoginScreen: FC<AuthScreenProps<'login'>> = ({navigation}) => {
       <Text>{t('login.signInWith')}</Text>
       <View style={styles.socialSignInButtons}>
         <GoogleSignIn />
+        <Spacer />
+        <AppleSignin />
       </View>
     </View>
   );

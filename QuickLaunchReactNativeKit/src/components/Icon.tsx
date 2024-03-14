@@ -10,13 +10,13 @@ import {
   ViewProps,
   ViewStyle,
 } from 'react-native';
-import { iconRegistry } from '../assets/icons';
-import { Colors } from '../theme';
-import { useTheme } from '@react-navigation/native';
+import {useTheme} from '@react-navigation/native';
+import {iconRegistry} from '../assets/icons';
+import {Colors} from '../theme';
 
 export type IconTypes = keyof typeof iconRegistry;
 
-interface IconProps extends TouchableOpacityProps {
+export interface IconProps extends TouchableOpacityProps {
   /**
    * The name of the icon
    */
@@ -35,7 +35,7 @@ interface IconProps extends TouchableOpacityProps {
   /**
    * Style overrides for the icon image
    */
-  style?: StyleProp<ImageStyle>;
+  imageStyle?: StyleProp<ImageStyle>;
 
   /**
    * Style overrides for the icon container
@@ -59,8 +59,8 @@ export function Icon(props: IconProps) {
     icon,
     color,
     size,
-    style: imageStyleOverride,
-    containerStyle: containerStyleOverride,
+    imageStyle: imageStyleOverride,
+    style: containerStyleOverride,
     ...WrapperProps
   } = props;
 
@@ -71,7 +71,7 @@ export function Icon(props: IconProps) {
     WrapperProps?.onPress ? TouchableOpacity : View
   ) as ComponentType<TouchableOpacityProps | ViewProps>;
 
-  const imageStyle: StyleProp<ImageStyle> = [
+  const imageStyle: IconProps['imageStyle'] = [
     styles.imageStyleBase,
     color !== undefined && {tintColor: color},
     size !== undefined && {width: size, height: size},
@@ -87,9 +87,9 @@ export function Icon(props: IconProps) {
     </Wrapper>
   );
 }
-const makeStyles = (colors:Colors) =>
-StyleSheet.create({
-  imageStyleBase: {
-    resizeMode: 'contain',
-    },
+const makeStyles = (colors: Colors) =>
+  StyleSheet.create({
+    imageStyleBase: {
+      resizeMode: 'contain',
+    } as ImageStyle,
   });
