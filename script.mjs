@@ -55,7 +55,7 @@ const colors = {
   backgroundDark: "#1E1E1E",
 
   // The color of various secondary backgrounds, such as background color for the screens.
-  backgroundSecondary: "#3C3C3C",
+  backgroundSecondary: "#E6E6E6",
   // Dark mode version of the secondary background color.
   backgroundSecondaryDark: "#3C3C3C",
 
@@ -85,7 +85,7 @@ const colors = {
   placeholderTextDark: "#808080",
 
   // The background color of card-like elements, such as headers, tab bars etc.
-  card: "#3C3C3C",
+  card: "#E6E6E6",
   // Dark mode version of the card background color.
   cardDark: "#3C3C3C",
 };

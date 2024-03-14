@@ -12,7 +12,7 @@ export const theme3: ThemeWithMode = {
     btnTextSecondary: colors.chineseSilver,
     border: colors.darkSilver,
     placeholderText: colors.gray,
-    card: colors.blackOlive,
+    card: colors.platinum,
   },
   dark: {
     primary: colors.violet,

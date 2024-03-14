@@ -134,7 +134,7 @@ const makeStyles = (colors: Colors) =>
       alignItems: 'center',
       justifyContent: 'center',
       backgroundColor: colors.primary,
-      marginBottom: vs(spacing.lg),
+      marginBottom: vs(spacing.md),
       flexDirection: 'row',
     } as ViewStyle,
     link: {
