@@ -59,7 +59,7 @@ export const BiometricAuth = (props: BiometricAuthProps) => {
       default:
         return undefined;
     }
-  }, [BiometryTypes]);
+  }, [biometryTypes]);
 
   /**
    * Function that is called when the component mounts.
