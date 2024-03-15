@@ -1,14 +1,19 @@
-import React, {FC, useEffect, useRef, useState} from 'react';
+import React, {FC, useRef, useState} from 'react';
 import {TextInput, View} from 'react-native';
 import {useTheme} from '@react-navigation/native';
 import {useTranslation} from 'react-i18next';
-import {BiometryTypes} from 'react-native-biometrics';
 import {Button, Icon, Screen, Text, TextField} from '../../components';
 import {AuthScreenProps} from '../../navigation/authNavigator';
 import {setGenericPasswordToKeychain, useValidation, vs} from '../../utils';
 import {login, useAppDispatch, useAppSelector} from '../../store';
 import {LoginReq} from '../../api';
 import {AppleSignin, BiometricAuth, GoogleSignIn} from './services';
+import {
+  EmailOutline,
+  EyeOffOutline,
+  EyeOutline,
+  LockOutline,
+} from '../../assets/svgs';
 import makeStyles from './styles';
 
 /**
@@ -115,7 +120,7 @@ export const LoginScreen: FC<AuthScreenProps<'login'>> = ({navigation}) => {
   const renderHeaders = () => (
     <View style={styles.headerWrapper}>
       <Icon
-        icon="mindfireFireLogo"
+        icon="logo"
         size={vs(129)}
         style={styles.logoContainer}
         color={colors.primary}
@@ -151,7 +156,7 @@ export const LoginScreen: FC<AuthScreenProps<'login'>> = ({navigation}) => {
       <TextField
         value={email}
         onChangeText={setEmail}
-        leftIcon={'people'}
+        leftIcon={<EmailOutline />}
         placeholder={t('login.userNamePlaceholder')}
         keyboardType="email-address"
         inputMode="email"
@@ -166,9 +171,9 @@ export const LoginScreen: FC<AuthScreenProps<'login'>> = ({navigation}) => {
         ref={passwordRef}
         value={password}
         onChangeText={setPassword}
-        leftIcon={'lock'}
+        leftIcon={<LockOutline />}
         secureTextEntry={!isVisible}
-        rightIcon={!isVisible ? 'view' : 'hidden'}
+        rightIcon={!isVisible ? <EyeOutline /> : <EyeOffOutline />}
         onPressRightIcon={onPressRightIcon}
         placeholder={t('login.passwordPlaceholder')}
         returnKeyType="done"

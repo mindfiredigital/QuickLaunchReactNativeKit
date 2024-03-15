@@ -192,6 +192,7 @@ const makeStyles = (colors: Colors) =>
       fontFamily: typography.medium,
       borderRadius: spacingUtils.xs,
       textAlign: 'center',
+      color: colors.text,
       marginBottom: spacingUtils.md,
     } as TextStyle,
   });

@@ -7,12 +7,14 @@ import {
   StyleProp,
   TextStyle,
   View,
+  TouchableOpacity,
 } from 'react-native';
 import {useTheme} from '@react-navigation/native';
 import {Text} from './Text';
 import {Colors} from '../theme';
 import {s, vs} from '../utils';
-import {Button, Icon, IconTypes} from '.';
+import {IconTypes} from '.';
+import {ChevronLeft} from '../assets/svgs';
 
 export interface HeaderProps extends TouchableOpacityProps {
   /**
@@ -43,6 +45,7 @@ export interface HeaderProps extends TouchableOpacityProps {
   /**
    * Additional header props for the header left button icon component
    */
+  showLeftBtn?: boolean;
   leftBtnIcon?: IconTypes;
 
   /**
@@ -52,30 +55,29 @@ export interface HeaderProps extends TouchableOpacityProps {
 }
 
 export const Header = (props: HeaderProps) => {
+  const {colors} = useTheme();
   const {
     headerText,
     onPressLeft,
     onPressRight,
     styleProps,
     headerTextStyleProps,
-    leftBtnIcon,
+    showLeftBtn,
+    leftBtnIcon = (
+      <ChevronLeft height={vs(50)} width={s(40)} fill={colors.tertiary} />
+    ),
     rightBtnIcon,
     ...restProps
   } = props;
-  const {colors} = useTheme();
   const styles = makeStyles(colors);
 
   return (
     <View style={[styles.container, styleProps]}>
       <View style={styles.leftView}>
-        {leftBtnIcon && (
-          <Button
-            preset="link"
-            btnIcon="back"
-            btnIconSize={vs(30)}
-            onPress={onPressLeft}
-            styleProps={styles.rightBtnView}
-          />
+        {showLeftBtn && (
+          <TouchableOpacity style={styles.leftBtnView} onPress={onPressLeft}>
+            {leftBtnIcon}
+          </TouchableOpacity>
         )}
       </View>
       {headerText && (
@@ -87,13 +89,9 @@ export const Header = (props: HeaderProps) => {
       )}
       <View style={styles.rightView}>
         {rightBtnIcon && (
-          <Button
-            preset="link"
-            btnIcon="back"
-            btnIconSize={vs(30)}
-            onPress={onPressRight}
-            styleProps={styles.rightBtnView}
-          />
+          <TouchableOpacity style={styles.rightBtnView} onPress={onPressRight}>
+            {rightBtnIcon}
+          </TouchableOpacity>
         )}
       </View>
     </View>
@@ -116,7 +114,11 @@ const makeStyles = (colors: Colors) =>
       width: s(100),
       alignItems: 'flex-end',
     } as ViewStyle,
+    leftBtnView: {
+      alignSelf: 'flex-start',
+    } as ViewStyle,
     rightBtnView: {
       paddingHorizontal: 0,
+      alignSelf: 'flex-end',
     } as ViewStyle,
   });

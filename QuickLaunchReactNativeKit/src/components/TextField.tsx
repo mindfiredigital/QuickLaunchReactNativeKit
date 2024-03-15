@@ -6,15 +6,15 @@ import {
   TextInput,
   TextInputProps,
   TextStyle,
+  TouchableOpacity,
   View,
   ViewStyle,
 } from 'react-native';
 import {useTheme} from '@react-navigation/native';
 import {Text, TextProps} from './Text';
-import {Colors, fontSize, lineHeight, spacing, typography} from '../theme';
+import {Colors, fontSize, spacing, typography} from '../theme';
 import {Icon, IconTypes} from './Icon';
 import {s, vs} from '../utils';
-
 export interface TextFieldProps extends Omit<TextInputProps, 'ref'> {
   /**
    * A style modifier for different input states.
@@ -64,12 +64,12 @@ export interface TextFieldProps extends Omit<TextInputProps, 'ref'> {
   /**
    * The type of icon to be displayed on the right side of the text input.
    */
-  rightIcon?: IconTypes;
+  rightIcon?: IconTypes | React.JSX.Element;
 
   /**
    * The type of icon to be displayed on the left side of the text input.
    */
-  leftIcon?: IconTypes;
+  leftIcon?: IconTypes | React.JSX.Element;
 
   /**
    * Determines whether the text input is editable or not.
@@ -119,8 +119,8 @@ export const TextField = forwardRef(function TextField(
     containerStyle: containerStyleOverride,
     outerWrapper: outerWrapperOverride,
     errorStyle: errorStyleOverride,
-    leftIconSize = vs(20),
-    rightIconSize = vs(20),
+    leftIconSize = vs(24),
+    rightIconSize = vs(24),
     error = '',
     ...textInputProps
   } = props;
@@ -135,13 +135,35 @@ export const TextField = forwardRef(function TextField(
     containerStyleOverride,
   ];
 
+  // const getIconComponent = (
+  //   icon: IconTypes | React.JSX.Element,
+  //   size: number,
+  //   color: string = colors.tertiary,
+  // ) => {
+  //   if (typeof icon === 'string') {
+  //     return <Icon size={size} icon={icon} color={color} />;
+  //   } else if (React.isValidElement(icon)) {
+  //     // Check if the icon is a valid React element
+  //     return React.cloneElement(
+  //       icon as React.ReactElement<React.SVGProps<SVGSVGElement>>,
+  //       {
+  //         fill: color,
+  //         height: size,
+  //         width: size,
+  //       },
+  //     );
+  //   } else {
+  //     return <></>;
+  //   }
+  // };
+
   return (
     <View style={[styles.outerWrapper, outerWrapperOverride]}>
       <View style={wrapperStyle}>
         {leftIcon && (
           <Icon
-            size={leftIconSize}
             icon={leftIcon}
+            size={leftIconSize}
             color={!!!error ? colors.tertiary : colors.danger}
           />
         )}
@@ -156,12 +178,13 @@ export const TextField = forwardRef(function TextField(
           {...textInputProps}
         />
         {rightIcon && (
-          <Icon
-            icon={rightIcon}
-            size={rightIconSize}
-            color={colors.tertiary}
-            onPress={onPressRightIcon}
-          />
+          <TouchableOpacity onPress={onPressRightIcon}>
+            <Icon
+              icon={rightIcon}
+              size={rightIconSize}
+              color={colors.tertiary}
+            />
+          </TouchableOpacity>
         )}
       </View>
       {!!error && (

@@ -8,6 +8,13 @@ import {showSuccessToast, useValidation, vs} from '../../utils';
 import {LoginRes, SignUpReq} from '../../api';
 import {signUp, useAppDispatch, useAppSelector} from '../../store';
 import makeStyles from './styles';
+import {
+  AccountOutline,
+  EmailOutline,
+  EyeOffOutline,
+  EyeOutline,
+  LockOutline,
+} from '../../assets/svgs';
 
 /**
  * A Screen to render a Sign-up screen.
@@ -130,7 +137,7 @@ export const SignUpScreen: FC<AuthScreenProps<'signUp'>> = ({navigation}) => {
   const renderHeaders = () => (
     <View style={styles.headerWrapper}>
       <Header
-        leftBtnIcon="back"
+        showLeftBtn
         styleProps={styles.headerStyle}
         onPressLeft={goBack}
       />
@@ -159,7 +166,7 @@ export const SignUpScreen: FC<AuthScreenProps<'signUp'>> = ({navigation}) => {
     <>
       <TextField
         onChangeText={setFullName}
-        leftIcon={'people'}
+        leftIcon={<AccountOutline />}
         placeholder={t('signUp.namePlaceholder')}
         keyboardType="name-phone-pad"
         inputMode="text"
@@ -172,7 +179,7 @@ export const SignUpScreen: FC<AuthScreenProps<'signUp'>> = ({navigation}) => {
       <TextField
         ref={emailRef}
         onChangeText={setEmail}
-        leftIcon={'email'}
+        leftIcon={<EmailOutline />}
         placeholder={t('signUp.emailPlaceholder')}
         keyboardType="email-address"
         inputMode="email"
@@ -186,9 +193,9 @@ export const SignUpScreen: FC<AuthScreenProps<'signUp'>> = ({navigation}) => {
       <TextField
         ref={passwordRef}
         onChangeText={setPassword}
-        leftIcon={'lock'}
+        leftIcon={<LockOutline />}
         secureTextEntry={!isVisiblePassword}
-        rightIcon={!isVisiblePassword ? 'view' : 'hidden'}
+        rightIcon={!isVisiblePassword ? <EyeOutline /> : <EyeOffOutline />}
         onPressRightIcon={onPressPasswordEye}
         placeholder={t('login.passwordPlaceholder')}
         textContentType="newPassword"
@@ -200,9 +207,11 @@ export const SignUpScreen: FC<AuthScreenProps<'signUp'>> = ({navigation}) => {
       <TextField
         ref={confirmPasswordRef}
         onChangeText={setConfirmPassword}
-        leftIcon={'lock'}
+        leftIcon={<LockOutline />}
         secureTextEntry={!isVisibleConfirmPassword}
-        rightIcon={!isVisibleConfirmPassword ? 'view' : 'hidden'}
+        rightIcon={
+          !isVisibleConfirmPassword ? <EyeOutline /> : <EyeOffOutline />
+        }
         onPressRightIcon={onPressConfirmPasswordEye}
         placeholder={t('signUp.confirmPassword')}
         textContentType="newPassword"

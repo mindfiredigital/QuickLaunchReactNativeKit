@@ -8,6 +8,7 @@ import {showSuccessToast, useValidation, vs} from '../../utils';
 import {passwordReset, useAppDispatch, useAppSelector} from '../../store';
 import {LoginRes, PasswordResetReq} from '../../api';
 import makeStyles from './styles';
+import {EyeOffOutline, EyeOutline, LockOutline} from '../../assets/svgs';
 
 /**
  * A Screen to render a Set new password screen.
@@ -110,7 +111,7 @@ export const SetNewPasswordScreen: FC<AuthScreenProps<'setNewPassword'>> = ({
   const renderHeaders = () => (
     <View style={styles.headerWrapper}>
       <Header
-        leftBtnIcon="back"
+        showLeftBtn
         onPressLeft={goBack}
         styleProps={styles.headerStyle}
       />
@@ -129,9 +130,9 @@ export const SetNewPasswordScreen: FC<AuthScreenProps<'setNewPassword'>> = ({
     <>
       <TextField
         onChangeText={setPassword}
-        leftIcon={'lock'}
+        leftIcon={<LockOutline />}
         secureTextEntry={!isVisiblePassword}
-        rightIcon={!isVisiblePassword ? 'view' : 'hidden'}
+        rightIcon={!isVisiblePassword ? <EyeOutline /> : <EyeOffOutline />}
         onPressRightIcon={onPressPasswordEye}
         placeholder={t('setNewPassoword.newPassword')}
         textContentType="newPassword"
@@ -143,9 +144,11 @@ export const SetNewPasswordScreen: FC<AuthScreenProps<'setNewPassword'>> = ({
       <TextField
         ref={confirmPasswordRef}
         onChangeText={setConfirmPassword}
-        leftIcon={'lock'}
+        leftIcon={<LockOutline />}
         secureTextEntry={!isVisibleConfirmPassword}
-        rightIcon={!isVisibleConfirmPassword ? 'view' : 'hidden'}
+        rightIcon={
+          !isVisibleConfirmPassword ? <EyeOutline /> : <EyeOffOutline />
+        }
         onPressRightIcon={onPressConfirmPasswordEye}
         placeholder={t('setNewPassoword.confirmNewPassword')}
         textContentType="newPassword"

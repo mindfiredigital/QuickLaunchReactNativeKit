@@ -1,5 +1,10 @@
 import React, {useEffect} from 'react';
-import {ImageStyle, StyleSheet, TouchableOpacityProps} from 'react-native';
+import {
+  ImageStyle,
+  StyleSheet,
+  TouchableOpacity,
+  TouchableOpacityProps,
+} from 'react-native';
 import Config from 'react-native-config';
 import {useTranslation} from 'react-i18next';
 import {useTheme} from '@react-navigation/native';
@@ -8,10 +13,10 @@ import {
   statusCodes,
 } from '@react-native-google-signin/google-signin';
 import {showErrorToast, showSuccessToast, vs} from '../../../utils';
-import {Icon, IconTypes} from '../../../components';
 import {Colors, spacing} from '../../../theme';
 import {socialSignUp, useAppDispatch} from '../../../store';
 import {LoginRes} from '../../../api';
+import {GoogleDark, GoogleLight} from '../../../assets/svgs';
 
 interface GoogleSignInProps extends TouchableOpacityProps {
   /**
@@ -19,11 +24,6 @@ interface GoogleSignInProps extends TouchableOpacityProps {
    * @default 48
    */
   size?: number;
-  /**
-   * icon - The icon type for the Google sign-in button.
-   * @default - 'googleLight'|'googleDark'
-   */
-  icon?: IconTypes;
 }
 
 /**
@@ -33,11 +33,7 @@ interface GoogleSignInProps extends TouchableOpacityProps {
 export const GoogleSignIn = (props: GoogleSignInProps) => {
   const {dark, colors} = useTheme();
   // props
-  const {
-    size = vs(48),
-    icon = dark ? 'googleDark' : 'googleLight',
-    ...rest
-  } = props;
+  const {size = vs(48), ...rest} = props;
 
   // hooks
   const {t} = useTranslation();
@@ -100,14 +96,13 @@ export const GoogleSignIn = (props: GoogleSignInProps) => {
   };
 
   return (
-    // @ts-ignore
-    <Icon
-      size={size}
-      onPress={signIn}
-      imageStyle={styles.buttonIcon}
-      icon={icon}
-      {...rest}
-    />
+    <TouchableOpacity onPress={signIn} style={styles.buttonIcon} {...rest}>
+      {dark ? (
+        <GoogleDark height={size} width={size} />
+      ) : (
+        <GoogleLight height={size} width={size} />
+      )}
+    </TouchableOpacity>
   );
 };
 
@@ -121,5 +116,6 @@ const makeStyles = (colors: Colors) =>
       borderWidth: 1,
       borderColor: colors.border,
       borderRadius: vs(spacing.xs),
+      overflow: 'hidden',
     } as ImageStyle,
   });

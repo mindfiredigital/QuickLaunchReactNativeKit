@@ -8,6 +8,7 @@ import {showSuccessToast, useValidation, vs} from '../../utils';
 import {ForgotPasswordReq, LoginRes} from '../../api';
 import {forgotPassword, useAppDispatch, useAppSelector} from '../../store';
 import makeStyles from './styles';
+import {EmailOutline} from '../../assets/svgs';
 
 /**
  * A Screen to render a Forgot password screen.
@@ -74,7 +75,7 @@ export const ForgotPasswordScreen: FC<AuthScreenProps<'forgotPassword'>> = ({
   const renderHeaders = () => (
     <View style={styles.headerWrapper}>
       <Header
-        leftBtnIcon="back"
+        showLeftBtn
         onPressLeft={goBack}
         styleProps={styles.headerStyle}
       />
@@ -92,7 +93,7 @@ export const ForgotPasswordScreen: FC<AuthScreenProps<'forgotPassword'>> = ({
   const renderTextInputs = () => (
     <>
       <TextField
-        leftIcon={'email'}
+        leftIcon={<EmailOutline />}
         onChangeText={setEmail}
         value={email}
         placeholder={t('signUp.emailPlaceholder')}
@@ -101,6 +102,7 @@ export const ForgotPasswordScreen: FC<AuthScreenProps<'forgotPassword'>> = ({
         returnKeyType="done"
         textContentType="emailAddress"
         leftIconSize={vs(25)}
+        autoCapitalize="none"
         error={getErrorsInField('email')}
       />
     </>

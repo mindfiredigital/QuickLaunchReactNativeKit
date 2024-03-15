@@ -1,11 +1,18 @@
 import React, {useEffect, useMemo, useState} from 'react';
-import {StyleSheet, ViewStyle, TextStyle, TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  ViewStyle,
+  TextStyle,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {useTranslation} from 'react-i18next';
 import {useTheme} from '@react-navigation/native';
 import ReactNativeBiometrics, {BiometryTypes} from 'react-native-biometrics';
 import {getGenericPasswordFromKeychain, vs} from '../../../utils';
 import {Colors, spacing} from '../../../theme';
-import {Icon, IconTypes, Text} from '../../../components';
+import {Text} from '../../../components';
+import {FaceRecognition, Fingerprint} from '../../../assets/svgs';
 
 const rnBiometrics = new ReactNativeBiometrics({allowDeviceCredentials: true});
 
@@ -19,7 +26,7 @@ export const BiometricAuth = (props: BiometricAuthProps) => {
   const {t} = useTranslation();
   const [biometryTypes, setBiometryTypes] = useState<string>('');
   const [userCredentials, setUserCredentials] = useState<any>('');
-  const {colors} = useTheme();
+  const {colors, dark} = useTheme();
   // Styles with theme support
   const styles = makeStyles(colors);
 
@@ -33,6 +40,14 @@ export const BiometricAuth = (props: BiometricAuthProps) => {
     onMount();
   }, []);
 
+  // Icons with custom props
+  const FingerprintIcon = () => (
+    <Fingerprint height={vs(40)} width={vs(40)} fill={colors.tertiary} />
+  );
+  const FaceRecognitionIcon = () => (
+    <FaceRecognition height={vs(40)} width={vs(40)} fill={colors.tertiary} />
+  );
+
   /**
    * Returns the appropriate icon, text and description for biometric authentication based on the available biometric types.
    */
@@ -40,26 +55,26 @@ export const BiometricAuth = (props: BiometricAuthProps) => {
     switch (biometryTypes) {
       case BiometryTypes.TouchID:
         return {
-          icon: 'fingerprint' as IconTypes,
+          icon: <FingerprintIcon />,
           text: t('login.signinWithTouchId'),
           desc: t('login.signinWithTouchIdDis'),
         };
       case BiometryTypes.FaceID:
         return {
-          icon: 'faceRecognition' as IconTypes,
+          icon: <FaceRecognitionIcon />,
           text: t('login.signinWithFaceId'),
           desc: t('login.signinWithFaceIdDis'),
         };
       case BiometryTypes.Biometrics:
         return {
-          icon: 'fingerprint' as IconTypes,
+          icon: <FingerprintIcon />,
           text: t('login.signinWithTouchId'),
           desc: t('login.signinWithTouchIdDis'),
         };
       default:
         return undefined;
     }
-  }, [biometryTypes]);
+  }, [biometryTypes, dark]);
 
   /**
    * Function that is called when the component mounts.
@@ -142,18 +157,13 @@ export const BiometricAuth = (props: BiometricAuthProps) => {
     }
   };
 
-  if (biometricData && !!userCredentials)
+  if (biometricData && !!userCredentials) {
     return (
       <TouchableOpacity
         activeOpacity={0.6}
         onPress={() => onBiometrics(biometricData.text)}
         style={styles.biometricView}>
-        <Icon
-          icon={biometricData.icon}
-          size={vs(40)}
-          style={styles.biometricIcon}
-          color={colors.tertiary}
-        />
+        <View style={styles.biometricIcon}>{biometricData.icon}</View>
         <Text>{biometricData.text}</Text>
         <Text
           size="body1"
@@ -164,6 +174,9 @@ export const BiometricAuth = (props: BiometricAuthProps) => {
         </Text>
       </TouchableOpacity>
     );
+  } else {
+    return <></>;
+  }
 };
 /**
  * Function to create styles for the GoogleSignIn component.
