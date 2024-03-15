@@ -3,6 +3,7 @@ import {
   ImageStyle,
   Platform,
   StyleSheet,
+  TouchableOpacity,
   TouchableOpacityProps,
 } from 'react-native';
 import {useTranslation} from 'react-i18next';
@@ -16,6 +17,7 @@ import {Icon, IconTypes} from '../../../components';
 import {Colors, spacing} from '../../../theme';
 import {socialLogIn, socialSignUp, useAppDispatch} from '../../../store';
 import {LoginRes} from '../../../api';
+import {AppleDark, AppleLight} from '../../../assets/svgs';
 
 interface GoogleSignInProps extends TouchableOpacityProps {
   /**
@@ -23,11 +25,6 @@ interface GoogleSignInProps extends TouchableOpacityProps {
    * @default 48
    */
   size?: number;
-  /**
-   * icon - The icon type for the Google sign-in button.
-   * @default - 'googleLight'|'googleDark'
-   */
-  icon?: IconTypes;
 }
 
 interface AuthParams {
@@ -43,11 +40,7 @@ interface AuthParams {
 export const AppleSignin = (props: GoogleSignInProps) => {
   const {dark, colors} = useTheme();
   // props
-  const {
-    size = vs(48),
-    icon = dark ? 'appleDark' : 'appleLight',
-    ...rest
-  } = props;
+  const {size = vs(48), ...rest} = props;
 
   // hooks
   const {t} = useTranslation();
@@ -230,14 +223,16 @@ export const AppleSignin = (props: GoogleSignInProps) => {
     (Platform.OS === 'android' && appleAuthAndroid.isSupported)
   ) {
     return (
-      <Icon
-        size={size}
-        onPress={signIn}
-        imageStyle={styles.buttonIcon}
-        icon={icon}
-        {...rest}
-      />
+      <TouchableOpacity onPress={signIn} style={styles.buttonIcon} {...rest}>
+        {dark ? (
+          <AppleDark height={size} width={size} />
+        ) : (
+          <AppleLight height={size} width={size} />
+        )}
+      </TouchableOpacity>
     );
+  } else {
+    return <></>;
   }
 };
 
@@ -251,5 +246,6 @@ const makeStyles = (colors: Colors) =>
       borderWidth: 1,
       borderColor: colors.border,
       borderRadius: vs(spacing.xs),
+      overflow: 'hidden',
     } as ImageStyle,
   });

@@ -114,7 +114,7 @@ export const VerifyOTPScreen: FC<AuthScreenProps<'verifyOTP'>> = ({
   const renderHeaders = () => (
     <View style={styles.headerWrapper}>
       <Header
-        leftBtnIcon="back"
+        showLeftBtn
         onPressLeft={goBack}
         styleProps={styles.headerStyle}
       />

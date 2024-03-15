@@ -20,7 +20,7 @@ export interface IconProps extends TouchableOpacityProps {
   /**
    * The name of the icon
    */
-  icon: IconTypes;
+  icon: IconTypes | React.JSX.Element;
 
   /**
    * An optional tint color for the icon
@@ -36,6 +36,11 @@ export interface IconProps extends TouchableOpacityProps {
    * Style overrides for the icon image
    */
   imageStyle?: StyleProp<ImageStyle>;
+
+  /**
+   * Style overrides for the icon image
+   */
+  svgStyle?: React.SVGProps<SVGSVGElement>;
 
   /**
    * Style overrides for the icon container
@@ -60,6 +65,7 @@ export function Icon(props: IconProps) {
     color,
     size,
     imageStyle: imageStyleOverride,
+    svgStyle: svgStyleOverride,
     style: containerStyleOverride,
     ...WrapperProps
   } = props;
@@ -67,9 +73,9 @@ export function Icon(props: IconProps) {
   const {colors} = useTheme();
   const styles = makeStyles(colors);
   const isPressable = !!WrapperProps.onPress;
-  const Wrapper = (
-    WrapperProps?.onPress ? TouchableOpacity : View
-  ) as ComponentType<TouchableOpacityProps | ViewProps>;
+  const Wrapper = (isPressable ? TouchableOpacity : View) as ComponentType<
+    TouchableOpacityProps | ViewProps
+  >;
 
   const imageStyle: IconProps['imageStyle'] = [
     styles.imageStyleBase,
@@ -78,12 +84,29 @@ export function Icon(props: IconProps) {
     imageStyleOverride,
   ];
 
+  const svgStyle: React.SVGProps<SVGSVGElement> = {
+    ...(color !== undefined && {fill: color}),
+    ...(size !== undefined && {width: size, height: size}),
+    ...svgStyleOverride,
+  };
+
+  const getIconComponent = (icon: IconTypes | React.JSX.Element) => {
+    if (typeof icon === 'string') {
+      return <Image style={imageStyle} source={iconRegistry[icon]} />;
+    } else if (React.isValidElement(icon)) {
+      // Check if the icon is a valid React element
+      return React.cloneElement(
+        icon as React.ReactElement<React.SVGProps<SVGSVGElement>>,
+        svgStyle,
+      );
+    } else {
+      return <></>;
+    }
+  };
+
   return (
-    <Wrapper
-      accessibilityRole={isPressable ? 'imagebutton' : undefined}
-      {...WrapperProps}
-      style={containerStyleOverride}>
-      <Image style={imageStyle} source={iconRegistry[icon]} />
+    <Wrapper {...WrapperProps} style={containerStyleOverride}>
+      {getIconComponent(icon)}
     </Wrapper>
   );
 }
