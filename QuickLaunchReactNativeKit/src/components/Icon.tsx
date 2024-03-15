@@ -40,7 +40,7 @@ export interface IconProps extends TouchableOpacityProps {
   /**
    * Style overrides for the icon container
    */
-  containerStyle?: StyleProp<ViewStyle>;
+  style?: StyleProp<ViewStyle>;
 
   /**
    * An optional function to be called when the icon is pressed

@@ -83,25 +83,29 @@ export const LoginScreen: FC<AuthScreenProps<'login'>> = ({navigation}) => {
    */
   const focusPassword = () => passwordRef.current?.focus();
 
-  //login user using credencials
+  /**
+   * login user using credentials
+   */
   const loginUser = (username: string, password: string) => {
     const reqBody: LoginReq = {
       email: username,
       password: password,
     };
-    dispatch(login(reqBody));
+    return dispatch(login(reqBody));
   };
 
   /**
    * Validate text input than login the user
    */
-  const onLogin = async () => {
+  const onPressLogin = async () => {
     setIsTouched(true);
     const isValid = validateForm();
     if (isValid) {
-      //login user
-      await setGenericPasswordToKeychain(email, password);
-      loginUser(email, password);
+      const {meta} = await loginUser(email, password);
+      if (meta.requestStatus === 'fulfilled') {
+        // If response success store email and password in keychain
+        setGenericPasswordToKeychain(email, password);
+      }
     }
   };
 
@@ -134,9 +138,8 @@ export const LoginScreen: FC<AuthScreenProps<'login'>> = ({navigation}) => {
       <Button
         btnText={t('login.title')}
         disabled={!isFormValid()}
-        onPress={onLogin}
+        onPress={onPressLogin}
       />
-      {/* <Button btnText={'Face id'} onPress={onBiometrics} /> */}
     </>
   );
 
@@ -215,7 +218,7 @@ export const LoginScreen: FC<AuthScreenProps<'login'>> = ({navigation}) => {
       {renderTextInputs()}
       {renderButtons()}
       {renderSocialSignIn()}
-      <BiometricAuth />
+      <BiometricAuth onBiometricsSuccess={loginUser} />
     </Screen>
   );
 };

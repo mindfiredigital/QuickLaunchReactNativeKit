@@ -36,8 +36,8 @@ const en = {
     signinWithTouchId: 'Sign-in with Touch ID',
     signinWithFaceId: 'Sign-in with Face ID',
     signWithBiometrics: 'Sign-in with Biometrics',
-    signinWithTouchIdDis: 'Look directly at the front camera to use face ID',
-    signinWithFaceIdDis:
+    signinWithFaceIdDis: 'Look directly at the front camera to use face ID',
+    signinWithTouchIdDis:
       'Place your finger on the Touch ID sensor to authenticate.',
     signWithBiometricsDis:
       'Place your finger on the Touch ID sensor to authenticate.',
