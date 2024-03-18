@@ -12,3 +12,5 @@ export {default as FaceRecognition} from './FaceRecognition';
 export {default as Fingerprint} from './Fingerprint';
 export {default as AccountSettings} from './AccountSettings';
 export {default as OtherSettings} from './OtherSettings';
+export {default as Home} from './Home';
+export {default as Settings} from './Settings';

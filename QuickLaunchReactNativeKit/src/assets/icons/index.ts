@@ -1,3 +1,3 @@
 export const iconRegistry = {
-  logo: require('./mindfireFireLogo.png'),
+  logo: require('./appLogo.png'),
 };
