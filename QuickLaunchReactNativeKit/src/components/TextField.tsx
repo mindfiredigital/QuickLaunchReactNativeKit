@@ -135,28 +135,6 @@ export const TextField = forwardRef(function TextField(
     containerStyleOverride,
   ];
 
-  // const getIconComponent = (
-  //   icon: IconTypes | React.JSX.Element,
-  //   size: number,
-  //   color: string = colors.tertiary,
-  // ) => {
-  //   if (typeof icon === 'string') {
-  //     return <Icon size={size} icon={icon} color={color} />;
-  //   } else if (React.isValidElement(icon)) {
-  //     // Check if the icon is a valid React element
-  //     return React.cloneElement(
-  //       icon as React.ReactElement<React.SVGProps<SVGSVGElement>>,
-  //       {
-  //         fill: color,
-  //         height: size,
-  //         width: size,
-  //       },
-  //     );
-  //   } else {
-  //     return <></>;
-  //   }
-  // };
-
   return (
     <View style={[styles.outerWrapper, outerWrapperOverride]}>
       <View style={wrapperStyle}>
