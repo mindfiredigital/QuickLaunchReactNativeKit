@@ -68,6 +68,17 @@ const en = {
     newPassword: 'New Password',
     confirmNewPassword: 'Confirm New Password',
   },
+  settings: {
+    title: 'Settings',
+    account: 'Account',
+    other: 'Other',
+    editProfile: 'Edit Profile',
+    changePassword: 'Change Password',
+    privacy: 'Privacy',
+    logout: 'Logout',
+    help: 'Help',
+    aboutUs: 'About us',
+  },
   comman: {
     back: 'Back',
   },

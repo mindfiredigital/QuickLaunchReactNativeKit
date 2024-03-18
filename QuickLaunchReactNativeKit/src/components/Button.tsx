@@ -59,6 +59,10 @@ export interface ButtonProps extends TouchableOpacityProps {
    * The size of the icon.
    */
   btnIconSize?: number;
+  /**
+   * Text size modifier.
+   */
+  size?: Size;
 }
 
 type Preset = Exclude<ButtonProps['preset'], undefined>;
@@ -79,6 +83,7 @@ export const Button = (props: ButtonProps) => {
     restTextProps,
     btnIcon,
     btnIconSize = vs(30),
+    size,
     ...restProps
   } = props;
   const {colors} = useTheme();
@@ -116,7 +121,7 @@ export const Button = (props: ButtonProps) => {
         <Icon icon={btnIcon} size={btnIconSize} color={colors.primary} />
       )}
       <Text
-        size={textSize[preset]}
+        size={size || textSize[preset]}
         style={[presets[preset].btnTextStyle, textStyleProps]}
         {...restTextProps}>
         {btnText}
