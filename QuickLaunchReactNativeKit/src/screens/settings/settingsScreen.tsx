@@ -63,7 +63,7 @@ export const SettingsScreen: FC<PrimaryScreenProps<'settings'>> = ({
   const accountSetting = () => (
     <>
       {/* Account settings sub-heading */}
-      {<SubHeading svg={<AccountSettings />} text={t('settings.account')} />}
+      <SubHeading svg={<AccountSettings />} text={t('settings.account')} />
       {/* Edit profile button */}
       <Button
         preset="link"
@@ -116,7 +116,7 @@ export const SettingsScreen: FC<PrimaryScreenProps<'settings'>> = ({
   const otherSettings = () => (
     <>
       {/* Other settings sub-heading */}
-      {<SubHeading svg={<OtherSettings />} text={t('settings.other')} />}
+      <SubHeading svg={<OtherSettings />} text={t('settings.other')} />
       {/* Help button */}
       <Button
         preset="link"
