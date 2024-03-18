@@ -8,6 +8,8 @@ import {useAppDispatch} from '../../store';
 import {resetState} from '../../store/reducers';
 import {PrimaryScreenProps} from '../../navigation/primaryNavigator';
 import {AccountSettings, OtherSettings} from '../../assets/svgs';
+import {settings} from '../../../settings';
+import {ExtendedEdge} from '../../utils/useSafeAreaInsetsStyle';
 import {vs} from '../../utils';
 import makeStyles from './styles';
 
@@ -40,6 +42,10 @@ export const SettingsScreen: FC<PrimaryScreenProps<'settings'>> = ({
   const {colors} = useTheme();
   const {t} = useTranslation();
   const dispatch = useAppDispatch();
+  const safeAreaEdges: ExtendedEdge[] =
+    settings.primaryNavigationType == 'drawer'
+      ? ['bottom', 'left', 'right']
+      : ['top', 'left', 'right'];
 
   // Styles
   const styles = makeStyles(colors);
@@ -144,7 +150,7 @@ export const SettingsScreen: FC<PrimaryScreenProps<'settings'>> = ({
 
   return (
     <Screen
-      safeAreaEdges={['top', 'left', 'right']}
+      safeAreaEdges={safeAreaEdges}
       preset="auto"
       contentContainerStyle={styles.container}>
       <Text style={styles.headerText} size="h1">
