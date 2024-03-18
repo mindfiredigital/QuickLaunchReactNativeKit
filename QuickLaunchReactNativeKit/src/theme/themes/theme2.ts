@@ -7,7 +7,7 @@ export const theme2: ThemeWithMode = {
     text: colors.darkCharcole,
     background: colors.white,
     backgroundSecondary: colors.platinum,
-    tertiary: colors.black,
+    tertiary: colors.spanishGray,
     btnTextPrimary: colors.white,
     btnTextSecondary: colors.chineseSilver,
     border: colors.darkSilver,

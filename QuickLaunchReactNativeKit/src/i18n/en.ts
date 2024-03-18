@@ -79,6 +79,9 @@ const en = {
     help: 'Help',
     aboutUs: 'About us',
   },
+  home: {
+    title: 'Home',
+  },
   comman: {
     back: 'Back',
   },

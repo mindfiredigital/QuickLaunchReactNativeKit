@@ -9,6 +9,7 @@ import TabNavigator from './tabNavigator';
 import DrawerNavigator from './drawerNavigator';
 import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
 import {CompositeScreenProps} from '@react-navigation/native';
+import {settings} from '../../settings';
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -30,8 +31,7 @@ export type PrimaryScreenProps<T extends keyof PrimaryParamList> =
   >;
 
 const PrimaryNavigator = () => {
-  const showDrawer = false;
-  if (showDrawer) {
+  if (settings.primaryNavigationType == 'drawer') {
     return <DrawerNavigator />;
   } else {
     return <TabNavigator />;
