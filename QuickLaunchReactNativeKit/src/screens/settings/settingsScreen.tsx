@@ -17,7 +17,7 @@ import makeStyles from './styles';
  * @param text The text for the sub-heading.
  * @returns A React component representing the sub-heading.
  */
-const subHeading = (svg: React.JSX.Element, text: string) => {
+const SubHeading = ({svg, text}: {svg: React.JSX.Element; text: string}) => {
   // constants & hooks
   const {colors} = useTheme();
 
@@ -63,7 +63,7 @@ export const SettingsScreen: FC<PrimaryScreenProps<'settings'>> = ({
   const accountSetting = () => (
     <>
       {/* Account settings sub-heading */}
-      {subHeading(<AccountSettings />, t('settings.account'))}
+      {<SubHeading svg={<AccountSettings />} text={t('settings.account')} />}
       {/* Edit profile button */}
       <Button
         preset="link"
@@ -116,7 +116,7 @@ export const SettingsScreen: FC<PrimaryScreenProps<'settings'>> = ({
   const otherSettings = () => (
     <>
       {/* Other settings sub-heading */}
-      {subHeading(<OtherSettings />, t('settings.other'))}
+      {<SubHeading svg={<OtherSettings />} text={t('settings.other')} />}
       {/* Help button */}
       <Button
         preset="link"
