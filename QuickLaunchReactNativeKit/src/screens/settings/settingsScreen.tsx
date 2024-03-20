@@ -77,6 +77,7 @@ export const SettingsScreen: FC<PrimaryScreenProps<'settings'>> = ({
         btnText={t('settings.changePassword')}
         onPress={() => {
           //TODO: Handle change password action
+          navigation.navigate('changePassword');
         }}
       />
       {/* Privacy button */}

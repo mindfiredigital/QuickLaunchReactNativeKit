@@ -68,6 +68,12 @@ const en = {
     newPassword: 'New Password',
     confirmNewPassword: 'Confirm New Password',
   },
+  changePassword: {
+    title: 'Change Password',
+    description:
+      'Please enter your new password below. You can refer to the hint while setting it.',
+    currentPassword: 'Current Password',
+  },
   settings: {
     title: 'Settings',
     account: 'Account',

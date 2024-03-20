@@ -12,7 +12,7 @@ import {
   NativeStackScreenProps,
   createNativeStackNavigator,
 } from '@react-navigation/native-stack';
-import {EditProfileScreen} from '../screens';
+import {ChangePassword, EditProfileScreen} from '../screens';
 import {useTranslation} from 'react-i18next';
 
 /**
@@ -23,6 +23,7 @@ export type PrimaryParamList = {
   homeNav: undefined;
   settings: undefined;
   editProfile: undefined;
+  changePassword: undefined;
 };
 
 /**
@@ -55,6 +56,16 @@ const PrimaryNavigator = () => {
             component={EditProfileScreen}
             options={{
               title: t('settings.editProfile'),
+              headerShown: true,
+              headerBackTitleVisible: false,
+              headerBackTitle: t('settings.title'),
+            }}
+          />
+          <PrimaryStack.Screen
+            name={'changePassword'}
+            component={ChangePassword}
+            options={{
+              title: t('settings.changePassword'),
               headerShown: true,
               headerBackTitleVisible: false,
               headerBackTitle: t('settings.title'),
