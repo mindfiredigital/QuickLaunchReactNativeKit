@@ -14,3 +14,5 @@ export {default as AccountSettings} from './AccountSettings';
 export {default as OtherSettings} from './OtherSettings';
 export {default as Home} from './Home';
 export {default as Settings} from './Settings';
+export {default as PhoneOutline} from './PhoneOutline';
+export {default as EditImage} from './EditImage';

@@ -85,6 +85,20 @@ const en = {
   comman: {
     back: 'Back',
   },
+  editProfile: {
+    title: 'Profile',
+    mobileNumPlaceholder: 'Mobile Number',
+    save: 'Save',
+    imageUploadTitle: 'Upload Profile',
+    imageUploadSubTitle: 'Choose the Options to Upload',
+  },
+  imageUpload: {
+    takePhoto: 'Take Photo',
+    chooseFrom: 'Choose From Library',
+    cancel: 'Cancel',
+    openSetting: 'Open setting',
+    ok: 'Ok',
+  },
 };
 
 export default en;

@@ -66,3 +66,35 @@ export interface SocialSignUpReq {
 export interface SocialLogInReq {
   token: string;
 }
+
+export interface GetUserRes {
+  status: string;
+  message: string;
+  data: UserProfile | null;
+  error: string;
+}
+
+export interface UserProfile {
+  email: string;
+  full_name: string;
+  phone_number: string;
+  profileSignedUrl: string;
+}
+
+export interface UpdateUserReq {
+  email: string;
+  full_name: string;
+  phone_no: string;
+  is_update: string;
+}
+export interface UploadProfileImageReq {
+  uri: string;
+  name: string | undefined;
+  type: string;
+}
+export interface UploadProfileImageRes {
+  status: string;
+  message: string;
+  data: {profileSignedUrl: string};
+  error: string;
+}

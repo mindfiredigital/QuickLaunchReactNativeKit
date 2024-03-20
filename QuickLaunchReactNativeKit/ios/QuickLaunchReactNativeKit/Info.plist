@@ -24,6 +24,10 @@
 	<string>Face ID Required for authentication</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Touch ID Required for authentication</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Our app uses the camera to capture photos for updating your profile.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Allow photo access to add photos to your profile.</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
