@@ -10,7 +10,7 @@ import {
 } from '@react-navigation/drawer';
 import {useTheme} from '@react-navigation/native';
 import {useTranslation} from 'react-i18next';
-import {EditProfileScreen, HomeScreen} from '../screens';
+import {ChangePassword, EditProfileScreen, HomeScreen} from '../screens';
 import {Colors, fontSize, lineHeight, spacing, typography} from '../theme';
 import {Icon, IconTypes, Text} from '../components';
 import {
@@ -19,6 +19,7 @@ import {
   HelpCircle,
   Home,
   Information,
+  Lock,
   Logout,
   ShieldCheck,
 } from '../assets/svgs';
@@ -32,6 +33,7 @@ import {useAppSelector} from '../store';
 export type DrawerParamsList = {
   home: undefined;
   editProfile: undefined;
+  changePassword: undefined;
 };
 
 const Drawer = createDrawerNavigator<DrawerParamsList>();
@@ -168,6 +170,14 @@ const DrawerNavigator = () => {
         options={generateScreenOptions({
           title: t('settings.editProfile'),
           icon: <AccountSettings />,
+        })}
+      />
+      <Drawer.Screen
+        name={'changePassword'}
+        component={ChangePassword}
+        options={generateScreenOptions({
+          title: t('settings.changePassword'),
+          icon: <Lock />,
         })}
       />
     </Drawer.Navigator>
