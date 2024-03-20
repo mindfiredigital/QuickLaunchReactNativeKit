@@ -1,5 +1,5 @@
 import {StyleSheet, TextStyle, ViewStyle} from 'react-native';
-import {Colors, spacing} from '../../theme';
+import {Colors, spacing, typography} from '../../theme';
 import {s, vs} from '../../utils';
 
 const makeStyles = (colors: Colors) =>
@@ -12,19 +12,20 @@ const makeStyles = (colors: Colors) =>
     } as ViewStyle,
     subHeading: {
       flexDirection: 'row',
-      alignItems: 'flex-end',
       marginTop: vs(spacing.xl),
-      marginBottom: vs(spacing.md),
     },
     subHeadingText: {
       marginLeft: s(spacing.sm),
-      marginBottom: vs(spacing.xxs),
     } as TextStyle,
     btnTextStyle: {
       color: colors.btnTextSecondary,
+      fontFamily: typography.medium,
       marginHorizontal: 0,
     } as TextStyle,
-    btnStyle: {paddingHorizontal: 0, marginTop: vs(spacing.md)} as ViewStyle,
+    btnStyle: {
+      paddingHorizontal: 0,
+      marginTop: vs(spacing.md),
+    } as ViewStyle,
   });
 
 export default makeStyles;

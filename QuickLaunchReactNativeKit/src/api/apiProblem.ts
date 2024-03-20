@@ -1,7 +1,5 @@
 import i18n from '../i18n/i18n';
-import {store} from '../store';
-import {resetState} from '../store/reducers';
-import {showErrorToast} from '../utils';
+import {logoutUser, showErrorToast} from '../utils';
 
 /**
  * Attempts to get a common cause of problems from an API response.
@@ -47,7 +45,7 @@ const handleResponseError = (response: any) => {
   switch (status) {
     // Handle Unauthorized Access (e.g., redirect to login)
     case 401:
-      handleUnauthorizedAccess();
+      logoutUser();
       showErrorToast({message: i18n.t('apiErrors.unauthorizedAccess')});
       return {
         ...data,
@@ -95,11 +93,4 @@ const handleResponseError = (response: any) => {
         message: i18n.t('apiErrors.unexpectedError'),
       };
   }
-};
-
-/**
- * Handles unauthorized access by dispatching a state reset.
- */
-const handleUnauthorizedAccess = () => {
-  store.dispatch(resetState());
 };

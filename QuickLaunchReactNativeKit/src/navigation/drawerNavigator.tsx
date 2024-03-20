@@ -1,24 +1,127 @@
 import React from 'react';
-import {Dimensions, StyleSheet} from 'react-native';
-import {useTheme} from '@react-navigation/native';
+import {Dimensions, Image, StyleSheet, TextStyle, View} from 'react-native';
 import {
+  DrawerContentComponentProps,
+  DrawerContentScrollView,
+  DrawerItem,
+  DrawerItemList,
   DrawerNavigationOptions,
   createDrawerNavigator,
 } from '@react-navigation/drawer';
+import {useTheme} from '@react-navigation/native';
 import {useTranslation} from 'react-i18next';
-import {HomeScreen, SettingsScreen} from '../screens';
-import {PrimaryParamList} from './primaryNavigator';
-import {Colors} from '../theme';
-import {Icon, IconTypes} from '../components';
-import {Home, Settings} from '../assets/svgs';
-import {vs} from '../utils';
-
-const Drawer = createDrawerNavigator<PrimaryParamList>();
+import {EditProfileScreen, HomeScreen} from '../screens';
+import {Colors, fontSize, lineHeight, spacing, typography} from '../theme';
+import {Icon, IconTypes, Text} from '../components';
+import {
+  AccountSettings,
+  Delete,
+  HelpCircle,
+  Home,
+  Information,
+  Logout,
+  ShieldCheck,
+} from '../assets/svgs';
+import {logoutUser, s, vs} from '../utils';
+import {useAppSelector} from '../store';
 
 /**
- * The drawer navigator is used for the "main"
- * navigation flow with side Drawer
- * which the user will use once logged in.
+ * This type allows TypeScript to know what routes are defined in this navigator
+ * as well as what properties (if any) they might take when navigating to them.
+ */
+export type DrawerParamsList = {
+  home: undefined;
+  editProfile: undefined;
+};
+
+const Drawer = createDrawerNavigator<DrawerParamsList>();
+
+/**
+ * Renders the drawer button icon.
+ *
+ * @param icon - JSX.Element | IconTypes: Icon element or icon type.
+ * @param color - string: Color of the icon.
+ */
+const RenderDrawerIcon = ({
+  icon,
+  color,
+}: {
+  icon: JSX.Element | IconTypes;
+  color: string;
+}) => <Icon icon={icon} size={vs(24)} color={color} />;
+
+/**
+ * Custom drawer content component.
+ * Renders the contents of the drawer navigation.
+ */
+const CustomDrawerContent = (props: DrawerContentComponentProps) => {
+  // Constants & hooks
+  const {colors} = useTheme();
+  const {t} = useTranslation();
+  const {user} = useAppSelector(state => state.auth);
+  const styles = makeStyles(colors);
+
+  const renderProfileView = () => (
+    <View style={styles.profileContainer}>
+      <View style={styles.profileImageContainer}>
+        <Image
+          source={{uri: user.profileSignedUrl}}
+          style={styles.profileImage}
+        />
+      </View>
+      <Text size="h3">{user.full_name}</Text>
+      <Text>{user.email}</Text>
+    </View>
+  );
+
+  return (
+    <View style={styles.container}>
+      <DrawerContentScrollView style={styles.scrollView} {...props}>
+        {renderProfileView()}
+        <DrawerItemList {...props} />
+        <DrawerItem
+          label={t('settings.privacy')}
+          icon={({color}) => (
+            <RenderDrawerIcon icon={<ShieldCheck />} color={color} />
+          )}
+          onPress={() => {}}
+        />
+        <DrawerItem
+          label={t('settings.help')}
+          icon={({color}) => (
+            <RenderDrawerIcon icon={<HelpCircle />} color={color} />
+          )}
+          onPress={() => {}}
+        />
+        <DrawerItem
+          label={t('settings.aboutUs')}
+          icon={({color}) => (
+            <RenderDrawerIcon icon={<Information />} color={color} />
+          )}
+          onPress={() => {}}
+        />
+        <DrawerItem
+          label={t('settings.deleteAccount')}
+          icon={({color}) => (
+            <RenderDrawerIcon icon={<Delete />} color={color} />
+          )}
+          onPress={() => {}}
+        />
+        <DrawerItem
+          label={t('settings.logout')}
+          icon={({color}) => (
+            <RenderDrawerIcon icon={<Logout />} color={color} />
+          )}
+          onPress={logoutUser}
+        />
+      </DrawerContentScrollView>
+    </View>
+  );
+};
+
+/**
+ * Drawer navigator component.
+ * Manages the main navigation flow with a side drawer.
  */
 const DrawerNavigator = () => {
   // Constants & hooks
@@ -27,36 +130,14 @@ const DrawerNavigator = () => {
   const {t} = useTranslation();
   const isLargeScreen = Dimensions.get('screen').width >= 768;
 
-  /**
-   * Renders the drawer button icon.
-   *
-   * @param icon - JSX.Element | IconTypes: Icon element or icon type.
-   * @param color - string: Color of the icon.
-   */
-  const RenderDrawerIcon = ({
-    icon,
-    color,
-  }: {
-    icon: JSX.Element | IconTypes;
-    color: string;
-  }) => <Icon icon={icon} size={vs(24)} color={color} />;
-
-  /**
-   * Screen options for drawer navigator
-   */
   const screenOptions: DrawerNavigationOptions = {
     headerTintColor: colors.primary,
     headerStyle: styles.headerStyle,
+    headerTitleStyle: styles.headerTitle,
     drawerType: isLargeScreen ? 'permanent' : undefined,
     overlayColor: 'transparent',
   };
 
-  /**
-   * Generate screen options for tab navigator
-   *
-   * @param title - string: Title of the screen.
-   * @param icon - JSX.Element | IconTypes: Icon element or icon type.
-   */
   const generateScreenOptions = ({
     title,
     icon,
@@ -69,7 +150,10 @@ const DrawerNavigator = () => {
   });
 
   return (
-    <Drawer.Navigator screenOptions={screenOptions} initialRouteName={'home'}>
+    <Drawer.Navigator
+      screenOptions={screenOptions}
+      drawerContent={props => <CustomDrawerContent {...props} />}
+      initialRouteName={'home'}>
       <Drawer.Screen
         name={'home'}
         component={HomeScreen}
@@ -79,11 +163,11 @@ const DrawerNavigator = () => {
         })}
       />
       <Drawer.Screen
-        name={'settings'}
-        component={SettingsScreen}
+        name={'editProfile'}
+        component={EditProfileScreen}
         options={generateScreenOptions({
-          title: t('settings.title'),
-          icon: <Settings />,
+          title: t('settings.editProfile'),
+          icon: <AccountSettings />,
         })}
       />
     </Drawer.Navigator>
@@ -92,9 +176,39 @@ const DrawerNavigator = () => {
 
 const makeStyles = (colors: Colors) =>
   StyleSheet.create({
+    container: {
+      flex: 1,
+    },
+    scrollView: {
+      flex: 1,
+    },
+    profileContainer: {
+      paddingHorizontal: s(spacing.md),
+      paddingVertical: vs(spacing.md),
+      borderBottomWidth: 0.5,
+      borderBottomColor: colors.border,
+      marginBottom: vs(spacing.md),
+    },
+    profileImageContainer: {
+      borderRadius: vs(40),
+      overflow: 'hidden',
+      alignSelf: 'flex-start',
+      marginBottom: vs(spacing.md),
+    },
+    profileImage: {
+      height: vs(80),
+      width: vs(80),
+    },
     headerStyle: {
       backgroundColor: colors.background,
     },
+    headerTitle: {
+      fontSize: fontSize.h3,
+      lineHeight: lineHeight[fontSize.h3],
+      fontFamily: typography.semiBold,
+      fontWeight: undefined,
+      color: colors.text,
+    } as TextStyle,
   });
 
 export default DrawerNavigator;

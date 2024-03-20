@@ -50,19 +50,19 @@ const en = {
   },
   forgotPassword: {
     title: 'Forgot Password',
-    discription:
+    description:
       'Opps. It happens to the best of us. Input your email address to fix the issue.',
     sendOtp: 'Send OTP',
   },
   verifyOTP: {
     title: 'OTP Verification',
-    discription:
+    description:
       'Copy the verification code in your authy application to verify this account recovery',
     verifyOTP: 'Verify OTP',
   },
   setNewPassoword: {
     title: 'Set new password',
-    discription:
+    description:
       'Enter your new password below and check the hint while setting it.',
     submitPassword: 'Submit password',
     newPassword: 'New Password',
@@ -78,6 +78,7 @@ const en = {
     logout: 'Logout',
     help: 'Help',
     aboutUs: 'About us',
+    deleteAccount: 'Delete Account',
   },
   home: {
     title: 'Home',

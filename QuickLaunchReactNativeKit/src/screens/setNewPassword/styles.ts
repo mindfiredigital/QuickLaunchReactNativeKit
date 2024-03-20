@@ -9,7 +9,7 @@ const makeStyles = (colors: Colors) =>
       paddingHorizontal: s(spacing.md),
       marginBottom: vs(40),
     } as ViewStyle,
-    discriptionText: {
+    descriptionText: {
       marginTop: vs(10),
     } as TextStyle,
     headerStyle: {

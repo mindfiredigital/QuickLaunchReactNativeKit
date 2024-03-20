@@ -35,10 +35,6 @@ export const EditProfileScreen: FC<PrimaryScreenProps<'editProfile'>> = ({
   const dispatch = useAppDispatch();
   const {loading: authLoading} = useAppSelector(state => state.auth);
   const {loading} = useAppSelector(state => state.app);
-  const safeAreaEdges: ExtendedEdge[] =
-    settings.primaryNavigationType == 'drawer'
-      ? ['bottom', 'left', 'right']
-      : ['top', 'left', 'right'];
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [mobileNum, setMobileNum] = useState('');
@@ -227,17 +223,9 @@ export const EditProfileScreen: FC<PrimaryScreenProps<'editProfile'>> = ({
 
   return (
     <Screen
-      safeAreaEdges={safeAreaEdges}
+      safeAreaEdges={['bottom', 'left', 'right']}
       preset="auto"
       loading={loading || authLoading}>
-      {/* Header component with left button, title, and custom styles */}
-      <Header
-        showLeftBtn // Indicates whether the left button should be shown
-        onPressLeft={goBack} // Function to handle the left button press event
-        headerText={t('editProfile.title')} // Title text obtained from translation
-        styleProps={styles.headerStyle} // Custom styles for the header
-      />
-
       {/* ProfileImage component with profile URI and modal visibility handler */}
       <ProfileImage
         uri={profileUri} // Profile image URI

@@ -117,8 +117,8 @@ export const SetNewPasswordScreen: FC<AuthScreenProps<'setNewPassword'>> = ({
       />
       <Text size="h1" text={t('setNewPassoword.title')} />
       <Text
-        text={t('setNewPassoword.discription')}
-        style={styles.discriptionText}
+        text={t('setNewPassoword.description')}
+        style={styles.descriptionText}
       />
     </View>
   );
