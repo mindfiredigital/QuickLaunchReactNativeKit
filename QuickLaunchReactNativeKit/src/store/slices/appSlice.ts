@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {uploadProfileImage} from '../actions';
+import {changePassword, uploadProfileImage} from '../actions';
 
 export interface AppState {
   loading: boolean;
@@ -21,6 +21,15 @@ export const appSlice = createSlice({
       state.loading = false;
     });
     builder.addCase(uploadProfileImage.rejected, state => {
+      state.loading = false;
+    });
+    builder.addCase(changePassword.pending, state => {
+      state.loading = true;
+    });
+    builder.addCase(changePassword.fulfilled, state => {
+      state.loading = false;
+    });
+    builder.addCase(changePassword.rejected, state => {
       state.loading = false;
     });
   },

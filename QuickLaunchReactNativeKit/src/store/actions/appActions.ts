@@ -1,5 +1,7 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {
+  ChangePasswordRes,
+  LoginRes,
   UploadProfileImageReq,
   UploadProfileImageRes,
   api,
@@ -15,13 +17,31 @@ export const uploadProfileImage = createAsyncThunk(
     try {
       const formData = new FormData();
       formData.append('image', data);
-      const commonHeader = {
-        'Content-Type': 'multipart/form-data',
-      };
       const res: UploadProfileImageRes = await api.post(
         endPoints.app.uploadProfileImage,
         data,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        },
       );
+
+      return res;
+    } catch (e) {
+      return rejectWithValue(e);
+    }
+  },
+);
+
+/**
+ * The changePassword function is responsible for handling the update of asynchronous user account password.
+ */
+export const changePassword = createAsyncThunk(
+  endPoints.app.changePassword,
+  async (data: ChangePasswordRes, {rejectWithValue}) => {
+    try {
+      const res: LoginRes = await api.post(endPoints.app.changePassword, data);
 
       return res;
     } catch (e) {
