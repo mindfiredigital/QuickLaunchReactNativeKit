@@ -12,8 +12,8 @@
     "test": "jest"
   },
   "dependencies": {
-    "@react-native-async-storage/async-storage": "^1.22.3",
     "@invertase/react-native-apple-authentication": "^2.3.0",
+    "@react-native-async-storage/async-storage": "^1.22.3",
     "@react-native-google-signin/google-signin": "^11.0.0",
     "@react-navigation/bottom-tabs": "^6.5.12",
     "@react-navigation/drawer": "^6.6.7",
@@ -29,6 +29,7 @@
     "react-native-bootsplash": "^5.4.0",
     "react-native-config": "^1.5.1",
     "react-native-gesture-handler": "^2.15.0",
+    "react-native-image-crop-picker": "^0.40.3",
     "react-native-keychain": "^8.2.0",
     "react-native-otp-verify": "^1.1.8",
     "react-native-reanimated": "^3.7.0",

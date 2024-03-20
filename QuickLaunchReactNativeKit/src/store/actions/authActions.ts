@@ -10,6 +10,8 @@ import {
   SocialSignUpReq,
   api,
   endPoints,
+  UpdateUserReq,
+  GetUserRes,
 } from '../../api';
 
 /**
@@ -112,6 +114,37 @@ export const socialLogIn = createAsyncThunk(
   async (data: SocialLogInReq, {rejectWithValue}) => {
     try {
       const res: LoginRes = await api.post(endPoints.auth.socialLogIn, data);
+      return res;
+    } catch (e) {
+      return rejectWithValue(e);
+    }
+  },
+);
+
+/**
+ * The getUser function is responsible for handling the asynchronous get user details operation.
+ */
+export const getUser = createAsyncThunk(
+  endPoints.auth.getUser,
+  async (data: '', {rejectWithValue}) => {
+    try {
+      const res: GetUserRes = await api.get(endPoints.auth.getUser);
+      return res;
+    } catch (e) {
+      return rejectWithValue(e);
+    }
+  },
+);
+
+/**
+ * The updateUser function is responsible for handling the asynchronous update user operation.
+ */
+export const updateUser = createAsyncThunk(
+  endPoints.auth.updateUser,
+  async (data: UpdateUserReq, {rejectWithValue}) => {
+    try {
+      const res: LoginRes = await api.post(endPoints.auth.updateUser, data);
+
       return res;
     } catch (e) {
       return rejectWithValue(e);

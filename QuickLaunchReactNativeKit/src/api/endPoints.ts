@@ -18,5 +18,13 @@ export const endPoints = {
     socialSignUp: 'auth/social/signup',
     /** Endpoint for login with social accounts */
     socialLogIn: 'auth/social/login',
+    /** Endpoint for get user details. */
+    getUser: 'user',
+    /** Endpoint for update user details. */
+    updateUser: 'user/create-update',
+  },
+  /** Endpoints for app. */
+  app: {
+    uploadProfileImage: 'user/upload/profileImage',
   },
 };

@@ -2,6 +2,7 @@ import axios, {AxiosResponse, InternalAxiosRequestConfig} from 'axios';
 import Config from 'react-native-config';
 import {ApiConfig} from './api.types';
 import {getGeneralApiProblem} from './apiProblem';
+import {store} from '../store';
 
 /**
  * Configuring the axios instance.
@@ -28,7 +29,10 @@ export const api = axios.create({
 api.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
     // You can modify the request config here (e.g., add headers, authentication token)
-    // config.headers['Authorization'] = 'Bearer YOUR_ACCESS_TOKEN';
+    const token = store.getState().auth.user.access_token;
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
     return config;
   },
   error => {
