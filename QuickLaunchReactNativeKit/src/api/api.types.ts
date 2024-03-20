@@ -98,3 +98,8 @@ export interface UploadProfileImageRes {
   data: {profileSignedUrl: string};
   error: string;
 }
+
+export interface ChangePasswordRes {
+  password: string;
+  newPassword: string;
+}

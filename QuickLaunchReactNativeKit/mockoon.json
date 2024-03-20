@@ -63,6 +63,10 @@
         },
         {
           "type": "route",
+          "uuid": "fa04dd5c-85b0-4224-b7f1-bb3c60461692"
+        },
+        {
+          "type": "route",
           "uuid": "e3041bf4-61e7-4ee1-9676-ad8eb0a8972d"
         }
       ]
@@ -1106,6 +1110,138 @@
           "databucketID": "",
           "sendFileAsBody": false,
           "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "fa04dd5c-85b0-4224-b7f1-bb3c60461692",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "user/password/change",
+      "responses": [
+        {
+          "uuid": "6937538d-55ba-4cc2-9fda-150fadfff267",
+          "body": "{\n  \"status\": \"false\",\n  \"message\": \"Please enter different new password.\",\n  \"data\": null,\n  \"error\": \"Please enter different new password.\"\n}",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "When current and new password are same",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "newPassword",
+              "value": "{{body 'password'}}",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "ada75962-4b10-490e-bfca-513ca65f4fdb",
+          "body": "{\n  \"status\": \"false\",\n  \"message\": \"Please provide all fields\",\n  \"data\": null,\n  \"error\": \"All fields are not provided\"\n}",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "when all fields are not provided",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "password",
+              "value": "",
+              "invert": false,
+              "operator": "null"
+            },
+            {
+              "target": "body",
+              "modifier": "newPassword",
+              "value": "",
+              "invert": false,
+              "operator": "null"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "6b4e86ab-2fa0-48db-912e-8a09dad0dcb3",
+          "body": "{\n  \"status\": \"false\",\n  \"message\": \"Please provide correct current password.\",\n  \"data\": null,\n  \"error\": \"Please provide correct current password.\"\n}",
+          "latency": 0,
+          "statusCode": 400,
+          "label": "When current password is wrong",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "password",
+              "value": "Test@1234",
+              "invert": true,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "11478f4b-c248-4223-b9b0-61d526c7261d",
+          "body": "{\n  \"status\": \"true\",\n  \"message\": \"Your password has been successfully changed.\",\n  \"data\": \"\",\n  \"error\": null\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "success response",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "password",
+              "value": "Test@1234",
+              "invert": false,
+              "operator": "equals"
+            },
+            {
+              "target": "body",
+              "modifier": "newPassword",
+              "value": "",
+              "invert": false,
+              "operator": "null"
+            }
+          ],
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,

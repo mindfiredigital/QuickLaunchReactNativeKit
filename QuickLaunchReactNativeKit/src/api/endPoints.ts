@@ -26,5 +26,7 @@ export const endPoints = {
   /** Endpoints for app. */
   app: {
     uploadProfileImage: 'user/upload/profileImage',
+    /** Change user password */
+    changePassword: 'user/password/change',
   },
 };

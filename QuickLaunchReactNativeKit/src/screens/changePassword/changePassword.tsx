@@ -4,8 +4,13 @@ import {useTheme} from '@react-navigation/native';
 import {useTranslation} from 'react-i18next';
 import {Button, Screen, Text, TextField} from '../../components';
 import {showSuccessToast, useValidation, vs} from '../../utils';
-import {passwordReset, useAppDispatch, useAppSelector} from '../../store';
-import {LoginRes, PasswordResetReq} from '../../api';
+import {
+  changePassword,
+  passwordReset,
+  useAppDispatch,
+  useAppSelector,
+} from '../../store';
+import {ChangePasswordRes, LoginRes, PasswordResetReq} from '../../api';
 import makeStyles from './styles';
 import {EyeOffOutline, EyeOutline, LockOutline} from '../../assets/svgs';
 import {PrimaryScreenProps} from '../../navigation/primaryNavigator';
@@ -34,7 +39,7 @@ export const ChangePassword: FC<PrimaryScreenProps<'changePassword'>> = ({
 
   // Redux hooks
   const dispatch = useAppDispatch();
-  const {loading} = useAppSelector(state => state.auth);
+  const {loading} = useAppSelector(state => state.app);
 
   const passwordFieldRules = {
     required: true,
@@ -90,7 +95,18 @@ export const ChangePassword: FC<PrimaryScreenProps<'changePassword'>> = ({
     setIsTouched(true);
     const isValid = validateForm();
     if (isValid) {
-      //TODO: Change password api call here
+      // change password
+      const reqBody: ChangePasswordRes = {
+        password,
+        newPassword,
+      };
+      const {meta, payload} = await dispatch(changePassword(reqBody));
+      const data = payload as LoginRes;
+      // on api success
+      if (meta.requestStatus === 'fulfilled') {
+        showSuccessToast({message: data.message});
+        navigation.goBack();
+      }
     }
   };
 
