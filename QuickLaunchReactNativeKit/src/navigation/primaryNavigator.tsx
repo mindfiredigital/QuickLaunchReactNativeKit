@@ -4,20 +4,25 @@
  * This has option to choose between bottom tab and drawer.
  */
 import React from 'react';
-import {DrawerScreenProps} from '@react-navigation/drawer';
 import TabNavigator from './tabNavigator';
 import DrawerNavigator from './drawerNavigator';
-import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
-import {CompositeScreenProps} from '@react-navigation/native';
+import {useTheme} from '@react-navigation/native';
 import {settings} from '../../settings';
+import {
+  NativeStackScreenProps,
+  createNativeStackNavigator,
+} from '@react-navigation/native-stack';
+import {EditProfileScreen} from '../screens';
+import {useTranslation} from 'react-i18next';
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
  * as well as what properties (if any) they might take when navigating to them.
  */
 export type PrimaryParamList = {
-  home: undefined;
+  homeNav: undefined;
   settings: undefined;
+  editProfile: undefined;
 };
 
 /**
@@ -25,17 +30,40 @@ export type PrimaryParamList = {
  * for screen props.
  */
 export type PrimaryScreenProps<T extends keyof PrimaryParamList> =
-  CompositeScreenProps<
-    BottomTabScreenProps<PrimaryParamList, T>,
-    DrawerScreenProps<PrimaryParamList, T>
-  >;
+  NativeStackScreenProps<PrimaryParamList, T>;
+
+const PrimaryStack = createNativeStackNavigator<PrimaryParamList>();
 
 const PrimaryNavigator = () => {
-  if (settings.primaryNavigationType == 'drawer') {
-    return <DrawerNavigator />;
-  } else {
-    return <TabNavigator />;
-  }
+  const {colors} = useTheme();
+  const {t} = useTranslation();
+
+  return (
+    <PrimaryStack.Navigator
+      initialRouteName="homeNav"
+      screenOptions={{
+        navigationBarColor: colors.background,
+        headerShown: false,
+      }}>
+      {settings.primaryNavigationType == 'drawer' ? (
+        <PrimaryStack.Screen name={'homeNav'} component={DrawerNavigator} />
+      ) : (
+        <>
+          <PrimaryStack.Screen name={'homeNav'} component={TabNavigator} />
+          <PrimaryStack.Screen
+            name={'editProfile'}
+            component={EditProfileScreen}
+            options={{
+              title: t('settings.editProfile'),
+              headerShown: true,
+              headerBackTitleVisible: false,
+              headerBackTitle: t('settings.title'),
+            }}
+          />
+        </>
+      )}
+    </PrimaryStack.Navigator>
+  );
 };
 
 export default PrimaryNavigator;

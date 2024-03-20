@@ -1,5 +1,11 @@
 import React from 'react';
-import {StyleSheet, TouchableOpacity, View, Image} from 'react-native';
+import {
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  Image,
+  ViewStyle,
+} from 'react-native';
 import {useTheme} from '@react-navigation/native';
 import {vs} from '../../../utils';
 import {Colors, spacing} from '../../../theme';
@@ -24,14 +30,18 @@ export const ProfileImage = (props: BiometricAuthProps) => {
 
   return (
     <View style={styles.imageView}>
-      <Image
-        source={{
-          uri: uri,
-        }}
-        style={styles.image}
-      />
+      <View style={styles.imageWrapper}>
+        {!!uri && (
+          <Image
+            source={{
+              uri: uri,
+            }}
+            style={styles.image}
+          />
+        )}
+      </View>
       <TouchableOpacity style={styles.cameraIconView} onPress={editOnPress}>
-        <Icon icon={<EditImage />} color={colors.background} size={30} />
+        <Icon icon={<EditImage />} color={colors.background} size={vs(24)} />
       </TouchableOpacity>
     </View>
   );
@@ -51,21 +61,27 @@ const makeStyles = (colors: Colors) =>
       borderRadius: vs(140),
       marginBottom: vs(spacing.xxxl),
     },
-    image: {
+    imageWrapper: {
       width: vs(140),
       height: vs(140),
       backgroundColor: colors.tertiary,
-      borderRadius: vs(140),
+      borderRadius: vs(70),
+      overflow: 'hidden',
+    } as ViewStyle,
+    image: {
+      width: vs(140),
+      height: vs(140),
+      resizeMode: 'cover',
     },
     cameraIconView: {
-      height: vs(50),
-      width: vs(50),
+      height: vs(36),
+      width: vs(36),
       alignItems: 'center',
       justifyContent: 'center',
       position: 'absolute',
-      right: 0,
-      bottom: vs(8),
-      backgroundColor: colors.tertiary,
-      borderRadius: vs(50),
+      right: vs(6),
+      bottom: vs(6),
+      backgroundColor: colors.text + '80',
+      borderRadius: vs(20),
     },
   });

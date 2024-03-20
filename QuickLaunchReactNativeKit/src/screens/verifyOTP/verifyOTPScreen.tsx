@@ -119,7 +119,7 @@ export const VerifyOTPScreen: FC<AuthScreenProps<'verifyOTP'>> = ({
         styleProps={styles.headerStyle}
       />
       <Text size="h1" text={t('verifyOTP.title')} />
-      <Text text={t('verifyOTP.discription')} style={styles.discriptionText} />
+      <Text text={t('verifyOTP.description')} style={styles.descriptionText} />
     </View>
   );
 

@@ -8,16 +8,20 @@ import {useTranslation} from 'react-i18next';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useTheme} from '@react-navigation/native';
 import {HomeScreen, SettingsScreen} from '../screens';
-import {PrimaryParamList} from './primaryNavigator';
 import {Colors, fontSize, lineHeight, spacing, typography} from '../theme';
 import {Home, Settings} from '../assets/svgs';
 import {Icon, IconTypes} from '../components';
 import {s, vs} from '../utils';
 
+export type TabParansList = {
+  home: undefined;
+  settings: undefined;
+};
+
 /**
  * Tab Navigator Instance
  */
-const Tab = createBottomTabNavigator<PrimaryParamList>();
+const Tab = createBottomTabNavigator<TabParansList>();
 
 /**
  * RootTabNavigator Component

@@ -83,7 +83,9 @@ export const Header = (props: HeaderProps) => {
       {headerText && (
         <Text
           text={headerText}
-          size="h1"
+          size="h3"
+          numberOfLines={1}
+          adjustsFontSizeToFit
           style={[styles.headerText, headerTextStyleProps]}
         />
       )}
@@ -102,16 +104,18 @@ const makeStyles = (colors: Colors) =>
   StyleSheet.create({
     container: {
       justifyContent: 'space-between',
+      alignItems: 'center',
       flexDirection: 'row',
     } as ViewStyle,
     headerText: {
-      color: colors.primary,
+      fontSize: vs(20),
+      color: colors.text,
     } as TextStyle,
     leftView: {
-      width: s(100),
+      width: s(50),
     } as ViewStyle,
     rightView: {
-      width: s(100),
+      width: s(50),
       alignItems: 'flex-end',
     } as ViewStyle,
     leftBtnView: {

@@ -70,7 +70,7 @@ export const ForgotPasswordScreen: FC<AuthScreenProps<'forgotPassword'>> = ({
   };
 
   /**
-   * Render back btn, title and discription
+   * Render back btn, title and description
    */
   const renderHeaders = () => (
     <View style={styles.headerWrapper}>
@@ -81,8 +81,8 @@ export const ForgotPasswordScreen: FC<AuthScreenProps<'forgotPassword'>> = ({
       />
       <Text size="h1" text={t('forgotPassword.title')} />
       <Text
-        text={t('forgotPassword.discription')}
-        style={styles.discriptionText}
+        text={t('forgotPassword.description')}
+        style={styles.descriptionText}
       />
     </View>
   );

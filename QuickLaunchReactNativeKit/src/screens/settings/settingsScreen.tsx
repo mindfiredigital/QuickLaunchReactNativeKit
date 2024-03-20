@@ -1,16 +1,14 @@
 import React, {FC} from 'react';
 import {View} from 'react-native';
 import {useTranslation} from 'react-i18next';
-import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {useTheme} from '@react-navigation/native';
 import {Button, Icon, Screen, Text} from '../../components';
 import {useAppDispatch} from '../../store';
-import {resetState} from '../../store/reducers';
 import {PrimaryScreenProps} from '../../navigation/primaryNavigator';
 import {AccountSettings, OtherSettings} from '../../assets/svgs';
 import {settings} from '../../../settings';
 import {ExtendedEdge} from '../../utils/useSafeAreaInsetsStyle';
-import {vs} from '../../utils';
+import {logoutUser, vs} from '../../utils';
 import makeStyles from './styles';
 
 /**
@@ -27,7 +25,7 @@ const SubHeading = ({svg, text}: {svg: React.JSX.Element; text: string}) => {
   const styles = makeStyles(colors);
   return (
     <View style={styles.subHeading}>
-      <Icon icon={svg} size={vs(40)} color={colors.tertiary} />
+      <Icon icon={svg} size={vs(40)} color={colors.text} />
       <Text style={styles.subHeadingText} size="h2">
         {text}
       </Text>
@@ -50,18 +48,6 @@ export const SettingsScreen: FC<PrimaryScreenProps<'settings'>> = ({
   // Styles
   const styles = makeStyles(colors);
 
-  const logoutUser = async () => {
-    try {
-      // logout google account if signed in
-      const isSignedIn = await GoogleSignin.isSignedIn();
-      if (isSignedIn) await GoogleSignin.signOut();
-    } catch (error) {
-      console.error(error);
-    } finally {
-      dispatch(resetState());
-    }
-  };
-
   /**
    * Generates the account settings section.
    * @returns A React component representing the account settings section.
@@ -79,6 +65,7 @@ export const SettingsScreen: FC<PrimaryScreenProps<'settings'>> = ({
         btnText={t('settings.editProfile')}
         onPress={() => {
           //TODO: Handle edit profile action
+          navigation.navigate('editProfile');
         }}
       />
       {/* Change password button */}
