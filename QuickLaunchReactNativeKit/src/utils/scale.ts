@@ -1,4 +1,4 @@
-import {Dimensions} from 'react-native';
+import {Dimensions, Platform} from 'react-native';
 
 // Retrieve the width and height of the window
 const {width, height} = Dimensions.get('window');
@@ -8,8 +8,19 @@ const [shortDimension, longDimension] =
   width < height ? [width, height] : [height, width];
 
 // Default guideline sizes based on iPhone 15 mobile device
-const guidelineBaseWidth = 393;
-const guidelineBaseHeight = 852;
+let guidelineBaseWidth = 393;
+let guidelineBaseHeight = 852;
+
+// Adjust guideline base sizes for iPad and Android tablets
+if (Platform.OS === 'ios' && shortDimension > 600) {
+  // iPad
+  guidelineBaseWidth = 768;
+  guidelineBaseHeight = 1024;
+} else if (Platform.OS === 'android' && shortDimension > 600) {
+  // Android tablets
+  guidelineBaseWidth = 600;
+  guidelineBaseHeight = 960;
+}
 
 /**
  * Scale a given size proportionally based on the short dimension.
@@ -18,7 +29,7 @@ const guidelineBaseHeight = 852;
  * @returns {number} - Scaled size.
  */
 export const scale = (size: number): number =>
-  (shortDimension / guidelineBaseWidth) * size;
+  Math.round((shortDimension / guidelineBaseWidth) * size);
 
 /**
  * Scale a given size proportionally based on the long dimension.
@@ -27,7 +38,7 @@ export const scale = (size: number): number =>
  * @returns {number} - Scaled size.
  */
 export const verticalScale = (size: number): number =>
-  (longDimension / guidelineBaseHeight) * size;
+  Math.round((longDimension / guidelineBaseHeight) * size);
 
 /**
  * Moderately scale a given size with an optional scaling factor.
@@ -37,7 +48,7 @@ export const verticalScale = (size: number): number =>
  * @returns {number} - Moderately scaled size.
  */
 export const moderateScale = (size: number, factor: number = 0.5): number =>
-  size + (scale(size) - size) * factor;
+  Math.round(size + (scale(size) - size) * factor);
 
 /**
  * Moderately scale a given size vertically with an optional scaling factor.
@@ -49,7 +60,7 @@ export const moderateScale = (size: number, factor: number = 0.5): number =>
 export const moderateVerticalScale = (
   size: number,
   factor: number = 0.5,
-): number => size + (verticalScale(size) - size) * factor;
+): number => Math.round(size + (verticalScale(size) - size) * factor);
 
 // Aliases for easier usage
 /**
