@@ -8,6 +8,8 @@ import {
   signUp,
   socialSignUp,
   socialLogIn,
+  getUser,
+  updateUser,
 } from '../actions';
 
 export interface AuthState {
@@ -113,6 +115,27 @@ export const authSlice = createSlice({
       }
     });
     builder.addCase(socialLogIn.rejected, state => {
+      state.loading = false;
+    });
+    builder.addCase(getUser.pending, state => {
+      state.loading = true;
+    });
+    builder.addCase(getUser.fulfilled, (state, {payload}) => {
+      state.loading = false;
+      if (payload.data) {
+        state.user = {...state.user, ...payload.data};
+      }
+    });
+    builder.addCase(getUser.rejected, state => {
+      state.loading = false;
+    });
+    builder.addCase(updateUser.pending, state => {
+      state.loading = true;
+    });
+    builder.addCase(updateUser.fulfilled, state => {
+      state.loading = false;
+    });
+    builder.addCase(updateUser.rejected, state => {
       state.loading = false;
     });
   },

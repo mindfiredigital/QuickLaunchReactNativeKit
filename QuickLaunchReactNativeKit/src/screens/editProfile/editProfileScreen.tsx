@@ -33,7 +33,8 @@ export const EditProfileScreen: FC<PrimaryScreenProps<'editProfile'>> = ({
   const {colors} = useTheme();
   const {t} = useTranslation();
   const dispatch = useAppDispatch();
-  const {loading} = useAppSelector(state => state.auth);
+  const {loading: authLoading} = useAppSelector(state => state.auth);
+  const {loading} = useAppSelector(state => state.app);
   const safeAreaEdges: ExtendedEdge[] =
     settings.primaryNavigationType == 'drawer'
       ? ['bottom', 'left', 'right']
@@ -225,7 +226,10 @@ export const EditProfileScreen: FC<PrimaryScreenProps<'editProfile'>> = ({
   );
 
   return (
-    <Screen safeAreaEdges={safeAreaEdges} preset="auto" loading={loading}>
+    <Screen
+      safeAreaEdges={safeAreaEdges}
+      preset="auto"
+      loading={loading || authLoading}>
       {/* Header component with left button, title, and custom styles */}
       <Header
         showLeftBtn // Indicates whether the left button should be shown

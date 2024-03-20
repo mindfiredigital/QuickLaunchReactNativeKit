@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {getUser, updateUser} from '../actions';
+import {uploadProfileImage} from '../actions';
 
 export interface AppState {
   loading: boolean;
@@ -14,22 +14,13 @@ export const appSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: builder => {
-    builder.addCase(getUser.pending, state => {
+    builder.addCase(uploadProfileImage.pending, state => {
       state.loading = true;
     });
-    builder.addCase(getUser.fulfilled, state => {
+    builder.addCase(uploadProfileImage.fulfilled, state => {
       state.loading = false;
     });
-    builder.addCase(getUser.rejected, state => {
-      state.loading = false;
-    });
-    builder.addCase(updateUser.pending, state => {
-      state.loading = true;
-    });
-    builder.addCase(updateUser.fulfilled, state => {
-      state.loading = false;
-    });
-    builder.addCase(updateUser.rejected, state => {
+    builder.addCase(uploadProfileImage.rejected, state => {
       state.loading = false;
     });
   },
