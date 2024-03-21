@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {StyleSheet, TextStyle} from 'react-native';
+import {StyleSheet, TextStyle, ViewStyle} from 'react-native';
 import {
   BottomTabNavigationOptions,
   createBottomTabNavigator,
@@ -54,14 +54,15 @@ const RootTabNavigator = () => {
    * Screen options for tab navigator
    */
   const screenOptions: BottomTabNavigationOptions = {
-    headerShown: false,
     tabBarStyle: [
       styles.container,
+      styles.tabShadow,
       {
         height: vs(60) + insets.bottom,
         paddingBottom: insets.bottom ? insets.bottom : vs(spacing.xs),
       },
     ],
+    headerStyle: [styles.header, styles.tabShadow],
     tabBarLabelStyle: styles.tabLabel,
     tabBarActiveTintColor: colors.primary,
     tabBarInactiveTintColor: colors.tertiary,
@@ -113,12 +114,25 @@ const RootTabNavigator = () => {
 const makeStyles = (colors: Colors) =>
   StyleSheet.create({
     container: {
-      borderTopWidth: 0.5,
-      borderTopColor: colors.border,
       backgroundColor: colors.background,
+      borderTopWidth: 0,
       paddingTop: vs(spacing.xs),
       paddingHorizontal: s(spacing.sm),
-    },
+    } as ViewStyle,
+    header: {
+      backgroundColor: colors.background,
+      borderBottomWidth: 0,
+    } as ViewStyle,
+    tabShadow: {
+      shadowColor: colors.text,
+      shadowOffset: {
+        width: 0,
+        height: 1,
+      },
+      shadowOpacity: 0.15,
+      shadowRadius: 5.65,
+      elevation: 6,
+    } as ViewStyle,
     tabLabel: {
       fontSize: fontSize.body,
       lineHeight: lineHeight[fontSize.body],

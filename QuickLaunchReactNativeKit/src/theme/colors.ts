@@ -1,5 +1,6 @@
 /**
  * A color helpers for defining app theme
+ * Color names are taken from https://www.color-name.com/hex
  */
 export const colors = {
   transparent: 'rgba(0, 0, 0, 0)',
@@ -31,4 +32,5 @@ export const colors = {
   danger: '#f44336',
   warning: '#ffa726',
   info: '#29b6f6',
+  darkGunmetal: '#1b1c32',
 };
