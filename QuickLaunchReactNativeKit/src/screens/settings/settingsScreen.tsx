@@ -1,37 +1,20 @@
 import React, {FC} from 'react';
-import {View} from 'react-native';
 import {useTranslation} from 'react-i18next';
 import {useTheme} from '@react-navigation/native';
-import {Button, Icon, Screen, Text} from '../../components';
-import {useAppDispatch} from '../../store';
+import {Screen, Separator} from '../../components';
 import {PrimaryScreenProps} from '../../navigation/primaryNavigator';
-import {AccountSettings, OtherSettings} from '../../assets/svgs';
-import {settings} from '../../../settings';
-import {ExtendedEdge} from '../../utils/useSafeAreaInsetsStyle';
-import {logoutUser, vs} from '../../utils';
+import {
+  Delete,
+  HelpCircle,
+  Information,
+  Lock,
+  Logout,
+  ShieldCheck,
+} from '../../assets/svgs';
+import {ProfileSettings, SettingsItem, SettingsSection} from './components';
+import {useAppSelector} from '../../store';
 import makeStyles from './styles';
-
-/**
- * Generates a sub-heading component with an SVG icon and text.
- * @param svg The SVG icon component.
- * @param text The text for the sub-heading.
- * @returns A React component representing the sub-heading.
- */
-const SubHeading = ({svg, text}: {svg: React.JSX.Element; text: string}) => {
-  // constants & hooks
-  const {colors} = useTheme();
-
-  // Styles
-  const styles = makeStyles(colors);
-  return (
-    <View style={styles.subHeading}>
-      <Icon icon={svg} size={vs(40)} color={colors.text} />
-      <Text style={styles.subHeadingText} size="h2">
-        {text}
-      </Text>
-    </View>
-  );
-};
+import {logoutUser} from '../../utils';
 
 export const SettingsScreen: FC<PrimaryScreenProps<'settings'>> = ({
   navigation,
@@ -39,112 +22,91 @@ export const SettingsScreen: FC<PrimaryScreenProps<'settings'>> = ({
   // constants & hooks
   const {colors} = useTheme();
   const {t} = useTranslation();
-  const dispatch = useAppDispatch();
-  const safeAreaEdges: ExtendedEdge[] =
-    settings.primaryNavigationType == 'drawer'
-      ? ['bottom', 'left', 'right']
-      : ['top', 'left', 'right'];
+
+  // redux hooks
+  const {user} = useAppSelector(state => state.auth);
 
   // Styles
   const styles = makeStyles(colors);
 
   /**
    * Generates the account settings section.
-   * @returns A React component representing the account settings section.
    */
-  const accountSetting = () => (
-    <>
-      {/* Account settings sub-heading */}
-      <SubHeading svg={<AccountSettings />} text={t('settings.account')} />
-      {/* Edit profile button */}
-      <Button
-        preset="link"
-        restTextProps={{size: 'h3'}}
-        styleProps={styles.btnStyle}
-        textStyleProps={styles.btnTextStyle}
-        btnText={t('settings.editProfile')}
+  const accountSettings = () => (
+    <SettingsSection title={t('settings.account')}>
+      <ProfileSettings
+        profileUrl={user?.profileSignedUrl}
+        userName={user?.full_name}
+        email={user?.email}
         onPress={() => {
-          //TODO: Handle edit profile action
+          // Handle edit profile action
           navigation.navigate('editProfile');
         }}
       />
-      {/* Change password button */}
-      <Button
-        preset="link"
-        restTextProps={{size: 'h3'}}
-        styleProps={styles.btnStyle}
-        textStyleProps={styles.btnTextStyle}
-        btnText={t('settings.changePassword')}
+      <Separator />
+      <SettingsItem
+        icon={<Lock />}
+        setting={t('settings.changePassword')}
         onPress={() => {
-          //TODO: Handle change password action
+          // Handle change password action
           navigation.navigate('changePassword');
         }}
       />
-      {/* Privacy button */}
-      <Button
-        preset="link"
-        restTextProps={{size: 'h3'}}
-        styleProps={styles.btnStyle}
-        textStyleProps={styles.btnTextStyle}
-        btnText={t('settings.privacy')}
-        onPress={() => {
-          //TODO: Handle privacy action
-        }}
-      />
-      {/* Logout button */}
-      <Button
-        preset="link"
-        restTextProps={{size: 'h3'}}
-        styleProps={styles.btnStyle}
-        textStyleProps={styles.btnTextStyle}
-        btnText={t('settings.logout')}
-        onPress={logoutUser}
-      />
-    </>
-  );
-
-  /**
-   * Generates the other settings section.
-   * @returns A React component representing the other settings section.
-   */
-  const otherSettings = () => (
-    <>
-      {/* Other settings sub-heading */}
-      <SubHeading svg={<OtherSettings />} text={t('settings.other')} />
-      {/* Help button */}
-      <Button
-        preset="link"
-        restTextProps={{size: 'h3'}}
-        styleProps={styles.btnStyle}
-        textStyleProps={styles.btnTextStyle}
-        btnText={t('settings.help')}
+      <Separator />
+      <SettingsItem
+        icon={<Delete />}
+        setting={t('settings.deleteAccount')}
         onPress={() => {
           //TODO: Handle help action
         }}
       />
-      {/* About Us button */}
-      <Button
-        preset="link"
-        restTextProps={{size: 'h3'}}
-        styleProps={styles.btnStyle}
-        textStyleProps={styles.btnTextStyle}
-        btnText={t('settings.aboutUs')}
+      <Separator />
+      <SettingsItem
+        icon={<Logout />}
+        setting={t('settings.logout')}
+        onPress={logoutUser}
+      />
+    </SettingsSection>
+  );
+
+  /**
+   * Generates the other settings section.
+   */
+  const otherSettings = () => (
+    <SettingsSection title={t('settings.other')}>
+      <SettingsItem
+        icon={<ShieldCheck />}
+        setting={t('settings.privacy')}
+        onPress={() => {
+          //TODO: Handle help action
+        }}
+      />
+      <Separator />
+      <SettingsItem
+        icon={<HelpCircle />}
+        setting={t('settings.help')}
+        onPress={() => {
+          //TODO: Handle privacy action
+        }}
+      />
+      <Separator />
+      <SettingsItem
+        icon={<Information />}
+        setting={t('settings.aboutUs')}
         onPress={() => {
           //TODO: Handle about us action
         }}
       />
-    </>
+    </SettingsSection>
   );
 
   return (
     <Screen
-      safeAreaEdges={safeAreaEdges}
+      safeAreaEdges={['left', 'right']}
       preset="auto"
-      contentContainerStyle={styles.container}>
-      <Text style={styles.headerText} size="h1">
-        {t('settings.title')}
-      </Text>
-      {accountSetting()}
+      style={styles.container}
+      contentContainerStyle={styles.contentContainer}>
+      {accountSettings()}
       {otherSettings()}
     </Screen>
   );

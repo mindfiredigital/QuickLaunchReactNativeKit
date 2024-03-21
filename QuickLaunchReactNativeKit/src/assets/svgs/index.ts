@@ -22,3 +22,4 @@ export {default as Lock} from './Lock';
 export {default as ShieldCheck} from './ShieldCheck';
 export {default as Logout} from './Logout';
 export {default as Delete} from './Delete';
+export {default as ChevronRight} from './ChevronRight';
