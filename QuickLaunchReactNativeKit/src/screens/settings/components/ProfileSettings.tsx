@@ -15,7 +15,7 @@ import {s, vs} from '../../../utils';
 import {spacing, typography} from '../../../theme';
 import {ChevronRight} from '../../../assets/svgs';
 
-interface SettingsItemProps extends TouchableOpacityProps {
+interface ProfileSettingsProps extends TouchableOpacityProps {
   /**
    * The URL of the user's profile picture.
    */
@@ -44,7 +44,7 @@ export const ProfileSettings = ({
   userName,
   email,
   ...rest
-}: SettingsItemProps) => {
+}: ProfileSettingsProps) => {
   const {colors} = useTheme();
   return (
     <TouchableOpacity style={styles.settingsItemContainer} {...rest}>

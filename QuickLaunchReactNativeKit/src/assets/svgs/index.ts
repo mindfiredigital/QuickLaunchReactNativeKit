@@ -23,3 +23,6 @@ export {default as ShieldCheck} from './ShieldCheck';
 export {default as Logout} from './Logout';
 export {default as Delete} from './Delete';
 export {default as ChevronRight} from './ChevronRight';
+export {default as Camera} from './Camera';
+export {default as CloseCircle} from './CloseCircle';
+export {default as Image} from './Image';

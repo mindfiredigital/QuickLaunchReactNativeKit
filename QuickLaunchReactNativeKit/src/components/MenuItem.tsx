@@ -6,16 +6,16 @@ import {
   View,
 } from 'react-native';
 import {useTheme} from '@react-navigation/native';
-import {Icon, IconProps, Text} from '../../../components';
-import {s, vs} from '../../../utils';
-import {Colors, spacing} from '../../../theme';
-import {ChevronRight} from '../../../assets/svgs';
+import {Icon, IconProps, Text} from '.';
+import {s, vs} from '../utils';
+import {Colors, spacing} from '../theme';
+import {ChevronRight} from '../assets/svgs';
 
-interface SettingsItemProps extends TouchableOpacityProps {
+interface MenuItemProps extends TouchableOpacityProps {
   /** The icon to be displayed on the left side of the item. */
   icon: IconProps['icon'];
   /** The name of the setting to be displayed. */
-  setting: string;
+  text: string;
   /** The size of the left icon. Default value is 24. */
   leftIconSize?: number;
   /** The size of the right arrow icon. Default value is 24. */
@@ -26,21 +26,21 @@ interface SettingsItemProps extends TouchableOpacityProps {
  * This component represents an item in a settings list. It typically includes an icon on the left,
  * the setting name, and a right arrow icon to indicate interaction.
  */
-export const SettingsItem = ({
+export const MenuItem = ({
   icon,
-  setting,
+  text,
   leftIconSize = vs(24),
   rightIconSize = vs(24),
   ...rest
-}: SettingsItemProps) => {
+}: MenuItemProps) => {
   const {colors} = useTheme();
   const styles = makeStyles(colors);
   return (
-    <TouchableOpacity style={styles.settingsItemContainer} {...rest}>
-      <View style={styles.settingsItemContentContainer}>
+    <TouchableOpacity style={styles.menuItemContainer} {...rest}>
+      <View style={styles.menuItemContentContainer}>
         <Icon icon={icon} size={leftIconSize} color={colors.tertiary} />
-        <Text size="h4" style={styles.settingsText}>
-          {setting}
+        <Text size="h4" style={styles.menuText}>
+          {text}
         </Text>
       </View>
       <View>
@@ -56,17 +56,17 @@ export const SettingsItem = ({
 
 const makeStyles = (colors: Colors) =>
   StyleSheet.create({
-    settingsItemContainer: {
+    menuItemContainer: {
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
       paddingVertical: vs(spacing.md),
       paddingHorizontal: s(spacing.sm),
     },
-    settingsText: {
+    menuText: {
       marginLeft: s(spacing.xs),
     },
-    settingsItemContentContainer: {
+    menuItemContentContainer: {
       flexDirection: 'row',
       alignItems: 'center',
     },

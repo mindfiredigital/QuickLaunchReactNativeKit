@@ -3,7 +3,7 @@ import {TextInput} from 'react-native';
 import {useTranslation} from 'react-i18next';
 import {useTheme} from '@react-navigation/native';
 import {ImageOrVideo} from 'react-native-image-crop-picker';
-import {Button, Header, Screen, TextField} from '../../components';
+import {Button, Screen, TextField} from '../../components';
 import {
   getUser,
   updateUser,
@@ -13,33 +13,39 @@ import {
 } from '../../store';
 import {PrimaryScreenProps} from '../../navigation/primaryNavigator';
 import {AccountOutline, EmailOutline, PhoneOutline} from '../../assets/svgs';
-import {settings} from '../../../settings';
-import {ExtendedEdge} from '../../utils/useSafeAreaInsetsStyle';
-import {useValidation, vs} from '../../utils';
+import {showSuccessToast, useValidation, vs} from '../../utils';
 import {
   GetUserRes,
   UpdateUserReq,
   UploadProfileImageReq,
   UploadProfileImageRes,
 } from '../../api';
-import {ProfileImage} from './components/profileImage';
-import ImageUploadModal from '../../components/ImageUploadModal';
 import makeStyles from './styles';
+import {ImageUploadModal, ProfileImage} from './components';
 
+/**
+ * Edit profile screen
+ * User can update profile image and other user details like name, phone and email.
+ */
 export const EditProfileScreen: FC<PrimaryScreenProps<'editProfile'>> = ({
   navigation,
 }) => {
   // constants & hooks
   const {colors} = useTheme();
   const {t} = useTranslation();
+
+  // redux hooks
   const dispatch = useAppDispatch();
-  const {loading: authLoading} = useAppSelector(state => state.auth);
+  const {loading: authLoading, user} = useAppSelector(state => state.auth);
   const {loading} = useAppSelector(state => state.app);
+
+  // states
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [mobileNum, setMobileNum] = useState('');
   const [profileUri, setProfileUri] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
+
   // Styles
   const styles = makeStyles(colors);
 
@@ -48,29 +54,31 @@ export const EditProfileScreen: FC<PrimaryScreenProps<'editProfile'>> = ({
   const mobileNumRef = useRef<TextInput>(null);
 
   /**
-   * Effect hook to fetch user details when the component mounts.
+   * Effect hook to set user details when the component mounts.
    */
   useEffect(() => {
-    // Calls the function to fetch user details
-    getUserDetails();
+    setUserDetails();
   }, []);
+
+  /**
+   * Function to set user details.
+   */
+  const setUserDetails = async () => {
+    const {email, full_name, phone_number, profileSignedUrl} = user;
+    // Sets the email, full name, mobile number, and profile URI based on the received data
+    setEmail(email);
+    setFullName(full_name);
+    setMobileNum(phone_number);
+    setProfileUri(profileSignedUrl);
+  };
 
   /**
    * Function to fetch user details.
    */
   const getUserDetails = async () => {
     // Dispatches the getUser action to fetch user details
-    const {meta, payload} = await dispatch(getUser(''));
-    const data = payload as GetUserRes;
-
-    // Checks if the API request is successful and data is received
-    if (meta.requestStatus === 'fulfilled' && data?.data?.email) {
-      // Sets the email, full name, mobile number, and profile URI based on the received data
-      setEmail(data?.data?.email);
-      setFullName(data?.data?.full_name);
-      setMobileNum(data?.data?.phone_number);
-      setProfileUri(data?.data?.profileSignedUrl);
-    }
+    await dispatch(getUser());
+    goBack();
   };
 
   // Validate form textfields input
@@ -130,10 +138,14 @@ export const EditProfileScreen: FC<PrimaryScreenProps<'editProfile'>> = ({
       };
 
       // Dispatches update user request
-      const {meta} = await dispatch(updateUser(req));
+      const {meta, payload} = await dispatch(updateUser(req));
+      const data = payload as GetUserRes;
 
       // If request is fulfilled, fetches user details
       if (meta.requestStatus === 'fulfilled') {
+        if (data?.message) {
+          showSuccessToast({message: data.message});
+        }
         getUserDetails();
       }
     }
@@ -143,12 +155,12 @@ export const EditProfileScreen: FC<PrimaryScreenProps<'editProfile'>> = ({
    * Handles the uploaded image.
    * @param image The uploaded image.
    */
-  const setUploadedImage = async (image: ImageOrVideo) => {
+  const onUpdateImage = async (image: ImageOrVideo) => {
     // Constructs upload profile image request
     const req: UploadProfileImageReq = {
       uri: image.path,
       name: image.filename || image.modificationDate,
-      type: 'image/jpeg',
+      type: image.mime,
     };
 
     // Dispatches upload profile image request
@@ -158,6 +170,7 @@ export const EditProfileScreen: FC<PrimaryScreenProps<'editProfile'>> = ({
     // If request is fulfilled and profile image url is received, updates profile URI
     if (meta.requestStatus === 'fulfilled' && data.data.profileSignedUrl) {
       setProfileUri(data.data.profileSignedUrl);
+      if (data?.message) showSuccessToast({message: data.message});
     }
   };
 
@@ -216,7 +229,7 @@ export const EditProfileScreen: FC<PrimaryScreenProps<'editProfile'>> = ({
         btnText={t('editProfile.save')}
         disabled={!isFormValid()}
         onPress={onPressSave}
-        styleProps={styles.btnStyle}
+        style={styles.btnStyle}
       />
     </>
   );
@@ -242,9 +255,7 @@ export const EditProfileScreen: FC<PrimaryScreenProps<'editProfile'>> = ({
       <ImageUploadModal
         modal={modalVisible} // Indicates whether the modal is visible
         setModal={setModalVisible} // Function to control modal visibility
-        updateImage={setUploadedImage} // Function to handle image update
-        title={t('editProfile.imageUploadTitle')} // Title text obtained from translation
-        subtitle={t('editProfile.imageUploadSubTitle')} // Subtitle text obtained from translation
+        updateImage={onUpdateImage} // Function to handle image update
       />
     </Screen>
   );
