@@ -23,7 +23,14 @@ import {
   Logout,
   ShieldCheck,
 } from '../assets/svgs';
-import {logoutUser, s, vs} from '../utils';
+import {
+  logoutUser,
+  openAboutUs,
+  openHelp,
+  openPrivacyPolicy,
+  s,
+  vs,
+} from '../utils';
 import {useAppSelector} from '../store';
 
 /**
@@ -86,21 +93,21 @@ const CustomDrawerContent = (props: DrawerContentComponentProps) => {
           icon={({color}) => (
             <RenderDrawerIcon icon={<ShieldCheck />} color={color} />
           )}
-          onPress={() => {}}
+          onPress={openPrivacyPolicy}
         />
         <DrawerItem
           label={t('settings.help')}
           icon={({color}) => (
             <RenderDrawerIcon icon={<HelpCircle />} color={color} />
           )}
-          onPress={() => {}}
+          onPress={openHelp}
         />
         <DrawerItem
           label={t('settings.aboutUs')}
           icon={({color}) => (
             <RenderDrawerIcon icon={<Information />} color={color} />
           )}
-          onPress={() => {}}
+          onPress={openAboutUs}
         />
         <DrawerItem
           label={t('settings.deleteAccount')}

@@ -7,3 +7,4 @@ export * from './setNewPassword/setNewPasswordScreen';
 export * from './verifyOTP/verifyOTPScreen';
 export * from './editProfile/editProfileScreen';
 export * from './changePassword/changePassword';
+export * from './webView/webViewScreen';

@@ -12,7 +12,7 @@ import {
   NativeStackScreenProps,
   createNativeStackNavigator,
 } from '@react-navigation/native-stack';
-import {ChangePassword, EditProfileScreen} from '../screens';
+import {ChangePassword, EditProfileScreen, WebViewScreen} from '../screens';
 import {useTranslation} from 'react-i18next';
 
 /**
@@ -24,6 +24,7 @@ export type PrimaryParamList = {
   settings: undefined;
   editProfile: undefined;
   changePassword: undefined;
+  webView: {renderType: 'uri' | 'html'; uriOrHTML: string; title: any};
 };
 
 /**
@@ -47,7 +48,9 @@ const PrimaryNavigator = () => {
         headerShown: false,
       }}>
       {settings.primaryNavigationType == 'drawer' ? (
-        <PrimaryStack.Screen name={'homeNav'} component={DrawerNavigator} />
+        <>
+          <PrimaryStack.Screen name={'homeNav'} component={DrawerNavigator} />
+        </>
       ) : (
         <>
           <PrimaryStack.Screen name={'homeNav'} component={TabNavigator} />
@@ -73,6 +76,15 @@ const PrimaryNavigator = () => {
           />
         </>
       )}
+      <PrimaryStack.Screen
+        name={'webView'}
+        component={WebViewScreen}
+        options={{
+          title: '',
+          headerShown: true,
+          headerBackTitleVisible: false,
+        }}
+      />
     </PrimaryStack.Navigator>
   );
 };
