@@ -26,3 +26,4 @@ export {default as ChevronRight} from './ChevronRight';
 export {default as Camera} from './Camera';
 export {default as CloseCircle} from './CloseCircle';
 export {default as Image} from './Image';
+export {default as ThemeLightDark} from './ThemeLightDark';

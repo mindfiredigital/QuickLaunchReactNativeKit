@@ -10,9 +10,14 @@ import {
 } from '@react-navigation/drawer';
 import {useTheme} from '@react-navigation/native';
 import {useTranslation} from 'react-i18next';
-import {ChangePassword, EditProfileScreen, HomeScreen} from '../screens';
+import {
+  ChangePassword,
+  EditProfileScreen,
+  HomeScreen,
+  SettingsScreen,
+} from '../screens';
 import {Colors, fontSize, lineHeight, spacing, typography} from '../theme';
-import {Icon, IconTypes, Text} from '../components';
+import {Icon, IconTypes, Separator, Text} from '../components';
 import {
   AccountSettings,
   Delete,
@@ -22,6 +27,7 @@ import {
   Lock,
   Logout,
   ShieldCheck,
+  ThemeLightDark,
 } from '../assets/svgs';
 import {
   logoutUser,
@@ -41,6 +47,7 @@ export type DrawerParamsList = {
   home: undefined;
   editProfile: undefined;
   changePassword: undefined;
+  settings: {onlyShowAppSettings?: boolean};
 };
 
 const Drawer = createDrawerNavigator<DrawerParamsList>();
@@ -88,6 +95,7 @@ const CustomDrawerContent = (props: DrawerContentComponentProps) => {
       <DrawerContentScrollView style={styles.scrollView} {...props}>
         {renderProfileView()}
         <DrawerItemList {...props} />
+        <Separator />
         <DrawerItem
           label={t('settings.privacy')}
           icon={({color}) => (
@@ -109,6 +117,7 @@ const CustomDrawerContent = (props: DrawerContentComponentProps) => {
           )}
           onPress={openAboutUs}
         />
+        <Separator />
         <DrawerItem
           label={t('settings.deleteAccount')}
           icon={({color}) => (
@@ -186,6 +195,15 @@ const DrawerNavigator = () => {
           title: t('settings.changePassword'),
           icon: <Lock />,
         })}
+      />
+      <Drawer.Screen
+        name={'settings'}
+        component={SettingsScreen}
+        options={generateScreenOptions({
+          title: t('settings.appSettings'),
+          icon: <ThemeLightDark />,
+        })}
+        initialParams={{onlyShowAppSettings: true}}
       />
     </Drawer.Navigator>
   );

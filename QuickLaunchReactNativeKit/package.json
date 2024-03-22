@@ -15,6 +15,7 @@
     "@invertase/react-native-apple-authentication": "^2.3.0",
     "@react-native-async-storage/async-storage": "^1.22.3",
     "@react-native-google-signin/google-signin": "^11.0.0",
+    "@react-native-segmented-control/segmented-control": "^2.5.0",
     "@react-navigation/bottom-tabs": "^6.5.12",
     "@react-navigation/drawer": "^6.6.7",
     "@react-navigation/native": "^6.1.10",

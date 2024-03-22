@@ -4,7 +4,7 @@
  * Generally speaking, it will contain an auth flow (registration, login, forgot password)
  * and a "main" flow which the user will use once logged in.
  */
-import React, {useEffect} from 'react';
+import React, {useEffect, useMemo} from 'react';
 import {Platform, useColorScheme} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import BootSplash from 'react-native-bootsplash';
@@ -26,18 +26,27 @@ const AppNavigator = (props: NavigationProps) => {
   const scheme = useColorScheme();
   const insets = useSafeAreaInsets();
 
-  /**
-   * To support only light mode change isDarkMode to false
-   * const isDarkMode = false
-   */
-  const isDarkMode = scheme === 'dark';
-  const theme = isDarkMode ? darkTheme : lightTheme;
-  const toastConfig = useToastConfig(theme.colors);
-
   // Redux hooks
   const dispatch = useAppDispatch();
   // Return boolen to idicate if user is loggedin or not
   const {isAuthenticated} = useAppSelector(state => state.auth);
+  const {theme} = useAppSelector(state => state.app);
+
+  /**
+   * Return appTheme based on selection
+   */
+  const appTheme = useMemo(() => {
+    if (theme == 'auto') {
+      const isDarkMode = scheme === 'dark';
+      return isDarkMode ? darkTheme : lightTheme;
+    } else if (theme == 'dark') {
+      return darkTheme;
+    } else {
+      return lightTheme;
+    }
+  }, [theme, darkTheme, lightTheme, scheme]);
+
+  const toastConfig = useToastConfig(appTheme.colors);
 
   // Handle crenditional revoke of apple signin in ios app
   useEffect(() => {
@@ -68,7 +77,7 @@ const AppNavigator = (props: NavigationProps) => {
     <>
       <NavigationContainer
         ref={navigationRef}
-        theme={theme}
+        theme={appTheme}
         onReady={hideBootSplash}
         {...props}>
         {isAuthenticated ? <PrimaryNavigator /> : <AuthNavigator />}
