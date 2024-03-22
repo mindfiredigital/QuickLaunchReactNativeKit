@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, ViewProps, ViewStyle} from 'react-native';
+import {StyleSheet, ViewProps, ViewStyle} from 'react-native';
 import {useTheme} from '@react-navigation/native';
 import {WebView} from 'react-native-webview';
 import {Colors} from '../theme';
