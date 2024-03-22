@@ -3,6 +3,7 @@ import {StyleSheet, ViewProps, ViewStyle} from 'react-native';
 import {useTheme} from '@react-navigation/native';
 import {WebView, WebViewProps} from 'react-native-webview';
 import {Colors} from '../theme';
+import {Spinner} from '.';
 
 /**
  * Props for the WebViewApp component.
@@ -25,7 +26,15 @@ export const WebViewApp = ({source, ...rest}: WebViewAppProps) => {
   // Generating styles based on theme colors
   const styles = makeStyles(colors);
 
-  return <WebView source={source} style={styles.container} {...rest} />;
+  return (
+    <WebView
+      source={source}
+      style={styles.container}
+      startInLoadingState
+      renderLoading={() => <Spinner loading />}
+      {...rest}
+    />
+  );
 };
 
 /**
