@@ -14,7 +14,12 @@ import {
 import {ProfileSettings, SettingsItem, SettingsSection} from './components';
 import {useAppSelector} from '../../store';
 import makeStyles from './styles';
-import {logoutUser} from '../../utils';
+import {
+  logoutUser,
+  openAboutUs,
+  openHelp,
+  openPrivacyPolicy,
+} from '../../utils';
 
 export const SettingsScreen: FC<PrimaryScreenProps<'settings'>> = ({
   navigation,
@@ -77,25 +82,19 @@ export const SettingsScreen: FC<PrimaryScreenProps<'settings'>> = ({
       <SettingsItem
         icon={<ShieldCheck />}
         setting={t('settings.privacy')}
-        onPress={() => {
-          //TODO: Handle help action
-        }}
+        onPress={openPrivacyPolicy}
       />
       <Separator />
       <SettingsItem
         icon={<HelpCircle />}
         setting={t('settings.help')}
-        onPress={() => {
-          //TODO: Handle privacy action
-        }}
+        onPress={openHelp}
       />
       <Separator />
       <SettingsItem
         icon={<Information />}
         setting={t('settings.aboutUs')}
-        onPress={() => {
-          //TODO: Handle about us action
-        }}
+        onPress={openAboutUs}
       />
     </SettingsSection>
   );

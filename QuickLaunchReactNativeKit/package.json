@@ -37,6 +37,7 @@
     "react-native-screens": "^3.29.0",
     "react-native-svg": "^15.1.0",
     "react-native-toast-message": "^2.2.0",
+    "react-native-webview": "^13.8.2",
     "react-redux": "^9.1.0",
     "redux-persist": "^6.0.0"
   },

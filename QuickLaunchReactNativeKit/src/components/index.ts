@@ -8,3 +8,4 @@ export * from './OTPTextField';
 export * from './Spinner';
 export * from './Separator';
 export * from './Card';
+export * from './WebViewApp';

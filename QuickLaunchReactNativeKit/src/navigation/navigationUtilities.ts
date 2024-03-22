@@ -12,3 +12,17 @@ import {PrimaryParamList} from './primaryNavigator';
  * nested navigators, you'll need to use the `useNavigation` with the stack navigator's ParamList type.
  */
 export const navigationRef = createNavigationContainerRef<PrimaryParamList>();
+
+/**
+ * use this to navigate without the navigation
+ * prop. If you have access to the navigation prop, do not use this.
+ * @see {@link https://reactnavigation.org/docs/navigating-without-navigation-prop/}
+ * @param {unknown} name - The name of the route to navigate to.
+ * @param {unknown} params - The params to pass to the route.
+ */
+export function navigate(name: unknown, params?: unknown) {
+  if (navigationRef.isReady()) {
+    // @ts-expect-error
+    navigationRef.navigate(name as never, params as never);
+  }
+}
