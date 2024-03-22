@@ -110,11 +110,7 @@ export const SetNewPasswordScreen: FC<AuthScreenProps<'setNewPassword'>> = ({
    */
   const renderHeaders = () => (
     <View style={styles.headerWrapper}>
-      <Header
-        showLeftBtn
-        onPressLeft={goBack}
-        styleProps={styles.headerStyle}
-      />
+      <Header showLeftBtn onPressLeft={goBack} style={styles.headerStyle} />
       <Text size="h1" text={t('setNewPassoword.title')} />
       <Text
         text={t('setNewPassoword.description')}

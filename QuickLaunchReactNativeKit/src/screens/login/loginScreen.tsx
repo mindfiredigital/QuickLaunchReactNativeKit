@@ -137,7 +137,7 @@ export const LoginScreen: FC<AuthScreenProps<'login'>> = ({navigation}) => {
       <Button
         preset="link"
         btnText={t('login.forgotPassword')}
-        styleProps={styles.forgotView}
+        style={styles.forgotView}
         onPress={redirectToForgotPassword}
       />
       <Button

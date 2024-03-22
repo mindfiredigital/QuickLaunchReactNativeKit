@@ -113,11 +113,7 @@ export const VerifyOTPScreen: FC<AuthScreenProps<'verifyOTP'>> = ({
    */
   const renderHeaders = () => (
     <View style={styles.headerWrapper}>
-      <Header
-        showLeftBtn
-        onPressLeft={goBack}
-        styleProps={styles.headerStyle}
-      />
+      <Header showLeftBtn onPressLeft={goBack} style={styles.headerStyle} />
       <Text size="h1" text={t('verifyOTP.title')} />
       <Text text={t('verifyOTP.description')} style={styles.descriptionText} />
     </View>

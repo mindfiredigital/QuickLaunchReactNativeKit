@@ -33,12 +33,12 @@ export interface ButtonProps extends TouchableOpacityProps {
   /**
    * Style overrides for the button container.
    */
-  styleProps?: StyleProp<ViewStyle>;
+  style?: StyleProp<ViewStyle>;
 
   /**
    * Style overrides for the button text.
    */
-  textStyleProps?: StyleProp<TextStyle>;
+  textStyle?: StyleProp<TextStyle>;
 
   /**
    * Determines whether the button is in a disabled state.
@@ -73,8 +73,8 @@ export const Button = (props: ButtonProps) => {
     btnText,
     preset = 'default',
     onPress,
-    styleProps,
-    textStyleProps,
+    style: styleOverride,
+    textStyle: textStyleOverride,
     disabled = false,
     restTextProps,
     btnIcon,
@@ -108,7 +108,7 @@ export const Button = (props: ButtonProps) => {
       disabled={Boolean(disabled)}
       style={[
         presets[preset].buttonStyles,
-        styleProps,
+        styleOverride,
         disabled ? presets[preset].disabledStyle : null,
       ]}
       {...restProps}>
@@ -117,7 +117,7 @@ export const Button = (props: ButtonProps) => {
       )}
       <Text
         size={textSize[preset]}
-        style={[presets[preset].btnTextStyle, textStyleProps]}
+        style={[presets[preset].btnTextStyle, textStyleOverride]}
         {...restTextProps}>
         {btnText}
       </Text>

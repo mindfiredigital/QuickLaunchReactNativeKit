@@ -35,12 +35,12 @@ export interface HeaderProps extends TouchableOpacityProps {
   /**
    * Style overrides for the header container.
    */
-  styleProps?: StyleProp<ViewStyle>;
+  style?: StyleProp<ViewStyle>;
 
   /**
    * Style overrides for the header text.
    */
-  headerTextStyleProps?: StyleProp<TextStyle>;
+  textStyle?: StyleProp<TextStyle>;
 
   /**
    * Additional header props for the header left button icon component
@@ -60,8 +60,8 @@ export const Header = (props: HeaderProps) => {
     headerText,
     onPressLeft,
     onPressRight,
-    styleProps,
-    headerTextStyleProps,
+    style: styleOverride,
+    textStyle: textStyleOverride,
     showLeftBtn,
     leftBtnIcon = (
       <ChevronLeft height={vs(50)} width={s(40)} fill={colors.tertiary} />
@@ -72,7 +72,7 @@ export const Header = (props: HeaderProps) => {
   const styles = makeStyles(colors);
 
   return (
-    <View style={[styles.container, styleProps]}>
+    <View style={[styles.container, styleOverride]}>
       <View style={styles.leftView}>
         {showLeftBtn && (
           <TouchableOpacity style={styles.leftBtnView} onPress={onPressLeft}>
@@ -86,7 +86,7 @@ export const Header = (props: HeaderProps) => {
           size="h3"
           numberOfLines={1}
           adjustsFontSizeToFit
-          style={[styles.headerText, headerTextStyleProps]}
+          style={[styles.headerText, textStyleOverride]}
         />
       )}
       <View style={styles.rightView}>
