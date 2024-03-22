@@ -1,5 +1,6 @@
 const en = {
   common: {
+    appName: 'QuickLaunchReactNativeKit',
     success: 'Success',
     error: 'Error',
     info: 'Information',
@@ -90,9 +91,6 @@ const en = {
   home: {
     title: 'Home',
   },
-  comman: {
-    back: 'Back',
-  },
   editProfile: {
     title: 'Profile',
     mobileNumPlaceholder: 'Mobile Number',
@@ -104,7 +102,7 @@ const en = {
     takePhoto: 'Take Photo',
     choosePhoto: 'Choose Photo',
     cancel: 'Cancel',
-    openSetting: 'Open setting',
+    openSetting: 'Open Setting',
     ok: 'Ok',
   },
 };
