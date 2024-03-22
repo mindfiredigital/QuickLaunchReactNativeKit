@@ -74,11 +74,7 @@ export const ForgotPasswordScreen: FC<AuthScreenProps<'forgotPassword'>> = ({
    */
   const renderHeaders = () => (
     <View style={styles.headerWrapper}>
-      <Header
-        showLeftBtn
-        onPressLeft={goBack}
-        styleProps={styles.headerStyle}
-      />
+      <Header showLeftBtn onPressLeft={goBack} style={styles.headerStyle} />
       <Text size="h1" text={t('forgotPassword.title')} />
       <Text
         text={t('forgotPassword.description')}

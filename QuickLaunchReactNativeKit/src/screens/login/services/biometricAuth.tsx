@@ -186,7 +186,7 @@ const makeStyles = (colors: Colors) =>
   StyleSheet.create({
     biometricView: {
       maxWidth: vs(240),
-      backgroundColor: colors.card,
+      backgroundColor: colors.backgroundSecondary,
       alignSelf: 'center',
       alignItems: 'center',
       borderRadius: vs(spacing.xs),

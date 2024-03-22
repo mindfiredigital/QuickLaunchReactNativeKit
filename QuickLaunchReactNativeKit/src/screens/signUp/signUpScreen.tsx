@@ -136,11 +136,7 @@ export const SignUpScreen: FC<AuthScreenProps<'signUp'>> = ({navigation}) => {
    */
   const renderHeaders = () => (
     <View style={styles.headerWrapper}>
-      <Header
-        showLeftBtn
-        styleProps={styles.headerStyle}
-        onPressLeft={goBack}
-      />
+      <Header showLeftBtn style={styles.headerStyle} onPressLeft={goBack} />
       <Text size="h1" text={t('login.signup')} />
     </View>
   );
@@ -153,7 +149,7 @@ export const SignUpScreen: FC<AuthScreenProps<'signUp'>> = ({navigation}) => {
       <Button
         btnText={t('login.signup')}
         onPress={signUpUser}
-        styleProps={styles.signUpBtn}
+        style={styles.signUpBtn}
         disabled={!isFormValid()}
       />
     </>
