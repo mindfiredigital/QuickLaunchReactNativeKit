@@ -1,13 +1,13 @@
 import React from 'react';
 import {StyleSheet, ViewProps, ViewStyle} from 'react-native';
 import {useTheme} from '@react-navigation/native';
-import {WebView} from 'react-native-webview';
+import {WebView, WebViewProps} from 'react-native-webview';
 import {Colors} from '../theme';
 
 /**
  * Props for the WebViewApp component.
  */
-export interface WebViewAppProps extends ViewProps {
+export interface WebViewAppProps extends WebViewProps {
   /**
    * The source of the web page to display.
    */
