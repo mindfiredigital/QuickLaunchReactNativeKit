@@ -8,14 +8,17 @@ import {
   ViewStyle,
 } from 'react-native';
 import React from 'react';
-import ImagePicker, {ImageOrVideo} from 'react-native-image-crop-picker';
+import ImagePicker, {
+  ImageOrVideo,
+  Options,
+} from 'react-native-image-crop-picker';
 import {useTheme} from '@react-navigation/native';
 import {useTranslation} from 'react-i18next';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {Colors, spacing} from '../../../theme';
 import {Camera, CloseCircle, Image} from '../../../assets/svgs';
 import {Card, Icon, MenuItem, Separator, Text} from '../../../components';
-import {s, vs} from '../../../utils';
+import {s, showErrorToast, vs} from '../../../utils';
 
 /**
  * Props interface for the ImageUploadModal component.
@@ -39,6 +42,11 @@ export interface ImageUploadModalProps {
   updateImage: (image: ImageOrVideo) => void;
 }
 
+/**
+ * Handle image picker UI and pick image from gallary or capture new image
+ * @param props
+ * @returns
+ */
 export const ImageUploadModal = (props: ImageUploadModalProps) => {
   const {modal, setModal, updateImage} = props;
   const {colors} = useTheme();
@@ -47,29 +55,33 @@ export const ImageUploadModal = (props: ImageUploadModalProps) => {
   // Styles
   const styles = makeStyles(colors);
 
+  /** Image picker options for image cropping */
+  const imagePickerOptions: Options = {
+    mediaType: 'photo', // Specifies that only photos should be captured
+    cropping: true, // Enables image cropping
+    width: 400, // Cropped image width
+    height: 400, // Cropped image height
+    includeBase64: false, // Indicates whether to include base64 encoded image data
+    compressImageQuality: 0.5, // Image compression quality (0.0 - 1.0)
+    showCropGuidelines: true, // Shows guidelines during image cropping
+  };
+
   /**
    * Function to take a photo from the device camera.
    */
   const takePhotoFromCamera = async () => {
     // Opens the device camera to capture a photo
-    await ImagePicker.openCamera({
-      mediaType: 'photo', // Specifies that only photos should be captured
-      cropping: true, // Enables image cropping
-      width: 400, // Cropped image width
-      height: 400, // Cropped image height
-      includeBase64: false, // Indicates whether to include base64 encoded image data
-      compressImageQuality: 0.5, // Image compression quality (0.0 - 1.0)
-      showCropGuidelines: true, // Shows guidelines during image cropping
-    })
+    await ImagePicker.openCamera(imagePickerOptions)
       .then((image: ImageOrVideo) => {
-        // Dismisses the modal and updates the image with the captured photo
-        setModal(false);
+        // updates the image with the captured photo
         updateImage(image);
       })
-      .catch(function () {
-        // Dismisses the modal and shows an alert if there is an error
+      .catch((reason: any) => {
+        handlePickerError(reason);
+      })
+      .finally(() => {
+        // Dismisses the modal
         setModal(false);
-        showAlert();
       });
   };
 
@@ -78,32 +90,46 @@ export const ImageUploadModal = (props: ImageUploadModalProps) => {
    */
   const choosePhotoFromLibrary = async () => {
     // Opens the device library to choose a photo
-    await ImagePicker.openPicker({
-      mediaType: 'photo', // Specifies that only photos should be selected
-      cropping: true, // Enables image cropping
-      width: 400, // Cropped image width
-      height: 400, // Cropped image height
-      includeBase64: false, // Indicates whether to include base64 encoded image data
-      compressImageQuality: 0.5, // Image compression quality (0.0 - 1.0)
-      showCropGuidelines: true, // Shows guidelines during image cropping
-    })
+    await ImagePicker.openPicker(imagePickerOptions)
       .then(image => {
-        // Dismisses the modal and updates the image with the selected photo
-        setModal(false);
+        // updates the image with the selected photo
         updateImage(image);
       })
-      .catch(function () {
-        // Dismisses the modal and shows an alert if there is an error
+      .catch((reason: any) => {
+        handlePickerError(reason);
+      })
+      .finally(() => {
+        // Dismisses the modal
         setModal(false);
-        showAlert();
       });
   };
 
+  /**
+   * Handle picker error and display it to user
+   */
+  const handlePickerError = (reason: any) => {
+    switch (reason?.code) {
+      case 'E_PICKER_CANCELLED':
+        break;
+      case 'E_NO_LIBRARY_PERMISSION':
+      case 'E_NO_CAMERA_PERMISSION':
+        showAlert(reason?.message);
+        break;
+      default:
+        showErrorToast({
+          message: !!reason?.message
+            ? reason?.message
+            : t('apiErrors.unexpectedError'),
+        });
+        break;
+    }
+  };
+
   //show alert
-  const showAlert = () => {
-    Alert.alert('', t('imageUpload.openSetting'), [
+  const showAlert = (message: string) => {
+    Alert.alert(t('common.appName'), message, [
       // Optional buttons configuration
-      {text: t('imageUpload.ok'), onPress: openAppSettings},
+      {text: t('imageUpload.openSetting'), onPress: openAppSettings},
     ]);
   };
 
