@@ -9,3 +9,4 @@ export * from './Spinner';
 export * from './Separator';
 export * from './Card';
 export * from './WebViewApp';
+export * from './MenuItem';

@@ -126,7 +126,7 @@ export const socialLogIn = createAsyncThunk(
  */
 export const getUser = createAsyncThunk(
   endPoints.auth.getUser,
-  async (data: '', {rejectWithValue}) => {
+  async (data, {rejectWithValue}) => {
     try {
       const res: GetUserRes = await api.get(endPoints.auth.getUser);
       return res;

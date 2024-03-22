@@ -1,11 +1,21 @@
-import {View, Modal, Linking, StyleSheet, Alert} from 'react-native';
+import {
+  View,
+  Modal,
+  Linking,
+  StyleSheet,
+  Alert,
+  TouchableOpacity,
+  ViewStyle,
+} from 'react-native';
 import React from 'react';
 import ImagePicker, {ImageOrVideo} from 'react-native-image-crop-picker';
 import {useTheme} from '@react-navigation/native';
 import {useTranslation} from 'react-i18next';
-import {Colors, spacing} from '../theme';
-import {s, vs} from '../utils';
-import {Button, Text} from '.';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {Colors, spacing} from '../../../theme';
+import {Camera, CloseCircle, Image} from '../../../assets/svgs';
+import {Card, Icon, MenuItem, Separator, Text} from '../../../components';
+import {s, vs} from '../../../utils';
 
 /**
  * Props interface for the ImageUploadModal component.
@@ -27,22 +37,13 @@ export interface ImageUploadModalProps {
    * @param image The image to be updated.
    */
   updateImage: (image: ImageOrVideo) => void;
-
-  /**
-   * The title of the modal.
-   */
-  title: string;
-
-  /**
-   * The subtitle of the modal.
-   */
-  subtitle: string;
 }
 
-const ImageUploadModal = (props: ImageUploadModalProps) => {
-  const {modal, setModal, updateImage, title, subtitle} = props;
+export const ImageUploadModal = (props: ImageUploadModalProps) => {
+  const {modal, setModal, updateImage} = props;
   const {colors} = useTheme();
   const {t} = useTranslation();
+  const insets = useSafeAreaInsets();
   // Styles
   const styles = makeStyles(colors);
 
@@ -117,84 +118,77 @@ const ImageUploadModal = (props: ImageUploadModalProps) => {
     setModal(false);
   };
 
-  return (
-    <View>
-      <Modal animationType="slide" transparent={true} visible={modal}>
-        <View style={styles.container1}>
-          <View style={styles.modalPickImageStyle}>
-            <View style={styles.uploadContainer}>
-              <Text size="h1">{title}</Text>
-              <Text size="h2" style={styles.panelSubtitle}>
-                {subtitle}
-              </Text>
-            </View>
-            <Button
-              btnText={t('imageUpload.takePhoto')}
-              onPress={takePhotoFromCamera}
-            />
-            <Button
-              btnText={t('imageUpload.chooseFrom')}
-              onPress={choosePhotoFromLibrary}
-            />
-            <Button btnText={t('imageUpload.cancel')} onPress={hideModal} />
-          </View>
-        </View>
-      </Modal>
+  const renderHeader = () => (
+    <View style={styles.uploadContainer}>
+      <View>
+        <Text size="h2">{t('editProfile.editProfilePicture')}</Text>
+        <Text>{t('editProfile.editProfilePictureDesc')}</Text>
+      </View>
+      <Icon
+        icon={<CloseCircle />}
+        size={vs(30)}
+        color={colors.tertiary}
+        onPress={hideModal}
+      />
     </View>
+  );
+
+  const renderOptions = () => (
+    <Card style={styles.card}>
+      <View style={{overflow: 'hidden', borderRadius: s(spacing.xs)}}>
+        <MenuItem
+          icon={<Camera />}
+          text={t('imageUpload.takePhoto')}
+          onPress={takePhotoFromCamera}
+        />
+        <Separator />
+        <MenuItem
+          icon={<Image />}
+          text={t('imageUpload.choosePhoto')}
+          onPress={choosePhotoFromLibrary}
+        />
+      </View>
+    </Card>
+  );
+
+  return (
+    <Modal animationType="slide" transparent={true} visible={modal}>
+      <TouchableOpacity
+        activeOpacity={1}
+        style={styles.overlayContainer}
+        onPress={hideModal}>
+        <TouchableOpacity
+          activeOpacity={1}
+          style={[styles.modalPickImageStyle, {paddingBottom: insets.bottom}]}>
+          {renderHeader()}
+          {renderOptions()}
+        </TouchableOpacity>
+      </TouchableOpacity>
+    </Modal>
   );
 };
 
 const makeStyles = (colors: Colors) =>
   StyleSheet.create({
-    container1: {
+    overlayContainer: {
       flex: 1,
       backgroundColor: 'rgba(0,0,0,0.5)',
-    },
+    } as ViewStyle,
     modalPickImageStyle: {
       marginTop: 'auto',
-      backgroundColor: colors.background,
-      borderTopLeftRadius: s(20),
-      borderTopRightRadius: s(20),
-    },
-    panelTitle: {
-      fontStyle: 'normal',
-      fontWeight: '600',
-      fontSize: 24,
-      lineHeight: 28,
-      height: vs(spacing.xl),
-      color: colors.text,
-    },
-    panelSubtitle: {
-      height: vs(spacing.xl),
-      marginBottom: vs(spacing.md),
-    },
-    panelButtonTitle: {
-      fontStyle: 'normal',
-      fontWeight: '500',
-      fontSize: 20,
-      lineHeight: 28,
-      letterSpacing: 0.25,
-      color: 'white',
-    },
-    panelButton: {
-      padding: vs(spacing.md),
-      borderRadius: vs(spacing.md),
-      backgroundColor: colors.primary,
-      alignItems: 'center',
-      marginVertical: vs(spacing.md),
-      marginLeft: vs(spacing.md),
-      marginRight: vs(spacing.md),
-    },
-    flexDirection: {
-      flexDirection: 'row',
-    },
+      backgroundColor: colors.backgroundSecondary,
+      borderTopLeftRadius: s(spacing.md),
+      borderTopRightRadius: s(spacing.md),
+    } as ViewStyle,
     uploadContainer: {
-      alignItems: 'center',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      paddingHorizontal: s(spacing.md),
       marginTop: vs(spacing.md),
-    },
-    marginBottom: {
-      marginBottom: vs(spacing.xxl),
-    },
+      marginBottom: vs(spacing.sm),
+    } as ViewStyle,
+    card: {
+      marginHorizontal: s(spacing.md),
+      marginBottom: vs(spacing.md),
+    } as ViewStyle,
   });
-
-export default ImageUploadModal;

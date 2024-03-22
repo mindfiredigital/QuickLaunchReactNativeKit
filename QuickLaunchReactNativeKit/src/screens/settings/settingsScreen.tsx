@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import {useTranslation} from 'react-i18next';
 import {useTheme} from '@react-navigation/native';
-import {Screen, Separator} from '../../components';
+import {MenuItem, Screen, Separator} from '../../components';
 import {PrimaryScreenProps} from '../../navigation/primaryNavigator';
 import {
   Delete,
@@ -11,7 +11,7 @@ import {
   Logout,
   ShieldCheck,
 } from '../../assets/svgs';
-import {ProfileSettings, SettingsItem, SettingsSection} from './components';
+import {ProfileSettings, SettingsSection} from './components';
 import {useAppSelector} from '../../store';
 import makeStyles from './styles';
 import {
@@ -49,26 +49,26 @@ export const SettingsScreen: FC<PrimaryScreenProps<'settings'>> = ({
         }}
       />
       <Separator />
-      <SettingsItem
+      <MenuItem
         icon={<Lock />}
-        setting={t('settings.changePassword')}
+        text={t('settings.changePassword')}
         onPress={() => {
           // Handle change password action
           navigation.navigate('changePassword');
         }}
       />
       <Separator />
-      <SettingsItem
+      <MenuItem
         icon={<Delete />}
-        setting={t('settings.deleteAccount')}
+        text={t('settings.deleteAccount')}
         onPress={() => {
           //TODO: Handle help action
         }}
       />
       <Separator />
-      <SettingsItem
+      <MenuItem
         icon={<Logout />}
-        setting={t('settings.logout')}
+        text={t('settings.logout')}
         onPress={logoutUser}
       />
     </SettingsSection>
@@ -79,21 +79,21 @@ export const SettingsScreen: FC<PrimaryScreenProps<'settings'>> = ({
    */
   const otherSettings = () => (
     <SettingsSection title={t('settings.other')}>
-      <SettingsItem
+      <MenuItem
         icon={<ShieldCheck />}
-        setting={t('settings.privacy')}
+        text={t('settings.privacy')}
         onPress={openPrivacyPolicy}
       />
       <Separator />
-      <SettingsItem
+      <MenuItem
         icon={<HelpCircle />}
-        setting={t('settings.help')}
+        text={t('settings.help')}
         onPress={openHelp}
       />
       <Separator />
-      <SettingsItem
+      <MenuItem
         icon={<Information />}
-        setting={t('settings.aboutUs')}
+        text={t('settings.aboutUs')}
         onPress={openAboutUs}
       />
     </SettingsSection>

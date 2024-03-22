@@ -8,7 +8,7 @@ export const fontSize = {
   /** Font size for Heading 1 */
   h1: vs(30),
   /** Font size for Heading 2 */
-  h2: vs(24),
+  h2: vs(22),
   /** Font size for Heading 3 */
   h3: vs(18),
   /** Font size for Heading 4 */
