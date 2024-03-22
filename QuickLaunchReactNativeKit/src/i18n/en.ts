@@ -87,6 +87,8 @@ const en = {
     help: 'Help',
     aboutUs: 'About us',
     deleteAccount: 'Delete Account',
+    theme: 'Theme',
+    appSettings: 'App Settings',
   },
   home: {
     title: 'Home',

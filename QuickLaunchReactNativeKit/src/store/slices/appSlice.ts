@@ -3,16 +3,22 @@ import {changePassword, uploadProfileImage} from '../actions';
 
 export interface AppState {
   loading: boolean;
+  theme: 'auto' | 'light' | 'dark';
 }
 
 const initialState: AppState = {
   loading: false,
+  theme: 'auto',
 };
 
 export const appSlice = createSlice({
   name: 'app',
   initialState,
-  reducers: {},
+  reducers: {
+    updateTheme: (state, {payload}: {payload: AppState['theme']}) => {
+      state.theme = payload;
+    },
+  },
   extraReducers: builder => {
     builder.addCase(uploadProfileImage.pending, state => {
       state.loading = true;
@@ -34,3 +40,6 @@ export const appSlice = createSlice({
     });
   },
 });
+
+// Action creators are generated for each case reducer function
+export const {updateTheme} = appSlice.actions;

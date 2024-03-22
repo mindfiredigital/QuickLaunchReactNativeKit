@@ -28,11 +28,20 @@ const persistAuthConfig = {
 };
 
 /**
+ * persistence config for app reducer
+ */
+const persistAppConfig = {
+  key: 'app',
+  storage: AsyncStorage,
+  whitelist: ['theme'],
+};
+
+/**
  * Combine all the reducers
  */
 const appReducer = combineSlices({
   auth: persistReducer(persistAuthConfig, authSlice.reducer),
-  app: appSlice.reducer,
+  app: persistReducer(persistAppConfig, appSlice.reducer),
 });
 
 /**
@@ -44,9 +53,13 @@ const appReducer = combineSlices({
 export const rootReducer = (state: any, action: UnknownAction) => {
   // Reset redux state
   if (action.type === RESET_STATE) {
-    AsyncStorage.removeItem('persist:root');
-    AsyncStorage.removeItem('persist:auth');
-    state = undefined;
+    AsyncStorage.multiRemove(['persist:root', 'persist:auth']);
+    // Preserve selected theme preference
+    state = {
+      app: {
+        theme: state.app.theme,
+      },
+    };
   }
 
   return appReducer(state, action);

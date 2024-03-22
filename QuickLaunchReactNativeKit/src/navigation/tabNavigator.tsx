@@ -15,7 +15,7 @@ import {s, vs} from '../utils';
 
 export type TabParansList = {
   home: undefined;
-  settings: undefined;
+  settings: {onlyShowAppSettings?: boolean};
 };
 
 /**

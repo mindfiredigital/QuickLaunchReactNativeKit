@@ -21,7 +21,7 @@ import {useTranslation} from 'react-i18next';
  */
 export type PrimaryParamList = {
   homeNav: undefined;
-  settings: undefined;
+  settings: {onlyShowAppSettings?: boolean};
   editProfile: undefined;
   changePassword: undefined;
   webView: {renderType: 'uri' | 'html'; uriOrHTML: string; title: any};

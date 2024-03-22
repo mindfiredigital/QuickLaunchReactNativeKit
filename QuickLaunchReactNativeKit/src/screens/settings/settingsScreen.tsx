@@ -11,7 +11,7 @@ import {
   Logout,
   ShieldCheck,
 } from '../../assets/svgs';
-import {ProfileSettings, SettingsSection} from './components';
+import {AppTheme, ProfileSettings, SettingsSection} from './components';
 import {useAppSelector} from '../../store';
 import makeStyles from './styles';
 import {
@@ -23,10 +23,12 @@ import {
 
 export const SettingsScreen: FC<PrimaryScreenProps<'settings'>> = ({
   navigation,
+  route,
 }) => {
   // constants & hooks
   const {colors} = useTheme();
   const {t} = useTranslation();
+  const {params} = route;
 
   // redux hooks
   const {user} = useAppSelector(state => state.auth);
@@ -75,6 +77,15 @@ export const SettingsScreen: FC<PrimaryScreenProps<'settings'>> = ({
   );
 
   /**
+   * Generates the app related settings section.
+   */
+  const renderAppSettings = (title: string) => (
+    <SettingsSection title={title}>
+      <AppTheme />
+    </SettingsSection>
+  );
+
+  /**
    * Generates the other settings section.
    */
   const otherSettings = () => (
@@ -99,6 +110,18 @@ export const SettingsScreen: FC<PrimaryScreenProps<'settings'>> = ({
     </SettingsSection>
   );
 
+  if (!!params?.onlyShowAppSettings) {
+    return (
+      <Screen
+        safeAreaEdges={['left', 'right']}
+        preset="auto"
+        style={styles.container}
+        contentContainerStyle={styles.contentContainer}>
+        {renderAppSettings('')}
+      </Screen>
+    );
+  }
+
   return (
     <Screen
       safeAreaEdges={['left', 'right']}
@@ -106,6 +129,7 @@ export const SettingsScreen: FC<PrimaryScreenProps<'settings'>> = ({
       style={styles.container}
       contentContainerStyle={styles.contentContainer}>
       {accountSettings()}
+      {renderAppSettings(t('settings.app'))}
       {otherSettings()}
     </Screen>
   );
