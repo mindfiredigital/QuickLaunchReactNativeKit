@@ -1,5 +1,13 @@
 import {ThemeList} from './src/theme';
 
+/**
+ * Default settings for the application.
+ */
+export const settings: Settings = {
+  theme: 'theme2',
+  navigationType: 'tab',
+};
+
 interface Settings {
   /**
    * theme: Select predefined theme
@@ -9,18 +17,10 @@ interface Settings {
   theme: ThemeList;
 
   /**
-   * primaryNavigationType: Select the type of primary navigation
+   * navigationType: Select the type of primary navigation
    * Options: 'tab' or 'drawer'
    * 'tab': Uses tab-based navigation
    * 'drawer': Uses drawer-based navigation
    */
-  primaryNavigationType: 'tab' | 'drawer';
+  navigationType: 'tab' | 'drawer';
 }
-
-/**
- * Default settings for the application.
- */
-export const settings: Settings = {
-  theme: 'theme2',
-  primaryNavigationType: 'tab',
-};
