@@ -47,7 +47,7 @@ const PrimaryNavigator = () => {
         navigationBarColor: colors.background,
         headerShown: false,
       }}>
-      {settings.primaryNavigationType == 'drawer' ? (
+      {settings.navigationType == 'drawer' ? (
         <>
           <PrimaryStack.Screen name={'homeNav'} component={DrawerNavigator} />
         </>

@@ -35,7 +35,6 @@ if (npmInstallProcess.status !== 0) {
 const wantsCustomTheme = readlineSync.keyInYNStrict(
   `\n${BLUE}2. Do you want to set custom theme values?${NC}`
 );
-let selectedTheme = "theme2";
 
 // Default colors for custom theme
 const colors = {
@@ -198,7 +197,7 @@ const generateCustomTheme = () => {
   updateTheme();
 };
 
-const updateSettingsTheme = () => {
+const updateSettingsTheme = (selectedTheme = "theme2") => {
   const filePathToSettings = "settings.ts";
   fs.readFile(filePathToSettings, "utf8", (err, data) => {
     if (err) {
@@ -280,37 +279,97 @@ const updateTheme = () => {
   });
 };
 
-// If the user wants a custom theme, get user input for each color
-if (wantsCustomTheme) {
-  console.log(`\n${BLUE}3. Press enter or return to fill default color.${NC}`);
+// Function to update the settings file with the selected navigation type
+const updateNavigationType = (navigationType) => {
+  const filePathToSettings = "settings.ts";
+  fs.readFile(filePathToSettings, "utf8", (err, data) => {
+    if (err) {
+      console.error("Error reading file:", err);
+      return;
+    }
+
+    // Update the navigationType value
+    const updatedData = data.replace(
+      /navigationType: '[^']*'/,
+      `navigationType: '${navigationType}'`
+    );
+
+    // Write the updated content back to the file
+    fs.writeFile(filePathToSettings, updatedData, "utf8", (err) => {
+      if (err) {
+        console.error("Error writing to file:", err);
+        return;
+      }
+    });
+  });
+};
+
+const configureTheme = async () => {
+  // If the user wants a custom theme, get user input for each color
+  if (wantsCustomTheme) {
+    console.log(
+      `\n${BLUE}3. Press enter or return to fill default color.${NC}`
+    );
+    console.log(
+      `${chalk.green(
+        "Hint:"
+      )} Consider both light and dark mode versions for optimal theme design`
+    );
+    for (const color in colors) {
+      colors[color] = promptForColor(color, colors[color]);
+    }
+    generateCustomTheme();
+    console.log(`${GREEN}\u2713 Theme file generated successfully!${NC}\n`);
+  } else {
+    // If the user doesn't want a custom theme, provide options
+    console.log(`\n${BLUE}3. Choose a theme from the options:${NC}`);
+    console.log(
+      `${chalk.green("Hint:")} Refer to README.md file for preset themes.`
+    );
+    const themeOptions = ["theme1", "theme2", "theme3"];
+    const themeSelectionPrompt = {
+      type: "list",
+      name: "selectedTheme",
+      message: "Select:",
+      choices: themeOptions,
+    };
+
+    const themeAnswer = await inquirer.prompt(themeSelectionPrompt);
+    const selectedTheme = themeAnswer.selectedTheme;
+    updateSettingsTheme(selectedTheme);
+    console.log(
+      `${GREEN}\u2713 ${selectedTheme} will be used.${NC}\nTo update theme navigate to settings.ts and choose theme from preset list!${NC}\n`
+    );
+  }
+};
+
+const configureNavigationType = async () => {
+  // Ask the user to choose the navigation type
+  console.log(`${BLUE}Choose the navigation type:${NC}`);
   console.log(
     `${chalk.green(
       "Hint:"
-    )} Consider both light and dark mode versions for optimal theme design`
+    )} Refer to README.md file for navigation type options.`
   );
-  for (const color in colors) {
-    colors[color] = promptForColor(color, colors[color]);
-  }
-  generateCustomTheme();
-  console.log(`${GREEN}\u2713 Theme file generated successfully!${NC}\n`);
-} else {
-  // If the user doesn't want a custom theme, provide options
-  console.log(`\n${BLUE}3. Choose a theme from the options:${NC}`);
-  console.log(
-    `${chalk.green("Hint:")} Refer to README.md file for preset themes.`
-  );
-  const themeOptions = ["theme1", "theme2", "theme3"];
-  const themeSelectionPrompt = {
+  const navigationTypeOptions = ["tab", "drawer"];
+  const navigationTypeSelectionPrompt = {
     type: "list",
-    name: "selectedTheme",
-    message: "Select:",
-    choices: themeOptions,
+    name: "selectedNavigationType",
+    message: "Select navigation type:",
+    choices: navigationTypeOptions,
   };
 
-  const themeAnswer = await inquirer.prompt(themeSelectionPrompt);
-  selectedTheme = themeAnswer.selectedTheme;
-  updateSettingsTheme();
+  const navigationAnswer = await inquirer.prompt(navigationTypeSelectionPrompt);
+  const selectedNavigationType = navigationAnswer.selectedNavigationType;
+  updateNavigationType(selectedNavigationType);
   console.log(
-    `${GREEN}\u2713 ${selectedTheme} will be used.${NC}\nTo update theme navigate to settings.ts and choose theme from preset list!${NC}\n`
+    `${GREEN}\u2713 Navigation type set to ${selectedNavigationType}.${NC}\n`
   );
-}
+};
+
+const main = async () => {
+  await configureTheme();
+  await configureNavigationType();
+};
+
+main();
