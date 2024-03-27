@@ -34,8 +34,8 @@ interface MenuItemProps extends TouchableOpacityProps {
 export const MenuItem = ({
   icon,
   text,
-  leftIconSize = vs(24),
-  rightIconSize = vs(24),
+  leftIconSize = vs(22),
+  rightIconSize = vs(22),
   rightChildren,
   bottomChildren,
   ...rest
@@ -77,7 +77,7 @@ export const MenuItem = ({
 const makeStyles = (colors: Colors) =>
   StyleSheet.create({
     menuOuterItemContainer: {
-      paddingVertical: vs(spacing.md),
+      paddingVertical: vs(spacing.sm),
       paddingHorizontal: s(spacing.sm),
     },
     menuItemContainer: {

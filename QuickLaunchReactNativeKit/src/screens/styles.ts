@@ -8,6 +8,9 @@ const makeCommanStyles = (colors: Colors) =>
       flexGrow: 1,
       justifyContent: 'space-between',
     } as ViewStyle,
+    headerBackground: {
+      backgroundColor: colors.background,
+    },
     header: {
       backgroundColor: colors.background,
       borderBottomWidth: 0,
