@@ -51,6 +51,7 @@ const PrimaryNavigator = () => {
         headerTintColor: colors.tertiary,
         headerShown: false,
         headerTitleAlign: 'center',
+        headerStyle: commonStyles.headerBackground,
       }}>
       {settings.navigationType == 'drawer' ? (
         <>
