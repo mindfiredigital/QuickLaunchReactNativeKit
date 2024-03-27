@@ -199,11 +199,9 @@ export const ChangePassword: FC<PrimaryScreenProps<'changePassword'>> = ({
       safeAreaEdges={['bottom', 'bottom', 'right']}
       preset="auto"
       loading={loading}>
-      <View>
-        {renderHeaders()}
-        {renderTextInputs()}
-        {renderSubmitPassword()}
-      </View>
+      {renderHeaders()}
+      {renderTextInputs()}
+      {renderSubmitPassword()}
     </Screen>
   );
 };

@@ -40,14 +40,14 @@ const makeStyles = (colors: Colors) =>
   StyleSheet.create({
     card: {
       // Shadow properties
-      shadowColor: colors.text,
+      shadowColor: colors.black,
       shadowOffset: {
         width: 0,
         height: 1,
       },
       shadowOpacity: 0.15,
       shadowRadius: 5.65,
-      elevation: 6, // For Android elevation
+      elevation: 2, // For Android elevation
       borderRadius: s(spacing.xs),
       backgroundColor: colors.card,
     } as ViewStyle,

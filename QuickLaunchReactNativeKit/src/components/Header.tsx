@@ -8,15 +8,16 @@ import {
   TextStyle,
   View,
   TouchableOpacity,
+  ViewProps,
 } from 'react-native';
 import {useTheme} from '@react-navigation/native';
 import {Text} from './Text';
 import {Colors} from '../theme';
 import {s, vs} from '../utils';
-import {IconTypes} from '.';
+import {Icon, IconTypes} from '.';
 import {ChevronLeft} from '../assets/svgs';
 
-export interface HeaderProps extends TouchableOpacityProps {
+export interface HeaderProps extends ViewProps {
   /**
    * The text to be displayed on top.
    */
@@ -64,7 +65,7 @@ export const Header = (props: HeaderProps) => {
     textStyle: textStyleOverride,
     showLeftBtn,
     leftBtnIcon = (
-      <ChevronLeft height={vs(50)} width={s(40)} fill={colors.tertiary} />
+      <Icon icon={<ChevronLeft />} size={vs(40)} color={colors.tertiary} />
     ),
     rightBtnIcon,
     ...restProps
@@ -72,7 +73,7 @@ export const Header = (props: HeaderProps) => {
   const styles = makeStyles(colors);
 
   return (
-    <View style={[styles.container, styleOverride]}>
+    <View style={[styles.container, styleOverride]} {...restProps}>
       <View style={styles.leftView}>
         {showLeftBtn && (
           <TouchableOpacity style={styles.leftBtnView} onPress={onPressLeft}>

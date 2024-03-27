@@ -1,5 +1,6 @@
 import {StyleSheet, ViewStyle} from 'react-native';
-import {Colors, typography} from '../theme';
+import {Colors, fontSize, lineHeight, typography} from '../theme';
+import {vs} from '../utils';
 
 const makeCommanStyles = (colors: Colors) =>
   StyleSheet.create({
@@ -7,6 +8,24 @@ const makeCommanStyles = (colors: Colors) =>
       flexGrow: 1,
       justifyContent: 'space-between',
     } as ViewStyle,
+    header: {
+      backgroundColor: colors.background,
+      borderBottomWidth: 0,
+      shadowColor: colors.black,
+      shadowOffset: {
+        width: 0,
+        height: 1,
+      },
+      shadowOpacity: 0.15,
+      shadowRadius: 5.65,
+      elevation: 6,
+    } as ViewStyle,
+    headerTitle: {
+      fontSize: vs(16),
+      fontFamily: typography.medium,
+      fontWeight: undefined,
+      color: colors.text,
+    },
   });
 
 export default makeCommanStyles;

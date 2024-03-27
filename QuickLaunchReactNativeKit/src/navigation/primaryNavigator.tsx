@@ -12,8 +12,9 @@ import {
   NativeStackScreenProps,
   createNativeStackNavigator,
 } from '@react-navigation/native-stack';
-import {ChangePassword, EditProfileScreen, WebViewScreen} from '../screens';
 import {useTranslation} from 'react-i18next';
+import {ChangePassword, EditProfileScreen, WebViewScreen} from '../screens';
+import makeCommanStyles from '../screens/styles';
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -39,13 +40,17 @@ const PrimaryStack = createNativeStackNavigator<PrimaryParamList>();
 const PrimaryNavigator = () => {
   const {colors} = useTheme();
   const {t} = useTranslation();
+  const commonStyles = makeCommanStyles(colors);
 
   return (
     <PrimaryStack.Navigator
       initialRouteName="homeNav"
       screenOptions={{
         navigationBarColor: colors.background,
+        headerTitleStyle: commonStyles.headerTitle,
+        headerTintColor: colors.tertiary,
         headerShown: false,
+        headerTitleAlign: 'center',
       }}>
       {settings.navigationType == 'drawer' ? (
         <>

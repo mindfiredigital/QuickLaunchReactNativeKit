@@ -2,7 +2,7 @@ import React, {FC, useRef, useState} from 'react';
 import {TextInput, View} from 'react-native';
 import {useTheme} from '@react-navigation/native';
 import {useTranslation} from 'react-i18next';
-import {Button, Header, Screen, Text, TextField} from '../../components';
+import {Button, Screen, Text, TextField} from '../../components';
 import {AuthScreenProps} from '../../navigation/authNavigator';
 import {showSuccessToast, useValidation, vs} from '../../utils';
 import {LoginRes, SignUpReq} from '../../api';
@@ -136,7 +136,6 @@ export const SignUpScreen: FC<AuthScreenProps<'signUp'>> = ({navigation}) => {
    */
   const renderHeaders = () => (
     <View style={styles.headerWrapper}>
-      <Header showLeftBtn style={styles.headerStyle} onPressLeft={goBack} />
       <Text size="h1" text={t('login.signup')} />
     </View>
   );
@@ -229,7 +228,7 @@ export const SignUpScreen: FC<AuthScreenProps<'signUp'>> = ({navigation}) => {
 
   return (
     <Screen
-      safeAreaEdges={['top', 'bottom', 'left', 'right']}
+      safeAreaEdges={['bottom', 'left', 'right']}
       preset="auto"
       loading={loading}
       bottomContent={renderSignIn()}>

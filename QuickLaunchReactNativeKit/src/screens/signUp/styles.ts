@@ -5,7 +5,7 @@ import {s, vs} from '../../utils';
 const makeStyles = (colors: Colors) =>
   StyleSheet.create({
     headerWrapper: {
-      marginTop: vs(spacing.lg),
+      marginTop: vs(spacing.xxxl),
       paddingHorizontal: s(spacing.md),
       marginBottom: vs(40),
     } as ViewStyle,

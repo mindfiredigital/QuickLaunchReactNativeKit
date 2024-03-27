@@ -12,6 +12,7 @@ import {Colors, fontSize, lineHeight, spacing, typography} from '../theme';
 import {Home, Settings} from '../assets/svgs';
 import {Icon, IconTypes} from '../components';
 import {s, vs} from '../utils';
+import makeCommanStyles from '../screens/styles';
 
 export type TabParansList = {
   home: undefined;
@@ -33,6 +34,7 @@ const RootTabNavigator = () => {
   // Constants & hooks
   const {colors} = useTheme();
   const styles = makeStyles(colors);
+  const commonStyles = makeCommanStyles(colors);
   const {t} = useTranslation();
   const insets = useSafeAreaInsets();
 
@@ -62,10 +64,12 @@ const RootTabNavigator = () => {
         paddingBottom: insets.bottom ? insets.bottom : vs(spacing.xs),
       },
     ],
-    headerStyle: [styles.header, styles.tabShadow],
+    headerStyle: commonStyles.header,
+    headerTitleStyle: commonStyles.headerTitle,
     tabBarLabelStyle: styles.tabLabel,
     tabBarActiveTintColor: colors.primary,
     tabBarInactiveTintColor: colors.tertiary,
+    headerTitleAlign: 'center',
   };
 
   /**
@@ -119,15 +123,11 @@ const makeStyles = (colors: Colors) =>
       paddingTop: vs(spacing.xs),
       paddingHorizontal: s(spacing.sm),
     } as ViewStyle,
-    header: {
-      backgroundColor: colors.background,
-      borderBottomWidth: 0,
-    } as ViewStyle,
     tabShadow: {
-      shadowColor: colors.text,
+      shadowColor: colors.black,
       shadowOffset: {
         width: 0,
-        height: 1,
+        height: -1,
       },
       shadowOpacity: 0.15,
       shadowRadius: 5.65,

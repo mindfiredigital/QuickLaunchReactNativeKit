@@ -38,6 +38,7 @@ import {
   vs,
 } from '../utils';
 import {useAppSelector} from '../store';
+import makeCommanStyles from '../screens/styles';
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -145,13 +146,15 @@ const DrawerNavigator = () => {
   // Constants & hooks
   const {colors} = useTheme();
   const styles = makeStyles(colors);
+  const commonStyles = makeCommanStyles(colors);
   const {t} = useTranslation();
   const isLargeScreen = Dimensions.get('screen').width >= 768;
 
   const screenOptions: DrawerNavigationOptions = {
-    headerTintColor: colors.primary,
-    headerStyle: styles.headerStyle,
-    headerTitleStyle: styles.headerTitle,
+    headerTintColor: colors.tertiary,
+    drawerStyle: styles.drawerStyle,
+    headerStyle: commonStyles.header,
+    headerTitleStyle: commonStyles.headerTitle,
     drawerType: isLargeScreen ? 'permanent' : undefined,
     overlayColor: 'transparent',
   };
@@ -230,20 +233,13 @@ const makeStyles = (colors: Colors) =>
       alignSelf: 'flex-start',
       marginBottom: vs(spacing.md),
     },
+    drawerStyle: {
+      backgroundColor: colors.backgroundSecondary,
+    },
     profileImage: {
       height: vs(80),
       width: vs(80),
     },
-    headerStyle: {
-      backgroundColor: colors.background,
-    },
-    headerTitle: {
-      fontSize: fontSize.h3,
-      lineHeight: lineHeight[fontSize.h3],
-      fontFamily: typography.semiBold,
-      fontWeight: undefined,
-      color: colors.text,
-    } as TextStyle,
   });
 
 export default DrawerNavigator;

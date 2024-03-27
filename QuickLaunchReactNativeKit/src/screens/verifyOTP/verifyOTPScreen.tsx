@@ -7,7 +7,7 @@ import {
   removeListener,
   startOtpListener,
 } from 'react-native-otp-verify';
-import {Button, Header, OTPTextField, Screen, Text} from '../../components';
+import {Button, OTPTextField, Screen, Text} from '../../components';
 import {AuthScreenProps} from '../../navigation/authNavigator';
 import {showSuccessToast, useValidation} from '../../utils';
 import {otpVerification, useAppDispatch, useAppSelector} from '../../store';
@@ -113,7 +113,6 @@ export const VerifyOTPScreen: FC<AuthScreenProps<'verifyOTP'>> = ({
    */
   const renderHeaders = () => (
     <View style={styles.headerWrapper}>
-      <Header showLeftBtn onPressLeft={goBack} style={styles.headerStyle} />
       <Text size="h1" text={t('verifyOTP.title')} />
       <Text text={t('verifyOTP.description')} style={styles.descriptionText} />
     </View>
@@ -147,7 +146,7 @@ export const VerifyOTPScreen: FC<AuthScreenProps<'verifyOTP'>> = ({
   // Render the entire screen
   return (
     <Screen
-      safeAreaEdges={['top', 'bottom', 'left', 'right']}
+      safeAreaEdges={['bottom', 'left', 'right']}
       preset="auto"
       loading={loading}>
       {renderHeaders()}

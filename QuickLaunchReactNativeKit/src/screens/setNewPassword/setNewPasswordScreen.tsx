@@ -110,7 +110,6 @@ export const SetNewPasswordScreen: FC<AuthScreenProps<'setNewPassword'>> = ({
    */
   const renderHeaders = () => (
     <View style={styles.headerWrapper}>
-      <Header showLeftBtn onPressLeft={goBack} style={styles.headerStyle} />
       <Text size="h1" text={t('setNewPassoword.title')} />
       <Text
         text={t('setNewPassoword.description')}
@@ -169,7 +168,7 @@ export const SetNewPasswordScreen: FC<AuthScreenProps<'setNewPassword'>> = ({
 
   return (
     <Screen
-      safeAreaEdges={['top', 'bottom', 'bottom', 'right']}
+      safeAreaEdges={['bottom', 'bottom', 'right']}
       preset="auto"
       loading={loading}>
       <View>
