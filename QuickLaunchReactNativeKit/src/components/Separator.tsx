@@ -19,7 +19,7 @@ export const Separator = () => {
 const makeStyles = (colors: Colors) =>
   StyleSheet.create({
     separator: {
-      borderBottomWidth: 0.6,
-      borderBottomColor: colors.border,
+      height: 1,
+      backgroundColor: colors.border,
     },
   });

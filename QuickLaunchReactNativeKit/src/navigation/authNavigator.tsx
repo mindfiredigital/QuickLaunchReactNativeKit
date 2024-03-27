@@ -15,6 +15,7 @@ import {
   SignUpScreen,
   VerifyOTPScreen,
 } from '../screens';
+import makeCommanStyles from '../screens/styles';
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -39,13 +40,22 @@ const AuthStack = createNativeStackNavigator<AuthParamList>();
 
 const AuthNavigator = () => {
   const {colors} = useTheme();
+  const commonStyles = makeCommanStyles(colors);
   return (
     <AuthStack.Navigator
       screenOptions={{
-        headerShown: false,
+        headerShown: true,
+        headerTintColor: colors.tertiary,
+        headerTitle: '',
+        headerBackTitleVisible: false,
         navigationBarColor: colors.background,
+        headerShadowVisible: false,
       }}>
-      <AuthStack.Screen name={'login'} component={LoginScreen} />
+      <AuthStack.Screen
+        name={'login'}
+        component={LoginScreen}
+        options={{headerShown: false}}
+      />
       <AuthStack.Screen name={'signUp'} component={SignUpScreen} />
       <AuthStack.Screen
         name={'forgotPassword'}

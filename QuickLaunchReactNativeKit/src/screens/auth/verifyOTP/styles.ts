@@ -1,0 +1,26 @@
+import {StyleSheet, TextStyle, ViewStyle} from 'react-native';
+import {Colors, spacing} from '../../../theme';
+import {s, vs} from '../../../utils';
+
+const makeStyles = (colors: Colors) =>
+  StyleSheet.create({
+    headerWrapper: {
+      marginTop: vs(spacing.xxxl),
+      paddingHorizontal: s(spacing.md),
+      marginBottom: vs(40),
+    } as ViewStyle,
+    descriptionText: {
+      marginTop: vs(10),
+    } as TextStyle,
+    headerStyle: {
+      marginBottom: vs(100),
+    } as ViewStyle,
+    bottomView: {
+      marginTop: vs(spacing.xxxl),
+    } as ViewStyle,
+    textInput: {
+      marginBottom: vs(spacing.xl),
+    } as ViewStyle,
+  });
+
+export default makeStyles;
