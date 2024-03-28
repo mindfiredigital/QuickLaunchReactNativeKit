@@ -12,3 +12,7 @@
 # proguard rules for react-native-config
 -keep class com.quicklaunchreactnativekit.BuildConfig { *; }
 -keepresources string/build_config_package
+-keep class com.android.installreferrer.api.** {
+  *;
+}
+-keep class com.google.android.gms.common.** {*;}
