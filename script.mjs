@@ -54,14 +54,14 @@ const colors = {
   backgroundDark: "#1E1E1E",
 
   // The color of various secondary backgrounds, such as background color for the screens.
-  backgroundSecondary: "#E6E6E6",
+  backgroundSecondary: "#F5F5F5",
   // Dark mode version of the secondary background color.
-  backgroundSecondaryDark: "#3C3C3C",
+  backgroundSecondaryDark: "#282828",
 
   // The icon color of various elements.
-  tertiary: "#000000",
+  tertiary: "#999999",
   // Dark mode version of the tertiary color.
-  tertiaryDark: "#D2D2D2",
+  tertiaryDark: "#999999",
 
   // Them text color of primary button elements.
   btnTextPrimary: "#FFFFFF",
@@ -71,22 +71,22 @@ const colors = {
   // Them text color of secondary button elements.
   btnTextSecondary: "#C8C8C8",
   // Dark mode version of the secondary button text color.
-  btnTextSecondaryDark: "#C8C8C8",
+  btnTextSecondaryDark: "#BBC2D8",
 
   // The color of borders, e.g. header border, tab bar border etc.
-  border: "#707070",
+  border: "#E6E6E6",
   // Dark mode version of the border color.
-  borderDark: "#FEFFFF",
+  borderDark: "#333333",
 
   // Secondary button text color.
   placeholderText: "#808080",
   // Dark mode version of the secondary button text color.
-  placeholderTextDark: "#808080",
+  placeholderTextDark: "#D2D2D2",
 
   // The background color of card-like elements, such as headers, tab bars etc.
-  card: "#E6E6E6",
+  card: "#ffffff",
   // Dark mode version of the card background color.
-  cardDark: "#3C3C3C",
+  cardDark: "#1E1E1E",
 };
 
 // Template for generating custom theme
