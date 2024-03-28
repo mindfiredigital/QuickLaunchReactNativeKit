@@ -11,7 +11,12 @@ import {
   Logout,
   ShieldCheck,
 } from '../../../../assets/svgs';
-import {AppTheme, ProfileSettings, SettingsSection} from './components';
+import {
+  AppTheme,
+  AppVersion,
+  ProfileSettings,
+  SettingsSection,
+} from './components';
 import {useAppSelector} from '../../../../store';
 import makeStyles from './styles';
 import {
@@ -131,6 +136,7 @@ export const SettingsScreen: FC<PrimaryScreenProps<'settings'>> = ({
       {accountSettings()}
       {renderAppSettings(t('settings.app'))}
       {otherSettings()}
+      <AppVersion />
     </Screen>
   );
 };

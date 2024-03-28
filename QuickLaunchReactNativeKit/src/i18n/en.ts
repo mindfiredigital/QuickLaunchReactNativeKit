@@ -89,6 +89,7 @@ const en = {
     deleteAccount: 'Delete Account',
     theme: 'Theme',
     appSettings: 'App Settings',
+    version: 'Version',
   },
   home: {
     title: 'Home',

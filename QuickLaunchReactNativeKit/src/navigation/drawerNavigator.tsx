@@ -10,14 +10,15 @@ import {
 } from '@react-navigation/drawer';
 import {useTheme} from '@react-navigation/native';
 import {useTranslation} from 'react-i18next';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {
   ChangePassword,
   EditProfileScreen,
   HomeScreen,
   SettingsScreen,
 } from '../screens';
-import {Colors, fontSize, lineHeight, spacing, typography} from '../theme';
-import {Icon, IconTypes, Separator, Text} from '../components';
+import {Colors, spacing} from '../theme';
+import {AppVersion, Icon, IconTypes, Separator, Text} from '../components';
 import {
   AccountSettings,
   Delete,
@@ -77,6 +78,7 @@ const CustomDrawerContent = (props: DrawerContentComponentProps) => {
   const {t} = useTranslation();
   const {user} = useAppSelector(state => state.auth);
   const styles = makeStyles(colors);
+  const insets = useSafeAreaInsets();
 
   const renderProfileView = () => (
     <View style={styles.profileContainer}>
@@ -134,6 +136,8 @@ const CustomDrawerContent = (props: DrawerContentComponentProps) => {
           onPress={logoutUser}
         />
       </DrawerContentScrollView>
+      <Separator />
+      <AppVersion showAppName style={{paddingBottom: insets.bottom}} />
     </View>
   );
 };
