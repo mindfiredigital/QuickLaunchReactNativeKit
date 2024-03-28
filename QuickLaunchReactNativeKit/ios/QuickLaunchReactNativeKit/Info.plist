@@ -20,14 +20,6 @@
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
-	<key>NSFaceIDUsageDescription</key>
-	<string>Face ID Required for authentication</string>
-	<key>NSFaceIDUsageDescription</key>
-	<string>Touch ID Required for authentication</string>
-	<key>NSCameraUsageDescription</key>
-	<string>Our app uses the camera to capture photos for updating your profile.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Allow photo access to add photos to your profile.</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -43,6 +35,10 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>itms-apps</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -52,8 +48,12 @@
 		<key>NSAllowsLocalNetworking</key>
 		<true/>
 	</dict>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<key>NSCameraUsageDescription</key>
+	<string>Our app uses the camera to capture photos for updating your profile.</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Touch ID Required for authentication</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Allow photo access to add photos to your profile.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Poppins-Bold.ttf</string>
