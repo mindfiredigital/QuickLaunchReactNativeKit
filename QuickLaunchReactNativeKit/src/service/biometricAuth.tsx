@@ -9,10 +9,10 @@ import {
 import {useTranslation} from 'react-i18next';
 import {useTheme} from '@react-navigation/native';
 import ReactNativeBiometrics, {BiometryTypes} from 'react-native-biometrics';
-import {getGenericPasswordFromKeychain, vs} from '../../../../utils';
-import {Colors, spacing} from '../../../../theme';
-import {Text} from '../../../../components';
-import {FaceRecognition, Fingerprint} from '../../../../assets/svgs';
+import {getGenericPasswordFromKeychain, vs} from 'utils';
+import {Colors, spacing} from 'theme';
+import {Text} from 'components';
+import {FaceRecognition, Fingerprint} from 'assets/svgs';
 
 const rnBiometrics = new ReactNativeBiometrics({allowDeviceCredentials: true});
 

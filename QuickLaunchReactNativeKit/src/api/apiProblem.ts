@@ -1,5 +1,5 @@
-import i18n from '../i18n/i18n';
-import {logoutUser, showErrorToast} from '../utils';
+import i18n from 'i18n';
+import {logoutUser, showErrorToast} from 'utils';
 
 /**
  * Attempts to get a common cause of problems from an API response.

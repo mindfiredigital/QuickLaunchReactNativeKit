@@ -1,5 +1,5 @@
 import Toast, {ToastShowParams} from 'react-native-toast-message';
-import i18n from '../../i18n/i18n';
+import i18n from 'i18n';
 
 // Interface for the custom showSuccessToast function
 interface ShowToastType extends ToastShowParams {

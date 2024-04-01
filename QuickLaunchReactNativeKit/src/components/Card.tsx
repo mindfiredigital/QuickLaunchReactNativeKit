@@ -1,8 +1,8 @@
 import React from 'react';
 import {StyleProp, StyleSheet, View, ViewProps, ViewStyle} from 'react-native';
 import {useTheme} from '@react-navigation/native';
-import {Colors, spacing} from '../theme';
-import {s} from '../utils';
+import {Colors, spacing} from 'theme';
+import {s} from 'utils';
 
 /**
  * Props for the Card component.

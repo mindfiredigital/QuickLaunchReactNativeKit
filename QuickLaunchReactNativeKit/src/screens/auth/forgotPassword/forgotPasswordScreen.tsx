@@ -2,13 +2,13 @@ import React, {FC, useState} from 'react';
 import {View} from 'react-native';
 import {useTheme} from '@react-navigation/native';
 import {useTranslation} from 'react-i18next';
-import {Button, Header, Screen, Text, TextField} from '../../../components';
-import {AuthScreenProps} from '../../../navigation/authNavigator';
-import {showSuccessToast, useValidation, vs} from '../../../utils';
-import {ForgotPasswordReq, LoginRes} from '../../../api';
-import {forgotPassword, useAppDispatch, useAppSelector} from '../../../store';
+import {Button, Screen, Text, TextField} from 'components';
+import {AuthScreenProps} from 'navigation';
+import {showSuccessToast, useValidation, vs} from 'utils';
+import {ForgotPasswordReq, LoginRes} from 'api';
+import {forgotPassword, useAppDispatch, useAppSelector} from 'store';
+import {EmailOutline} from 'assets/svgs';
 import makeStyles from './styles';
-import {EmailOutline} from '../../../assets/svgs';
 
 /**
  * A Screen to render a Forgot password screen.

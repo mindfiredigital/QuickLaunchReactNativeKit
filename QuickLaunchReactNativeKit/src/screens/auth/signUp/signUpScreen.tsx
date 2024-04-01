@@ -2,19 +2,19 @@ import React, {FC, useRef, useState} from 'react';
 import {TextInput, View} from 'react-native';
 import {useTheme} from '@react-navigation/native';
 import {useTranslation} from 'react-i18next';
-import {Button, Screen, Text, TextField} from '../../../components';
-import {AuthScreenProps} from '../../../navigation/authNavigator';
-import {showSuccessToast, useValidation, vs} from '../../../utils';
-import {LoginRes, SignUpReq} from '../../../api';
-import {signUp, useAppDispatch, useAppSelector} from '../../../store';
-import makeStyles from './styles';
+import {Button, Screen, Text, TextField} from 'components';
+import {AuthScreenProps} from 'navigation';
+import {showSuccessToast, useValidation, vs} from 'utils';
+import {LoginRes, SignUpReq} from 'api';
+import {signUp, useAppDispatch, useAppSelector} from 'store';
 import {
   AccountOutline,
   EmailOutline,
   EyeOffOutline,
   EyeOutline,
   LockOutline,
-} from '../../../assets/svgs';
+} from 'assets/svgs';
+import makeStyles from './styles';
 
 /**
  * A Screen to render a Sign-up screen.

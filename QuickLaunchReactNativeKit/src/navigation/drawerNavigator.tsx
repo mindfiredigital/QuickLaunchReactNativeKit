@@ -1,5 +1,5 @@
 import React from 'react';
-import {Dimensions, Image, StyleSheet, TextStyle, View} from 'react-native';
+import {Dimensions, Image, StyleSheet, View} from 'react-native';
 import {
   DrawerContentComponentProps,
   DrawerContentScrollView,
@@ -16,9 +16,9 @@ import {
   EditProfileScreen,
   HomeScreen,
   SettingsScreen,
-} from '../screens';
-import {Colors, spacing} from '../theme';
-import {AppVersion, Icon, IconTypes, Separator, Text} from '../components';
+} from 'screens';
+import {Colors, spacing} from 'theme';
+import {AppVersion, Icon, IconTypes, Separator, Text} from 'components';
 import {
   AccountSettings,
   Delete,
@@ -29,7 +29,7 @@ import {
   Logout,
   ShieldCheck,
   ThemeLightDark,
-} from '../assets/svgs';
+} from 'assets/svgs';
 import {
   logoutUser,
   openAboutUs,
@@ -37,9 +37,9 @@ import {
   openPrivacyPolicy,
   s,
   vs,
-} from '../utils';
-import {useAppSelector} from '../store';
-import makeCommanStyles from '../screens/styles';
+} from 'utils';
+import {useAppSelector} from 'store';
+import makeCommanStyles from 'styles';
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -146,7 +146,7 @@ const CustomDrawerContent = (props: DrawerContentComponentProps) => {
  * Drawer navigator component.
  * Manages the main navigation flow with a side drawer.
  */
-const DrawerNavigator = () => {
+export const DrawerNavigator = () => {
   // Constants & hooks
   const {colors} = useTheme();
   const styles = makeStyles(colors);
@@ -245,5 +245,3 @@ const makeStyles = (colors: Colors) =>
       width: vs(80),
     },
   });
-
-export default DrawerNavigator;

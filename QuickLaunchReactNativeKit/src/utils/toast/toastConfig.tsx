@@ -1,8 +1,8 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
 import {BaseToast, BaseToastProps} from 'react-native-toast-message';
-import {Colors, fontSize, lineHeight, spacing, typography} from '../../theme';
-import {s, vs} from '..';
+import {Colors, fontSize, lineHeight, spacing, typography} from 'theme';
+import {s, vs} from 'utils';
 
 /**
  *  Create the configs for react-native-toast-message

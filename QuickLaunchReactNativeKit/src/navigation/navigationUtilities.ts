@@ -1,5 +1,8 @@
-import {createNavigationContainerRef} from '@react-navigation/native';
-import {PrimaryParamList} from './primaryNavigator';
+import {
+  CommonActions,
+  createNavigationContainerRef,
+} from '@react-navigation/native';
+import {PrimaryParamList} from 'navigation';
 
 /**
  * Reference to the root App Navigator.
@@ -20,9 +23,38 @@ export const navigationRef = createNavigationContainerRef<PrimaryParamList>();
  * @param {unknown} name - The name of the route to navigate to.
  * @param {unknown} params - The params to pass to the route.
  */
-export function navigate(name: unknown, params?: unknown) {
+export const navigate = (name: unknown, params?: unknown) => {
   if (navigationRef.isReady()) {
-    // @ts-expect-error
+    // @ts-ignore
     navigationRef.navigate(name as never, params as never);
   }
-}
+};
+
+/**
+ * Replaces the last N screens in the navigation stack with a new screen.
+ * @param {string} name - The name of the route to replace the last N screens with.
+ * @param {number} replaceN - The number of screens to replace. Defaults to 2.
+ * @param {any} params - The params to pass to the new route.
+ */
+export const replaceLastNScreens = (
+  name: string,
+  replaceN: number = 2,
+  params?: any,
+) => {
+  if (navigationRef.isReady()) {
+    navigationRef.dispatch(state => {
+      // Remove the last 2 routes from current list of routes
+      const routes = state.routes.slice(0, -replaceN);
+      routes.push({name, params, key: name});
+
+      // Reset the state to the new state with updated list of routes
+      const newState = CommonActions.reset({
+        ...state,
+        index: routes.length - 1,
+        routes,
+      });
+
+      return newState;
+    });
+  }
+};

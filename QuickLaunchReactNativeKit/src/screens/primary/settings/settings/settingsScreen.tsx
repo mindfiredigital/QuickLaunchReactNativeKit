@@ -1,8 +1,8 @@
 import React, {FC} from 'react';
 import {useTranslation} from 'react-i18next';
 import {useTheme} from '@react-navigation/native';
-import {MenuItem, Screen, Separator} from '../../../../components';
-import {PrimaryScreenProps} from '../../../../navigation/primaryNavigator';
+import {AppVersion, MenuItem, Screen, Separator} from 'components';
+import {PrimaryScreenProps} from 'navigation';
 import {
   Delete,
   HelpCircle,
@@ -10,21 +10,11 @@ import {
   Lock,
   Logout,
   ShieldCheck,
-} from '../../../../assets/svgs';
-import {
-  AppTheme,
-  AppVersion,
-  ProfileSettings,
-  SettingsSection,
-} from './components';
-import {useAppSelector} from '../../../../store';
+} from 'assets/svgs';
+import {AppTheme, ProfileSettings, SettingsSection} from './components';
+import {useAppSelector} from 'store';
+import {logoutUser, openAboutUs, openHelp, openPrivacyPolicy} from 'utils';
 import makeStyles from './styles';
-import {
-  logoutUser,
-  openAboutUs,
-  openHelp,
-  openPrivacyPolicy,
-} from '../../../../utils';
 
 export const SettingsScreen: FC<PrimaryScreenProps<'settings'>> = ({
   navigation,

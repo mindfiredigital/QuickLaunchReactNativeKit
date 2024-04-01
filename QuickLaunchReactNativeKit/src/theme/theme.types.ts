@@ -1,5 +1,5 @@
 import {Theme} from '@react-navigation/native';
-import {Colors} from '.';
+import {Colors} from 'theme/theme';
 
 interface ThemeColors {
   /**

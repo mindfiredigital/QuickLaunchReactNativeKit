@@ -1,9 +1,9 @@
 import React from 'react';
-import {StyleSheet, ViewProps, ViewStyle} from 'react-native';
+import {StyleSheet, ViewStyle} from 'react-native';
 import {useTheme} from '@react-navigation/native';
 import {WebView, WebViewProps} from 'react-native-webview';
-import {Colors} from '../theme';
-import {Spinner} from '.';
+import {Spinner} from 'components';
+import {Colors} from 'theme';
 
 /**
  * Props for the WebViewApp component.

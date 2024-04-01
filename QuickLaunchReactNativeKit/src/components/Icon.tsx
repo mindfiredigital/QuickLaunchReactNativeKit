@@ -11,8 +11,8 @@ import {
   ViewStyle,
 } from 'react-native';
 import {useTheme} from '@react-navigation/native';
-import {iconRegistry} from '../assets/icons';
-import {Colors} from '../theme';
+import {iconRegistry} from 'assets/icons';
+import {Colors} from 'theme';
 
 export type IconTypes = keyof typeof iconRegistry;
 

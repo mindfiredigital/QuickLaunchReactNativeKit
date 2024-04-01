@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {
   ImageStyle,
   Platform,
@@ -12,12 +12,11 @@ import {
   appleAuth,
   appleAuthAndroid,
 } from '@invertase/react-native-apple-authentication';
-import {showErrorToast, showSuccessToast, vs} from '../../../../utils';
-import {Icon, IconTypes} from '../../../../components';
-import {Colors, spacing} from '../../../../theme';
-import {socialLogIn, socialSignUp, useAppDispatch} from '../../../../store';
-import {LoginRes} from '../../../../api';
-import {AppleDark, AppleLight} from '../../../../assets/svgs';
+import {showErrorToast, showSuccessToast, vs} from 'utils';
+import {Colors, spacing} from 'theme';
+import {socialLogIn, socialSignUp, useAppDispatch} from 'store';
+import {LoginRes} from 'api';
+import {AppleDark, AppleLight} from 'assets/svgs';
 
 interface GoogleSignInProps extends TouchableOpacityProps {
   /**

@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {StyleSheet, ViewStyle} from 'react-native';
 import {useTheme} from '@react-navigation/native';
-import {Screen, Text} from '../../../../components';
-import {Colors} from '../../../../theme';
+import {Screen, Text} from 'components';
+import {Colors} from 'theme';
 
 export const HomeScreen = () => {
   const {colors} = useTheme();

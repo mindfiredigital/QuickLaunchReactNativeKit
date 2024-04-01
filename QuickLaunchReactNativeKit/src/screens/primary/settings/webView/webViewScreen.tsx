@@ -1,7 +1,7 @@
 import React, {FC, useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import {PrimaryScreenProps} from '../../../../navigation/primaryNavigator';
-import {WebViewApp, WebViewAppProps} from '../../../../components';
+import {PrimaryScreenProps} from 'navigation';
+import {WebViewApp, WebViewAppProps} from 'components';
 
 // Types for WebView rendering options
 const webViewTypes = {uri: 'uri', html: 'html'};

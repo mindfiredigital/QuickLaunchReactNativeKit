@@ -14,8 +14,8 @@ import {
   SetNewPasswordScreen,
   SignUpScreen,
   VerifyOTPScreen,
-} from '../screens';
-import makeCommanStyles from '../screens/styles';
+} from 'screens';
+import makeCommanStyles from 'styles';
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -38,7 +38,7 @@ export type AuthScreenProps<T extends keyof AuthParamList> =
 
 const AuthStack = createNativeStackNavigator<AuthParamList>();
 
-const AuthNavigator = () => {
+export const AuthNavigator = () => {
   const {colors} = useTheme();
   const commonStyles = makeCommanStyles(colors);
   return (
@@ -69,5 +69,3 @@ const AuthNavigator = () => {
     </AuthStack.Navigator>
   );
 };
-
-export default AuthNavigator;

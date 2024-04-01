@@ -1,6 +1,6 @@
 import {StyleSheet, ViewStyle} from 'react-native';
-import {Colors, fontSize, lineHeight, typography} from '../theme';
-import {vs} from '../utils';
+import {Colors, typography} from 'theme';
+import {vs} from 'utils';
 
 const makeCommanStyles = (colors: Colors) =>
   StyleSheet.create({

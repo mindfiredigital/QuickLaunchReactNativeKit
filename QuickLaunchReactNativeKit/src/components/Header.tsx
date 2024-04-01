@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   StyleSheet,
-  PressableProps as RNPressableProps,
   TouchableOpacityProps,
   ViewStyle,
   StyleProp,
@@ -11,11 +10,10 @@ import {
   ViewProps,
 } from 'react-native';
 import {useTheme} from '@react-navigation/native';
-import {Text} from './Text';
-import {Colors} from '../theme';
-import {s, vs} from '../utils';
-import {Icon, IconTypes} from '.';
-import {ChevronLeft} from '../assets/svgs';
+import {Text, Icon, IconTypes} from 'components';
+import {Colors} from 'theme';
+import {s, vs} from 'utils';
+import {ChevronLeft} from 'assets/svgs';
 
 export interface HeaderProps extends ViewProps {
   /**

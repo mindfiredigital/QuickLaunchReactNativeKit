@@ -3,16 +3,11 @@ import {StyleSheet, View} from 'react-native';
 import {useTranslation} from 'react-i18next';
 import {useTheme} from '@react-navigation/native';
 import SegmentedControl from '@react-native-segmented-control/segmented-control';
-import {MenuItem} from '../../../../../components';
-import {Colors, spacing, typography} from '../../../../../theme';
-import {vs} from '../../../../../utils';
-import {ThemeLightDark} from '../../../../../assets/svgs';
-import {
-  AppState,
-  updateTheme,
-  useAppDispatch,
-  useAppSelector,
-} from '../../../../../store';
+import {MenuItem} from 'components';
+import {Colors, spacing, typography} from 'theme';
+import {vs} from 'utils';
+import {ThemeLightDark} from 'assets/svgs';
+import {AppState, updateTheme, useAppDispatch, useAppSelector} from 'store';
 
 // List of themes
 const THEMES = ['Auto', 'Light', 'Dark'];

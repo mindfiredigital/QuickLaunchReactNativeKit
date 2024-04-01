@@ -1,5 +1,5 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {
+import api, {
   ForgotPasswordReq,
   OTPVerificationReq,
   PasswordResetReq,
@@ -8,11 +8,10 @@ import {
   LoginRes,
   SocialLogInReq,
   SocialSignUpReq,
-  api,
   endPoints,
   UpdateUserReq,
   GetUserRes,
-} from '../../api';
+} from 'api';
 
 /**
  * The login function is responsible for handling the asynchronous login operation.

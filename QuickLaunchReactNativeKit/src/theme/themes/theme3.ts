@@ -1,5 +1,5 @@
-import {colors} from '../colors';
-import {ThemeWithMode} from '../theme.types';
+import {colors} from 'theme/colors';
+import {ThemeWithMode} from 'theme/theme.types';
 
 export const theme3: ThemeWithMode = {
   light: {

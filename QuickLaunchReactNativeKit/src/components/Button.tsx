@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   StyleSheet,
-  PressableProps as RNPressableProps,
   TouchableOpacityProps,
   ViewStyle,
   StyleProp,
@@ -9,10 +8,9 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {useTheme} from '@react-navigation/native';
-import {Text, TextProps} from './Text';
-import {Colors, spacing, typography} from '../theme';
-import {s, vs} from '../utils';
-import {Icon, IconTypes} from '.';
+import {Text, TextProps, Icon, IconTypes} from 'components';
+import {Colors, spacing, typography} from 'theme';
+import {s, vs} from 'utils';
 
 export interface ButtonProps extends TouchableOpacityProps {
   /**

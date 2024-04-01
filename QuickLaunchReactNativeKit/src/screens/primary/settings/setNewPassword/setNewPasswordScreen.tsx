@@ -2,13 +2,13 @@ import React, {FC, useRef, useState} from 'react';
 import {TextInput, View} from 'react-native';
 import {useTheme} from '@react-navigation/native';
 import {useTranslation} from 'react-i18next';
-import {Button, Header, Screen, Text, TextField} from '../../../../components';
-import {AuthScreenProps} from '../../../../navigation/authNavigator';
-import {showSuccessToast, useValidation, vs} from '../../../../utils';
-import {passwordReset, useAppDispatch, useAppSelector} from '../../../../store';
-import {LoginRes, PasswordResetReq} from '../../../../api';
+import {Button, Screen, Text, TextField} from 'components';
+import {AuthScreenProps} from 'navigation';
+import {showSuccessToast, useValidation} from 'utils';
+import {passwordReset, useAppDispatch, useAppSelector} from 'store';
+import {LoginRes, PasswordResetReq} from 'api';
+import {EyeOffOutline, EyeOutline, LockOutline} from 'assets/svgs';
 import makeStyles from './styles';
-import {EyeOffOutline, EyeOutline, LockOutline} from '../../../../assets/svgs';
 
 /**
  * A Screen to render a Set new password screen.
@@ -88,7 +88,7 @@ export const SetNewPasswordScreen: FC<AuthScreenProps<'setNewPassword'>> = ({
       if (meta.requestStatus === 'fulfilled') {
         showSuccessToast({message: data.message});
         //Navigate to login screen
-        navigation.pop(3);
+        navigation.navigate('login');
       }
     }
   };

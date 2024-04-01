@@ -2,18 +2,13 @@ import React, {FC, useRef, useState} from 'react';
 import {TextInput, View} from 'react-native';
 import {useTheme} from '@react-navigation/native';
 import {useTranslation} from 'react-i18next';
-import {Button, Screen, Text, TextField} from '../../../../components';
-import {showSuccessToast, useValidation, vs} from '../../../../utils';
-import {
-  changePassword,
-  passwordReset,
-  useAppDispatch,
-  useAppSelector,
-} from '../../../../store';
-import {ChangePasswordRes, LoginRes, PasswordResetReq} from '../../../../api';
+import {Button, Screen, Text, TextField} from 'components';
+import {showSuccessToast, useValidation} from 'utils';
+import {changePassword, useAppDispatch, useAppSelector} from 'store';
+import {ChangePasswordRes, LoginRes} from 'api';
+import {EyeOffOutline, EyeOutline, LockOutline} from 'assets/svgs';
+import {PrimaryScreenProps} from 'navigation';
 import makeStyles from './styles';
-import {EyeOffOutline, EyeOutline, LockOutline} from '../../../../assets/svgs';
-import {PrimaryScreenProps} from '../../../../navigation/primaryNavigator';
 
 /**
  * A Screen to render a change password.

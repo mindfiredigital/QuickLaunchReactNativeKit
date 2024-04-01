@@ -10,4 +10,4 @@ export * from './Separator';
 export * from './Card';
 export * from './WebViewApp';
 export * from './MenuItem';
-export * from '../screens/primary/settings/settings/components/AppVersion';
+export * from './AppVersion';

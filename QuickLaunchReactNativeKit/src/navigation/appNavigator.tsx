@@ -11,19 +11,17 @@ import BootSplash from 'react-native-bootsplash';
 import Toast from 'react-native-toast-message';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import appleAuth from '@invertase/react-native-apple-authentication';
-import {navigationRef} from './navigationUtilities';
-import PrimaryNavigator from './primaryNavigator';
-import AuthNavigator from './authNavigator';
-import {darkTheme, lightTheme, spacing} from '../theme';
-import {resetState} from '../store/reducers';
-import {useAppDispatch, useAppSelector} from '../store';
-import {clearKeystorePassword, useToastConfig, vs} from '../utils';
-import {useInAppUpdates} from '../service';
+import {AuthNavigator, PrimaryNavigator, navigationRef} from 'navigation';
+import {darkTheme, lightTheme, spacing} from 'theme';
+import {resetState} from 'store';
+import {useAppDispatch, useAppSelector} from 'store';
+import {clearKeystorePassword, useToastConfig, vs} from 'utils';
+import {useInAppUpdates} from 'service';
 
 export interface NavigationProps
   extends Partial<React.ComponentProps<typeof NavigationContainer>> {}
 
-const AppNavigator = (props: NavigationProps) => {
+export const AppNavigator = (props: NavigationProps) => {
   const scheme = useColorScheme();
   const insets = useSafeAreaInsets();
 
@@ -90,5 +88,3 @@ const AppNavigator = (props: NavigationProps) => {
     </>
   );
 };
-
-export default AppNavigator;
