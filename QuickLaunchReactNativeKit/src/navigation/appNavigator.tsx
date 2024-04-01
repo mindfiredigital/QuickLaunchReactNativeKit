@@ -52,22 +52,21 @@ export const AppNavigator = (props: NavigationProps) => {
 
   // Handle crenditional revoke of apple signin in ios app
   useEffect(() => {
+    let authCredentialListener: any | null = null;
     if (Platform.OS == 'ios' && appleAuth.isSupported) {
-      let authCredentialListener: any | null = null;
       // initialise revoke listener
       authCredentialListener = appleAuth.onCredentialRevoked(async () => {
         // If this function executes, User Credentials have been Revoked
         dispatch(resetState());
       });
-
-      return () => {
-        // remove revoke listener
-        if (authCredentialListener?.remove !== undefined) {
-          authCredentialListener.remove();
-        }
-      };
     }
     clearKeystorePassword();
+    return () => {
+      // remove revoke listener
+      if (authCredentialListener?.remove !== undefined) {
+        authCredentialListener.remove();
+      }
+    };
   }, []);
 
   /** Hide boot splash screen once navigation is ready */
