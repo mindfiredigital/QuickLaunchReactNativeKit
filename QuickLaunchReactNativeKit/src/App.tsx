@@ -3,8 +3,8 @@ import {DevSettings, NativeModules} from 'react-native';
 import {Provider} from 'react-redux';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {PersistGate} from 'redux-persist/integration/react';
-import AppNavigator from './navigation/appNavigator';
-import {persistor, store} from './store';
+import {AppNavigator} from 'navigation';
+import {persistor, store} from 'store';
 import './i18n/i18n';
 import './utils/ignoreWarnings';
 

@@ -9,9 +9,9 @@ import {
   ActivityIndicatorProps,
 } from 'react-native';
 import {useTheme} from '@react-navigation/native';
-import {Text} from '.';
-import {Colors, spacing} from '../theme';
-import {s} from '../utils';
+import {Text} from 'components';
+import {Colors, spacing} from 'theme';
+import {s} from 'utils';
 
 /**
  * Define the properties expected by the Spinner component.

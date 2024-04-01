@@ -10,10 +10,10 @@ import {
   ViewStyle,
 } from 'react-native';
 import {useTheme} from '@react-navigation/native';
-import {Icon, Text} from '../../../../../components';
-import {s, vs} from '../../../../../utils';
-import {spacing, typography} from '../../../../../theme';
-import {ChevronRight} from '../../../../../assets/svgs';
+import {Icon, Text} from 'components';
+import {s, vs} from 'utils';
+import {spacing, typography} from 'theme';
+import {ChevronRight} from 'assets/svgs';
 
 interface ProfileSettingsProps extends TouchableOpacityProps {
   /**

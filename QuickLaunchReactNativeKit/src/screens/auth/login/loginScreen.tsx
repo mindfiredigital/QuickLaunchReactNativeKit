@@ -2,18 +2,18 @@ import React, {FC, useRef, useState} from 'react';
 import {TextInput, View} from 'react-native';
 import {useTheme} from '@react-navigation/native';
 import {useTranslation} from 'react-i18next';
-import {Button, Icon, Screen, Text, TextField} from '../../../components';
-import {AuthScreenProps} from '../../../navigation/authNavigator';
-import {setGenericPasswordToKeychain, useValidation, vs} from '../../../utils';
-import {login, useAppDispatch, useAppSelector} from '../../../store';
-import {LoginReq} from '../../../api';
-import {AppleSignin, BiometricAuth, GoogleSignIn} from './services';
+import {Button, Icon, Screen, Text, TextField} from 'components';
+import {AuthScreenProps} from 'navigation';
+import {setGenericPasswordToKeychain, useValidation, vs} from 'utils';
+import {login, useAppDispatch, useAppSelector} from 'store';
+import {LoginReq} from 'api';
+import {AppleSignin, BiometricAuth, GoogleSignIn} from 'service';
 import {
   EmailOutline,
   EyeOffOutline,
   EyeOutline,
   LockOutline,
-} from '../../../assets/svgs';
+} from 'assets/svgs';
 import makeStyles from './styles';
 
 /**

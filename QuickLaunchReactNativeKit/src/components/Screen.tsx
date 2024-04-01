@@ -14,12 +14,9 @@ import {
   StyleSheet,
 } from 'react-native';
 import {useScrollToTop, useTheme} from '@react-navigation/native';
-import {Colors} from '../theme';
-import {Spinner} from '.';
-import {
-  ExtendedEdge,
-  useSafeAreaInsetsStyle,
-} from '../utils/useSafeAreaInsetsStyle';
+import {Spinner} from 'components';
+import {Colors} from 'theme';
+import {ExtendedEdge, useSafeAreaInsetsStyle} from 'utils';
 
 interface BaseScreenProps {
   /**

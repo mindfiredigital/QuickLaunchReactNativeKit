@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {changePassword, uploadProfileImage} from '../actions';
+import {changePassword, uploadProfileImage} from 'store/actions';
 
 export interface AppState {
   loading: boolean;

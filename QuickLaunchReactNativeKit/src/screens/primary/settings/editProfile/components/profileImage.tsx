@@ -7,10 +7,10 @@ import {
   ViewStyle,
 } from 'react-native';
 import {useTheme} from '@react-navigation/native';
-import {vs} from '../../../../../utils';
-import {Colors, spacing} from '../../../../../theme';
-import {Icon} from '../../../../../components';
-import {EditImage} from '../../../../../assets/svgs';
+import {vs} from 'utils';
+import {Colors, spacing} from 'theme';
+import {Icon} from 'components';
+import {EditImage} from 'assets/svgs';
 
 interface BiometricAuthProps {
   setModalVisible: (value: boolean) => void;

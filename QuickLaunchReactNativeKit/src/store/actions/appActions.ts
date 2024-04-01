@@ -1,12 +1,11 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {
+import api, {
   ChangePasswordRes,
   LoginRes,
   UploadProfileImageReq,
   UploadProfileImageRes,
-  api,
   endPoints,
-} from '../../api';
+} from 'api';
 
 /**
  * The uploadProfileImage function is responsible for handling the asynchronous update user profile image operation.

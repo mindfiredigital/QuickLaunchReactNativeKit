@@ -15,10 +15,10 @@ import ImagePicker, {
 import {useTheme} from '@react-navigation/native';
 import {useTranslation} from 'react-i18next';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {Colors, spacing} from '../../../../../theme';
-import {Camera, CloseCircle, Image} from '../../../../../assets/svgs';
-import {Card, Icon, MenuItem, Separator, Text} from '../../../../../components';
-import {s, showErrorToast, vs} from '../../../../../utils';
+import {Colors, spacing} from 'theme';
+import {Camera, CloseCircle, Image} from 'assets/svgs';
+import {Card, Icon, MenuItem, Separator, Text} from 'components';
+import {s, showErrorToast, vs} from 'utils';
 
 /**
  * Props interface for the ImageUploadModal component.

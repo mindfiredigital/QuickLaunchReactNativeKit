@@ -4,17 +4,16 @@
  * This has option to choose between bottom tab and drawer.
  */
 import React from 'react';
-import TabNavigator from './tabNavigator';
-import DrawerNavigator from './drawerNavigator';
 import {useTheme} from '@react-navigation/native';
-import {settings} from '../../settings';
 import {
   NativeStackScreenProps,
   createNativeStackNavigator,
 } from '@react-navigation/native-stack';
 import {useTranslation} from 'react-i18next';
-import {ChangePassword, EditProfileScreen, WebViewScreen} from '../screens';
-import makeCommanStyles from '../screens/styles';
+import {TabNavigator, DrawerNavigator} from 'navigation';
+import {ChangePassword, EditProfileScreen, WebViewScreen} from 'screens';
+import {settings} from 'settings';
+import makeCommanStyles from 'styles';
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -37,7 +36,7 @@ export type PrimaryScreenProps<T extends keyof PrimaryParamList> =
 
 const PrimaryStack = createNativeStackNavigator<PrimaryParamList>();
 
-const PrimaryNavigator = () => {
+export const PrimaryNavigator = () => {
   const {colors} = useTheme();
   const {t} = useTranslation();
   const commonStyles = makeCommanStyles(colors);
@@ -94,5 +93,3 @@ const PrimaryNavigator = () => {
     </PrimaryStack.Navigator>
   );
 };
-
-export default PrimaryNavigator;

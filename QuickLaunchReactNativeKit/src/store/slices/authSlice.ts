@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {UserObj} from '../../api';
+import {UserObj} from 'api';
 import {
   forgotPassword,
   login,
@@ -10,7 +10,7 @@ import {
   socialLogIn,
   getUser,
   updateUser,
-} from '../actions';
+} from 'store/actions';
 
 export interface AuthState {
   isAuthenticated: boolean;

@@ -1,9 +1,9 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {useTheme} from '@react-navigation/native';
-import {Card, Text} from '../../../../../components';
-import {Colors, spacing} from '../../../../../theme';
-import {s, vs} from '../../../../../utils';
+import {Card, Text} from 'components';
+import {Colors, spacing} from 'theme';
+import {s, vs} from 'utils';
 
 interface SettingsSectionProps {
   /**

@@ -12,11 +12,11 @@ import {
   GoogleSignin,
   statusCodes,
 } from '@react-native-google-signin/google-signin';
-import {showErrorToast, showSuccessToast, vs} from '../../../../utils';
-import {Colors, spacing} from '../../../../theme';
-import {socialSignUp, useAppDispatch} from '../../../../store';
-import {LoginRes} from '../../../../api';
-import {GoogleDark, GoogleLight} from '../../../../assets/svgs';
+import {showErrorToast, showSuccessToast, vs} from 'utils';
+import {Colors, spacing} from 'theme';
+import {socialSignUp, useAppDispatch} from 'store';
+import {LoginRes} from 'api';
+import {GoogleDark, GoogleLight} from 'assets/svgs';
 
 interface GoogleSignInProps extends TouchableOpacityProps {
   /**

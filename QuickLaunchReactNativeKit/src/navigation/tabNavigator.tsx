@@ -7,12 +7,12 @@ import {
 import {useTranslation} from 'react-i18next';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useTheme} from '@react-navigation/native';
-import {HomeScreen, SettingsScreen} from '../screens';
-import {Colors, fontSize, lineHeight, spacing, typography} from '../theme';
-import {Home, Settings} from '../assets/svgs';
-import {Icon, IconTypes} from '../components';
-import {s, vs} from '../utils';
-import makeCommanStyles from '../screens/styles';
+import {HomeScreen, SettingsScreen} from 'screens';
+import {Colors, fontSize, lineHeight, spacing, typography} from 'theme';
+import {Home, Settings} from 'assets/svgs';
+import {Icon, IconTypes} from 'components';
+import {s, vs} from 'utils';
+import makeCommanStyles from 'styles';
 
 export type TabParansList = {
   home: undefined;
@@ -30,7 +30,7 @@ const Tab = createBottomTabNavigator<TabParansList>();
  * The RootTabNavigator component manages the main navigation flow with bottom tabs
  * which users will interact with upon logging in.
  */
-const RootTabNavigator = () => {
+export const TabNavigator = () => {
   // Constants & hooks
   const {colors} = useTheme();
   const styles = makeStyles(colors);
@@ -139,5 +139,3 @@ const makeStyles = (colors: Colors) =>
       fontFamily: typography.medium,
     } as TextStyle,
   });
-
-export default RootTabNavigator;

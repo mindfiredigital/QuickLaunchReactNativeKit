@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {useTheme} from '@react-navigation/native';
-import {Colors} from '../theme';
+import {Colors} from 'theme';
 
 /**
  * A simple horizontal separator component with customizable border color.

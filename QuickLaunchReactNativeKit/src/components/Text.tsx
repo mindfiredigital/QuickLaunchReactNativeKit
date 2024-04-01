@@ -7,8 +7,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import {useTheme} from '@react-navigation/native';
-import {Colors, fontSize, lineHeight, typography} from '../theme';
-import {vs} from '../utils';
+import {Colors, fontSize, lineHeight, typography} from 'theme';
 export interface TextProps extends RNTextProps {
   /**
    * The text to display if not using `tx` or nested components.

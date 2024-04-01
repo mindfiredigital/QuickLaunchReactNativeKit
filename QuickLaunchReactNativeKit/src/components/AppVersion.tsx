@@ -9,9 +9,9 @@ import {
 } from 'react-native';
 import {useTranslation} from 'react-i18next';
 import DeviceInfo from 'react-native-device-info';
-import {s, vs} from '../../../../../utils';
-import {Text} from '../../../../../components';
-import {spacing, typography} from '../../../../../theme';
+import {s, vs} from 'utils';
+import {Text} from 'components';
+import {spacing, typography} from 'theme';
 
 /**
  * Props for the AppVersion component.

@@ -1,17 +1,21 @@
 import React, {FC, useEffect, useState} from 'react';
 import {Platform, View} from 'react-native';
-import {useTheme} from '@react-navigation/native';
+import {
+  CommonActions,
+  StackNavigationState,
+  useTheme,
+} from '@react-navigation/native';
 import {useTranslation} from 'react-i18next';
 import {
   getHash,
   removeListener,
   startOtpListener,
 } from 'react-native-otp-verify';
-import {Button, OTPTextField, Screen, Text} from '../../../components';
-import {AuthScreenProps} from '../../../navigation/authNavigator';
-import {showSuccessToast, useValidation} from '../../../utils';
-import {otpVerification, useAppDispatch, useAppSelector} from '../../../store';
-import {LoginRes, OTPVerificationReq} from '../../../api';
+import {Button, OTPTextField, Screen, Text} from 'components';
+import {AuthParamList, AuthScreenProps, replaceLastNScreens} from 'navigation';
+import {showSuccessToast, useValidation} from 'utils';
+import {otpVerification, useAppDispatch, useAppSelector} from 'store';
+import {LoginRes, OTPVerificationReq} from 'api';
 import makeStyles from './styles';
 
 /**
@@ -96,7 +100,7 @@ export const VerifyOTPScreen: FC<AuthScreenProps<'verifyOTP'>> = ({
       if (meta.requestStatus === 'fulfilled' && data?.message) {
         showSuccessToast({message: data.message});
         //Navigate to set new password screen
-        navigation.navigate('setNewPassword');
+        replaceLastNScreens('setNewPassword', 2);
       }
     }
   };

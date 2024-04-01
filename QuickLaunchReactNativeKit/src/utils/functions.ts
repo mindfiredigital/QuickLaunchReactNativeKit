@@ -1,8 +1,8 @@
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
-import {resetState} from '../store/reducers';
-import {store} from '../store';
-import {navigate} from '../navigation';
-import {constants} from '../constants';
+import {resetState} from 'store';
+import {store} from 'store';
+import {navigate} from 'navigation';
+import {constants} from '@constants';
 
 /**
  * Logout the user from the app

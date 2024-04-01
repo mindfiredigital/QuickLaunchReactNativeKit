@@ -1,13 +1,12 @@
 import axios, {AxiosResponse, InternalAxiosRequestConfig} from 'axios';
 import Config from 'react-native-config';
-import {ApiConfig} from './api.types';
-import {getGeneralApiProblem} from './apiProblem';
-import {store} from '../store';
+import {ApiConfig, getGeneralApiProblem} from 'api';
+import {store} from 'store';
 
 /**
  * Configuring the axios instance.
  */
-export const DEFAULT_API_CONFIG: ApiConfig = {
+const DEFAULT_API_CONFIG: ApiConfig = {
   url: Config.API_URL || '',
   apiVersion: Config.API_VERSION || '',
   timeout: 10000,

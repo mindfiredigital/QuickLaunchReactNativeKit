@@ -1,4 +1,4 @@
-import {vs} from '../utils';
+import {vs} from 'utils';
 
 /**
  * Font sizes for different text styles.

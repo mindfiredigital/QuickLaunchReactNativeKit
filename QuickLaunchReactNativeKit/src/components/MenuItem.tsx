@@ -7,10 +7,10 @@ import {
   ViewProps,
 } from 'react-native';
 import {useTheme} from '@react-navigation/native';
-import {Icon, IconProps, Text} from '.';
-import {s, vs} from '../utils';
-import {Colors, spacing} from '../theme';
-import {ChevronRight} from '../assets/svgs';
+import {Icon, IconProps, Text} from 'components';
+import {s, vs} from 'utils';
+import {Colors, spacing} from 'theme';
+import {ChevronRight} from 'assets/svgs';
 
 interface MenuItemProps extends TouchableOpacityProps {
   /** The icon to be displayed on the left side of the item. */

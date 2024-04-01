@@ -3,29 +3,25 @@ import {TextInput} from 'react-native';
 import {useTranslation} from 'react-i18next';
 import {useTheme} from '@react-navigation/native';
 import {ImageOrVideo} from 'react-native-image-crop-picker';
-import {Button, Screen, TextField} from '../../../../components';
+import {Button, Screen, TextField} from 'components';
 import {
   getUser,
   updateUser,
   uploadProfileImage,
   useAppDispatch,
   useAppSelector,
-} from '../../../../store';
-import {PrimaryScreenProps} from '../../../../navigation/primaryNavigator';
-import {
-  AccountOutline,
-  EmailOutline,
-  PhoneOutline,
-} from '../../../../assets/svgs';
-import {showSuccessToast, useValidation, vs} from '../../../../utils';
+} from 'store';
+import {PrimaryScreenProps} from 'navigation';
+import {AccountOutline, EmailOutline, PhoneOutline} from 'assets/svgs';
+import {showSuccessToast, useValidation, vs} from 'utils';
 import {
   GetUserRes,
   UpdateUserReq,
   UploadProfileImageReq,
   UploadProfileImageRes,
-} from '../../../../api';
-import makeStyles from './styles';
+} from 'api';
 import {ImageUploadModal, ProfileImage} from './components';
+import makeStyles from './styles';
 
 /**
  * Edit profile screen

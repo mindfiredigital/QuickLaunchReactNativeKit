@@ -9,9 +9,9 @@ import {
   Keyboard,
 } from 'react-native';
 import {useTheme} from '@react-navigation/native';
-import {Colors, spacing as spacingUtils, typography} from '../theme';
-import {s, vs} from '../utils';
-import {Text} from '.';
+import {Text} from 'components';
+import {s, vs} from 'utils';
+import {Colors, spacing as spacingUtils, typography} from 'theme';
 
 /**
  * Props for OTPTextField component.

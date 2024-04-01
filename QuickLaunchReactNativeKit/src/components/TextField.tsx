@@ -11,10 +11,9 @@ import {
   ViewStyle,
 } from 'react-native';
 import {useTheme} from '@react-navigation/native';
-import {Text, TextProps} from './Text';
-import {Colors, fontSize, spacing, typography} from '../theme';
-import {Icon, IconTypes} from './Icon';
-import {s, vs} from '../utils';
+import {Text, TextProps, Icon, IconTypes} from 'components';
+import {Colors, fontSize, spacing, typography} from 'theme';
+import {s, vs} from 'utils';
 export interface TextFieldProps extends Omit<TextInputProps, 'ref'> {
   /**
    * A style modifier for different input states.

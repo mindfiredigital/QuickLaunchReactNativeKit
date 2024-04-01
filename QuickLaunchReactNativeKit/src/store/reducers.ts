@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {persistReducer} from 'redux-persist';
 import {UnknownAction, combineSlices} from '@reduxjs/toolkit';
-import {authSlice, appSlice} from './slices';
+import {authSlice, appSlice} from 'store/slices';
 
 export const RESET_STATE = 'RESET_STATE';
 
