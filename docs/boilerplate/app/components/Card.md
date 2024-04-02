@@ -1,4 +1,4 @@
-# Card Component
+# Card
 
 The `Card` component is a simple card component with a shadow and customizable background color.
 
