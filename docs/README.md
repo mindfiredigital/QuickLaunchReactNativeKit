@@ -1,4 +1,4 @@
-- [Components](./boilerplate/app/components/Components.md) - QuickLaunchReactNativeKit's built-in UI components
+- [Components](./boilerplate/app/components/Components.md) - QuickLaunchReactNativeKit's built-in UI components.
   - [Button](./boilerplate/app/components/Button.md)
   - [Card](./boilerplate/app/components/Card.md)
   - [Header](./boilerplate/app/components/Header.md)
