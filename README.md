@@ -37,7 +37,54 @@ Explore all available screens [here](./docs/ScreenShots.md)
 
 With QuickLaunchReactNativeKit, expedite your React Native project and craft exceptional mobile experiences. Happy coding!
 
+## Installation
+
+To get started with QuickLaunchReactNativeKit, follow these steps:
+
+### Prerequisites
+
+- For React Native, make sure you're set up for React Native by following [the official documentation](https://reactnative.dev/docs/environment-setup).
+- Ensure you have Node.js LTS release or greater installed.
+- Install recent versions of Xcode and Android Studio.
+- Recommended: Yarn or npm package manager.
+- Recommended: macOS (for iOS development).
+
+### Running the CLI
+
+```bash
+# Get walked through the prompts for the different options to start your new app
+npx react-native@latest init <ProjectName> --template=https://gitlab.mindfire.co.in/mobilefoss/Foss_RN.git
+```
+
+### Post-Install Setup
+
+#### Step 1: Theme Configuration
+
+During setup, you have the option to customize your theme or choose from preset themes.
+
+##### Option 1: Custom Theme Configuration
+
+1. You'll be prompted to define custom theme values.
+2. Follow the prompts to input hex color values for each theme property.
+3. Upon completion, a custom theme file will be generated successfully.
+
+##### Option 2: Preset Theme Configuration
+
+1. Select a theme from the available options. Refer to the [Theme Section](#themes) for details.
+2. The chosen theme will be applied to your project.
+
+#### Step 2: Choose Navigation Type
+
+1. Select your preferred navigation type: Tab or Drawer, as per your app's structure. Refer to the [Navigation Types](#navigation-types) section for more information.
+2. Navigation type will be set accordingly.
+
+### Project Initialization Complete
+
+Your React Native project has been generated with the QuickLaunchReactNativeKit template. You're now ready to start development with your chosen theme and navigation type configurations. Follow the instructions displayed in the terminal to seamlessly run your app on both iOS and Android platforms.
+
 ## Where do I start?
+
+### Components
 
 [Components](./docs/template/src/components/Components.md) - QuickLaunchReactNativeKit's built-in UI components.
 
@@ -53,3 +100,18 @@ With QuickLaunchReactNativeKit, expedite your React Native project and craft exc
 - [Text](./docs/template/src/components/Text.md)
 - [TextField](./docs/template/src/components/TextField.md)
 - [WebViewApp](./docs/template/src/components/WebViewApp.md)
+
+### Themes
+
+List of available themes:
+
+1. Theme 1
+2. Theme 2
+3. Theme 3
+
+### Navigation Types
+
+Available navigation types:
+
+- **Tab**: Tab-based navigation system.
+- **Drawer**: Drawer-based navigation system.
