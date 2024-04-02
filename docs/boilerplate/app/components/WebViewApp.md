@@ -3,33 +3,12 @@
 The `WebViewApp` component is used for displaying a web page using WebView.
 
 ```tsx
-import React from "react";
-import { WebViewApp } from "./path/to/WebViewApp";
-import { View, StyleSheet } from "react-native";
-
-const MyComponent = () => {
-  return (
-    <View style={styles.container}>
-      <WebViewApp
-        source={{ uri: "https://example.com" }}
-        onError={(event) => console.error("WebView error:", event.nativeEvent)}
-        renderLoading={() => <Spinner loading />}
-        style={styles.webView}
-      />
-    </View>
-  );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  webView: {
-    flex: 1,
-  },
-});
-
-export default MyComponent;
+<WebViewApp
+  source={{ uri: "https://example.com" }}
+  onError={(event) => console.error("WebView error:", event.nativeEvent)}
+  renderLoading={() => <Spinner loading />}
+  style={styles.webView}
+/>
 ```
 
 ## Props

@@ -6,7 +6,7 @@ The `Button` component is a customizable button component for React Native appli
 <Button
   preset="link"
   btnText={"login"}
-  style={[{ paddingVertical: 100 }, { borderRadius: 0 }]}
+  style={[{ borderRadius: 0 }]}
   onPress={() => Alert.alert("pressed")}
 />
 ```
