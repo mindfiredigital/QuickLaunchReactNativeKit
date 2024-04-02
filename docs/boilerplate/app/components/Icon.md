@@ -4,7 +4,7 @@ The `Icon` component is used to render an icon. It supports both image and SVG i
 
 ```tsx
 {
-  /* Image icon */
+  /** Image icon */
 }
 <Icon
   icon="exampleImage"
@@ -15,16 +15,15 @@ The `Icon` component is used to render an icon. It supports both image and SVG i
 />;
 
 {
-  /* SVG icon */
+  /** SVG icon */
 }
-<TouchableOpacity onPress={handleIconPress}>
-  <Icon
-    icon={<MySVGIcon />}
-    color={Colors.secondary}
-    size={40}
-    style={styles.icon}
-  />
-</TouchableOpacity>;
+<Icon
+  icon={<MySVGIcon />}
+  color={Colors.secondary}
+  size={40}
+  style={styles.icon}
+  onPress={handleIconPress}
+/>;
 ```
 
 ## Props
