@@ -70,7 +70,7 @@ During setup, you have the option to customize your theme or choose from preset 
 
 ##### Option 2: Preset Theme Configuration
 
-1. Select a theme from the available options. Refer to the [Theme Section](#themes) for details.
+1. Select a theme from the available options. Refer to the [Theme Section](./docs/template/src/theme/PresetThemes.md) for details.
 2. The chosen theme will be applied to your project.
 
 #### Step 2: Choose Navigation Type
@@ -89,6 +89,7 @@ Your React Native project has been generated with the QuickLaunchReactNativeKit 
 - [Folder Structure](./docs/template/FolderStructure.md) - An overview of the project folder structure
 
 - [Components](./docs/template/src/components/Components.md) - QuickLaunchReactNativeKit's built-in UI components.
+
   - [Button](./docs/template/src/components/Button.md)
   - [Card](./docs/template/src/components/Card.md)
   - [Header](./docs/template/src/components/Header.md)
@@ -102,13 +103,7 @@ Your React Native project has been generated with the QuickLaunchReactNativeKit 
   - [TextField](./docs/template/src/components/TextField.md)
   - [WebViewApp](./docs/template/src/components/WebViewApp.md)
 
-### Themes
-
-List of available themes:
-
-1. Theme 1
-2. Theme 2
-3. Theme 3
+- [Theme](./docs/template/src/theme/Theme.md) - How to customize the look and feel of your app
 
 ### Navigation Types
 
