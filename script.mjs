@@ -324,7 +324,9 @@ const configureTheme = async () => {
     // If the user doesn't want a custom theme, provide options
     console.log(`\n${BLUE}3. Choose a theme from the options:${NC}`);
     console.log(
-      `${chalk.green("Hint:")} Refer to README.md file for preset themes.`
+      `${chalk.green(
+        "Hint:"
+      )} Refer to documentation [PresetThemes.md](https://github.com/mindfiredigital/QuickLaunchReactNativeKit/blob/development/QuickLaunchReactNativeKit/docs/template/src/theme/PresetThemes.md) for list of available themes.`
     );
     const themeOptions = ["theme1", "theme2", "theme3"];
     const themeSelectionPrompt = {
@@ -349,7 +351,7 @@ const configureNavigationType = async () => {
   console.log(
     `${chalk.green(
       "Hint:"
-    )} Refer to README.md file for navigation type options.`
+    )} Refer to [Navigation Types](https://github.com/mindfiredigital/QuickLaunchReactNativeKit/blob/development/QuickLaunchReactNativeKit/docs/template/src/navigation/Navigation.md#primary-navigation-types) for navigation type options.`
   );
   const navigationTypeOptions = ["tab", "drawer"];
   const navigationTypeSelectionPrompt = {
