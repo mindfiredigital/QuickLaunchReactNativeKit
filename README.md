@@ -1,5 +1,7 @@
 # Quick Launch React Native Kit
 
+<img alt="Sign-in" src="./docs/screenshots/banner.png" />
+
 ## Overview
 
 Welcome to QuickLaunchReactNativeKit! This kit is designed to expedite the development process of common React Native projects by providing pre-built frameworks for essential functionalities like login, signup, settings, and more. With QuickLaunchReactNativeKit, developers can seamlessly integrate these features into their projects, saving valuable time and effort. Additionally, this kit offers multiple themes to enhance the aesthetic appeal of your app.
