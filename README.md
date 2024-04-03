@@ -1,6 +1,6 @@
 # Quick Launch React Native Kit
 
-<img alt="feature-image" src="./docs/screenshots/banner.png" />
+<img alt="feature-image" src="./QuickLaunchReactNativeKit/docs/screenshots/banner.png" />
 
 ## Overview
 
@@ -21,7 +21,7 @@ Your new QuickLaunchReactNativeKit project comes equipped with a comprehensive s
 - **SVG icons support**: Easily integrate scalable vector graphics into your app.
 - **Prebuilt UI**: Accelerates development with pre-designed user interface components.
 - **Social sign-ins**: Simplifies user authentication with Google and Apple sign-ins.
-- **Additional prebuilt [components](./docs/template/src/components/Components.md)**: Explore a variety of pre-built components to enhance your app's UI.
+- **Additional prebuilt [components](./QuickLaunchReactNativeKit/docs/template/src/components/Components.md)**: Explore a variety of pre-built components to enhance your app's UI.
 
 And much more!
 
@@ -35,7 +35,7 @@ Utilize our pre-built screens to jumpstart your app development:
 
 3. **Navigation**: Seamlessly organize app content with tab and drawer views.
 
-[Explore all available screens](./docs/ScreenShots.md)
+[Explore all available screens](./QuickLaunchReactNativeKit/docs/ScreenShots.md)
 
 With QuickLaunchReactNativeKit, expedite your React Native project and craft exceptional mobile experiences. Happy coding!
 
@@ -73,12 +73,12 @@ During setup, you have the option to customize your theme or choose from preset 
 
 ##### Option 2: Preset Theme Configuration
 
-1. Select a theme from the available options. Refer to the [Theme Section](./docs/template/src/theme/PresetThemes.md) for details.
+1. Select a theme from the available options. Refer to the [Theme Section](./QuickLaunchReactNativeKit/docs/template/src/theme/PresetThemes.md) for details.
 2. The chosen theme will be applied to your project.
 
 #### Step 2: Choose Navigation Type
 
-1. Select your preferred navigation type: Tab or Drawer, as per your app's structure. Refer to the [Navigation Types](./docs/template/src/navigation/Navigation.md) section for more information.
+1. Select your preferred navigation type: Tab or Drawer, as per your app's structure. Refer to the [Navigation Types](./QuickLaunchReactNativeKit/docs/template/src/navigation/Navigation.md) section for more information.
 2. Navigation type will be set accordingly.
 
 ### Project Initialization Complete
@@ -87,33 +87,33 @@ Your React Native project has been generated with the QuickLaunchReactNativeKit 
 
 ## Documentation
 
-- [Tech Stack](./docs/template/TechStack.md) - List of the key libraries, tools, and utilities used in the project's tech stack, along with their respective versions and brief descriptions.
+- [Tech Stack](./QuickLaunchReactNativeKit/docs/template/TechStack.md) - List of the key libraries, tools, and utilities used in the project's tech stack, along with their respective versions and brief descriptions.
 
-- [Folder Structure](./docs/template/FolderStructure.md) - An overview of the project folder structure
+- [Folder Structure](./QuickLaunchReactNativeKit/docs/template/FolderStructure.md) - An overview of the project folder structure
 
-- [Components](./docs/template/src/components/Components.md) - QuickLaunchReactNativeKit's built-in UI components.
+- [Components](./QuickLaunchReactNativeKit/docs/template/src/components/Components.md) - QuickLaunchReactNativeKit's built-in UI components.
 
-  - [Button](./docs/template/src/components/Button.md)
-  - [Card](./docs/template/src/components/Card.md)
-  - [Header](./docs/template/src/components/Header.md)
-  - [Icon](./docs/template/src/components/Icon.md)
-  - [MenuItem](./docs/template/src/components/MenuItem.md)
-  - [OTPTextField](./docs/template/src/components/OTPTextField.md)
-  - [Screen](./docs/template/src/components/Screen.md)
-  - [Separator](./docs/template/src/components/Separator.md)
-  - [Spinner](./docs/template/src/components/Spinner.md)
-  - [Text](./docs/template/src/components/Text.md)
-  - [TextField](./docs/template/src/components/TextField.md)
-  - [WebViewApp](./docs/template/src/components/WebViewApp.md)
+  - [Button](./QuickLaunchReactNativeKit/docs/template/src/components/Button.md)
+  - [Card](./QuickLaunchReactNativeKit/docs/template/src/components/Card.md)
+  - [Header](./QuickLaunchReactNativeKit/docs/template/src/components/Header.md)
+  - [Icon](./QuickLaunchReactNativeKit/docs/template/src/components/Icon.md)
+  - [MenuItem](./QuickLaunchReactNativeKit/docs/template/src/components/MenuItem.md)
+  - [OTPTextField](./QuickLaunchReactNativeKit/docs/template/src/components/OTPTextField.md)
+  - [Screen](./QuickLaunchReactNativeKit/docs/template/src/components/Screen.md)
+  - [Separator](./QuickLaunchReactNativeKit/docs/template/src/components/Separator.md)
+  - [Spinner](./QuickLaunchReactNativeKit/docs/template/src/components/Spinner.md)
+  - [Text](./QuickLaunchReactNativeKit/docs/template/src/components/Text.md)
+  - [TextField](./QuickLaunchReactNativeKit/docs/template/src/components/TextField.md)
+  - [WebViewApp](./QuickLaunchReactNativeKit/docs/template/src/components/WebViewApp.md)
 
-- [Theme](./docs/template/src/theme/Theme.md) - How to customize the look and feel of your app
+- [Theme](./QuickLaunchReactNativeKit/docs/template/src/theme/Theme.md) - How to customize the look and feel of your app
 
-- [Navigation](./docs/template/src/navigation/Navigation.md) - How [React Navigation](https://reactnavigation.org/docs/getting-started/) is used to navigate through your screens
+- [Navigation](./QuickLaunchReactNativeKit/docs/template/src/navigation/Navigation.md) - How [React Navigation](https://reactnavigation.org/docs/getting-started/) is used to navigate through your screens
 
-- [API](./docs/template/src/api/API.md) - Handle network calls using [Axios](https://www.npmjs.com/package/axios), enabling efficient data retrieval, manipulation, and transmission for your application.
+- [API](./QuickLaunchReactNativeKit/docs/template/src/api/API.md) - Handle network calls using [Axios](https://www.npmjs.com/package/axios), enabling efficient data retrieval, manipulation, and transmission for your application.
 
-- [Assets](./docs/template/src/assets/Assets.md) - This folder houses fonts, images, and SVG icons used within the project's user interface and design elements.
+- [Assets](./QuickLaunchReactNativeKit/docs/template/src/assets/Assets.md) - This folder houses fonts, images, and SVG icons used within the project's user interface and design elements.
 
-- [i18n](./docs/template/src/i18n/i18n.md) - Multilanguage Support
+- [i18n](./QuickLaunchReactNativeKit/docs/template/src/i18n/i18n.md) - Multilanguage Support
 
-- [Service](./docs/template/src/service/Service.md) - The Service folder hosts key files for Signin with Apple, Google, biometric authentication, and in-app updates.
+- [Service](./QuickLaunchReactNativeKit/docs/template/src/service/Service.md) - The Service folder hosts key files for Signin with Apple, Google, biometric authentication, and in-app updates.
