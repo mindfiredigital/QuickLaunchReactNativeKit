@@ -115,3 +115,5 @@ Your React Native project has been generated with the QuickLaunchReactNativeKit 
 - [Assets](./docs/template/src/assets/Assets.md) - This folder houses fonts, images, and SVG icons used within the project's user interface and design elements.
 
 - [i18n](./docs/template/src/i18n/i18n.md) - Multilanguage Support
+
+- [Service](./docs/template/src/service/Service.md) - The Service folder hosts key files for Signin with Apple, Google, biometric authentication, and in-app updates.
