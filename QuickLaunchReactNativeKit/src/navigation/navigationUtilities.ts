@@ -1,8 +1,10 @@
 import {
   CommonActions,
+  NavigationState,
+  PartialState,
   createNavigationContainerRef,
 } from '@react-navigation/native';
-import {PrimaryParamList} from 'navigation';
+import {AuthParamList, PrimaryParamList} from 'navigation';
 
 /**
  * Reference to the root App Navigator.
@@ -58,3 +60,18 @@ export const replaceLastNScreens = (
     });
   }
 };
+
+/**
+ * Gets the current screen from any navigation state.
+ * @param {NavigationState | PartialState<NavigationState>} state - The navigation state to traverse.
+ * @returns {string} - The name of the current screen.
+ */
+export function getActiveRouteName(state: NavigationState | PartialState<NavigationState>): string {
+  const route = state.routes[state.index ?? 0]
+
+  // Found the active route -- return the name
+  if (!route.state) return route.name as keyof AuthParamList | keyof PrimaryParamList
+
+  // Recursive call to deal with nested routers
+  return getActiveRouteName(route.state as NavigationState<AuthParamList | PrimaryParamList>)
+}

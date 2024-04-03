@@ -1,6 +1,6 @@
 # Quick Launch React Native Kit
 
-<img alt="Sign-in" src="./docs/screenshots/banner.png" />
+<img alt="feature-image" src="./docs/screenshots/banner.png" />
 
 ## Overview
 
@@ -78,7 +78,7 @@ During setup, you have the option to customize your theme or choose from preset 
 
 #### Step 2: Choose Navigation Type
 
-1. Select your preferred navigation type: Tab or Drawer, as per your app's structure. Refer to the [Navigation Types](#navigation-types) section for more information.
+1. Select your preferred navigation type: Tab or Drawer, as per your app's structure. Refer to the [Navigation Types](./docs/template/src/navigation/Navigation.md) section for more information.
 2. Navigation type will be set accordingly.
 
 ### Project Initialization Complete
@@ -108,9 +108,4 @@ Your React Native project has been generated with the QuickLaunchReactNativeKit 
 
 - [Theme](./docs/template/src/theme/Theme.md) - How to customize the look and feel of your app
 
-### Navigation Types
-
-Available navigation types:
-
-- **Tab**: Tab-based navigation system.
-- **Drawer**: Drawer-based navigation system.
+- [Navigation](./docs/template/src/navigation/Navigation.md) - How [React Navigation](https://reactnavigation.org/docs/getting-started/) is used to navigate through your screens
