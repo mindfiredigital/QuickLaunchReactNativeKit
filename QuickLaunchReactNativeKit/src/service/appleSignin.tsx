@@ -18,7 +18,7 @@ import {socialLogIn, socialSignUp, useAppDispatch} from 'store';
 import {LoginRes} from 'api';
 import {AppleDark, AppleLight} from 'assets/svgs';
 
-interface GoogleSignInProps extends TouchableOpacityProps {
+interface AppleSignInProps extends TouchableOpacityProps {
   /**
    * size - The size of the Google sign-in button.
    * @default 48
@@ -34,9 +34,9 @@ interface AuthParams {
 
 /**
  * AppleSignin component for allowing users to sign in with Apple.
- * @param GoogleSignInProps
+ * @param AppleSignInProps
  */
-export const AppleSignin = (props: GoogleSignInProps) => {
+export const AppleSignin = (props: AppleSignInProps) => {
   const {dark, colors} = useTheme();
   // props
   const {size = vs(48), ...rest} = props;
