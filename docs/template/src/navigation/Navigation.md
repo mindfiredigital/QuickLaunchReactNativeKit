@@ -28,6 +28,6 @@ Inside `./src/navigation/drawerNavigator.tsx` you'll see the definition of the D
 
 For detailed information, refer to the [official documentation](https://reactnavigation.org/docs/drawer-navigator)
 
-| Tab Navigation                                                          | Drawer Navigation                                                    |
-| ----------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| <img alt="bottom-tabs" src="../../../screenshots/home-with-tabs.png" /> | <img alt="drawer-menu" src="../../../screenshots/drawer-menu.png" /> |
+| Tab Navigation                                                                      | Drawer Navigation                                                                |
+| ----------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| <img alt="bottom-tabs" src="../../../screenshots/home-with-tabs.png" width="220" /> | <img alt="drawer-menu" src="../../../screenshots/drawer-menu.png" width="220" /> |
