@@ -111,3 +111,5 @@ Your React Native project has been generated with the QuickLaunchReactNativeKit 
 - [Navigation](./docs/template/src/navigation/Navigation.md) - How [React Navigation](https://reactnavigation.org/docs/getting-started/) is used to navigate through your screens
 
 - [API](./docs/template/src/api/API.md) - Handle network calls using [Axios](https://www.npmjs.com/package/axios), enabling efficient data retrieval, manipulation, and transmission for your application.
+
+- [Assets](./docs/template/src/assets/Assets.md) - This folder houses fonts, images, and SVG icons used within the project's user interface and design elements.
