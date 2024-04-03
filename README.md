@@ -33,7 +33,7 @@ Utilize our pre-built screens to jumpstart your app development:
 
 3. **Navigation**: Seamlessly organize app content with tab and drawer views.
 
-Explore all available screens [here](./docs/ScreenShots.md)
+[Explore all available screens](./docs/ScreenShots.md)
 
 With QuickLaunchReactNativeKit, expedite your React Native project and craft exceptional mobile experiences. Happy coding!
 
