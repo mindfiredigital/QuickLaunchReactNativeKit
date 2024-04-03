@@ -28,7 +28,7 @@ Inside `./src/navigation/drawerNavigator.tsx` you'll see the definition of the D
 
 For detailed information, refer to the [official documentation](https://reactnavigation.org/docs/drawer-navigator)
 
-## Screenshots
+### Screenshots
 
 | Tab Navigation                                                                      | Drawer Navigation                                                                |
 | ----------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
