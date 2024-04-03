@@ -51,9 +51,10 @@ To get started with QuickLaunchReactNativeKit, follow these steps:
 
 ### Running the CLI
 
-```bash
-# Get walked through the prompts for the different options to start your new app
-npx react-native@latest init <ProjectName> --template=https://gitlab.mindfire.co.in/mobilefoss/Foss_RN.git
+Get walked through the prompts for the different options to start your new app
+
+```terminal
+npx react-native@latest init <ProjectName> --template=https://github.com/mindfiredigital/QuickLaunchReactNativeKit.git#development
 ```
 
 ### Post-Install Setup
