@@ -119,3 +119,5 @@ Your React Native project has been generated with the QuickLaunchReactNativeKit 
 - [i18n](./QuickLaunchReactNativeKit/docs/template/src/i18n/i18n.md) - Multilanguage Support
 
 - [Service](./QuickLaunchReactNativeKit/docs/template/src/service/Service.md) - The Service folder hosts key files for Signin with Apple, Google, biometric authentication, and in-app updates.
+
+- **[Store](./QuickLaunchReactNativeKit/docs/template/src/store/Store.md)** - QuickLaunchReactNativeKit utilizes [Redux-Toolkit](https://redux-toolkit.js.org) and [Redux-Persist](https://www.npmjs.com/package/redux-persist) for state management.
