@@ -4,16 +4,10 @@ import {useTheme} from '@react-navigation/native';
 import {useTranslation} from 'react-i18next';
 import {Button, Screen, Text, TextField} from 'components';
 import {AuthScreenProps} from 'navigation';
-import {showSuccessToast, useValidation, vs} from 'utils';
+import {showSuccessToast, useValidation} from 'utils';
 import {LoginRes, SignUpReq} from 'api';
 import {signUp, useAppDispatch, useAppSelector} from 'store';
-import {
-  AccountOutline,
-  EmailOutline,
-  EyeOffOutline,
-  EyeOutline,
-  LockOutline,
-} from 'assets/svgs';
+import {AccountOutline, EmailOutline, LockOutline} from 'assets/svgs';
 import makeStyles from './styles';
 
 /**
@@ -29,8 +23,6 @@ export const SignUpScreen: FC<AuthScreenProps<'signUp'>> = ({navigation}) => {
   const passwordRef = useRef<TextInput>(null);
   const confirmPasswordRef = useRef<TextInput>(null);
   //hooks
-  const [isVisiblePassword, setVisiblePassword] = useState(false);
-  const [isVisibleConfirmPassword, setVisibleConfirmPassword] = useState(false);
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -70,20 +62,6 @@ export const SignUpScreen: FC<AuthScreenProps<'signUp'>> = ({navigation}) => {
       },
       isTouchedEnabled: true,
     });
-
-  /**
-   * show hide password
-   */
-  const onPressPasswordEye = () => {
-    setVisiblePassword(!isVisiblePassword);
-  };
-
-  /**
-   * show hide confirm password
-   */
-  const onPressConfirmPasswordEye = () => {
-    setVisibleConfirmPassword(!isVisibleConfirmPassword);
-  };
 
   /**
    * navigate to back screen
@@ -160,6 +138,7 @@ export const SignUpScreen: FC<AuthScreenProps<'signUp'>> = ({navigation}) => {
   const renderTextInputs = () => (
     <>
       <TextField
+        value={fullName}
         onChangeText={setFullName}
         leftIcon={<AccountOutline />}
         placeholder={t('signUp.namePlaceholder')}
@@ -173,41 +152,36 @@ export const SignUpScreen: FC<AuthScreenProps<'signUp'>> = ({navigation}) => {
       />
       <TextField
         ref={emailRef}
+        value={email}
         onChangeText={setEmail}
         leftIcon={<EmailOutline />}
         placeholder={t('signUp.emailPlaceholder')}
         keyboardType="email-address"
         inputMode="email"
         returnKeyType="next"
+        autoCapitalize="none"
         textContentType="emailAddress"
-        leftIconSize={vs(25)}
         onSubmitEditing={focusPassword}
         error={getErrorsInField('email')}
-        blurOnSubmit={false}
       />
       <TextField
         ref={passwordRef}
+        preset="password"
+        value={password}
         onChangeText={setPassword}
         leftIcon={<LockOutline />}
-        secureTextEntry={!isVisiblePassword}
-        rightIcon={!isVisiblePassword ? <EyeOutline /> : <EyeOffOutline />}
-        onPressRightIcon={onPressPasswordEye}
         placeholder={t('login.passwordPlaceholder')}
         textContentType="newPassword"
         returnKeyType="next"
         onSubmitEditing={focusConfirmPassword}
         error={getErrorsInField('password')}
-        blurOnSubmit={false}
       />
       <TextField
         ref={confirmPasswordRef}
+        preset="password"
+        value={confirmPassword}
         onChangeText={setConfirmPassword}
         leftIcon={<LockOutline />}
-        secureTextEntry={!isVisibleConfirmPassword}
-        rightIcon={
-          !isVisibleConfirmPassword ? <EyeOutline /> : <EyeOffOutline />
-        }
-        onPressRightIcon={onPressConfirmPasswordEye}
         placeholder={t('signUp.confirmPassword')}
         textContentType="newPassword"
         returnKeyType="done"

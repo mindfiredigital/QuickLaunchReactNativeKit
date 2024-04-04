@@ -42,6 +42,8 @@ const en = {
       'Place your finger on the Touch ID sensor to authenticate.',
     signWithBiometricsDis:
       'Place your finger on the Touch ID sensor to authenticate.',
+    passwordHint:
+      'Your password should be between 8 and 16 characters long, and include at least one uppercase letter, one lowercase letter, one number, and one special character.',
   },
   signUp: {
     iHaveAlready: 'Already have an account ?',
@@ -52,7 +54,7 @@ const en = {
   forgotPassword: {
     title: 'Forgot Password',
     description:
-      'Opps. It happens to the best of us. Input your email address to fix the issue.',
+      'Oops. It happens to the best of us. Input your email address to fix the issue.',
     sendOtp: 'Send OTP',
   },
   verifyOTP: {

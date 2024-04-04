@@ -6,7 +6,7 @@ import {Button, Screen, Text, TextField} from 'components';
 import {showSuccessToast, useValidation} from 'utils';
 import {changePassword, useAppDispatch, useAppSelector} from 'store';
 import {ChangePasswordRes, LoginRes} from 'api';
-import {EyeOffOutline, EyeOutline, LockOutline} from 'assets/svgs';
+import {LockOutline} from 'assets/svgs';
 import {PrimaryScreenProps} from 'navigation';
 import makeStyles from './styles';
 
@@ -25,9 +25,6 @@ export const ChangePassword: FC<PrimaryScreenProps<'changePassword'>> = ({
   const confirmPasswordRef = useRef<TextInput>(null);
 
   //Hooks
-  const [isVisiblePassword, setVisiblePassword] = useState(false);
-  const [isVisibleNewPassword, setVisibleNewPassword] = useState(false);
-  const [isVisibleConfirmPassword, setVisibleConfirmPassword] = useState(false);
   const [password, setPassword] = useState('');
   const [newPassword, setnewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -61,27 +58,6 @@ export const ChangePassword: FC<PrimaryScreenProps<'changePassword'>> = ({
       },
       isTouchedEnabled: true,
     });
-
-  /**
-   * show hide current password
-   */
-  const onPressPasswordEye = () => {
-    setVisiblePassword(!isVisiblePassword);
-  };
-
-  /**
-   * show hide new password
-   */
-  const onPressNewPasswordEye = () => {
-    setVisibleNewPassword(!isVisibleNewPassword);
-  };
-
-  /**
-   * show hide confirm new password
-   */
-  const onPressConfirmPasswordEye = () => {
-    setVisibleConfirmPassword(!isVisibleConfirmPassword);
-  };
 
   /**
    * Validate text input than submit password
@@ -133,41 +109,34 @@ export const ChangePassword: FC<PrimaryScreenProps<'changePassword'>> = ({
   const renderTextInputs = () => (
     <>
       <TextField
+        preset="password"
+        value={password}
         onChangeText={setPassword}
         leftIcon={<LockOutline />}
-        secureTextEntry={!isVisiblePassword}
-        rightIcon={!isVisiblePassword ? <EyeOutline /> : <EyeOffOutline />}
-        onPressRightIcon={onPressPasswordEye}
         placeholder={t('changePassword.currentPassword')}
         textContentType="password"
         returnKeyType="next"
         onSubmitEditing={focusNewPassword}
         error={getErrorsInField('password')}
-        blurOnSubmit={false}
       />
       <TextField
         ref={newPasswordRef}
+        preset="password"
+        value={newPassword}
         onChangeText={setnewPassword}
         leftIcon={<LockOutline />}
-        secureTextEntry={!isVisibleNewPassword}
-        rightIcon={!isVisibleNewPassword ? <EyeOutline /> : <EyeOffOutline />}
-        onPressRightIcon={onPressNewPasswordEye}
         placeholder={t('setNewPassoword.newPassword')}
         textContentType="newPassword"
         returnKeyType="next"
         onSubmitEditing={focusConfirmPassword}
         error={getErrorsInField('newPassword')}
-        blurOnSubmit={false}
       />
       <TextField
         ref={confirmPasswordRef}
+        preset="password"
+        value={confirmPassword}
         onChangeText={setConfirmPassword}
         leftIcon={<LockOutline />}
-        secureTextEntry={!isVisibleConfirmPassword}
-        rightIcon={
-          !isVisibleConfirmPassword ? <EyeOutline /> : <EyeOffOutline />
-        }
-        onPressRightIcon={onPressConfirmPasswordEye}
         placeholder={t('setNewPassoword.confirmNewPassword')}
         textContentType="newPassword"
         returnKeyType="done"

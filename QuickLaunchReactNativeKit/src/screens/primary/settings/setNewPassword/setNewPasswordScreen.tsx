@@ -7,7 +7,7 @@ import {AuthScreenProps} from 'navigation';
 import {showSuccessToast, useValidation} from 'utils';
 import {passwordReset, useAppDispatch, useAppSelector} from 'store';
 import {LoginRes, PasswordResetReq} from 'api';
-import {EyeOffOutline, EyeOutline, LockOutline} from 'assets/svgs';
+import {LockOutline} from 'assets/svgs';
 import makeStyles from './styles';
 
 /**
@@ -24,8 +24,6 @@ export const SetNewPasswordScreen: FC<AuthScreenProps<'setNewPassword'>> = ({
   const confirmPasswordRef = useRef<TextInput>(null);
 
   //Hooks
-  const [isVisiblePassword, setVisiblePassword] = useState(false);
-  const [isVisibleConfirmPassword, setVisibleConfirmPassword] = useState(false);
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
@@ -55,20 +53,6 @@ export const SetNewPasswordScreen: FC<AuthScreenProps<'setNewPassword'>> = ({
       },
       isTouchedEnabled: true,
     });
-
-  /**
-   * show hide new password
-   */
-  const onPressPasswordEye = () => {
-    setVisiblePassword(!isVisiblePassword);
-  };
-
-  /**
-   * show hide confirm new password
-   */
-  const onPressConfirmPasswordEye = () => {
-    setVisibleConfirmPassword(!isVisibleConfirmPassword);
-  };
 
   /**
    * Validate text input than submit password
@@ -124,11 +108,10 @@ export const SetNewPasswordScreen: FC<AuthScreenProps<'setNewPassword'>> = ({
   const renderTextInputs = () => (
     <>
       <TextField
+        preset="password"
+        value={password}
         onChangeText={setPassword}
         leftIcon={<LockOutline />}
-        secureTextEntry={!isVisiblePassword}
-        rightIcon={!isVisiblePassword ? <EyeOutline /> : <EyeOffOutline />}
-        onPressRightIcon={onPressPasswordEye}
         placeholder={t('setNewPassoword.newPassword')}
         textContentType="newPassword"
         returnKeyType="next"
@@ -138,13 +121,10 @@ export const SetNewPasswordScreen: FC<AuthScreenProps<'setNewPassword'>> = ({
       />
       <TextField
         ref={confirmPasswordRef}
+        preset="password"
+        value={confirmPassword}
         onChangeText={setConfirmPassword}
         leftIcon={<LockOutline />}
-        secureTextEntry={!isVisibleConfirmPassword}
-        rightIcon={
-          !isVisibleConfirmPassword ? <EyeOutline /> : <EyeOffOutline />
-        }
-        onPressRightIcon={onPressConfirmPasswordEye}
         placeholder={t('setNewPassoword.confirmNewPassword')}
         textContentType="newPassword"
         returnKeyType="done"
