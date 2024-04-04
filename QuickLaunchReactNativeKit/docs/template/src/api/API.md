@@ -22,11 +22,11 @@ This repository provides instructions and resources for setting up a mock API en
 
 ### Mockoon Setup Instructions
 
-Follow the steps outlined in the [Mockoon Setup Instructions README](./MockoonSetup.md) to set up a mock API using Mockoon.
+Follow the steps outlined in the **[Mockoon Setup Instructions README](./MockoonSetup.md)** to set up a mock API using Mockoon.
 
 ### Postman Collection Setup
 
-Refer to the [Postman Collection Setup README](./PostmanSetup.md) for instructions on setting up a Postman collection for testing against the mock API.
+Refer to the **[Postman Collection Setup README](./PostmanSetup.md)** for instructions on setting up a Postman collection for testing against the mock API.
 
 ## Interceptors
 
