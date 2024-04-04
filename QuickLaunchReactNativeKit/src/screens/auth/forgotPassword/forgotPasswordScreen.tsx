@@ -96,7 +96,6 @@ export const ForgotPasswordScreen: FC<AuthScreenProps<'forgotPassword'>> = ({
         inputMode="email"
         returnKeyType="done"
         textContentType="emailAddress"
-        leftIconSize={vs(25)}
         autoCapitalize="none"
         error={getErrorsInField('email')}
       />

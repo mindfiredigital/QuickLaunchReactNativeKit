@@ -111,8 +111,8 @@ const makeStyles = (colors: Colors) =>
       lineHeight: lineHeight[fontSize.body2],
     },
     error: {
-      fontSize: fontSize.body,
-      lineHeight: lineHeight[fontSize.body],
+      fontSize: fontSize.body1,
+      lineHeight: lineHeight[fontSize.body1],
       color: colors.danger,
     },
   });

@@ -8,12 +8,7 @@ import {setGenericPasswordToKeychain, useValidation, vs} from 'utils';
 import {login, useAppDispatch, useAppSelector} from 'store';
 import {LoginReq} from 'api';
 import {AppleSignin, BiometricAuth, GoogleSignIn} from 'service';
-import {
-  EmailOutline,
-  EyeOffOutline,
-  EyeOutline,
-  LockOutline,
-} from 'assets/svgs';
+import {EmailOutline, LockOutline} from 'assets/svgs';
 import makeStyles from './styles';
 
 /**
@@ -35,7 +30,6 @@ export const LoginScreen: FC<AuthScreenProps<'login'>> = ({navigation}) => {
   const passwordRef = useRef<TextInput>(null);
 
   // Hooks
-  const [isVisible, setVisible] = useState<boolean>(false);
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
@@ -77,13 +71,6 @@ export const LoginScreen: FC<AuthScreenProps<'login'>> = ({navigation}) => {
   };
 
   /**
-   * Show and hide password
-   */
-  const onPressRightIcon = () => {
-    setVisible(!isVisible);
-  };
-
-  /**
    * Focus password textfield
    */
   const focusPassword = () => passwordRef.current?.focus();
@@ -121,7 +108,7 @@ export const LoginScreen: FC<AuthScreenProps<'login'>> = ({navigation}) => {
     <View style={styles.headerWrapper}>
       <Icon
         icon="logo"
-        size={vs(129)}
+        size={vs(80)}
         style={styles.logoContainer}
         color={colors.primary}
       />
@@ -169,12 +156,10 @@ export const LoginScreen: FC<AuthScreenProps<'login'>> = ({navigation}) => {
       />
       <TextField
         ref={passwordRef}
+        preset="password"
         value={password}
         onChangeText={setPassword}
         leftIcon={<LockOutline />}
-        secureTextEntry={!isVisible}
-        rightIcon={!isVisible ? <EyeOutline /> : <EyeOffOutline />}
-        onPressRightIcon={onPressRightIcon}
         placeholder={t('login.passwordPlaceholder')}
         returnKeyType="done"
         textContentType="password"
