@@ -9,8 +9,7 @@ const makeStyles = (colors: Colors) =>
       marginBottom: vs(spacing.lg),
     } as ViewStyle,
     logoContainer: {
-      marginTop: vs(spacing.md),
-      marginBottom: vs(spacing.lg),
+      marginVertical: vs(spacing.md),
       alignSelf: 'center',
     } as ViewStyle,
     forgotView: {

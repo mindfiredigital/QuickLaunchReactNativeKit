@@ -108,7 +108,7 @@ export const LoginScreen: FC<AuthScreenProps<'login'>> = ({navigation}) => {
     <View style={styles.headerWrapper}>
       <Icon
         icon="logo"
-        size={vs(80)}
+        size={vs(120)}
         style={styles.logoContainer}
         color={colors.primary}
       />
