@@ -90,7 +90,8 @@ const colors = {
 };
 
 // Template for generating custom theme
-const themeTemplate = `
+const getThemeTemplate = () => {
+  return `
 import { ThemeWithMode } from "theme/theme.types";
 
 export const customTheme: ThemeWithMode = {
@@ -120,6 +121,7 @@ export const customTheme: ThemeWithMode = {
   },
 };
 `;
+};
 
 // Function to get color hint based on color name
 const getColorHint = (colorName) => {
@@ -191,7 +193,7 @@ const promptForColor = (colorName, defaultValue = "") => {
 // Function to generate custom theme based on user input
 const generateCustomTheme = () => {
   // Create a TypeScript file with the generated content
-  fs.writeFileSync("src/theme/themes/customTheme.ts", themeTemplate);
+  fs.writeFileSync("src/theme/themes/customTheme.ts", getThemeTemplate());
   updateSettingsTheme();
   updateThemeIndex();
   updateTheme();
