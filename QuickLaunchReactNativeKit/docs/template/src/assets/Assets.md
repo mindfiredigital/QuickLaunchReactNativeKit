@@ -10,12 +10,12 @@ To access these images, they are exported via the `iconRegistry` object as shown
 
 ```typescript
 export const iconRegistry = {
-  logo: require("./appLogo.png"),
+  logo: require('./appLogo.png'),
   // Add new image paths here...
 };
 ```
 
-These icons can be utilized through the [Icons](../components/Icon.md) component.
+These icons can be utilized through the **[Icons](../components/Icon.md)** component.
 
 ## SVGs
 
@@ -59,7 +59,7 @@ SVGR provides various configuration options to customize the output. Below is an
 
 Feel free to customize the configuration based on your project requirements.
 
-For more information and advanced usage, refer to the [SVGR documentation](https://react-svgr.com/docs/cli/).
+For more information and advanced usage, refer to the **[SVGR documentation](https://react-svgr.com/docs/cli/)**.
 
 By leveraging SVGR, you can easily incorporate SVG files into your React applications and enjoy the benefits of scalability and customization offered by React components.
 
@@ -67,4 +67,4 @@ By leveraging SVGR, you can easily incorporate SVG files into your React applica
 
 This README contains a list of supported font families along with instructions on how to add or update font assets.
 
-[Fonts README](../theme/Typography.md)
+**[Fonts README](../theme/Typography.md)**

@@ -8,4 +8,4 @@
 
    - Upon receiving a response from the API, this component meticulously inspects the outcome. In case of any errors, it gracefully manages them, ensuring a smooth flow of operations. Additionally, it communicates any encountered issues to your application, effectively handling them through `./src/api/apiProblem.ts` with user-friendly messages which are displayed through Toast notifications within the application.
 
-   For error codes refer [API Problem README](./APIProblem.md)
+   For error codes refer **[API Problem README](./APIProblem.md)**

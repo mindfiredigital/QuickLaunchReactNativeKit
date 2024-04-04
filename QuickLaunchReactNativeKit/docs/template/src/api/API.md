@@ -32,13 +32,13 @@ Refer to the [Postman Collection Setup README](./PostmanSetup.md) for instructio
 
 You can intercept requests or responses before they are handled by then or catch.
 
-[Interceptors README](./Interceptors.md)
+**[Interceptors README](./Interceptors.md)**
 
 ## API Problem
 
 The code property on error responses is filled with the best guess on where the problem lies. You can use a switch to check the problem. The values are exposed as CONSTANTS hanging on your built API.
 
-[API Problem README](./APIProblem.md)
+**[API Problem README](./APIProblem.md)**
 
 </br>
 With these mechanisms in place, your application is fully equipped to harness the API configuration seamlessly.
