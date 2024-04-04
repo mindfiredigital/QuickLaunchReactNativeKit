@@ -9,7 +9,7 @@ There's also a `navigationUtilities.tsx` file which provides some utility functi
 To navigate between different screens, you can utilize the Navigation API as follows:
 
 ```tsx
-navigation.navigate("settings");
+navigation.navigate('settings');
 ```
 
 ## Primary Navigation Types
@@ -20,13 +20,13 @@ When setting up QuickLaunchReactNativeKit, you'll be prompted to choose between 
 
 Inside `./src/navigation/tabNavigator.tsx` you'll see the definition of the bottom tab navigator. This is where you can customize the style and behavior of the tab bar itself, along with each individual tab.
 
-For detailed information, refer to the [official documentation](https://reactnavigation.org/docs/bottom-tab-navigator/).
+For detailed information, refer to the **[official documentation](https://reactnavigation.org/docs/bottom-tab-navigator/)**.
 
 ### Option 2: Drawer Navigation
 
 Inside `./src/navigation/drawerNavigator.tsx` you'll see the definition of the Drawer navigator. This is where you can customize the style and behavior of the Drawer menu itself, along with DrawerItems.
 
-For detailed information, refer to the [official documentation](https://reactnavigation.org/docs/drawer-navigator)
+For detailed information, refer to the **[official documentation](https://reactnavigation.org/docs/drawer-navigator)**
 
 ### Screenshots
 

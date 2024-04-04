@@ -12,7 +12,7 @@ In our application, colors are managed through the `src/theme/colors.ts` file. W
 
 This structured approach not only promotes uniformity in our color scheme but also enables seamless modifications to the palette when necessary.
 
-[Colors README](./Colors.md)
+**[Colors README](./Colors.md)**
 
 ## Preset Themes
 
@@ -26,7 +26,7 @@ List of available themes:
 | Theme2 | ![#F00001](https://via.placeholder.com/11/F00001/000000?text=+) `#F00001` |
 | Theme3 | ![#8034DE](https://via.placeholder.com/11/8034DE/000000?text=+) `#8034DE` |
 
-[Preset Themes README](./PresetThemes.md)
+**[Preset Themes README](./PresetThemes.md)**
 
 ## Typography
 
@@ -34,7 +34,7 @@ The Typography Module provides a centralized location for managing font families
 
 This README contains a list of supported font families along with instructions on how to add or update font assets.
 
-[Typography README](./Typography.md)
+**[Typography README](./Typography.md)**
 
 ## Font Size
 
@@ -42,10 +42,10 @@ The Font Size and Line Height Module defines font sizes and line heights for var
 
 This README includes a list of predefined font sizes and their respective line heights, ensuring consistency in typography and spacing.
 
-[Font Size README](./FontSize.md)
+**[Font Size README](./FontSize.md)**
 
 # Spacing
 
 The Spacing Module provides predefined spacing values for margins, paddings, and other whitespace used throughout the application.
 
-[Spacing README](./Spacing.md)
+**[Spacing README](./Spacing.md)**

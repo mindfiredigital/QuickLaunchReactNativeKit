@@ -2,7 +2,7 @@
 
 ## Postman Collection API URL
 
-[Postman Collection URL](https://api.postman.com/collections/22803009-fbe3183b-3907-4871-84de-2662cc4aff78?access_key=PMAT-01HHEDR85E6TMP8V5N5NP769S5)
+**[Postman Collection URL](https://api.postman.com/collections/22803009-fbe3183b-3907-4871-84de-2662cc4aff78?access_key=PMAT-01HHEDR85E6TMP8V5N5NP769S5)**
 
 ## Steps to Import on Postman:
 

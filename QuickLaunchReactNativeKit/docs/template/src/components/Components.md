@@ -11,13 +11,13 @@ The `Button` component is a customizable button component for React Native appli
 ```tsx
 <Button
   preset="link"
-  btnText={"login"}
-  style={[{ borderRadius: 0 }]}
-  onPress={() => Alert.alert("pressed")}
+  btnText={'login'}
+  style={[{borderRadius: 0}]}
+  onPress={() => Alert.alert('pressed')}
 />
 ```
 
-[Full Button Component Documentation](./Button.md)
+**[Full Button Component Documentation](./Button.md)**
 
 ### Text
 
@@ -29,7 +29,7 @@ The `Text` component is used for displaying text with customizable styles.
 </Text>
 ```
 
-[Full Text Component Documentation](./Text.md)
+**[Full Text Component Documentation](./Text.md)**
 
 ### TextField
 
@@ -42,12 +42,12 @@ The `TextField` component allows for the entering and editing of text.
   placeholder="Enter your username"
   leftIcon="user"
   rightIcon="eye"
-  onPressRightIcon={() => console.log("Right icon pressed")}
+  onPressRightIcon={() => console.log('Right icon pressed')}
   error="Username is required"
 />
 ```
 
-[Full TextField Component Documentation](./TextField.md)
+**[Full TextField Component Documentation](./TextField.md)**
 
 ### Card
 
@@ -57,7 +57,7 @@ The `Card` component is a simple card component with a shadow and customizable b
 <Card style={styles.card}>{/* Content inside the card */}</Card>
 ```
 
-[Full Card Component Documentation](./Card.md)
+**[Full Card Component Documentation](./Card.md)**
 
 ### Screen
 
@@ -69,7 +69,7 @@ The `Screen` component provides a consistent layout and behavior for different s
   statusBarStyle="dark-content"
   loading={false}
   bottomContent={<View style={styles.bottomContent} />}
-  safeAreaEdges={["top"]}
+  safeAreaEdges={['top']}
   style={styles.screen}
   contentContainerStyle={styles.contentContainer}
   preset="fixed">
@@ -77,7 +77,7 @@ The `Screen` component provides a consistent layout and behavior for different s
 </Screen>
 ```
 
-[Full Screen Component Documentation](./Screen.md)
+**[Full Screen Component Documentation](./Screen.md)**
 
 ### Header
 
@@ -94,7 +94,7 @@ The `Header` component is used to display a header at the top of a screen. It ty
 />
 ```
 
-[Full Header Component Documentation](./Header.md)
+**[Full Header Component Documentation](./Header.md)**
 
 ### Icon
 
@@ -124,7 +124,7 @@ The `Icon` component is used to render an icon. It supports both image and SVG i
 />;
 ```
 
-[Full Icon Component Documentation](./Icon.md)
+**[Full Icon Component Documentation](./Icon.md)**
 
 ### Spinner
 
@@ -133,14 +133,14 @@ The `Spinner` component displays an animated loading spinner with optional text.
 ```tsx
 <Spinner
   loading={true}
-  color={"#FF0000"}
+  color={'#FF0000'}
   containerStyle={styles.container}
   spinnerStyle={styles.spinner}
   textStyles={styles.loadingText}
 />
 ```
 
-[Full Spinner Component Documentation](./Spinner.md)
+**[Full Spinner Component Documentation](./Spinner.md)**
 
 ### MenuItem
 
@@ -155,7 +155,7 @@ The `MenuItem` component represents an item in a settings list. It typically inc
 />
 ```
 
-[Full MenuItem Component Documentation](./MenuItem.md)
+**[Full MenuItem Component Documentation](./MenuItem.md)**
 
 ### OTPTextField
 
@@ -171,7 +171,7 @@ The `OTPTextField` component represents a custom OTP (One-Time Password) input f
 />
 ```
 
-[Full OTPTextField Component Documentation](./OTPTextField.md)
+**[Full OTPTextField Component Documentation](./OTPTextField.md)**
 
 ### Separator
 
@@ -181,7 +181,7 @@ The `Separator` component is a simple horizontal separator with customizable bor
 <Separator />
 ```
 
-[Full Screen Component Documentation](./Separator.md)
+**[Full Screen Component Documentation](./Separator.md)**
 
 ### WebViewApp
 
@@ -189,11 +189,11 @@ The `WebViewApp` component is used for displaying a web page using WebView.
 
 ```tsx
 <WebViewApp
-  source={{ uri: "https://example.com" }}
-  onError={(event) => console.error("WebView error:", event.nativeEvent)}
+  source={{uri: 'https://example.com'}}
+  onError={event => console.error('WebView error:', event.nativeEvent)}
   renderLoading={() => <Spinner loading />}
   style={styles.webView}
 />
 ```
 
-[Full WebViewApp Component Documentation](./WebViewApp.md)
+**[Full WebViewApp Component Documentation](./WebViewApp.md)**
