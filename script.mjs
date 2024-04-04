@@ -261,8 +261,8 @@ const updateTheme = () => {
 
     // Add import statement for customTheme
     const updatedData = data.replace(
-      /import {theme1, theme2, theme3} from '\.\/themes';/,
-      "import {theme1, theme2, theme3, customTheme} from './themes';"
+      /import {theme1, theme2, theme3} from 'theme\/themes';/,
+      "import {theme1, theme2, theme3, customTheme} from 'theme/themes';"
     );
 
     // Add customTheme to the theme object
