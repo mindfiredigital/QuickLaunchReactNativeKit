@@ -1,4 +1,4 @@
-# Quick Launch React Native Kit
+# QuickLaunchReactNativeKit
 
 <img alt="feature-image" src="./QuickLaunchReactNativeKit/docs/screenshots/banner.png" />
 
