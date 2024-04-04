@@ -91,7 +91,7 @@ const colors = {
 
 // Template for generating custom theme
 const themeTemplate = `
-import { ThemeWithMode } from "theme/theme";
+import { ThemeWithMode } from "theme/theme.types";
 
 export const customTheme: ThemeWithMode = {
   light: {
