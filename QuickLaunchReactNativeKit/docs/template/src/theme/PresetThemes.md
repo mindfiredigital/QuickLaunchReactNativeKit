@@ -1,6 +1,8 @@
 # Preset Themes
 
-List of available themes:
+In QuickLaunchReactNativeKit, you have predefined themes that users can select from. This document outlines the process of updating the preset theme type.
+
+## List of available themes:
 
 Here are the tables for each theme with light and dark mode hex color values:
 
@@ -81,3 +83,26 @@ Here are the tables for each theme with light and dark mode hex color values:
     <td><img alt="settings-dark" src="../../../screenshots/theme3/settings-dark.png" /></td>
   </tr>
 </table>
+
+## Update App Theme
+
+To update the preset theme type, you need to modify the `settings` object in your application's codebase.
+
+```typescript
+import {ThemeList} from './src/theme';
+
+/**
+ * Default settings for the application.
+ */
+export const settings: Settings = {
+  theme: 'theme2', // Change this to the desired theme
+  navigationType: 'tab',
+};
+```
+
+### Instructions
+
+1. Open the file containing the `settings` object in your application's codebase.
+2. Locate the `theme` property within the `settings` object.
+3. Update the value of the `theme` property to one of the predefined themes available in your application. You can choose from `theme1`, `theme2`, or `theme3`.
+4. Save the changes.
