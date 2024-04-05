@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "baseUrl": "./",
+    "paths": {
+      "*": ["./*"],
+      "root/*": ["./*"],
+      "src/*": ["src/*"],
+      "api": ["./src/api"],
+      "assets/*": ["./src/assets/*"],
+      "components": ["./src/components"],
+      "@constants": ["./src/constants"],
+      "i18n": ["./src/i18n"],
+      "navigation": ["./src/navigation"],
+      "screens": ["./src/screens"],
+      "styles": ["./src/screens/styles.ts"],
+      "service": ["./src/service"],
+      "store": ["./src/store"],
+      "store/*": ["./src/store/*"],
+      "theme": ["./src/theme"],
+      "theme/*": ["./src/theme/*"],
+      "utils": ["./src/utils"],
+      "settings": ["./settings"]
+    }
+  },
+  "extends": "@react-native/typescript-config/tsconfig.json"
+}
