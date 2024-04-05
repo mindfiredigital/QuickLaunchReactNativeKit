@@ -1,8 +1,8 @@
 {
-  "name": "QuickLaunchReactNativeKit",
+  "name": "quick-launch-react-native-kit",
   "version": "0.0.1",
   "type": "commonjs",
-  "description": "It is designed to reduce the time of common projects. This kit provides frameworks for login, signup, settings and other common features. Users/Developers can use this kit and quickly include these functionality in their projects. This kit also includes multiple themes.",
+  "description": "Welcome to QuickLaunchReactNativeKit! This kit is designed to expedite the development process of common React Native projects by providing pre-built frameworks for essential functionalities like login, signup, settings, and more. With QuickLaunchReactNativeKit, developers can seamlessly integrate these features into their projects, saving valuable time and effort. Additionally, this kit offers multiple themes to enhance the aesthetic appeal of your app.",
   "repository": "https://github.com/mindfiredigital/QuickLaunchReactNativeKit.git",
   "author": "Madhav Nasit <madhavn@mindfiresolutions.com>",
   "license": "MIT",

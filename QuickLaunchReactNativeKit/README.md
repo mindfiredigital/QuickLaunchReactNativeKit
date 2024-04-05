@@ -56,7 +56,7 @@ To get started with QuickLaunchReactNativeKit, follow these steps:
 Get walked through the prompts for the different options to start your new app
 
 ```terminal
-npx react-native@latest init <ProjectName> --template=https://github.com/mindfiredigital/QuickLaunchReactNativeKit.git#development
+npx react-native@latest init <ProjectName> --template=https://github.com/mindfiredigital/QuickLaunchReactNativeKit.git
 ```
 
 ### Post-Install Setup
