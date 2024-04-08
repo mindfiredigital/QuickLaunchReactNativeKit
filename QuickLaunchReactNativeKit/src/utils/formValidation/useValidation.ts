@@ -7,7 +7,7 @@ import {
 } from './validation.types';
 import {getValidatedFields} from './service/validations';
 import defaultMessages from './mesages/defaultMessages';
-import defaultRules from './rules/defaultRuile';
+import defaultRules from './rules/defaultRules';
 import {
   getErrorMessagesUtils,
   getErrorsForFieldUtils,
