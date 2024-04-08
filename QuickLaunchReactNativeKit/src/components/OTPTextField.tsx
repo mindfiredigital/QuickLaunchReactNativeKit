@@ -84,6 +84,7 @@ export const OTPTextField = (props: OTPTextFieldProps) => {
       width: size,
       height: size,
       fontSize: size / 2.5,
+      lineHeight: (size / 2.5) * 1.4,
       borderColor: !!!error ? colors.border : colors.danger,
     },
     inputStyleOverride, // Apply the override styles for input fields
