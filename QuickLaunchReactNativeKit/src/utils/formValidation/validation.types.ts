@@ -1,5 +1,5 @@
 import defaultMessages from './mesages/defaultMessages';
-import defaultRules from './rules/defaultRuile';
+import defaultRules from './rules/defaultRules';
 
 // Type Definitions
 export type CustomRules = {[key: string]: RulesValues};
